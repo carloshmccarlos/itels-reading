@@ -173,10 +173,7 @@ function ArticleContent({ article }: { article: Article }) {
 	);
 }
 
-export default async function ArticlePage({
-	params,
-	searchParams,
-}: ArticlePageParams) {
+export default async function ArticlePage({ params }: ArticlePageParams) {
 	return (
 		<Suspense fallback={<ArticleSkeleton />}>
 			<ArticleContent article={(await getArticle(params.id)) ?? notFound()} />
