@@ -17,10 +17,18 @@ interface Article {
 	tags?: string[];
 }
 
+// Define the params type for the page
+type ArticlePageParams = {
+	params: {
+		id: string;
+	};
+	searchParams?: { [key: string]: string | string[] | undefined };
+};
+
 // Generate metadata for SEO
 export async function generateMetadata({
 	params,
-}: { params: { id: string } }): Promise<Metadata> {
+}: ArticlePageParams): Promise<Metadata> {
 	const article = await getArticle(params.id);
 
 	if (!article) {
@@ -146,7 +154,7 @@ function ArticleContent({ article }: { article: Article }) {
 						src={article.imageUrl}
 						alt={article.title}
 						fill
-						className="object-cover "
+						className="object-cover"
 						priority
 						sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
 					/>
@@ -167,7 +175,8 @@ function ArticleContent({ article }: { article: Article }) {
 
 export default async function ArticlePage({
 	params,
-}: { params: { id: string } }) {
+	searchParams,
+}: ArticlePageParams) {
 	return (
 		<Suspense fallback={<ArticleSkeleton />}>
 			<ArticleContent article={(await getArticle(params.id)) ?? notFound()} />
