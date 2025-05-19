@@ -1,9 +1,9 @@
 import TextComponent from "@/components/TextComponent";
 import type { CardProps } from "@/types/article";
-import Image from "next/image";
+
 import Link from "next/link";
 
-function NoImageCard({ article, priority, className }: CardProps) {
+function NoImageCard({ article, className }: CardProps) {
 	return (
 		<Link
 			href={`/article/${article.id}`}
