@@ -23,7 +23,7 @@ function TextComponent({ className, article, titleSize }: Props) {
 				<h2 className={`${titleSize ? titleSize : "text-lg"}    font-bold `}>
 					<span
 						className=" bg-[length:0%_2px]   bg-gradient-to-r from-pink-700 to-violet-700
-					bg-no-repeat bg-left-bottom transition-all duration-500 group-hover:bg-[length:100%_2px]
+					bg-no-repeat bg-left-bottom transition-all duration-700 group-hover:bg-[length:100%_2px]
 					group-hover:bg-[position:left_bottom]"
 					>
 						{article.title}
