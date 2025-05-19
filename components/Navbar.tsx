@@ -32,7 +32,7 @@ function NavBar() {
 				className={`bg-white py-4 border-b sticky top-0 z-50 transition-all duration-300 ${scrolled ? "py-2" : "py-4"}`}
 			>
 				<div className="mx-auto flex items-center px-4 relative">
-					<div className="absolute left-4">
+					<div className="absolute left-0 sm:left-4">
 						<Menu />
 					</div>
 
@@ -49,7 +49,7 @@ function NavBar() {
 						</Link>
 					</div>
 
-					<div className="hidden md:flex items-center gap-2 md:gap-4 absolute right-4">
+					<div className="hidden lg:flex items-center gap-2 md:gap-4 absolute right-0 sm:right-4">
 						<RegisterButton />
 						<LoginButton />
 					</div>
