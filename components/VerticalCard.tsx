@@ -1,13 +1,11 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { memo } from "react";
 
 import TextComponent from "@/components/TextComponent";
-import type { CardProps } from "@/types/article";
+import type { CardProps } from "@/types/interface";
 
-function VerticalCard({ article, priority, className }: CardProps) {
+function VerticalCard({ article, className }: CardProps) {
 	return (
 		<Link
 			href={`/article/${article.id}`}
@@ -20,7 +18,6 @@ function VerticalCard({ article, priority, className }: CardProps) {
 					fill
 					className="object-cover rounded-t-sm transform group-hover:scale-105 transition-transform duration-200"
 					sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-					priority={priority}
 				/>
 			</div>
 

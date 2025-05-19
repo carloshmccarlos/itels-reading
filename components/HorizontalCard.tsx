@@ -1,12 +1,10 @@
-"use client";
-
 import TextComponent from "@/components/TextComponent";
-import type { CardProps } from "@/types/article";
+import type { CardProps } from "@/types/interface";
 import Image from "next/image";
 import Link from "next/link";
 import { memo } from "react";
 
-function HorizontalCard({ article, priority, className }: CardProps) {
+function HorizontalCard({ article, className }: CardProps) {
 	return (
 		<Link
 			href={`/article/${article.id}`}
@@ -23,7 +21,6 @@ function HorizontalCard({ article, priority, className }: CardProps) {
 					fill
 					className="rounded-sm lg:rounded-r-none object-cover transform group-hover:scale-105 transition-transform duration-200"
 					sizes="(max-width: 640px) 100vw, (max-width: 1024px) 40vw, 25vw"
-					priority={priority}
 				/>
 			</div>
 

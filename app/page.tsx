@@ -2,13 +2,13 @@ import HorizontalCard from "@/components/HorizontalCard";
 import VerticalCard from "@/components/VerticalCard";
 
 import BigCard from "@/components/BigCard";
-import NoImageCard from "@/components/NoImageCard";
 import Footer from "@/components/Footer";
-import { getAllArticles, sampleArticles } from "@/lib/data/sample-articles";
-import type { Article } from "@/types/article";
+import NoImageCard from "@/components/NoImageCard";
+import { getAllArticles } from "@/lib/data/article";
+import type { Article } from "@/lib/generated/prisma";
 
-export default function Home() {
-	const articles: Article[] = getAllArticles();
+export default async function Home() {
+	const articles: Article[] = await getAllArticles();
 
 	return (
 		<>

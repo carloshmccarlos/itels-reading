@@ -1,13 +1,16 @@
 "use client";
 
-import LoginButton from "@/components/LoginButton";
 import Menu from "@/components/Menu";
 import NavLinks from "@/components/NavLinks";
-import RegisterButton from "@/components/RegisterButton";
+import type { Category } from "@/lib/generated/prisma";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-function NavBar() {
+interface Props {
+	categories: Category[];
+}
+
+function NavBar({ categories }: Props) {
 	const [scrolled, setScrolled] = useState(false);
 
 	useEffect(() => {
@@ -33,9 +36,8 @@ function NavBar() {
 			>
 				<div className="mx-auto flex items-center px-4 relative">
 					<div className="absolute left-0 sm:left-4">
-						<Menu />
+						<Menu categories={categories} />
 					</div>
-
 					<div className="w-full flex justify-center">
 						<Link
 							href={"/"}
@@ -49,21 +51,23 @@ function NavBar() {
 						</Link>
 					</div>
 
-					<div className="hidden lg:flex items-center gap-2 md:gap-4 absolute right-0 sm:right-4">
+					{/* login and register function, hidden for now, realised later*/}
+					{/*<div className="hidden lg:flex items-center gap-2 md:gap-4 absolute right-0 sm:right-4">
 						<RegisterButton />
 						<LoginButton />
-					</div>
+					</div>*/}
 				</div>
 			</nav>
 
-			<div className="bg-white">
+			{/*	<div className="bg-white">
 				<NavLinks
+					categories={categories}
 					type={"row"}
 					className={
 						"hidden border-b  md:flex items-center justify-center gap-4"
 					}
 				/>
-			</div>
+			</div>*/}
 		</>
 	);
 }

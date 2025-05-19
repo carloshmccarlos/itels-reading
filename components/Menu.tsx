@@ -13,9 +13,14 @@ import {
 	SheetTitle,
 	SheetTrigger,
 } from "@/components/ui/sheet";
+import type { Category } from "@/lib/generated/prisma";
 import { useRef } from "react";
 
-function Menu() {
+interface Props {
+	categories: Category[];
+}
+
+function Menu({ categories }: Props) {
 	const inputRef = useRef<HTMLInputElement>(null);
 
 	return (
@@ -57,11 +62,17 @@ function Menu() {
 					</Button>
 				</div>
 
-				<div className={"flex justify-center items-center gap-2 md:gap-4"}>
+				{/* login and register function, hidden for now, realised later*/}
+				{/*	<div className={"flex justify-center items-center gap-2 md:gap-4"}>
 					<RegisterButton />
 					<LoginButton />
-				</div>
-				<NavLinks type={"col"} className={"flex flex-col py-2 px-4 "} />
+				</div>*/}
+
+				<NavLinks
+					categories={categories}
+					type={"col"}
+					className={"flex flex-col py-2 px-4 "}
+				/>
 			</SheetContent>
 		</Sheet>
 	);

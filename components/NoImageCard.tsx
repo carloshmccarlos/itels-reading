@@ -1,5 +1,5 @@
 import TextComponent from "@/components/TextComponent";
-import type { CardProps } from "@/types/article";
+import type { CardProps } from "@/types/interface";
 
 import Link from "next/link";
 

@@ -1,5 +1,6 @@
+import { getCategoryById } from "@/lib/data/category";
+import type { Article } from "@/lib/generated/prisma";
 import { cn } from "@/lib/utils";
-import type { Article } from "@/types/article";
 
 interface Props {
 	className?: string;
@@ -7,7 +8,10 @@ interface Props {
 	titleSize?: string;
 }
 
-function TextComponent({ className, article, titleSize }: Props) {
+async function TextComponent({ className, article, titleSize }: Props) {
+	const category = await getCategoryById(article.categoryId);
+	if (!category) return null;
+
 	return (
 		<>
 			<div
@@ -17,9 +21,7 @@ function TextComponent({ className, article, titleSize }: Props) {
 					className,
 				)}
 			>
-				<div className="text-lg font-bold text-red-700 ">
-					{article.category}
-				</div>
+				<div className="text-lg font-bold text-red-700 ">{category.name}</div>
 				<h2 className={`${titleSize ? titleSize : "text-lg"}    font-bold `}>
 					<span
 						className=" bg-[length:0%_2px]   bg-gradient-to-r from-pink-700 to-violet-700
@@ -36,7 +38,7 @@ function TextComponent({ className, article, titleSize }: Props) {
 					</p>
 				)}
 				<time className="text-sm text-gray-500 mt-auto">
-					{new Date(article.publishedDate).toLocaleDateString()}
+					{new Date(article.date).toLocaleDateString()}
 				</time>
 			</div>
 		</>
