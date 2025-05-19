@@ -29,7 +29,7 @@ function NavBar() {
 	return (
 		<>
 			<nav
-				className={`bg-white py-4 shadow-sm sticky top-0 z-50 transition-all duration-300 ${scrolled ? "py-2" : "py-4"}`}
+				className={`bg-white py-4 border-b sticky top-0 z-50 transition-all duration-300 ${scrolled ? "py-2" : "py-4"}`}
 			>
 				<div className="mx-auto flex items-center px-4 relative">
 					<div className="absolute left-4">
@@ -60,7 +60,7 @@ function NavBar() {
 				<NavLinks
 					type={"row"}
 					className={
-						"hidden shadow-sm  md:flex items-center justify-center gap-4"
+						"hidden border-b  md:flex items-center justify-center gap-4"
 					}
 				/>
 			</div>
