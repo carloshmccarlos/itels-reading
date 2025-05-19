@@ -9,7 +9,7 @@ import { memo } from "react";
 function HorizontalCard({ article, priority, className }: CardProps) {
 	return (
 		<Link
-			href={`/${article.id}`}
+			href={`/article/${article.id}`}
 			className={`shadow-sm p-4 lg:p-0 group hover:shadow-lg bg-gray-100 hover:bg-gray-50 transition-all duration-500 rounded-sm flex flex-row w-full ${className}`}
 		>
 			<div

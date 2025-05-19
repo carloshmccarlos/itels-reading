@@ -10,7 +10,7 @@ import type { CardProps } from "@/types/article";
 function VerticalCard({ article, priority, className }: CardProps) {
 	return (
 		<Link
-			href={`/${article.id}`}
+			href={`/article/${article.id}`}
 			className={`shadow-sm hover:shadow-lg group bg-gray-100  transition-all duration-500 rounded-sm flex flex-col h-full ${className}`}
 		>
 			<div className="rounded-t-sm relative aspect-[10/7] sm:aspect-[3/2] overflow-hidden">
