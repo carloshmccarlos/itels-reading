@@ -2,7 +2,11 @@ import type { Article } from "@/types/article";
 
 import Image from "next/image";
 
-function ArticleContent({ article }: { article: Article }) {
+interface Props {
+	article: Article;
+}
+
+function ArticleContent({ article }: Props) {
 	return (
 		<article className="py-8 px-4 md:px-8 lg:px-16 max-w-4xl mx-auto">
 			<header className="mb-8">
