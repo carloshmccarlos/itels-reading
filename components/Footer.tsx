@@ -6,13 +6,13 @@ function Footer() {
 	return (
 		<footer className="bg-black mt-12 text-white">
 			<div className="max-w-[2000px] mx-auto px-2 sm:px-4 lg:px-8 xl:px-16 2xl:px-32 py-12">
-				<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+				<div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 					{/* About Section */}
-					<div className="col-span-1 px-24">
-						<h3 className=" text-2xl font-bold mb-4 text-white">
-							About IELTS Reading
+					<div className="col-span-1 px-4 md:px-8lg:px-0">
+						<h3 className="text-center  text-2xl font-bold mb-4 text-white">
+							About
 						</h3>
-						<p className=" text-lg text-gray-300 mb-4 leading-relaxed">
+						<p className=" text-center text-lg text-gray-300 mb-4 leading-relaxed">
 							Your trusted source for IELTS reading practice and preparation. We
 							provide high-quality articles and resources to help you achieve
 							your desired score.
@@ -61,14 +61,14 @@ function Footer() {
 					</div>
 
 					{/* Contact */}
-					<div className={"justify-self-end"}>
+					<div className={" lg:justify-self-end"}>
 						<h3 className="text-2xl font-bold mb-4 text-white  text-center">
 							Contact
 						</h3>
-						<ul className="text-lg space-y-3">
+						<ul className="text-lg space-y-3 text-center">
 							<li className="text-gray-300">Email: contact@ieltsreading.com</li>
 							<li className="text-gray-300">Follow us on social media:</li>
-							<li className="flex space-x-6 mt-2">
+							<li className="justify-center flex space-x-6 mt-2">
 								<Link
 									href="#"
 									className="text-gray-300 hover:text-white transition-colors"
