@@ -9,7 +9,7 @@ interface Props {
 async function ArticleContent({ article }: Props) {
 	const category = await getCategoryById(article.categoryId);
 	if (!category) return null;
-	
+
 	return (
 		<article className="py-8 px-4 md:px-8 lg:px-16 max-w-4xl mx-auto">
 			<header className="mb-8">
@@ -23,7 +23,7 @@ async function ArticleContent({ article }: Props) {
 
 				<div className="flex items-center gap-4 mb-4">
 					<time className="text-sm text-gray-500">
-						{new Date(article.date).toLocaleDateString("en-US", {
+						{new Date(article.createdAt).toLocaleDateString("en-US", {
 							year: "numeric",
 							month: "long",
 							day: "numeric",
