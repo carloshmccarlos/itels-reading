@@ -12,7 +12,8 @@ model Article {
   id          String   @id @default(cuid())
   title       String
   imageUrl    String
-  content     String
+  /// The main content of the article in markdown format
+  content     String   @db.Text
   description String
   readTimes   Int      @default(0)
   createdAt   DateTime @default(now())
