@@ -1,4 +1,4 @@
-import type { Article } from "@/lib/generated/prisma";
+import type { Article, Prisma } from "@/lib/generated/prisma";
 import { prisma } from "@/lib/prisma";
 
 export async function getAllArticles(): Promise<Article[]> {

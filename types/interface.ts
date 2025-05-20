@@ -1,6 +1,12 @@
-import type { Article } from "@/lib/generated/prisma";
+import type { Prisma } from "@/lib/generated/prisma";
 
 export interface CardProps {
-	article: Article;
+	article: ArticleWithCategory;
 	className?: string;
 }
+
+export type ArticleWithCategory = Prisma.ArticleGetPayload<{
+	include: {
+		Category: true;
+	};
+}>;

@@ -1,17 +1,13 @@
-import { getCategoryById } from "@/lib/data/category";
-import type { Article } from "@/lib/generated/prisma";
 import { cn } from "@/lib/utils";
+import type { ArticleWithCategory } from "@/types/interface";
 
 interface Props {
 	className?: string;
-	article: Article;
+	article: ArticleWithCategory;
 	titleSize?: string;
 }
 
 async function TextComponent({ className, article, titleSize }: Props) {
-	const category = await getCategoryById(article.categoryId);
-	if (!category) return null;
-
 	return (
 		<>
 			<div
@@ -21,7 +17,9 @@ async function TextComponent({ className, article, titleSize }: Props) {
 					className,
 				)}
 			>
-				<div className="text-lg font-bold text-red-700 ">{category.name}</div>
+				<div className="text-lg font-bold text-red-700 ">
+					{article.Category.name}
+				</div>
 				<h2 className={`${titleSize ? titleSize : "text-lg"}    font-bold `}>
 					<span
 						className=" bg-[length:0%_2px]   bg-gradient-to-r from-pink-700 to-violet-700
