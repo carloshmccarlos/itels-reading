@@ -30,9 +30,9 @@ async function main() {
 				id: article.id,
 				title: article.title,
 				imageUrl: article.imageUrl,
-				date: article.date,
 				content: article.content,
 				description: article.description,
+				readTimes: article.readTimes,
 				// Assuming your Prisma schema for Article has createdAt and updatedAt fields
 				createdAt: article.createdAt,
 				updatedAt: article.updatedAt,
