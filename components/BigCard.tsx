@@ -4,8 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 function BigCard({ article, className }: CardProps) {
-	console.log(article);
-
 	return (
 		<Link
 			href={`/article/${article.id}`}
