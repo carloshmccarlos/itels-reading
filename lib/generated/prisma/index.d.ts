@@ -23,6 +23,16 @@ export type Article = $Result.DefaultSelection<Prisma.$ArticlePayload>
  * 
  */
 export type Category = $Result.DefaultSelection<Prisma.$CategoryPayload>
+/**
+ * Model Novel
+ * 
+ */
+export type Novel = $Result.DefaultSelection<Prisma.$NovelPayload>
+/**
+ * Model Series
+ * 
+ */
+export type Series = $Result.DefaultSelection<Prisma.$SeriesPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -168,6 +178,26 @@ export class PrismaClient<
     * ```
     */
   get category(): Prisma.CategoryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.novel`: Exposes CRUD operations for the **Novel** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Novels
+    * const novels = await prisma.novel.findMany()
+    * ```
+    */
+  get novel(): Prisma.NovelDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.series`: Exposes CRUD operations for the **Series** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Series
+    * const series = await prisma.series.findMany()
+    * ```
+    */
+  get series(): Prisma.SeriesDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -609,7 +639,9 @@ export namespace Prisma {
 
   export const ModelName: {
     Article: 'Article',
-    Category: 'Category'
+    Category: 'Category',
+    Novel: 'Novel',
+    Series: 'Series'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -628,7 +660,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "article" | "category"
+      modelProps: "article" | "category" | "novel" | "series"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -780,6 +812,154 @@ export namespace Prisma {
           }
         }
       }
+      Novel: {
+        payload: Prisma.$NovelPayload<ExtArgs>
+        fields: Prisma.NovelFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.NovelFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NovelPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.NovelFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NovelPayload>
+          }
+          findFirst: {
+            args: Prisma.NovelFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NovelPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.NovelFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NovelPayload>
+          }
+          findMany: {
+            args: Prisma.NovelFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NovelPayload>[]
+          }
+          create: {
+            args: Prisma.NovelCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NovelPayload>
+          }
+          createMany: {
+            args: Prisma.NovelCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.NovelCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NovelPayload>[]
+          }
+          delete: {
+            args: Prisma.NovelDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NovelPayload>
+          }
+          update: {
+            args: Prisma.NovelUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NovelPayload>
+          }
+          deleteMany: {
+            args: Prisma.NovelDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.NovelUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.NovelUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NovelPayload>[]
+          }
+          upsert: {
+            args: Prisma.NovelUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NovelPayload>
+          }
+          aggregate: {
+            args: Prisma.NovelAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateNovel>
+          }
+          groupBy: {
+            args: Prisma.NovelGroupByArgs<ExtArgs>
+            result: $Utils.Optional<NovelGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.NovelCountArgs<ExtArgs>
+            result: $Utils.Optional<NovelCountAggregateOutputType> | number
+          }
+        }
+      }
+      Series: {
+        payload: Prisma.$SeriesPayload<ExtArgs>
+        fields: Prisma.SeriesFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SeriesFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeriesPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SeriesFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeriesPayload>
+          }
+          findFirst: {
+            args: Prisma.SeriesFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeriesPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SeriesFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeriesPayload>
+          }
+          findMany: {
+            args: Prisma.SeriesFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeriesPayload>[]
+          }
+          create: {
+            args: Prisma.SeriesCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeriesPayload>
+          }
+          createMany: {
+            args: Prisma.SeriesCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SeriesCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeriesPayload>[]
+          }
+          delete: {
+            args: Prisma.SeriesDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeriesPayload>
+          }
+          update: {
+            args: Prisma.SeriesUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeriesPayload>
+          }
+          deleteMany: {
+            args: Prisma.SeriesDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SeriesUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SeriesUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeriesPayload>[]
+          }
+          upsert: {
+            args: Prisma.SeriesUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeriesPayload>
+          }
+          aggregate: {
+            args: Prisma.SeriesAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSeries>
+          }
+          groupBy: {
+            args: Prisma.SeriesGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SeriesGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SeriesCountArgs<ExtArgs>
+            result: $Utils.Optional<SeriesCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -866,6 +1046,8 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     article?: ArticleOmit
     category?: CategoryOmit
+    novel?: NovelOmit
+    series?: SeriesOmit
   }
 
   /* Types for Logging */
@@ -987,6 +1169,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type SeriesCountOutputType
+   */
+
+  export type SeriesCountOutputType = {
+    novels: number
+  }
+
+  export type SeriesCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    novels?: boolean | SeriesCountOutputTypeCountNovelsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * SeriesCountOutputType without action
+   */
+  export type SeriesCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeriesCountOutputType
+     */
+    select?: SeriesCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * SeriesCountOutputType without action
+   */
+  export type SeriesCountOutputTypeCountNovelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NovelWhereInput
+  }
+
+
+  /**
    * Models
    */
 
@@ -996,17 +1209,27 @@ export namespace Prisma {
 
   export type AggregateArticle = {
     _count: ArticleCountAggregateOutputType | null
+    _avg: ArticleAvgAggregateOutputType | null
+    _sum: ArticleSumAggregateOutputType | null
     _min: ArticleMinAggregateOutputType | null
     _max: ArticleMaxAggregateOutputType | null
+  }
+
+  export type ArticleAvgAggregateOutputType = {
+    readTimes: number | null
+  }
+
+  export type ArticleSumAggregateOutputType = {
+    readTimes: number | null
   }
 
   export type ArticleMinAggregateOutputType = {
     id: string | null
     title: string | null
     imageUrl: string | null
-    date: Date | null
     content: string | null
     description: string | null
+    readTimes: number | null
     createdAt: Date | null
     updatedAt: Date | null
     categoryId: string | null
@@ -1016,9 +1239,9 @@ export namespace Prisma {
     id: string | null
     title: string | null
     imageUrl: string | null
-    date: Date | null
     content: string | null
     description: string | null
+    readTimes: number | null
     createdAt: Date | null
     updatedAt: Date | null
     categoryId: string | null
@@ -1028,9 +1251,9 @@ export namespace Prisma {
     id: number
     title: number
     imageUrl: number
-    date: number
     content: number
     description: number
+    readTimes: number
     createdAt: number
     updatedAt: number
     categoryId: number
@@ -1038,13 +1261,21 @@ export namespace Prisma {
   }
 
 
+  export type ArticleAvgAggregateInputType = {
+    readTimes?: true
+  }
+
+  export type ArticleSumAggregateInputType = {
+    readTimes?: true
+  }
+
   export type ArticleMinAggregateInputType = {
     id?: true
     title?: true
     imageUrl?: true
-    date?: true
     content?: true
     description?: true
+    readTimes?: true
     createdAt?: true
     updatedAt?: true
     categoryId?: true
@@ -1054,9 +1285,9 @@ export namespace Prisma {
     id?: true
     title?: true
     imageUrl?: true
-    date?: true
     content?: true
     description?: true
+    readTimes?: true
     createdAt?: true
     updatedAt?: true
     categoryId?: true
@@ -1066,9 +1297,9 @@ export namespace Prisma {
     id?: true
     title?: true
     imageUrl?: true
-    date?: true
     content?: true
     description?: true
+    readTimes?: true
     createdAt?: true
     updatedAt?: true
     categoryId?: true
@@ -1113,6 +1344,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: ArticleAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ArticleSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: ArticleMinAggregateInputType
@@ -1143,6 +1386,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: ArticleCountAggregateInputType | true
+    _avg?: ArticleAvgAggregateInputType
+    _sum?: ArticleSumAggregateInputType
     _min?: ArticleMinAggregateInputType
     _max?: ArticleMaxAggregateInputType
   }
@@ -1151,13 +1396,15 @@ export namespace Prisma {
     id: string
     title: string
     imageUrl: string
-    date: Date
     content: string
     description: string
+    readTimes: number
     createdAt: Date
     updatedAt: Date
     categoryId: string
     _count: ArticleCountAggregateOutputType | null
+    _avg: ArticleAvgAggregateOutputType | null
+    _sum: ArticleSumAggregateOutputType | null
     _min: ArticleMinAggregateOutputType | null
     _max: ArticleMaxAggregateOutputType | null
   }
@@ -1180,9 +1427,9 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     imageUrl?: boolean
-    date?: boolean
     content?: boolean
     description?: boolean
+    readTimes?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     categoryId?: boolean
@@ -1193,9 +1440,9 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     imageUrl?: boolean
-    date?: boolean
     content?: boolean
     description?: boolean
+    readTimes?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     categoryId?: boolean
@@ -1206,9 +1453,9 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     imageUrl?: boolean
-    date?: boolean
     content?: boolean
     description?: boolean
+    readTimes?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     categoryId?: boolean
@@ -1219,15 +1466,15 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     imageUrl?: boolean
-    date?: boolean
     content?: boolean
     description?: boolean
+    readTimes?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     categoryId?: boolean
   }
 
-  export type ArticleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "imageUrl" | "date" | "content" | "description" | "createdAt" | "updatedAt" | "categoryId", ExtArgs["result"]["article"]>
+  export type ArticleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "imageUrl" | "content" | "description" | "readTimes" | "createdAt" | "updatedAt" | "categoryId", ExtArgs["result"]["article"]>
   export type ArticleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Category?: boolean | CategoryDefaultArgs<ExtArgs>
   }
@@ -1247,9 +1494,9 @@ export namespace Prisma {
       id: string
       title: string
       imageUrl: string
-      date: Date
       content: string
       description: string
+      readTimes: number
       createdAt: Date
       updatedAt: Date
       categoryId: string
@@ -1680,9 +1927,9 @@ export namespace Prisma {
     readonly id: FieldRef<"Article", 'String'>
     readonly title: FieldRef<"Article", 'String'>
     readonly imageUrl: FieldRef<"Article", 'String'>
-    readonly date: FieldRef<"Article", 'DateTime'>
     readonly content: FieldRef<"Article", 'String'>
     readonly description: FieldRef<"Article", 'String'>
+    readonly readTimes: FieldRef<"Article", 'Int'>
     readonly createdAt: FieldRef<"Article", 'DateTime'>
     readonly updatedAt: FieldRef<"Article", 'DateTime'>
     readonly categoryId: FieldRef<"Article", 'String'>
@@ -3158,6 +3405,2179 @@ export namespace Prisma {
 
 
   /**
+   * Model Novel
+   */
+
+  export type AggregateNovel = {
+    _count: NovelCountAggregateOutputType | null
+    _min: NovelMinAggregateOutputType | null
+    _max: NovelMaxAggregateOutputType | null
+  }
+
+  export type NovelMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    imageUrl: string | null
+    content: string | null
+    description: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    seriesId: string | null
+  }
+
+  export type NovelMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    imageUrl: string | null
+    content: string | null
+    description: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    seriesId: string | null
+  }
+
+  export type NovelCountAggregateOutputType = {
+    id: number
+    title: number
+    imageUrl: number
+    content: number
+    description: number
+    createdAt: number
+    updatedAt: number
+    seriesId: number
+    _all: number
+  }
+
+
+  export type NovelMinAggregateInputType = {
+    id?: true
+    title?: true
+    imageUrl?: true
+    content?: true
+    description?: true
+    createdAt?: true
+    updatedAt?: true
+    seriesId?: true
+  }
+
+  export type NovelMaxAggregateInputType = {
+    id?: true
+    title?: true
+    imageUrl?: true
+    content?: true
+    description?: true
+    createdAt?: true
+    updatedAt?: true
+    seriesId?: true
+  }
+
+  export type NovelCountAggregateInputType = {
+    id?: true
+    title?: true
+    imageUrl?: true
+    content?: true
+    description?: true
+    createdAt?: true
+    updatedAt?: true
+    seriesId?: true
+    _all?: true
+  }
+
+  export type NovelAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Novel to aggregate.
+     */
+    where?: NovelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Novels to fetch.
+     */
+    orderBy?: NovelOrderByWithRelationInput | NovelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: NovelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Novels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Novels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Novels
+    **/
+    _count?: true | NovelCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: NovelMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: NovelMaxAggregateInputType
+  }
+
+  export type GetNovelAggregateType<T extends NovelAggregateArgs> = {
+        [P in keyof T & keyof AggregateNovel]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateNovel[P]>
+      : GetScalarType<T[P], AggregateNovel[P]>
+  }
+
+
+
+
+  export type NovelGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NovelWhereInput
+    orderBy?: NovelOrderByWithAggregationInput | NovelOrderByWithAggregationInput[]
+    by: NovelScalarFieldEnum[] | NovelScalarFieldEnum
+    having?: NovelScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: NovelCountAggregateInputType | true
+    _min?: NovelMinAggregateInputType
+    _max?: NovelMaxAggregateInputType
+  }
+
+  export type NovelGroupByOutputType = {
+    id: string
+    title: string
+    imageUrl: string
+    content: string
+    description: string
+    createdAt: Date
+    updatedAt: Date
+    seriesId: string | null
+    _count: NovelCountAggregateOutputType | null
+    _min: NovelMinAggregateOutputType | null
+    _max: NovelMaxAggregateOutputType | null
+  }
+
+  type GetNovelGroupByPayload<T extends NovelGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<NovelGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof NovelGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], NovelGroupByOutputType[P]>
+            : GetScalarType<T[P], NovelGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type NovelSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    imageUrl?: boolean
+    content?: boolean
+    description?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    seriesId?: boolean
+    Series?: boolean | Novel$SeriesArgs<ExtArgs>
+  }, ExtArgs["result"]["novel"]>
+
+  export type NovelSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    imageUrl?: boolean
+    content?: boolean
+    description?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    seriesId?: boolean
+    Series?: boolean | Novel$SeriesArgs<ExtArgs>
+  }, ExtArgs["result"]["novel"]>
+
+  export type NovelSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    imageUrl?: boolean
+    content?: boolean
+    description?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    seriesId?: boolean
+    Series?: boolean | Novel$SeriesArgs<ExtArgs>
+  }, ExtArgs["result"]["novel"]>
+
+  export type NovelSelectScalar = {
+    id?: boolean
+    title?: boolean
+    imageUrl?: boolean
+    content?: boolean
+    description?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    seriesId?: boolean
+  }
+
+  export type NovelOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "imageUrl" | "content" | "description" | "createdAt" | "updatedAt" | "seriesId", ExtArgs["result"]["novel"]>
+  export type NovelInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Series?: boolean | Novel$SeriesArgs<ExtArgs>
+  }
+  export type NovelIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Series?: boolean | Novel$SeriesArgs<ExtArgs>
+  }
+  export type NovelIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Series?: boolean | Novel$SeriesArgs<ExtArgs>
+  }
+
+  export type $NovelPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Novel"
+    objects: {
+      Series: Prisma.$SeriesPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      imageUrl: string
+      content: string
+      description: string
+      createdAt: Date
+      updatedAt: Date
+      seriesId: string | null
+    }, ExtArgs["result"]["novel"]>
+    composites: {}
+  }
+
+  type NovelGetPayload<S extends boolean | null | undefined | NovelDefaultArgs> = $Result.GetResult<Prisma.$NovelPayload, S>
+
+  type NovelCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<NovelFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: NovelCountAggregateInputType | true
+    }
+
+  export interface NovelDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Novel'], meta: { name: 'Novel' } }
+    /**
+     * Find zero or one Novel that matches the filter.
+     * @param {NovelFindUniqueArgs} args - Arguments to find a Novel
+     * @example
+     * // Get one Novel
+     * const novel = await prisma.novel.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends NovelFindUniqueArgs>(args: SelectSubset<T, NovelFindUniqueArgs<ExtArgs>>): Prisma__NovelClient<$Result.GetResult<Prisma.$NovelPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Novel that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {NovelFindUniqueOrThrowArgs} args - Arguments to find a Novel
+     * @example
+     * // Get one Novel
+     * const novel = await prisma.novel.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends NovelFindUniqueOrThrowArgs>(args: SelectSubset<T, NovelFindUniqueOrThrowArgs<ExtArgs>>): Prisma__NovelClient<$Result.GetResult<Prisma.$NovelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Novel that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NovelFindFirstArgs} args - Arguments to find a Novel
+     * @example
+     * // Get one Novel
+     * const novel = await prisma.novel.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends NovelFindFirstArgs>(args?: SelectSubset<T, NovelFindFirstArgs<ExtArgs>>): Prisma__NovelClient<$Result.GetResult<Prisma.$NovelPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Novel that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NovelFindFirstOrThrowArgs} args - Arguments to find a Novel
+     * @example
+     * // Get one Novel
+     * const novel = await prisma.novel.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends NovelFindFirstOrThrowArgs>(args?: SelectSubset<T, NovelFindFirstOrThrowArgs<ExtArgs>>): Prisma__NovelClient<$Result.GetResult<Prisma.$NovelPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Novels that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NovelFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Novels
+     * const novels = await prisma.novel.findMany()
+     * 
+     * // Get first 10 Novels
+     * const novels = await prisma.novel.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const novelWithIdOnly = await prisma.novel.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends NovelFindManyArgs>(args?: SelectSubset<T, NovelFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NovelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Novel.
+     * @param {NovelCreateArgs} args - Arguments to create a Novel.
+     * @example
+     * // Create one Novel
+     * const Novel = await prisma.novel.create({
+     *   data: {
+     *     // ... data to create a Novel
+     *   }
+     * })
+     * 
+     */
+    create<T extends NovelCreateArgs>(args: SelectSubset<T, NovelCreateArgs<ExtArgs>>): Prisma__NovelClient<$Result.GetResult<Prisma.$NovelPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Novels.
+     * @param {NovelCreateManyArgs} args - Arguments to create many Novels.
+     * @example
+     * // Create many Novels
+     * const novel = await prisma.novel.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends NovelCreateManyArgs>(args?: SelectSubset<T, NovelCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Novels and returns the data saved in the database.
+     * @param {NovelCreateManyAndReturnArgs} args - Arguments to create many Novels.
+     * @example
+     * // Create many Novels
+     * const novel = await prisma.novel.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Novels and only return the `id`
+     * const novelWithIdOnly = await prisma.novel.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends NovelCreateManyAndReturnArgs>(args?: SelectSubset<T, NovelCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NovelPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Novel.
+     * @param {NovelDeleteArgs} args - Arguments to delete one Novel.
+     * @example
+     * // Delete one Novel
+     * const Novel = await prisma.novel.delete({
+     *   where: {
+     *     // ... filter to delete one Novel
+     *   }
+     * })
+     * 
+     */
+    delete<T extends NovelDeleteArgs>(args: SelectSubset<T, NovelDeleteArgs<ExtArgs>>): Prisma__NovelClient<$Result.GetResult<Prisma.$NovelPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Novel.
+     * @param {NovelUpdateArgs} args - Arguments to update one Novel.
+     * @example
+     * // Update one Novel
+     * const novel = await prisma.novel.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends NovelUpdateArgs>(args: SelectSubset<T, NovelUpdateArgs<ExtArgs>>): Prisma__NovelClient<$Result.GetResult<Prisma.$NovelPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Novels.
+     * @param {NovelDeleteManyArgs} args - Arguments to filter Novels to delete.
+     * @example
+     * // Delete a few Novels
+     * const { count } = await prisma.novel.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends NovelDeleteManyArgs>(args?: SelectSubset<T, NovelDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Novels.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NovelUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Novels
+     * const novel = await prisma.novel.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends NovelUpdateManyArgs>(args: SelectSubset<T, NovelUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Novels and returns the data updated in the database.
+     * @param {NovelUpdateManyAndReturnArgs} args - Arguments to update many Novels.
+     * @example
+     * // Update many Novels
+     * const novel = await prisma.novel.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Novels and only return the `id`
+     * const novelWithIdOnly = await prisma.novel.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends NovelUpdateManyAndReturnArgs>(args: SelectSubset<T, NovelUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NovelPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Novel.
+     * @param {NovelUpsertArgs} args - Arguments to update or create a Novel.
+     * @example
+     * // Update or create a Novel
+     * const novel = await prisma.novel.upsert({
+     *   create: {
+     *     // ... data to create a Novel
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Novel we want to update
+     *   }
+     * })
+     */
+    upsert<T extends NovelUpsertArgs>(args: SelectSubset<T, NovelUpsertArgs<ExtArgs>>): Prisma__NovelClient<$Result.GetResult<Prisma.$NovelPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Novels.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NovelCountArgs} args - Arguments to filter Novels to count.
+     * @example
+     * // Count the number of Novels
+     * const count = await prisma.novel.count({
+     *   where: {
+     *     // ... the filter for the Novels we want to count
+     *   }
+     * })
+    **/
+    count<T extends NovelCountArgs>(
+      args?: Subset<T, NovelCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], NovelCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Novel.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NovelAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends NovelAggregateArgs>(args: Subset<T, NovelAggregateArgs>): Prisma.PrismaPromise<GetNovelAggregateType<T>>
+
+    /**
+     * Group by Novel.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NovelGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends NovelGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: NovelGroupByArgs['orderBy'] }
+        : { orderBy?: NovelGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, NovelGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNovelGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Novel model
+   */
+  readonly fields: NovelFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Novel.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__NovelClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    Series<T extends Novel$SeriesArgs<ExtArgs> = {}>(args?: Subset<T, Novel$SeriesArgs<ExtArgs>>): Prisma__SeriesClient<$Result.GetResult<Prisma.$SeriesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Novel model
+   */
+  interface NovelFieldRefs {
+    readonly id: FieldRef<"Novel", 'String'>
+    readonly title: FieldRef<"Novel", 'String'>
+    readonly imageUrl: FieldRef<"Novel", 'String'>
+    readonly content: FieldRef<"Novel", 'String'>
+    readonly description: FieldRef<"Novel", 'String'>
+    readonly createdAt: FieldRef<"Novel", 'DateTime'>
+    readonly updatedAt: FieldRef<"Novel", 'DateTime'>
+    readonly seriesId: FieldRef<"Novel", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Novel findUnique
+   */
+  export type NovelFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Novel
+     */
+    select?: NovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Novel
+     */
+    omit?: NovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NovelInclude<ExtArgs> | null
+    /**
+     * Filter, which Novel to fetch.
+     */
+    where: NovelWhereUniqueInput
+  }
+
+  /**
+   * Novel findUniqueOrThrow
+   */
+  export type NovelFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Novel
+     */
+    select?: NovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Novel
+     */
+    omit?: NovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NovelInclude<ExtArgs> | null
+    /**
+     * Filter, which Novel to fetch.
+     */
+    where: NovelWhereUniqueInput
+  }
+
+  /**
+   * Novel findFirst
+   */
+  export type NovelFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Novel
+     */
+    select?: NovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Novel
+     */
+    omit?: NovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NovelInclude<ExtArgs> | null
+    /**
+     * Filter, which Novel to fetch.
+     */
+    where?: NovelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Novels to fetch.
+     */
+    orderBy?: NovelOrderByWithRelationInput | NovelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Novels.
+     */
+    cursor?: NovelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Novels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Novels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Novels.
+     */
+    distinct?: NovelScalarFieldEnum | NovelScalarFieldEnum[]
+  }
+
+  /**
+   * Novel findFirstOrThrow
+   */
+  export type NovelFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Novel
+     */
+    select?: NovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Novel
+     */
+    omit?: NovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NovelInclude<ExtArgs> | null
+    /**
+     * Filter, which Novel to fetch.
+     */
+    where?: NovelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Novels to fetch.
+     */
+    orderBy?: NovelOrderByWithRelationInput | NovelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Novels.
+     */
+    cursor?: NovelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Novels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Novels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Novels.
+     */
+    distinct?: NovelScalarFieldEnum | NovelScalarFieldEnum[]
+  }
+
+  /**
+   * Novel findMany
+   */
+  export type NovelFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Novel
+     */
+    select?: NovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Novel
+     */
+    omit?: NovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NovelInclude<ExtArgs> | null
+    /**
+     * Filter, which Novels to fetch.
+     */
+    where?: NovelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Novels to fetch.
+     */
+    orderBy?: NovelOrderByWithRelationInput | NovelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Novels.
+     */
+    cursor?: NovelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Novels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Novels.
+     */
+    skip?: number
+    distinct?: NovelScalarFieldEnum | NovelScalarFieldEnum[]
+  }
+
+  /**
+   * Novel create
+   */
+  export type NovelCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Novel
+     */
+    select?: NovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Novel
+     */
+    omit?: NovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NovelInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Novel.
+     */
+    data: XOR<NovelCreateInput, NovelUncheckedCreateInput>
+  }
+
+  /**
+   * Novel createMany
+   */
+  export type NovelCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Novels.
+     */
+    data: NovelCreateManyInput | NovelCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Novel createManyAndReturn
+   */
+  export type NovelCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Novel
+     */
+    select?: NovelSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Novel
+     */
+    omit?: NovelOmit<ExtArgs> | null
+    /**
+     * The data used to create many Novels.
+     */
+    data: NovelCreateManyInput | NovelCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NovelIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Novel update
+   */
+  export type NovelUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Novel
+     */
+    select?: NovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Novel
+     */
+    omit?: NovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NovelInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Novel.
+     */
+    data: XOR<NovelUpdateInput, NovelUncheckedUpdateInput>
+    /**
+     * Choose, which Novel to update.
+     */
+    where: NovelWhereUniqueInput
+  }
+
+  /**
+   * Novel updateMany
+   */
+  export type NovelUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Novels.
+     */
+    data: XOR<NovelUpdateManyMutationInput, NovelUncheckedUpdateManyInput>
+    /**
+     * Filter which Novels to update
+     */
+    where?: NovelWhereInput
+    /**
+     * Limit how many Novels to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Novel updateManyAndReturn
+   */
+  export type NovelUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Novel
+     */
+    select?: NovelSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Novel
+     */
+    omit?: NovelOmit<ExtArgs> | null
+    /**
+     * The data used to update Novels.
+     */
+    data: XOR<NovelUpdateManyMutationInput, NovelUncheckedUpdateManyInput>
+    /**
+     * Filter which Novels to update
+     */
+    where?: NovelWhereInput
+    /**
+     * Limit how many Novels to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NovelIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Novel upsert
+   */
+  export type NovelUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Novel
+     */
+    select?: NovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Novel
+     */
+    omit?: NovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NovelInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Novel to update in case it exists.
+     */
+    where: NovelWhereUniqueInput
+    /**
+     * In case the Novel found by the `where` argument doesn't exist, create a new Novel with this data.
+     */
+    create: XOR<NovelCreateInput, NovelUncheckedCreateInput>
+    /**
+     * In case the Novel was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<NovelUpdateInput, NovelUncheckedUpdateInput>
+  }
+
+  /**
+   * Novel delete
+   */
+  export type NovelDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Novel
+     */
+    select?: NovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Novel
+     */
+    omit?: NovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NovelInclude<ExtArgs> | null
+    /**
+     * Filter which Novel to delete.
+     */
+    where: NovelWhereUniqueInput
+  }
+
+  /**
+   * Novel deleteMany
+   */
+  export type NovelDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Novels to delete
+     */
+    where?: NovelWhereInput
+    /**
+     * Limit how many Novels to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Novel.Series
+   */
+  export type Novel$SeriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Series
+     */
+    select?: SeriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Series
+     */
+    omit?: SeriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeriesInclude<ExtArgs> | null
+    where?: SeriesWhereInput
+  }
+
+  /**
+   * Novel without action
+   */
+  export type NovelDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Novel
+     */
+    select?: NovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Novel
+     */
+    omit?: NovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NovelInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Series
+   */
+
+  export type AggregateSeries = {
+    _count: SeriesCountAggregateOutputType | null
+    _min: SeriesMinAggregateOutputType | null
+    _max: SeriesMaxAggregateOutputType | null
+  }
+
+  export type SeriesMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SeriesMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SeriesCountAggregateOutputType = {
+    id: number
+    name: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SeriesMinAggregateInputType = {
+    id?: true
+    name?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SeriesMaxAggregateInputType = {
+    id?: true
+    name?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SeriesCountAggregateInputType = {
+    id?: true
+    name?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SeriesAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Series to aggregate.
+     */
+    where?: SeriesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Series to fetch.
+     */
+    orderBy?: SeriesOrderByWithRelationInput | SeriesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SeriesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Series from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Series.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Series
+    **/
+    _count?: true | SeriesCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SeriesMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SeriesMaxAggregateInputType
+  }
+
+  export type GetSeriesAggregateType<T extends SeriesAggregateArgs> = {
+        [P in keyof T & keyof AggregateSeries]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSeries[P]>
+      : GetScalarType<T[P], AggregateSeries[P]>
+  }
+
+
+
+
+  export type SeriesGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SeriesWhereInput
+    orderBy?: SeriesOrderByWithAggregationInput | SeriesOrderByWithAggregationInput[]
+    by: SeriesScalarFieldEnum[] | SeriesScalarFieldEnum
+    having?: SeriesScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SeriesCountAggregateInputType | true
+    _min?: SeriesMinAggregateInputType
+    _max?: SeriesMaxAggregateInputType
+  }
+
+  export type SeriesGroupByOutputType = {
+    id: string
+    name: string
+    createdAt: Date
+    updatedAt: Date
+    _count: SeriesCountAggregateOutputType | null
+    _min: SeriesMinAggregateOutputType | null
+    _max: SeriesMaxAggregateOutputType | null
+  }
+
+  type GetSeriesGroupByPayload<T extends SeriesGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SeriesGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SeriesGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SeriesGroupByOutputType[P]>
+            : GetScalarType<T[P], SeriesGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SeriesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    novels?: boolean | Series$novelsArgs<ExtArgs>
+    _count?: boolean | SeriesCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["series"]>
+
+  export type SeriesSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["series"]>
+
+  export type SeriesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["series"]>
+
+  export type SeriesSelectScalar = {
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SeriesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt", ExtArgs["result"]["series"]>
+  export type SeriesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    novels?: boolean | Series$novelsArgs<ExtArgs>
+    _count?: boolean | SeriesCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type SeriesIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type SeriesIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $SeriesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Series"
+    objects: {
+      novels: Prisma.$NovelPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["series"]>
+    composites: {}
+  }
+
+  type SeriesGetPayload<S extends boolean | null | undefined | SeriesDefaultArgs> = $Result.GetResult<Prisma.$SeriesPayload, S>
+
+  type SeriesCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SeriesFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SeriesCountAggregateInputType | true
+    }
+
+  export interface SeriesDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Series'], meta: { name: 'Series' } }
+    /**
+     * Find zero or one Series that matches the filter.
+     * @param {SeriesFindUniqueArgs} args - Arguments to find a Series
+     * @example
+     * // Get one Series
+     * const series = await prisma.series.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SeriesFindUniqueArgs>(args: SelectSubset<T, SeriesFindUniqueArgs<ExtArgs>>): Prisma__SeriesClient<$Result.GetResult<Prisma.$SeriesPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Series that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SeriesFindUniqueOrThrowArgs} args - Arguments to find a Series
+     * @example
+     * // Get one Series
+     * const series = await prisma.series.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SeriesFindUniqueOrThrowArgs>(args: SelectSubset<T, SeriesFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SeriesClient<$Result.GetResult<Prisma.$SeriesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Series that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeriesFindFirstArgs} args - Arguments to find a Series
+     * @example
+     * // Get one Series
+     * const series = await prisma.series.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SeriesFindFirstArgs>(args?: SelectSubset<T, SeriesFindFirstArgs<ExtArgs>>): Prisma__SeriesClient<$Result.GetResult<Prisma.$SeriesPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Series that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeriesFindFirstOrThrowArgs} args - Arguments to find a Series
+     * @example
+     * // Get one Series
+     * const series = await prisma.series.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SeriesFindFirstOrThrowArgs>(args?: SelectSubset<T, SeriesFindFirstOrThrowArgs<ExtArgs>>): Prisma__SeriesClient<$Result.GetResult<Prisma.$SeriesPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Series that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeriesFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Series
+     * const series = await prisma.series.findMany()
+     * 
+     * // Get first 10 Series
+     * const series = await prisma.series.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const seriesWithIdOnly = await prisma.series.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SeriesFindManyArgs>(args?: SelectSubset<T, SeriesFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SeriesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Series.
+     * @param {SeriesCreateArgs} args - Arguments to create a Series.
+     * @example
+     * // Create one Series
+     * const Series = await prisma.series.create({
+     *   data: {
+     *     // ... data to create a Series
+     *   }
+     * })
+     * 
+     */
+    create<T extends SeriesCreateArgs>(args: SelectSubset<T, SeriesCreateArgs<ExtArgs>>): Prisma__SeriesClient<$Result.GetResult<Prisma.$SeriesPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Series.
+     * @param {SeriesCreateManyArgs} args - Arguments to create many Series.
+     * @example
+     * // Create many Series
+     * const series = await prisma.series.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SeriesCreateManyArgs>(args?: SelectSubset<T, SeriesCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Series and returns the data saved in the database.
+     * @param {SeriesCreateManyAndReturnArgs} args - Arguments to create many Series.
+     * @example
+     * // Create many Series
+     * const series = await prisma.series.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Series and only return the `id`
+     * const seriesWithIdOnly = await prisma.series.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SeriesCreateManyAndReturnArgs>(args?: SelectSubset<T, SeriesCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SeriesPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Series.
+     * @param {SeriesDeleteArgs} args - Arguments to delete one Series.
+     * @example
+     * // Delete one Series
+     * const Series = await prisma.series.delete({
+     *   where: {
+     *     // ... filter to delete one Series
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SeriesDeleteArgs>(args: SelectSubset<T, SeriesDeleteArgs<ExtArgs>>): Prisma__SeriesClient<$Result.GetResult<Prisma.$SeriesPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Series.
+     * @param {SeriesUpdateArgs} args - Arguments to update one Series.
+     * @example
+     * // Update one Series
+     * const series = await prisma.series.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SeriesUpdateArgs>(args: SelectSubset<T, SeriesUpdateArgs<ExtArgs>>): Prisma__SeriesClient<$Result.GetResult<Prisma.$SeriesPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Series.
+     * @param {SeriesDeleteManyArgs} args - Arguments to filter Series to delete.
+     * @example
+     * // Delete a few Series
+     * const { count } = await prisma.series.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SeriesDeleteManyArgs>(args?: SelectSubset<T, SeriesDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Series.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeriesUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Series
+     * const series = await prisma.series.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SeriesUpdateManyArgs>(args: SelectSubset<T, SeriesUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Series and returns the data updated in the database.
+     * @param {SeriesUpdateManyAndReturnArgs} args - Arguments to update many Series.
+     * @example
+     * // Update many Series
+     * const series = await prisma.series.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Series and only return the `id`
+     * const seriesWithIdOnly = await prisma.series.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SeriesUpdateManyAndReturnArgs>(args: SelectSubset<T, SeriesUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SeriesPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Series.
+     * @param {SeriesUpsertArgs} args - Arguments to update or create a Series.
+     * @example
+     * // Update or create a Series
+     * const series = await prisma.series.upsert({
+     *   create: {
+     *     // ... data to create a Series
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Series we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SeriesUpsertArgs>(args: SelectSubset<T, SeriesUpsertArgs<ExtArgs>>): Prisma__SeriesClient<$Result.GetResult<Prisma.$SeriesPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Series.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeriesCountArgs} args - Arguments to filter Series to count.
+     * @example
+     * // Count the number of Series
+     * const count = await prisma.series.count({
+     *   where: {
+     *     // ... the filter for the Series we want to count
+     *   }
+     * })
+    **/
+    count<T extends SeriesCountArgs>(
+      args?: Subset<T, SeriesCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SeriesCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Series.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeriesAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SeriesAggregateArgs>(args: Subset<T, SeriesAggregateArgs>): Prisma.PrismaPromise<GetSeriesAggregateType<T>>
+
+    /**
+     * Group by Series.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeriesGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SeriesGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SeriesGroupByArgs['orderBy'] }
+        : { orderBy?: SeriesGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SeriesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSeriesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Series model
+   */
+  readonly fields: SeriesFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Series.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SeriesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    novels<T extends Series$novelsArgs<ExtArgs> = {}>(args?: Subset<T, Series$novelsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NovelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Series model
+   */
+  interface SeriesFieldRefs {
+    readonly id: FieldRef<"Series", 'String'>
+    readonly name: FieldRef<"Series", 'String'>
+    readonly createdAt: FieldRef<"Series", 'DateTime'>
+    readonly updatedAt: FieldRef<"Series", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Series findUnique
+   */
+  export type SeriesFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Series
+     */
+    select?: SeriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Series
+     */
+    omit?: SeriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeriesInclude<ExtArgs> | null
+    /**
+     * Filter, which Series to fetch.
+     */
+    where: SeriesWhereUniqueInput
+  }
+
+  /**
+   * Series findUniqueOrThrow
+   */
+  export type SeriesFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Series
+     */
+    select?: SeriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Series
+     */
+    omit?: SeriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeriesInclude<ExtArgs> | null
+    /**
+     * Filter, which Series to fetch.
+     */
+    where: SeriesWhereUniqueInput
+  }
+
+  /**
+   * Series findFirst
+   */
+  export type SeriesFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Series
+     */
+    select?: SeriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Series
+     */
+    omit?: SeriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeriesInclude<ExtArgs> | null
+    /**
+     * Filter, which Series to fetch.
+     */
+    where?: SeriesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Series to fetch.
+     */
+    orderBy?: SeriesOrderByWithRelationInput | SeriesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Series.
+     */
+    cursor?: SeriesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Series from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Series.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Series.
+     */
+    distinct?: SeriesScalarFieldEnum | SeriesScalarFieldEnum[]
+  }
+
+  /**
+   * Series findFirstOrThrow
+   */
+  export type SeriesFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Series
+     */
+    select?: SeriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Series
+     */
+    omit?: SeriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeriesInclude<ExtArgs> | null
+    /**
+     * Filter, which Series to fetch.
+     */
+    where?: SeriesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Series to fetch.
+     */
+    orderBy?: SeriesOrderByWithRelationInput | SeriesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Series.
+     */
+    cursor?: SeriesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Series from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Series.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Series.
+     */
+    distinct?: SeriesScalarFieldEnum | SeriesScalarFieldEnum[]
+  }
+
+  /**
+   * Series findMany
+   */
+  export type SeriesFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Series
+     */
+    select?: SeriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Series
+     */
+    omit?: SeriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeriesInclude<ExtArgs> | null
+    /**
+     * Filter, which Series to fetch.
+     */
+    where?: SeriesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Series to fetch.
+     */
+    orderBy?: SeriesOrderByWithRelationInput | SeriesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Series.
+     */
+    cursor?: SeriesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Series from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Series.
+     */
+    skip?: number
+    distinct?: SeriesScalarFieldEnum | SeriesScalarFieldEnum[]
+  }
+
+  /**
+   * Series create
+   */
+  export type SeriesCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Series
+     */
+    select?: SeriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Series
+     */
+    omit?: SeriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeriesInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Series.
+     */
+    data: XOR<SeriesCreateInput, SeriesUncheckedCreateInput>
+  }
+
+  /**
+   * Series createMany
+   */
+  export type SeriesCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Series.
+     */
+    data: SeriesCreateManyInput | SeriesCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Series createManyAndReturn
+   */
+  export type SeriesCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Series
+     */
+    select?: SeriesSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Series
+     */
+    omit?: SeriesOmit<ExtArgs> | null
+    /**
+     * The data used to create many Series.
+     */
+    data: SeriesCreateManyInput | SeriesCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Series update
+   */
+  export type SeriesUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Series
+     */
+    select?: SeriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Series
+     */
+    omit?: SeriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeriesInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Series.
+     */
+    data: XOR<SeriesUpdateInput, SeriesUncheckedUpdateInput>
+    /**
+     * Choose, which Series to update.
+     */
+    where: SeriesWhereUniqueInput
+  }
+
+  /**
+   * Series updateMany
+   */
+  export type SeriesUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Series.
+     */
+    data: XOR<SeriesUpdateManyMutationInput, SeriesUncheckedUpdateManyInput>
+    /**
+     * Filter which Series to update
+     */
+    where?: SeriesWhereInput
+    /**
+     * Limit how many Series to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Series updateManyAndReturn
+   */
+  export type SeriesUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Series
+     */
+    select?: SeriesSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Series
+     */
+    omit?: SeriesOmit<ExtArgs> | null
+    /**
+     * The data used to update Series.
+     */
+    data: XOR<SeriesUpdateManyMutationInput, SeriesUncheckedUpdateManyInput>
+    /**
+     * Filter which Series to update
+     */
+    where?: SeriesWhereInput
+    /**
+     * Limit how many Series to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Series upsert
+   */
+  export type SeriesUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Series
+     */
+    select?: SeriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Series
+     */
+    omit?: SeriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeriesInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Series to update in case it exists.
+     */
+    where: SeriesWhereUniqueInput
+    /**
+     * In case the Series found by the `where` argument doesn't exist, create a new Series with this data.
+     */
+    create: XOR<SeriesCreateInput, SeriesUncheckedCreateInput>
+    /**
+     * In case the Series was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SeriesUpdateInput, SeriesUncheckedUpdateInput>
+  }
+
+  /**
+   * Series delete
+   */
+  export type SeriesDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Series
+     */
+    select?: SeriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Series
+     */
+    omit?: SeriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeriesInclude<ExtArgs> | null
+    /**
+     * Filter which Series to delete.
+     */
+    where: SeriesWhereUniqueInput
+  }
+
+  /**
+   * Series deleteMany
+   */
+  export type SeriesDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Series to delete
+     */
+    where?: SeriesWhereInput
+    /**
+     * Limit how many Series to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Series.novels
+   */
+  export type Series$novelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Novel
+     */
+    select?: NovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Novel
+     */
+    omit?: NovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NovelInclude<ExtArgs> | null
+    where?: NovelWhereInput
+    orderBy?: NovelOrderByWithRelationInput | NovelOrderByWithRelationInput[]
+    cursor?: NovelWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NovelScalarFieldEnum | NovelScalarFieldEnum[]
+  }
+
+  /**
+   * Series without action
+   */
+  export type SeriesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Series
+     */
+    select?: SeriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Series
+     */
+    omit?: SeriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeriesInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -3175,9 +5595,9 @@ export namespace Prisma {
     id: 'id',
     title: 'title',
     imageUrl: 'imageUrl',
-    date: 'date',
     content: 'content',
     description: 'description',
+    readTimes: 'readTimes',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     categoryId: 'categoryId'
@@ -3196,6 +5616,30 @@ export namespace Prisma {
   export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
 
 
+  export const NovelScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    imageUrl: 'imageUrl',
+    content: 'content',
+    description: 'description',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    seriesId: 'seriesId'
+  };
+
+  export type NovelScalarFieldEnum = (typeof NovelScalarFieldEnum)[keyof typeof NovelScalarFieldEnum]
+
+
+  export const SeriesScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SeriesScalarFieldEnum = (typeof SeriesScalarFieldEnum)[keyof typeof SeriesScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -3210,6 +5654,14 @@ export namespace Prisma {
   };
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -3232,6 +5684,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -3246,16 +5712,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Int'
+   * Reference to a field of type 'Float'
    */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
     
 
 
   /**
-   * Reference to a field of type 'Int[]'
+   * Reference to a field of type 'Float[]'
    */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
   /**
    * Deep Input Types
@@ -3269,9 +5735,9 @@ export namespace Prisma {
     id?: StringFilter<"Article"> | string
     title?: StringFilter<"Article"> | string
     imageUrl?: StringFilter<"Article"> | string
-    date?: DateTimeFilter<"Article"> | Date | string
     content?: StringFilter<"Article"> | string
     description?: StringFilter<"Article"> | string
+    readTimes?: IntFilter<"Article"> | number
     createdAt?: DateTimeFilter<"Article"> | Date | string
     updatedAt?: DateTimeFilter<"Article"> | Date | string
     categoryId?: StringFilter<"Article"> | string
@@ -3282,9 +5748,9 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     imageUrl?: SortOrder
-    date?: SortOrder
     content?: SortOrder
     description?: SortOrder
+    readTimes?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     categoryId?: SortOrder
@@ -3298,9 +5764,9 @@ export namespace Prisma {
     NOT?: ArticleWhereInput | ArticleWhereInput[]
     title?: StringFilter<"Article"> | string
     imageUrl?: StringFilter<"Article"> | string
-    date?: DateTimeFilter<"Article"> | Date | string
     content?: StringFilter<"Article"> | string
     description?: StringFilter<"Article"> | string
+    readTimes?: IntFilter<"Article"> | number
     createdAt?: DateTimeFilter<"Article"> | Date | string
     updatedAt?: DateTimeFilter<"Article"> | Date | string
     categoryId?: StringFilter<"Article"> | string
@@ -3311,15 +5777,17 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     imageUrl?: SortOrder
-    date?: SortOrder
     content?: SortOrder
     description?: SortOrder
+    readTimes?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     categoryId?: SortOrder
     _count?: ArticleCountOrderByAggregateInput
+    _avg?: ArticleAvgOrderByAggregateInput
     _max?: ArticleMaxOrderByAggregateInput
     _min?: ArticleMinOrderByAggregateInput
+    _sum?: ArticleSumOrderByAggregateInput
   }
 
   export type ArticleScalarWhereWithAggregatesInput = {
@@ -3329,9 +5797,9 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Article"> | string
     title?: StringWithAggregatesFilter<"Article"> | string
     imageUrl?: StringWithAggregatesFilter<"Article"> | string
-    date?: DateTimeWithAggregatesFilter<"Article"> | Date | string
     content?: StringWithAggregatesFilter<"Article"> | string
     description?: StringWithAggregatesFilter<"Article"> | string
+    readTimes?: IntWithAggregatesFilter<"Article"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Article"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Article"> | Date | string
     categoryId?: StringWithAggregatesFilter<"Article"> | string
@@ -3387,13 +5855,133 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Category"> | Date | string
   }
 
+  export type NovelWhereInput = {
+    AND?: NovelWhereInput | NovelWhereInput[]
+    OR?: NovelWhereInput[]
+    NOT?: NovelWhereInput | NovelWhereInput[]
+    id?: StringFilter<"Novel"> | string
+    title?: StringFilter<"Novel"> | string
+    imageUrl?: StringFilter<"Novel"> | string
+    content?: StringFilter<"Novel"> | string
+    description?: StringFilter<"Novel"> | string
+    createdAt?: DateTimeFilter<"Novel"> | Date | string
+    updatedAt?: DateTimeFilter<"Novel"> | Date | string
+    seriesId?: StringNullableFilter<"Novel"> | string | null
+    Series?: XOR<SeriesNullableScalarRelationFilter, SeriesWhereInput> | null
+  }
+
+  export type NovelOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    imageUrl?: SortOrder
+    content?: SortOrder
+    description?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    seriesId?: SortOrderInput | SortOrder
+    Series?: SeriesOrderByWithRelationInput
+  }
+
+  export type NovelWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: NovelWhereInput | NovelWhereInput[]
+    OR?: NovelWhereInput[]
+    NOT?: NovelWhereInput | NovelWhereInput[]
+    title?: StringFilter<"Novel"> | string
+    imageUrl?: StringFilter<"Novel"> | string
+    content?: StringFilter<"Novel"> | string
+    description?: StringFilter<"Novel"> | string
+    createdAt?: DateTimeFilter<"Novel"> | Date | string
+    updatedAt?: DateTimeFilter<"Novel"> | Date | string
+    seriesId?: StringNullableFilter<"Novel"> | string | null
+    Series?: XOR<SeriesNullableScalarRelationFilter, SeriesWhereInput> | null
+  }, "id">
+
+  export type NovelOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    imageUrl?: SortOrder
+    content?: SortOrder
+    description?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    seriesId?: SortOrderInput | SortOrder
+    _count?: NovelCountOrderByAggregateInput
+    _max?: NovelMaxOrderByAggregateInput
+    _min?: NovelMinOrderByAggregateInput
+  }
+
+  export type NovelScalarWhereWithAggregatesInput = {
+    AND?: NovelScalarWhereWithAggregatesInput | NovelScalarWhereWithAggregatesInput[]
+    OR?: NovelScalarWhereWithAggregatesInput[]
+    NOT?: NovelScalarWhereWithAggregatesInput | NovelScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Novel"> | string
+    title?: StringWithAggregatesFilter<"Novel"> | string
+    imageUrl?: StringWithAggregatesFilter<"Novel"> | string
+    content?: StringWithAggregatesFilter<"Novel"> | string
+    description?: StringWithAggregatesFilter<"Novel"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Novel"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Novel"> | Date | string
+    seriesId?: StringNullableWithAggregatesFilter<"Novel"> | string | null
+  }
+
+  export type SeriesWhereInput = {
+    AND?: SeriesWhereInput | SeriesWhereInput[]
+    OR?: SeriesWhereInput[]
+    NOT?: SeriesWhereInput | SeriesWhereInput[]
+    id?: StringFilter<"Series"> | string
+    name?: StringFilter<"Series"> | string
+    createdAt?: DateTimeFilter<"Series"> | Date | string
+    updatedAt?: DateTimeFilter<"Series"> | Date | string
+    novels?: NovelListRelationFilter
+  }
+
+  export type SeriesOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    novels?: NovelOrderByRelationAggregateInput
+  }
+
+  export type SeriesWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SeriesWhereInput | SeriesWhereInput[]
+    OR?: SeriesWhereInput[]
+    NOT?: SeriesWhereInput | SeriesWhereInput[]
+    name?: StringFilter<"Series"> | string
+    createdAt?: DateTimeFilter<"Series"> | Date | string
+    updatedAt?: DateTimeFilter<"Series"> | Date | string
+    novels?: NovelListRelationFilter
+  }, "id">
+
+  export type SeriesOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SeriesCountOrderByAggregateInput
+    _max?: SeriesMaxOrderByAggregateInput
+    _min?: SeriesMinOrderByAggregateInput
+  }
+
+  export type SeriesScalarWhereWithAggregatesInput = {
+    AND?: SeriesScalarWhereWithAggregatesInput | SeriesScalarWhereWithAggregatesInput[]
+    OR?: SeriesScalarWhereWithAggregatesInput[]
+    NOT?: SeriesScalarWhereWithAggregatesInput | SeriesScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Series"> | string
+    name?: StringWithAggregatesFilter<"Series"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Series"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Series"> | Date | string
+  }
+
   export type ArticleCreateInput = {
     id?: string
     title: string
     imageUrl: string
-    date: Date | string
     content: string
     description: string
+    readTimes?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     Category: CategoryCreateNestedOneWithoutArticlesInput
@@ -3403,9 +5991,9 @@ export namespace Prisma {
     id?: string
     title: string
     imageUrl: string
-    date: Date | string
     content: string
     description: string
+    readTimes?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     categoryId: string
@@ -3415,9 +6003,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    readTimes?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Category?: CategoryUpdateOneRequiredWithoutArticlesNestedInput
@@ -3427,9 +6015,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    readTimes?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categoryId?: StringFieldUpdateOperationsInput | string
@@ -3439,9 +6027,9 @@ export namespace Prisma {
     id?: string
     title: string
     imageUrl: string
-    date: Date | string
     content: string
     description: string
+    readTimes?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     categoryId: string
@@ -3451,9 +6039,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    readTimes?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3462,9 +6050,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    readTimes?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categoryId?: StringFieldUpdateOperationsInput | string
@@ -3523,6 +6111,135 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type NovelCreateInput = {
+    id?: string
+    title: string
+    imageUrl: string
+    content: string
+    description: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Series?: SeriesCreateNestedOneWithoutNovelsInput
+  }
+
+  export type NovelUncheckedCreateInput = {
+    id?: string
+    title: string
+    imageUrl: string
+    content: string
+    description: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    seriesId?: string | null
+  }
+
+  export type NovelUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Series?: SeriesUpdateOneWithoutNovelsNestedInput
+  }
+
+  export type NovelUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    seriesId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type NovelCreateManyInput = {
+    id?: string
+    title: string
+    imageUrl: string
+    content: string
+    description: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    seriesId?: string | null
+  }
+
+  export type NovelUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NovelUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    seriesId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type SeriesCreateInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    novels?: NovelCreateNestedManyWithoutSeriesInput
+  }
+
+  export type SeriesUncheckedCreateInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    novels?: NovelUncheckedCreateNestedManyWithoutSeriesInput
+  }
+
+  export type SeriesUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    novels?: NovelUpdateManyWithoutSeriesNestedInput
+  }
+
+  export type SeriesUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    novels?: NovelUncheckedUpdateManyWithoutSeriesNestedInput
+  }
+
+  export type SeriesCreateManyInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SeriesUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SeriesUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -3536,6 +6253,17 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type DateTimeFilter<$PrismaModel = never> = {
@@ -3558,21 +6286,25 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     imageUrl?: SortOrder
-    date?: SortOrder
     content?: SortOrder
     description?: SortOrder
+    readTimes?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     categoryId?: SortOrder
+  }
+
+  export type ArticleAvgOrderByAggregateInput = {
+    readTimes?: SortOrder
   }
 
   export type ArticleMaxOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
     imageUrl?: SortOrder
-    date?: SortOrder
     content?: SortOrder
     description?: SortOrder
+    readTimes?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     categoryId?: SortOrder
@@ -3582,12 +6314,16 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     imageUrl?: SortOrder
-    date?: SortOrder
     content?: SortOrder
     description?: SortOrder
+    readTimes?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     categoryId?: SortOrder
+  }
+
+  export type ArticleSumOrderByAggregateInput = {
+    readTimes?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -3606,6 +6342,22 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -3653,6 +6405,113 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type SeriesNullableScalarRelationFilter = {
+    is?: SeriesWhereInput | null
+    isNot?: SeriesWhereInput | null
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
+  export type NovelCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    imageUrl?: SortOrder
+    content?: SortOrder
+    description?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    seriesId?: SortOrder
+  }
+
+  export type NovelMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    imageUrl?: SortOrder
+    content?: SortOrder
+    description?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    seriesId?: SortOrder
+  }
+
+  export type NovelMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    imageUrl?: SortOrder
+    content?: SortOrder
+    description?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    seriesId?: SortOrder
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NovelListRelationFilter = {
+    every?: NovelWhereInput
+    some?: NovelWhereInput
+    none?: NovelWhereInput
+  }
+
+  export type NovelOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SeriesCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SeriesMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SeriesMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
   export type CategoryCreateNestedOneWithoutArticlesInput = {
     create?: XOR<CategoryCreateWithoutArticlesInput, CategoryUncheckedCreateWithoutArticlesInput>
     connectOrCreate?: CategoryCreateOrConnectWithoutArticlesInput
@@ -3661,6 +6520,14 @@ export namespace Prisma {
 
   export type StringFieldUpdateOperationsInput = {
     set?: string
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -3717,6 +6584,68 @@ export namespace Prisma {
     deleteMany?: ArticleScalarWhereInput | ArticleScalarWhereInput[]
   }
 
+  export type SeriesCreateNestedOneWithoutNovelsInput = {
+    create?: XOR<SeriesCreateWithoutNovelsInput, SeriesUncheckedCreateWithoutNovelsInput>
+    connectOrCreate?: SeriesCreateOrConnectWithoutNovelsInput
+    connect?: SeriesWhereUniqueInput
+  }
+
+  export type SeriesUpdateOneWithoutNovelsNestedInput = {
+    create?: XOR<SeriesCreateWithoutNovelsInput, SeriesUncheckedCreateWithoutNovelsInput>
+    connectOrCreate?: SeriesCreateOrConnectWithoutNovelsInput
+    upsert?: SeriesUpsertWithoutNovelsInput
+    disconnect?: SeriesWhereInput | boolean
+    delete?: SeriesWhereInput | boolean
+    connect?: SeriesWhereUniqueInput
+    update?: XOR<XOR<SeriesUpdateToOneWithWhereWithoutNovelsInput, SeriesUpdateWithoutNovelsInput>, SeriesUncheckedUpdateWithoutNovelsInput>
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
+  export type NovelCreateNestedManyWithoutSeriesInput = {
+    create?: XOR<NovelCreateWithoutSeriesInput, NovelUncheckedCreateWithoutSeriesInput> | NovelCreateWithoutSeriesInput[] | NovelUncheckedCreateWithoutSeriesInput[]
+    connectOrCreate?: NovelCreateOrConnectWithoutSeriesInput | NovelCreateOrConnectWithoutSeriesInput[]
+    createMany?: NovelCreateManySeriesInputEnvelope
+    connect?: NovelWhereUniqueInput | NovelWhereUniqueInput[]
+  }
+
+  export type NovelUncheckedCreateNestedManyWithoutSeriesInput = {
+    create?: XOR<NovelCreateWithoutSeriesInput, NovelUncheckedCreateWithoutSeriesInput> | NovelCreateWithoutSeriesInput[] | NovelUncheckedCreateWithoutSeriesInput[]
+    connectOrCreate?: NovelCreateOrConnectWithoutSeriesInput | NovelCreateOrConnectWithoutSeriesInput[]
+    createMany?: NovelCreateManySeriesInputEnvelope
+    connect?: NovelWhereUniqueInput | NovelWhereUniqueInput[]
+  }
+
+  export type NovelUpdateManyWithoutSeriesNestedInput = {
+    create?: XOR<NovelCreateWithoutSeriesInput, NovelUncheckedCreateWithoutSeriesInput> | NovelCreateWithoutSeriesInput[] | NovelUncheckedCreateWithoutSeriesInput[]
+    connectOrCreate?: NovelCreateOrConnectWithoutSeriesInput | NovelCreateOrConnectWithoutSeriesInput[]
+    upsert?: NovelUpsertWithWhereUniqueWithoutSeriesInput | NovelUpsertWithWhereUniqueWithoutSeriesInput[]
+    createMany?: NovelCreateManySeriesInputEnvelope
+    set?: NovelWhereUniqueInput | NovelWhereUniqueInput[]
+    disconnect?: NovelWhereUniqueInput | NovelWhereUniqueInput[]
+    delete?: NovelWhereUniqueInput | NovelWhereUniqueInput[]
+    connect?: NovelWhereUniqueInput | NovelWhereUniqueInput[]
+    update?: NovelUpdateWithWhereUniqueWithoutSeriesInput | NovelUpdateWithWhereUniqueWithoutSeriesInput[]
+    updateMany?: NovelUpdateManyWithWhereWithoutSeriesInput | NovelUpdateManyWithWhereWithoutSeriesInput[]
+    deleteMany?: NovelScalarWhereInput | NovelScalarWhereInput[]
+  }
+
+  export type NovelUncheckedUpdateManyWithoutSeriesNestedInput = {
+    create?: XOR<NovelCreateWithoutSeriesInput, NovelUncheckedCreateWithoutSeriesInput> | NovelCreateWithoutSeriesInput[] | NovelUncheckedCreateWithoutSeriesInput[]
+    connectOrCreate?: NovelCreateOrConnectWithoutSeriesInput | NovelCreateOrConnectWithoutSeriesInput[]
+    upsert?: NovelUpsertWithWhereUniqueWithoutSeriesInput | NovelUpsertWithWhereUniqueWithoutSeriesInput[]
+    createMany?: NovelCreateManySeriesInputEnvelope
+    set?: NovelWhereUniqueInput | NovelWhereUniqueInput[]
+    disconnect?: NovelWhereUniqueInput | NovelWhereUniqueInput[]
+    delete?: NovelWhereUniqueInput | NovelWhereUniqueInput[]
+    connect?: NovelWhereUniqueInput | NovelWhereUniqueInput[]
+    update?: NovelUpdateWithWhereUniqueWithoutSeriesInput | NovelUpdateWithWhereUniqueWithoutSeriesInput[]
+    updateMany?: NovelUpdateManyWithWhereWithoutSeriesInput | NovelUpdateManyWithWhereWithoutSeriesInput[]
+    deleteMany?: NovelScalarWhereInput | NovelScalarWhereInput[]
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -3729,6 +6658,17 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
@@ -3759,7 +6699,7 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type NestedIntFilter<$PrismaModel = never> = {
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
     notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -3767,7 +6707,23 @@ export namespace Prisma {
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -3782,6 +6738,48 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type CategoryCreateWithoutArticlesInput = {
@@ -3832,9 +6830,9 @@ export namespace Prisma {
     id?: string
     title: string
     imageUrl: string
-    date: Date | string
     content: string
     description: string
+    readTimes?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -3843,9 +6841,9 @@ export namespace Prisma {
     id?: string
     title: string
     imageUrl: string
-    date: Date | string
     content: string
     description: string
+    readTimes?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -3883,21 +6881,125 @@ export namespace Prisma {
     id?: StringFilter<"Article"> | string
     title?: StringFilter<"Article"> | string
     imageUrl?: StringFilter<"Article"> | string
-    date?: DateTimeFilter<"Article"> | Date | string
     content?: StringFilter<"Article"> | string
     description?: StringFilter<"Article"> | string
+    readTimes?: IntFilter<"Article"> | number
     createdAt?: DateTimeFilter<"Article"> | Date | string
     updatedAt?: DateTimeFilter<"Article"> | Date | string
     categoryId?: StringFilter<"Article"> | string
+  }
+
+  export type SeriesCreateWithoutNovelsInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SeriesUncheckedCreateWithoutNovelsInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SeriesCreateOrConnectWithoutNovelsInput = {
+    where: SeriesWhereUniqueInput
+    create: XOR<SeriesCreateWithoutNovelsInput, SeriesUncheckedCreateWithoutNovelsInput>
+  }
+
+  export type SeriesUpsertWithoutNovelsInput = {
+    update: XOR<SeriesUpdateWithoutNovelsInput, SeriesUncheckedUpdateWithoutNovelsInput>
+    create: XOR<SeriesCreateWithoutNovelsInput, SeriesUncheckedCreateWithoutNovelsInput>
+    where?: SeriesWhereInput
+  }
+
+  export type SeriesUpdateToOneWithWhereWithoutNovelsInput = {
+    where?: SeriesWhereInput
+    data: XOR<SeriesUpdateWithoutNovelsInput, SeriesUncheckedUpdateWithoutNovelsInput>
+  }
+
+  export type SeriesUpdateWithoutNovelsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SeriesUncheckedUpdateWithoutNovelsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NovelCreateWithoutSeriesInput = {
+    id?: string
+    title: string
+    imageUrl: string
+    content: string
+    description: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type NovelUncheckedCreateWithoutSeriesInput = {
+    id?: string
+    title: string
+    imageUrl: string
+    content: string
+    description: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type NovelCreateOrConnectWithoutSeriesInput = {
+    where: NovelWhereUniqueInput
+    create: XOR<NovelCreateWithoutSeriesInput, NovelUncheckedCreateWithoutSeriesInput>
+  }
+
+  export type NovelCreateManySeriesInputEnvelope = {
+    data: NovelCreateManySeriesInput | NovelCreateManySeriesInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type NovelUpsertWithWhereUniqueWithoutSeriesInput = {
+    where: NovelWhereUniqueInput
+    update: XOR<NovelUpdateWithoutSeriesInput, NovelUncheckedUpdateWithoutSeriesInput>
+    create: XOR<NovelCreateWithoutSeriesInput, NovelUncheckedCreateWithoutSeriesInput>
+  }
+
+  export type NovelUpdateWithWhereUniqueWithoutSeriesInput = {
+    where: NovelWhereUniqueInput
+    data: XOR<NovelUpdateWithoutSeriesInput, NovelUncheckedUpdateWithoutSeriesInput>
+  }
+
+  export type NovelUpdateManyWithWhereWithoutSeriesInput = {
+    where: NovelScalarWhereInput
+    data: XOR<NovelUpdateManyMutationInput, NovelUncheckedUpdateManyWithoutSeriesInput>
+  }
+
+  export type NovelScalarWhereInput = {
+    AND?: NovelScalarWhereInput | NovelScalarWhereInput[]
+    OR?: NovelScalarWhereInput[]
+    NOT?: NovelScalarWhereInput | NovelScalarWhereInput[]
+    id?: StringFilter<"Novel"> | string
+    title?: StringFilter<"Novel"> | string
+    imageUrl?: StringFilter<"Novel"> | string
+    content?: StringFilter<"Novel"> | string
+    description?: StringFilter<"Novel"> | string
+    createdAt?: DateTimeFilter<"Novel"> | Date | string
+    updatedAt?: DateTimeFilter<"Novel"> | Date | string
+    seriesId?: StringNullableFilter<"Novel"> | string | null
   }
 
   export type ArticleCreateManyCategoryInput = {
     id?: string
     title: string
     imageUrl: string
-    date: Date | string
     content: string
     description: string
+    readTimes?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -3906,9 +7008,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    readTimes?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3917,9 +7019,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    readTimes?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3928,7 +7030,47 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    content?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    readTimes?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NovelCreateManySeriesInput = {
+    id?: string
+    title: string
+    imageUrl: string
+    content: string
+    description: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type NovelUpdateWithoutSeriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NovelUncheckedUpdateWithoutSeriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NovelUncheckedUpdateManyWithoutSeriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

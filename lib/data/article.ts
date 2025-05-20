@@ -7,7 +7,7 @@ export async function getAllArticles(): Promise<Article[]> {
 			Category: true,
 		},
 		orderBy: {
-			date: "desc",
+			createdAt: "desc",
 		},
 	});
 }
@@ -32,7 +32,7 @@ export async function getArticlesByCategory(
 			Category: true,
 		},
 		orderBy: {
-			date: "desc",
+			createdAt: "desc",
 		},
 	});
 }
@@ -53,7 +53,31 @@ export async function searchArticles(query: string): Promise<Article[]> {
 			Category: true,
 		},
 		orderBy: {
-			date: "desc",
+			createdAt: "desc",
+		},
+	});
+}
+
+export async function getLatestArticles(): Promise<Article[]> {
+	return prisma.article.findMany({
+		take: 9,
+		include: {
+			Category: true,
+		},
+		orderBy: {
+			createdAt: "desc",
+		},
+	});
+}
+
+export async function getHottestArticles(): Promise<Article[]> {
+	return prisma.article.findMany({
+		take: 7,
+		include: {
+			Category: true,
+		},
+		orderBy: {
+			readTimes: "desc",
 		},
 	});
 }

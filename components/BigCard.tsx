@@ -3,7 +3,7 @@ import type { CardProps } from "@/types/interface";
 import Image from "next/image";
 import Link from "next/link";
 
-function BigCard({ article, className }: CardProps) {
+function BigCard({ article, className, category }: CardProps) {
 	return (
 		<Link
 			href={`/article/${article.id}`}

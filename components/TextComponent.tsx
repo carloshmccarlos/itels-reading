@@ -38,7 +38,7 @@ async function TextComponent({ className, article, titleSize }: Props) {
 					</p>
 				)}
 				<time className="text-sm text-gray-500 mt-auto">
-					{new Date(article.date).toLocaleDateString()}
+					{new Date(article.createdAt).toLocaleDateString()}
 				</time>
 			</div>
 		</>

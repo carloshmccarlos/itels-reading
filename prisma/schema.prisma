@@ -12,9 +12,9 @@ model Article {
   id          String   @id @default(cuid())
   title       String
   imageUrl    String
-  date        DateTime
   content     String
   description String
+  readTimes   Int      @default(0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -24,11 +24,32 @@ model Article {
 }
 
 model Category {
+  id        String    @id @default(cuid())
+  name      String    @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  // Relations
+  articles  Article[]
+}
+
+model Novel {
+  id          String   @id @default(cuid())
+  title       String
+  imageUrl    String
+  content     String
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  Series   Series? @relation(fields: [seriesId], references: [id])
+  seriesId String?
+}
+
+model Series {
   id        String   @id @default(cuid())
-  name      String   @unique
+  name      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  // Relations
-  articles Article[]
+  novels Novel[]
 }

@@ -4,11 +4,11 @@ import VerticalCard from "@/components/VerticalCard";
 import BigCard from "@/components/BigCard";
 import Footer from "@/components/Footer";
 import NoImageCard from "@/components/NoImageCard";
-import { getAllArticles } from "@/lib/data/article";
-import type { Article } from "@/lib/generated/prisma";
+import { getHottestArticles, getLatestArticles } from "@/lib/data/article";
 
 export default async function Home() {
-	const articles: Article[] = await getAllArticles();
+	const latestArticles = await getLatestArticles();
+	const hottestArticles = await getHottestArticles();
 
 	return (
 		<>
@@ -19,19 +19,19 @@ export default async function Home() {
 					<div className="grid grid-cols-1 lg:grid-cols-6 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12 items-stretch">
 						{/* Latest Big Card  */}
 						<div className="lg:col-span-4 ">
-							<BigCard article={articles[0]} />
+							<BigCard article={latestArticles[0]} />
 						</div>
 
 						{/* Horizontal Cards */}
 						<div className="lg:col-span-2 grid grid-cols-1 gap-4 sm:gap-6 ">
-							<HorizontalCard article={articles[1]} />
-							<HorizontalCard article={articles[2]} />
+							<HorizontalCard article={latestArticles[1]} />
+							<HorizontalCard article={latestArticles[2]} />
 						</div>
 					</div>
 
 					{/* Vertical Card Section */}
 					<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mb-12">
-						{articles.slice(3, 9).map((article) => (
+						{latestArticles.slice(3, 9).map((article) => (
 							<VerticalCard key={article.title} article={article} />
 						))}
 					</div>
@@ -41,12 +41,12 @@ export default async function Home() {
 					<div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
 						{/* Two Big Cards on the left */}
 						<div className="flex items-center justify-center">
-							<BigCard article={articles[0]} />
+							<BigCard article={hottestArticles[0]} />
 						</div>
 
 						{/* NoImageCards on the right */}
 						<div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-							{articles.slice(0, 6).map((article) => (
+							{hottestArticles.slice(1, 6).map((article) => (
 								<NoImageCard key={article.title} article={article} />
 							))}
 						</div>
