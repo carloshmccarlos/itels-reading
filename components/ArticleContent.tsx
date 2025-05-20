@@ -1,6 +1,6 @@
 import MarkdownRenderer from "@/components/MarkdownRender";
 import { Button } from "@/components/ui/button";
-import { markdownContent1, markdownContent2 } from "@/lib/data/sample-data";
+
 import type { ArticleWithCategory } from "@/types/interface";
 import { Share2 } from "lucide-react";
 import Image from "next/image";
@@ -60,7 +60,7 @@ function ArticleContent({ article }: Props) {
 				</div>
 			)}
 
-			<MarkdownRenderer markdownContent={markdownContent1} />
+			<MarkdownRenderer markdownContent={article.content} />
 		</article>
 	);
 }

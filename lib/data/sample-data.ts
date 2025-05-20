@@ -336,9 +336,8 @@ Ellery looked at the stone circle once more, the symbols still glowing faintly. 
 
 The choice was hers, and hers alone.
 
----`;
-
-export const markdownContent2 = `### Vocabulary Words to Learn
+---
+### Vocabulary Words to Learn
 
 1. **Enchanted** – (adj.) Under the influence of a magical spell; bewitched.
 2. **Mesmerizing** – (adj.) Hypnotic; holding your attention completely.
