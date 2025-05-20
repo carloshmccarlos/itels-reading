@@ -60,6 +60,6 @@ export default async function Home() {
 
 // Generate static metadata
 export const metadata = {
-	title: "Latest Articles",
-	description: "Discover our latest articles and stay informed",
+	title: "I READ",
+	description: "Reading is the best way to learn",
 };

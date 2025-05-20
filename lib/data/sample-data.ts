@@ -138,9 +138,43 @@ export const categories: Category[] = [
 export const articles: Article[] = [
 	{
 		id: "art-1",
-		title: "Scientists Discover New Method to Predict Solar Flares",
+		title: "The Alchemist's Shadow: Chapter One - The Verdant Enigma",
 		imageUrl: "/content-image/1.png",
-		content: "A groundbreaking study reveals a new technique using artificial intelligence to predict dangerous solar flares up to 24 hours before they occur, potentially revolutionizing space weather forecasting. The research, conducted by an international team of scientists at the Solar Dynamics Observatory, combines machine learning algorithms with traditional solar physics to achieve unprecedented accuracy in flare prediction. Solar flares, sudden bursts of radiation from the sun's surface, can have significant impacts on Earth's technology infrastructure, affecting satellite communications, power grids, and GPS systems. The new AI model analyzes patterns in the sun's magnetic field and surface activity, processing data from multiple solar observation satellites in real-time. What makes this breakthrough particularly significant is its ability to identify subtle patterns that human observers might miss, leading to a 40% improvement in prediction accuracy compared to previous methods. The system can now detect the early warning signs of solar flares up to 24 hours in advance, giving critical infrastructure operators more time to prepare for potential disruptions. The research team spent three years developing and training the AI model using historical data from over 10,000 solar flares. The model considers various factors including magnetic field strength, sunspot configurations, and plasma flow patterns. This advancement comes at a crucial time as we approach the peak of the current solar cycle, when solar activity is expected to be at its highest. The implications of this technology extend beyond Earth, as it will be crucial for protecting astronauts and equipment during future deep space missions. NASA has already expressed interest in implementing this system for their Artemis program and future Mars missions. The team is now working on making the prediction system even more precise and reducing the false alarm rate, which currently stands at about 15%. They're also developing a user-friendly interface that will allow space weather forecasters to easily interpret the AI's predictions and communicate potential risks to relevant stakeholders.",
+		content: `
+
+The late afternoon sun, a molten orb sinking behind the distant Blackwood Peaks, cast long, attenuated shadows across the cobbled streets of Eldoria. A palpable sense of anticipation hung in the air, a peculiar blend of excitement and an almost apprehensive dread. Today was the day the annual ephemera fair commenced, a chaotic yet captivating spectacle that drew merchants, tricksters, and curious onlookers from across the known realms.
+
+Elara, perched precariously on a sturdy oak branch overlooking the bustling market square, felt a familiar frisson of wonder. Below, the square was a vibrant tapestry of humanity. Hawkers with booming voices peddled their wares, their cries a cacophony of enticing offers. The air was thick with the scent of roasted chestnuts, sweet incense, and the faint, acrid tang of something undefinable – perhaps the residue of a forgotten alchemical experiment.
+
+She adjusted her spectacles, their silver frames glinting in the waning light. Her gaze, usually so astute and observant, was drawn to a new stall, one she hadn't seen in previous years. It was draped in a dark, almost ebon fabric, absorbing the light rather than reflecting it. A single, flickering lantern within cast a faint, luminous glow upon an array of curious objects. There were:
+
+- Vials of shimmering liquids, their contents shifting with an internal light
+- Small, intricately carved wooden figures that seemed to possess an uncanny stillness
+- A large, leather-bound tome, its pages an abstruse mess of symbols and diagrams
+
+## The Mysterious Alchemist
+
+A figure emerged from the shadows of the stall. He was tall and gaunt, his face a network of fine lines that spoke of countless hours spent poring over esoteric texts. His eyes, though deep-set, held a piercing intensity, an almost incandescent gleam that seemed to penetrate the very air around him. He moved with a quiet deftness, arranging his peculiar artifacts with a precision that bordered on the ritualistic.
+
+Elara had always possessed an insatiable curiosity, a yearning to unravel the world's hidden mechanisms. While others her age were preoccupied with mundane concerns, she found solace and exhilaration in the pursuit of knowledge. Her small, unassuming cottage, a short walk from the town's edge, was a veritable repository of ancient maps, forgotten scrolls, and half-finished inventions.
+
+## The Enigmatic Locket
+
+She noticed a small, ornate silver locket lying on a velvet cloth at the forefront of the alchemist's display. It pulsed faintly, almost imperceptibly, with a soft, internal warmth. A wave of unexpected serenity washed over her as she gazed at it, a feeling so profound it momentarily quieted the usual clamor of the fair. It was unlike anything she had ever encountered, possessing an undeniable allure that seemed to defy explanation.
+
+A sudden gust of wind, a harbinger of the approaching night, ruffled the pages of the alchemist's tome, causing a few loose parchments to flutter to the ground. Elara, ever resourceful, quickly descended the tree, her movements fluid and nimble. She scooped up the stray pages, their edges brittle and yellowed with age. As she approached the stall, the alchemist looked up, his gaze meeting hers. For a fleeting moment, an almost imperceptible flicker of surprise crossed his otherwise impassive features.
+
+> "You have a keen eye, young one," he said, his voice a low, resonant murmur. "These are not mere trifles."
+
+Elara extended the parchments to him, her heart doing a peculiar flutter. "I found them," she replied, her voice softer than usual. "They seemed… important."
+
+He took them with a slow, deliberate movement, his fingers brushing hers. A jolt, like static electricity, passed between them. It was a strange, inexplicable connection, a silent acknowledgment of something profound and yet to be understood. He gave her a small, almost enigmatic smile.
+
+> "Indeed," he murmured, his eyes returning to the locket. "More important than you know."
+
+## The Beginning of a Journey
+
+As the last rays of sunlight vanished, plunging Eldoria into a deepening twilight, Elara found herself transfixed by the alchemist's mysterious presence and the intriguing objects he displayed. The fair, with its myriad distractions, suddenly seemed distant, almost inconsequential. A new kind of fascination had taken hold, one that promised a journey far more perilous and provocative than any she had ever dared to imagine. Her mundane life, she sensed, was about to become anything but. The verdant enigma of the alchemist and his wares had captured her imagination, ensnaring her in its intricate web.`,
 		description: "New AI technique revolutionizes solar flare prediction",
 		readTimes: 1500,
 		createdAt: new Date("2024-03-20"),
@@ -151,8 +185,10 @@ export const articles: Article[] = [
 		id: "art-2",
 		title: "Breakthrough in Quantum Computing Achieves New Milestone",
 		imageUrl: "/content-image/2.png",
-		content: "Researchers have successfully demonstrated quantum supremacy in a new class of quantum computers, solving complex problems that would take traditional supercomputers thousands of years. This breakthrough, achieved by a team at the Quantum Computing Research Institute, represents a significant leap forward in the field of quantum computing. The team's quantum processor, featuring 128 qubits with unprecedented stability and coherence times, successfully solved a complex optimization problem in just 200 seconds - a task that would require the world's most powerful supercomputer approximately 10,000 years to complete. The key to this achievement lies in the team's innovative approach to quantum error correction and qubit stability. They developed a new method of maintaining quantum coherence using a combination of cryogenic cooling and electromagnetic shielding, allowing the qubits to maintain their quantum state for significantly longer periods. The processor also implements a novel architecture that reduces cross-talk between qubits, a major challenge in quantum computing. This breakthrough has immediate implications for fields such as cryptography, drug discovery, and climate modeling. In cryptography, the new system can factor large numbers exponentially faster than classical computers, potentially revolutionizing current encryption methods. For pharmaceutical research, the quantum computer can simulate molecular interactions with unprecedented accuracy, accelerating the drug discovery process. The team's next goal is to scale up the system to 1,000 qubits while maintaining the current level of stability and error correction. They're also working on developing quantum algorithms specifically designed to take advantage of their processor's unique architecture. This development marks a crucial step toward practical quantum computing applications, though experts note that widespread commercial use is still several years away. The research team has made their findings and some of their quantum algorithms open-source, encouraging collaboration across the scientific community to further advance the field.",
-		description: "Quantum computing breakthrough shows unprecedented capabilities",
+		content:
+			"Researchers have successfully demonstrated quantum supremacy in a new class of quantum computers, solving complex problems that would take traditional supercomputers thousands of years. This breakthrough, achieved by a team at the Quantum Computing Research Institute, represents a significant leap forward in the field of quantum computing. The team's quantum processor, featuring 128 qubits with unprecedented stability and coherence times, successfully solved a complex optimization problem in just 200 seconds - a task that would require the world's most powerful supercomputer approximately 10,000 years to complete. The key to this achievement lies in the team's innovative approach to quantum error correction and qubit stability. They developed a new method of maintaining quantum coherence using a combination of cryogenic cooling and electromagnetic shielding, allowing the qubits to maintain their quantum state for significantly longer periods. The processor also implements a novel architecture that reduces cross-talk between qubits, a major challenge in quantum computing. This breakthrough has immediate implications for fields such as cryptography, drug discovery, and climate modeling. In cryptography, the new system can factor large numbers exponentially faster than classical computers, potentially revolutionizing current encryption methods. For pharmaceutical research, the quantum computer can simulate molecular interactions with unprecedented accuracy, accelerating the drug discovery process. The team's next goal is to scale up the system to 1,000 qubits while maintaining the current level of stability and error correction. They're also working on developing quantum algorithms specifically designed to take advantage of their processor's unique architecture. This development marks a crucial step toward practical quantum computing applications, though experts note that widespread commercial use is still several years away. The research team has made their findings and some of their quantum algorithms open-source, encouraging collaboration across the scientific community to further advance the field.",
+		description:
+			"Quantum computing breakthrough shows unprecedented capabilities",
 		readTimes: 1200,
 		createdAt: new Date("2024-03-19"),
 		updatedAt: new Date("2024-03-19"),
@@ -256,4 +292,81 @@ export const articles: Article[] = [
 	},
 ];
 
-// Helper function to get article by slu
+export const markdownContent1 = `It was a misty morning when Ellery set off on her journey. Her boots crunched against the damp, dewy leaves as she made her way through the narrow, winding path. The dense forest around her was both **mesmerizing** and **intimidating**. Sunlight barely pierced the thick canopy above, casting **ethereal** beams onto the moss-covered ground. The air was thick with the scent of **pine** and earth, and a strange, almost **palpable**, silence enveloped her as she ventured deeper into the wilderness.
+
+Ellery had always been fascinated by the ancient myths surrounding the **Enchanted** Grove, a mythical forest said to be imbued with magical properties. Legends spoke of travelers who had disappeared without a trace, lost to the pull of the grove's **otherworldly** allure. Some said the grove was a place where time stood still, while others believed it was a portal to alternate dimensions. Regardless, it had always been a place of mystery and **intrigue**, and now Ellery was determined to uncover its secrets.
+
+As she walked, her thoughts were interrupted by a sudden rustling sound from the **underbrush**. She stopped in her tracks, heart pounding in her chest. Her eyes scanned the dark forest floor, searching for any sign of movement. The rustling grew louder, more **deliberate**, as though something—no, someone—was approaching. The tension in the air was **suffocating**.
+
+A figure emerged from the shadows, cloaked in a **tattered** robe. It was a woman, with sharp, almost **predatory** eyes that gleamed like polished **obsidian**. Her hair was long and wild, and her skin seemed to shimmer with an **ethereal** glow. She looked at Ellery with an **inscrutable** expression, neither welcoming nor hostile.
+
+"You're here for the Grove," the woman said, her voice smooth but tinged with an unspoken warning.
+
+Ellery nodded **cautiously**. "I want to learn its secrets. To understand its power."
+
+The woman's lips curled into a faint, **enigmatic** smile. "Few have ventured so far and returned with their minds intact. The Grove does not reveal itself to just anyone." Her gaze seemed to pierce Ellery's very soul, and for a moment, she felt a shiver of doubt creep into her mind. But she **steeled** herself, determined not to turn back now.
+
+"Will you guide me?" Ellery asked, her voice steady despite the rising unease in her chest.
+
+The woman chuckled softly, as if amused by the request. "I do not guide. I merely observe. The Grove itself will test you." She stepped aside, gesturing for Ellery to continue. "But be warned: what you seek may not be what you find. The Grove reveals itself only to those who are truly ready."
+
+Ellery swallowed hard but refused to let the woman's **cryptic** words deter her. She had come too far to turn back now.
+
+The path ahead grew even more twisted, and the trees seemed to close in around her as she ventured deeper into the Grove. The air became thicker, almost suffocating, and the ground beneath her feet felt soft, as if the earth itself were alive and shifting. Strange whispers seemed to emanate from the shadows, and Ellery couldn't tell if they were real or just figments of her imagination. Her pulse quickened, but she pressed on.
+
+After what felt like an eternity, Ellery arrived at a clearing. The trees here were unlike any she had ever seen before. They were tall and ancient, their bark twisted and **gnarled** like the limbs of some primordial creature. At the center of the clearing was a massive stone circle, covered in moss and lichen, with symbols carved into its surface that seemed to pulse with a faint, eerie light.
+
+She stepped forward, drawn to the stone circle as if some invisible force was pulling her toward it. As she placed her hand on the cold stone, a surge of energy coursed through her, and she was overcome by a vision.
+
+In the vision, she saw herself standing in the center of a vast, swirling **vortex**, surrounded by countless figures—some human, some not—each one staring at her with intense, unblinking eyes. They whispered her name in unison, their voices blending together in a **harmonious** yet **discordant** chorus. The ground beneath her feet **trembled**, and a deep, **resonant** voice echoed in her mind.
+
+**"Only the chosen may pass through. Only the worthy may return."**
+
+The vision faded as suddenly as it had come, leaving Ellery breathless and disoriented. She staggered back, her hand still pressed against the stone. Her heart raced as she tried to make sense of what she had just witnessed. What did it mean? Was she truly ready for whatever lay beyond?
+
+Suddenly, the woman from before appeared at the edge of the clearing, her eyes gleaming with knowing.
+
+"You have seen the truth," she said, her voice low and **reverent**. "The Grove has spoken."
+
+Ellery turned to her, her mind reeling with the weight of the vision. "What now?" she asked, her voice barely a whisper.
+
+The woman nodded slowly. "Now, you must decide. Will you continue, knowing the price you may pay? Or will you walk away, leaving the Grove's secrets **buried** in the past?"
+
+Ellery looked at the stone circle once more, the symbols still glowing faintly. She could feel the pull of the Grove, the **allure** of its mysteries. And yet, something inside her hesitated.
+
+The choice was hers, and hers alone.
+
+---`;
+
+export const markdownContent2 = `### Vocabulary Words to Learn
+
+1. **Enchanted** – (adj.) Under the influence of a magical spell; bewitched.
+2. **Mesmerizing** – (adj.) Hypnotic; holding your attention completely.
+3. **Intimidating** – (adj.) Making you feel frightened or nervous.
+4. **Ethereal** – (adj.) Extremely delicate and light in a way that seems too perfect for this world.
+5. **Pine** – (n.) A type of evergreen tree known for its long, thin leaves.
+6. **Allure** – (n.) The quality of being attractive or fascinating.
+7. **Otherworldly** – (adj.) Not of this world; supernatural.
+8. **Intrigue** – (n.) Arousing curiosity or interest.
+9. **Underbrush** – (n.) The low-growing shrubs and plants beneath the taller trees in a forest.
+10. **Deliberate** – (adj.) Done on purpose, intentional.
+11. **Predatory** – (adj.) Relating to the practice of preying upon others.
+12. **Obsidian** – (n.) A type of dark, volcanic glass.
+13. **Inscrutable** – (adj.) Impossible to understand or interpret.
+14. **Cautiously** – (adv.) In a careful and wary manner.
+15. **Tattered** – (adj.) Torn and worn; ragged.
+16. **Enigmatic** – (adj.) Mysterious; difficult to understand.
+17. **Palpable** – (adj.) Able to be touched or felt; tangible.
+18. **Steeled** – (v.) Mentally prepared or hardened for something difficult.
+19. **Tension** – (n.) Mental or emotional strain, stress.
+20. **Ethereal** – (adj.) Light, delicate, and airy.
+21. **Amiable** – (adj.) Friendly and pleasant.
+22. **Cryptic** – (adj.) Mysterious or obscure in meaning.
+23. **Gnarled** – (adj.) Twisted and knotted, often due to age.
+24. **Vortex** – (n.) A mass of whirling fluid or air, especially one that sucks everything near it inward.
+25. **Resonant** – (adj.) Having a deep, clear, and continuing sound.
+26. **Harmonious** – (adj.) Forming a pleasing or consistent whole.
+27. **Discordant** – (adj.) Disagreeing or inharmonious in sound.
+28. **Trembled** – (v.) Shook involuntarily, usually due to fear or cold.
+29. **Reverent** – (adj.) Showing deep respect.
+30. **Buried** – (v.) Covered up, hidden from view.`;

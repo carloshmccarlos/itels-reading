@@ -1,5 +1,4 @@
 import ArticleContent from "@/components/ArticleContent";
-
 import Spinner from "@/components/Spinner";
 import { getArticleById } from "@/lib/data/article";
 import { notFound } from "next/navigation";

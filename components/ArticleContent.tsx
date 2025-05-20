@@ -1,27 +1,29 @@
-import { getCategoryById } from "@/lib/data/category";
-import type { Article, Category } from "@/lib/generated/prisma";
+import MarkdownRenderer from "@/components/MarkdownRender";
+import { Button } from "@/components/ui/button";
+import { markdownContent1, markdownContent2 } from "@/lib/data/sample-data";
+import type { ArticleWithCategory } from "@/types/interface";
+import { Share2 } from "lucide-react";
 import Image from "next/image";
 
 interface Props {
-	article: Article;
+	article: ArticleWithCategory;
 }
 
-async function ArticleContent({ article }: Props) {
-	const category = await getCategoryById(article.categoryId);
-	if (!category) return null;
-
+function ArticleContent({ article }: Props) {
 	return (
-		<article className="py-8 px-4 md:px-8 lg:px-16 max-w-4xl mx-auto">
+		<article className="py-8 px-4 md:px-8 lg:px-16 max-w-7xl mx-auto relative">
 			<header className="mb-8">
 				<div className="flex items-center gap-4 mb-4">
-					<div className="text-sm font-medium text-blue-600">
-						{category.name}
+					<div className="text-sm font-medium text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
+						{article.Category.name}
 					</div>
 				</div>
 
-				<h1 className="text-4xl font-bold mb-4">{article.title}</h1>
+				<h1 className="text-4xl font-bold mb-4 leading-tight">
+					{article.title}
+				</h1>
 
-				<div className="flex items-center gap-4 mb-4">
+				<div className="flex items-center justify-between gap-4 mb-4">
 					<time className="text-sm text-gray-500">
 						{new Date(article.createdAt).toLocaleDateString("en-US", {
 							year: "numeric",
@@ -29,15 +31,24 @@ async function ArticleContent({ article }: Props) {
 							day: "numeric",
 						})}
 					</time>
+					<Button
+						variant="outline"
+						className="cursor-pointer flex items-center gap-2"
+					>
+						<Share2 className="w-4 h-4" />
+						Share
+					</Button>
 				</div>
 
 				{article.description && (
-					<p className="text-lg text-gray-600 mb-4">{article.description}</p>
+					<p className="text-lg text-gray-600 mb-4 leading-relaxed">
+						{article.description}
+					</p>
 				)}
 			</header>
 
 			{article.imageUrl && (
-				<div className="relative w-full mb-6 aspect-[10/6]">
+				<div className="relative w-full mb-8 aspect-[16/9] rounded-lg overflow-hidden shadow-lg">
 					<Image
 						src={article.imageUrl}
 						alt={article.title}
@@ -49,12 +60,7 @@ async function ArticleContent({ article }: Props) {
 				</div>
 			)}
 
-			<div className="mt-8 pt-8 border-t border-gray-200">
-				<h2 className="text-2xl font-bold mb-4">Share this article</h2>
-				<div className="flex gap-4">
-					{/* Add your social sharing buttons here */}
-				</div>
-			</div>
+			<MarkdownRenderer markdownContent={markdownContent1} />
 		</article>
 	);
 }
