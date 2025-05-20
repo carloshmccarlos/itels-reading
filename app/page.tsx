@@ -46,7 +46,7 @@ export default async function Home() {
 
 						{/* NoImageCards on the right */}
 						<div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-							{hottestArticles.slice(1, 6).map((article) => (
+							{hottestArticles.slice(1, 7).map((article) => (
 								<NoImageCard key={article.title} article={article} />
 							))}
 						</div>
