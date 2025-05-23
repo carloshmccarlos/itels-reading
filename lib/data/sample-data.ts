@@ -71,7 +71,7 @@ export const categories: Category[] = [
 
 export const articles: Article[] = [
 	{
-		id: 1,
+		id: "1",
 		title: "The Alchemist's Shadow: Chapter One - The Verdant Enigma",
 		imageUrl: "/content-image/1.png",
 		content:
@@ -83,7 +83,7 @@ export const articles: Article[] = [
 		categoryName: "Nature Geography",
 	},
 	{
-		id: 2,
+		id: "2",
 		title: "Breakthrough in Quantum Computing Achieves New Milestone",
 		imageUrl: "/content-image/1.png",
 		content:
@@ -96,7 +96,7 @@ export const articles: Article[] = [
 		categoryName: "School Education",
 	},
 	{
-		id: 3,
+		id: "3",
 		title: "Ancient Human Footprints Rewrite History of Americas",
 		imageUrl: "/content-image/1.png",
 		content:
@@ -108,7 +108,7 @@ export const articles: Article[] = [
 		categoryName: "Nature Geography",
 	},
 	{
-		id: 4,
+		id: "4",
 		title: "Revolutionary Battery Technology Promises Week-Long Phone Charge",
 		imageUrl: "/content-image/1.png",
 		content:
@@ -120,7 +120,7 @@ export const articles: Article[] = [
 		categoryName: "School Education",
 	},
 	{
-		id: 5,
+		id: "5",
 		title: "Ocean Cleanup Project Shows Promising Results",
 		imageUrl: "/content-image/1.png",
 		content:
@@ -132,7 +132,7 @@ export const articles: Article[] = [
 		categoryName: "Culture History",
 	},
 	{
-		id: 6,
+		id: "6",
 		title: "AI System Masters Complex Mathematical Proofs",
 		imageUrl: "/content-image/1.png",
 		content:
@@ -144,7 +144,7 @@ export const articles: Article[] = [
 		categoryName: "School Education",
 	},
 	{
-		id: 7,
+		id: "7",
 		title: "New Species of Deep-Sea Creatures Found in Pacific",
 		imageUrl: "/content-image/1.png",
 		content:
@@ -156,7 +156,7 @@ export const articles: Article[] = [
 		categoryName: "Animal Protection",
 	},
 	{
-		id: 8,
+		id: "8",
 		title: "Climate Change Affecting Bird Migration Patterns",
 		imageUrl: "/content-image/1.png",
 		content:
@@ -168,7 +168,7 @@ export const articles: Article[] = [
 		categoryName: "Culture History",
 	},
 	{
-		id: 9,
+		id: "9",
 		title: "Breakthrough in Alzheimer's Treatment Shows Promise",
 		imageUrl: "/content-image/1.png",
 		content:
@@ -180,7 +180,7 @@ export const articles: Article[] = [
 		categoryName: "Technology Invention",
 	},
 	{
-		id: 10,
+		id: "10",
 		title: "Mars Rover Makes Surprising Discovery About Ancient Water",
 		imageUrl: "/content-image/1.png",
 		content:
