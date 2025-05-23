@@ -6,7 +6,7 @@ export default function Spinner() {
 	return (
 		<Stack
 			className={
-				"absolute top-1/2 left-1/2 opacity-80 -translate-x-1/2 -translate-y-1/2"
+				" absolute top-1/2 left-1/2 opacity-80 -translate-x-1/2 -translate-y-1/2"
 			}
 			spacing={2}
 			direction="row"

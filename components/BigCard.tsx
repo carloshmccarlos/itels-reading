@@ -1,12 +1,15 @@
 import TextComponent from "@/components/TextComponent";
+import { generateToPath } from "@/lib/utils";
 import type { CardProps } from "@/types/interface";
 import Image from "next/image";
 import Link from "next/link";
 
 function BigCard({ article, className }: CardProps) {
+	const toPath = generateToPath(article.title);
+
 	return (
 		<Link
-			href={`/article/${article.id}`}
+			href={`/article/${article.id}-${toPath}`}
 			className={`h-full flex-col-reverse group bg-gray-100 hover:bg-gray-50 
 			transition-colors duration-200 rounded-sm flex flex-grow  md:flex-row w-full ${className}`}
 		>

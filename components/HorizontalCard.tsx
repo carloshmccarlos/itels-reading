@@ -1,13 +1,14 @@
 import TextComponent from "@/components/TextComponent";
+import { generateToPath } from "@/lib/utils";
 import type { CardProps } from "@/types/interface";
 import Image from "next/image";
 import Link from "next/link";
-import { memo } from "react";
 
 function HorizontalCard({ article, className }: CardProps) {
+	const toPath = generateToPath(article.title);
 	return (
 		<Link
-			href={`/article/${article.id}`}
+			href={`/article/${article.id}-${toPath}`}
 			className={`shadow-sm p-4 lg:p-0 group hover:shadow-lg bg-gray-100 hover:bg-gray-50 transition-all duration-500 rounded-sm flex flex-row w-full ${className}`}
 		>
 			<div
@@ -30,4 +31,4 @@ function HorizontalCard({ article, className }: CardProps) {
 }
 
 // Memoize the component to prevent unnecessary re-renders
-export default memo(HorizontalCard);
+export default HorizontalCard;

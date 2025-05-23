@@ -35,7 +35,7 @@ export default async function RootLayout({
 
 	return (
 		<html lang="en">
-			<body className="flex flex-col font-serif justify-center antialiased ">
+			<body className="overflow-y-scroll flex flex-col font-serif justify-center antialiased">
 				<Navbar categories={categories} />
 				{children}
 			</body>

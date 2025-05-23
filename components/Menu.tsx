@@ -1,9 +1,7 @@
 "use client";
 
-import LoginButton from "@/components/LoginButton";
 import MenuIcon from "@/components/MenuIcon";
 import NavLinks from "@/components/NavLinks";
-import RegisterButton from "@/components/RegisterButton";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {

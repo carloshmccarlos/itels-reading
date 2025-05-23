@@ -1232,7 +1232,7 @@ export namespace Prisma {
     readTimes: number | null
     createdAt: Date | null
     updatedAt: Date | null
-    categoryId: string | null
+    categoryName: string | null
   }
 
   export type ArticleMaxAggregateOutputType = {
@@ -1244,7 +1244,7 @@ export namespace Prisma {
     readTimes: number | null
     createdAt: Date | null
     updatedAt: Date | null
-    categoryId: string | null
+    categoryName: string | null
   }
 
   export type ArticleCountAggregateOutputType = {
@@ -1256,7 +1256,7 @@ export namespace Prisma {
     readTimes: number
     createdAt: number
     updatedAt: number
-    categoryId: number
+    categoryName: number
     _all: number
   }
 
@@ -1278,7 +1278,7 @@ export namespace Prisma {
     readTimes?: true
     createdAt?: true
     updatedAt?: true
-    categoryId?: true
+    categoryName?: true
   }
 
   export type ArticleMaxAggregateInputType = {
@@ -1290,7 +1290,7 @@ export namespace Prisma {
     readTimes?: true
     createdAt?: true
     updatedAt?: true
-    categoryId?: true
+    categoryName?: true
   }
 
   export type ArticleCountAggregateInputType = {
@@ -1302,7 +1302,7 @@ export namespace Prisma {
     readTimes?: true
     createdAt?: true
     updatedAt?: true
-    categoryId?: true
+    categoryName?: true
     _all?: true
   }
 
@@ -1401,7 +1401,7 @@ export namespace Prisma {
     readTimes: number
     createdAt: Date
     updatedAt: Date
-    categoryId: string
+    categoryName: string | null
     _count: ArticleCountAggregateOutputType | null
     _avg: ArticleAvgAggregateOutputType | null
     _sum: ArticleSumAggregateOutputType | null
@@ -1432,8 +1432,8 @@ export namespace Prisma {
     readTimes?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    categoryId?: boolean
-    Category?: boolean | CategoryDefaultArgs<ExtArgs>
+    categoryName?: boolean
+    Category?: boolean | Article$CategoryArgs<ExtArgs>
   }, ExtArgs["result"]["article"]>
 
   export type ArticleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1445,8 +1445,8 @@ export namespace Prisma {
     readTimes?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    categoryId?: boolean
-    Category?: boolean | CategoryDefaultArgs<ExtArgs>
+    categoryName?: boolean
+    Category?: boolean | Article$CategoryArgs<ExtArgs>
   }, ExtArgs["result"]["article"]>
 
   export type ArticleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1458,8 +1458,8 @@ export namespace Prisma {
     readTimes?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    categoryId?: boolean
-    Category?: boolean | CategoryDefaultArgs<ExtArgs>
+    categoryName?: boolean
+    Category?: boolean | Article$CategoryArgs<ExtArgs>
   }, ExtArgs["result"]["article"]>
 
   export type ArticleSelectScalar = {
@@ -1471,24 +1471,24 @@ export namespace Prisma {
     readTimes?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    categoryId?: boolean
+    categoryName?: boolean
   }
 
-  export type ArticleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "imageUrl" | "content" | "description" | "readTimes" | "createdAt" | "updatedAt" | "categoryId", ExtArgs["result"]["article"]>
+  export type ArticleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "imageUrl" | "content" | "description" | "readTimes" | "createdAt" | "updatedAt" | "categoryName", ExtArgs["result"]["article"]>
   export type ArticleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Category?: boolean | CategoryDefaultArgs<ExtArgs>
+    Category?: boolean | Article$CategoryArgs<ExtArgs>
   }
   export type ArticleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Category?: boolean | CategoryDefaultArgs<ExtArgs>
+    Category?: boolean | Article$CategoryArgs<ExtArgs>
   }
   export type ArticleIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Category?: boolean | CategoryDefaultArgs<ExtArgs>
+    Category?: boolean | Article$CategoryArgs<ExtArgs>
   }
 
   export type $ArticlePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Article"
     objects: {
-      Category: Prisma.$CategoryPayload<ExtArgs>
+      Category: Prisma.$CategoryPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1499,7 +1499,7 @@ export namespace Prisma {
       readTimes: number
       createdAt: Date
       updatedAt: Date
-      categoryId: string
+      categoryName: string | null
     }, ExtArgs["result"]["article"]>
     composites: {}
   }
@@ -1894,7 +1894,7 @@ export namespace Prisma {
    */
   export interface Prisma__ArticleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    Category<T extends CategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CategoryDefaultArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    Category<T extends Article$CategoryArgs<ExtArgs> = {}>(args?: Subset<T, Article$CategoryArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1932,7 +1932,7 @@ export namespace Prisma {
     readonly readTimes: FieldRef<"Article", 'Int'>
     readonly createdAt: FieldRef<"Article", 'DateTime'>
     readonly updatedAt: FieldRef<"Article", 'DateTime'>
-    readonly categoryId: FieldRef<"Article", 'String'>
+    readonly categoryName: FieldRef<"Article", 'String'>
   }
     
 
@@ -2329,6 +2329,25 @@ export namespace Prisma {
   }
 
   /**
+   * Article.Category
+   */
+  export type Article$CategoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Category
+     */
+    omit?: CategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+    where?: CategoryWhereInput
+  }
+
+  /**
    * Article without action
    */
   export type ArticleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2358,47 +2377,29 @@ export namespace Prisma {
   }
 
   export type CategoryMinAggregateOutputType = {
-    id: string | null
     name: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
   }
 
   export type CategoryMaxAggregateOutputType = {
-    id: string | null
     name: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
   }
 
   export type CategoryCountAggregateOutputType = {
-    id: number
     name: number
-    createdAt: number
-    updatedAt: number
     _all: number
   }
 
 
   export type CategoryMinAggregateInputType = {
-    id?: true
     name?: true
-    createdAt?: true
-    updatedAt?: true
   }
 
   export type CategoryMaxAggregateInputType = {
-    id?: true
     name?: true
-    createdAt?: true
-    updatedAt?: true
   }
 
   export type CategoryCountAggregateInputType = {
-    id?: true
     name?: true
-    createdAt?: true
-    updatedAt?: true
     _all?: true
   }
 
@@ -2475,10 +2476,7 @@ export namespace Prisma {
   }
 
   export type CategoryGroupByOutputType = {
-    id: string
     name: string
-    createdAt: Date
-    updatedAt: Date
     _count: CategoryCountAggregateOutputType | null
     _min: CategoryMinAggregateOutputType | null
     _max: CategoryMaxAggregateOutputType | null
@@ -2499,36 +2497,24 @@ export namespace Prisma {
 
 
   export type CategorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
     name?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
     articles?: boolean | Category$articlesArgs<ExtArgs>
     _count?: boolean | CategoryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["category"]>
 
   export type CategorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
     name?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
   }, ExtArgs["result"]["category"]>
 
   export type CategorySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
     name?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
   }, ExtArgs["result"]["category"]>
 
   export type CategorySelectScalar = {
-    id?: boolean
     name?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
   }
 
-  export type CategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt", ExtArgs["result"]["category"]>
+  export type CategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"name", ExtArgs["result"]["category"]>
   export type CategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     articles?: boolean | Category$articlesArgs<ExtArgs>
     _count?: boolean | CategoryCountOutputTypeDefaultArgs<ExtArgs>
@@ -2542,10 +2528,7 @@ export namespace Prisma {
       articles: Prisma.$ArticlePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: string
       name: string
-      createdAt: Date
-      updatedAt: Date
     }, ExtArgs["result"]["category"]>
     composites: {}
   }
@@ -2629,8 +2612,8 @@ export namespace Prisma {
      * // Get first 10 Categories
      * const categories = await prisma.category.findMany({ take: 10 })
      * 
-     * // Only select the `id`
-     * const categoryWithIdOnly = await prisma.category.findMany({ select: { id: true } })
+     * // Only select the `name`
+     * const categoryWithNameOnly = await prisma.category.findMany({ select: { name: true } })
      * 
      */
     findMany<T extends CategoryFindManyArgs>(args?: SelectSubset<T, CategoryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -2674,9 +2657,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Create many Categories and only return the `id`
-     * const categoryWithIdOnly = await prisma.category.createManyAndReturn({
-     *   select: { id: true },
+     * // Create many Categories and only return the `name`
+     * const categoryWithNameOnly = await prisma.category.createManyAndReturn({
+     *   select: { name: true },
      *   data: [
      *     // ... provide data here
      *   ]
@@ -2765,9 +2748,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Categories and only return the `id`
-     * const categoryWithIdOnly = await prisma.category.updateManyAndReturn({
-     *   select: { id: true },
+     * // Update zero or more Categories and only return the `name`
+     * const categoryWithNameOnly = await prisma.category.updateManyAndReturn({
+     *   select: { name: true },
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2970,10 +2953,7 @@ export namespace Prisma {
    * Fields of the Category model
    */
   interface CategoryFieldRefs {
-    readonly id: FieldRef<"Category", 'String'>
     readonly name: FieldRef<"Category", 'String'>
-    readonly createdAt: FieldRef<"Category", 'DateTime'>
-    readonly updatedAt: FieldRef<"Category", 'DateTime'>
   }
     
 
@@ -3422,7 +3402,7 @@ export namespace Prisma {
     description: string | null
     createdAt: Date | null
     updatedAt: Date | null
-    seriesId: string | null
+    seriesName: string | null
   }
 
   export type NovelMaxAggregateOutputType = {
@@ -3433,7 +3413,7 @@ export namespace Prisma {
     description: string | null
     createdAt: Date | null
     updatedAt: Date | null
-    seriesId: string | null
+    seriesName: string | null
   }
 
   export type NovelCountAggregateOutputType = {
@@ -3444,7 +3424,7 @@ export namespace Prisma {
     description: number
     createdAt: number
     updatedAt: number
-    seriesId: number
+    seriesName: number
     _all: number
   }
 
@@ -3457,7 +3437,7 @@ export namespace Prisma {
     description?: true
     createdAt?: true
     updatedAt?: true
-    seriesId?: true
+    seriesName?: true
   }
 
   export type NovelMaxAggregateInputType = {
@@ -3468,7 +3448,7 @@ export namespace Prisma {
     description?: true
     createdAt?: true
     updatedAt?: true
-    seriesId?: true
+    seriesName?: true
   }
 
   export type NovelCountAggregateInputType = {
@@ -3479,7 +3459,7 @@ export namespace Prisma {
     description?: true
     createdAt?: true
     updatedAt?: true
-    seriesId?: true
+    seriesName?: true
     _all?: true
   }
 
@@ -3563,7 +3543,7 @@ export namespace Prisma {
     description: string
     createdAt: Date
     updatedAt: Date
-    seriesId: string | null
+    seriesName: string | null
     _count: NovelCountAggregateOutputType | null
     _min: NovelMinAggregateOutputType | null
     _max: NovelMaxAggregateOutputType | null
@@ -3591,7 +3571,7 @@ export namespace Prisma {
     description?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    seriesId?: boolean
+    seriesName?: boolean
     Series?: boolean | Novel$SeriesArgs<ExtArgs>
   }, ExtArgs["result"]["novel"]>
 
@@ -3603,7 +3583,7 @@ export namespace Prisma {
     description?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    seriesId?: boolean
+    seriesName?: boolean
     Series?: boolean | Novel$SeriesArgs<ExtArgs>
   }, ExtArgs["result"]["novel"]>
 
@@ -3615,7 +3595,7 @@ export namespace Prisma {
     description?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    seriesId?: boolean
+    seriesName?: boolean
     Series?: boolean | Novel$SeriesArgs<ExtArgs>
   }, ExtArgs["result"]["novel"]>
 
@@ -3627,10 +3607,10 @@ export namespace Prisma {
     description?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    seriesId?: boolean
+    seriesName?: boolean
   }
 
-  export type NovelOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "imageUrl" | "content" | "description" | "createdAt" | "updatedAt" | "seriesId", ExtArgs["result"]["novel"]>
+  export type NovelOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "imageUrl" | "content" | "description" | "createdAt" | "updatedAt" | "seriesName", ExtArgs["result"]["novel"]>
   export type NovelInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Series?: boolean | Novel$SeriesArgs<ExtArgs>
   }
@@ -3654,7 +3634,7 @@ export namespace Prisma {
       description: string
       createdAt: Date
       updatedAt: Date
-      seriesId: string | null
+      seriesName: string | null
     }, ExtArgs["result"]["novel"]>
     composites: {}
   }
@@ -4086,7 +4066,7 @@ export namespace Prisma {
     readonly description: FieldRef<"Novel", 'String'>
     readonly createdAt: FieldRef<"Novel", 'DateTime'>
     readonly updatedAt: FieldRef<"Novel", 'DateTime'>
-    readonly seriesId: FieldRef<"Novel", 'String'>
+    readonly seriesName: FieldRef<"Novel", 'String'>
   }
     
 
@@ -4531,47 +4511,29 @@ export namespace Prisma {
   }
 
   export type SeriesMinAggregateOutputType = {
-    id: string | null
     name: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
   }
 
   export type SeriesMaxAggregateOutputType = {
-    id: string | null
     name: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
   }
 
   export type SeriesCountAggregateOutputType = {
-    id: number
     name: number
-    createdAt: number
-    updatedAt: number
     _all: number
   }
 
 
   export type SeriesMinAggregateInputType = {
-    id?: true
     name?: true
-    createdAt?: true
-    updatedAt?: true
   }
 
   export type SeriesMaxAggregateInputType = {
-    id?: true
     name?: true
-    createdAt?: true
-    updatedAt?: true
   }
 
   export type SeriesCountAggregateInputType = {
-    id?: true
     name?: true
-    createdAt?: true
-    updatedAt?: true
     _all?: true
   }
 
@@ -4648,10 +4610,7 @@ export namespace Prisma {
   }
 
   export type SeriesGroupByOutputType = {
-    id: string
     name: string
-    createdAt: Date
-    updatedAt: Date
     _count: SeriesCountAggregateOutputType | null
     _min: SeriesMinAggregateOutputType | null
     _max: SeriesMaxAggregateOutputType | null
@@ -4672,36 +4631,24 @@ export namespace Prisma {
 
 
   export type SeriesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
     name?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
     novels?: boolean | Series$novelsArgs<ExtArgs>
     _count?: boolean | SeriesCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["series"]>
 
   export type SeriesSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
     name?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
   }, ExtArgs["result"]["series"]>
 
   export type SeriesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
     name?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
   }, ExtArgs["result"]["series"]>
 
   export type SeriesSelectScalar = {
-    id?: boolean
     name?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
   }
 
-  export type SeriesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt", ExtArgs["result"]["series"]>
+  export type SeriesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"name", ExtArgs["result"]["series"]>
   export type SeriesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     novels?: boolean | Series$novelsArgs<ExtArgs>
     _count?: boolean | SeriesCountOutputTypeDefaultArgs<ExtArgs>
@@ -4715,10 +4662,7 @@ export namespace Prisma {
       novels: Prisma.$NovelPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: string
       name: string
-      createdAt: Date
-      updatedAt: Date
     }, ExtArgs["result"]["series"]>
     composites: {}
   }
@@ -4802,8 +4746,8 @@ export namespace Prisma {
      * // Get first 10 Series
      * const series = await prisma.series.findMany({ take: 10 })
      * 
-     * // Only select the `id`
-     * const seriesWithIdOnly = await prisma.series.findMany({ select: { id: true } })
+     * // Only select the `name`
+     * const seriesWithNameOnly = await prisma.series.findMany({ select: { name: true } })
      * 
      */
     findMany<T extends SeriesFindManyArgs>(args?: SelectSubset<T, SeriesFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SeriesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -4847,9 +4791,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Create many Series and only return the `id`
-     * const seriesWithIdOnly = await prisma.series.createManyAndReturn({
-     *   select: { id: true },
+     * // Create many Series and only return the `name`
+     * const seriesWithNameOnly = await prisma.series.createManyAndReturn({
+     *   select: { name: true },
      *   data: [
      *     // ... provide data here
      *   ]
@@ -4938,9 +4882,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Series and only return the `id`
-     * const seriesWithIdOnly = await prisma.series.updateManyAndReturn({
-     *   select: { id: true },
+     * // Update zero or more Series and only return the `name`
+     * const seriesWithNameOnly = await prisma.series.updateManyAndReturn({
+     *   select: { name: true },
      *   where: {
      *     // ... provide filter here
      *   },
@@ -5143,10 +5087,7 @@ export namespace Prisma {
    * Fields of the Series model
    */
   interface SeriesFieldRefs {
-    readonly id: FieldRef<"Series", 'String'>
     readonly name: FieldRef<"Series", 'String'>
-    readonly createdAt: FieldRef<"Series", 'DateTime'>
-    readonly updatedAt: FieldRef<"Series", 'DateTime'>
   }
     
 
@@ -5600,17 +5541,14 @@ export namespace Prisma {
     readTimes: 'readTimes',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
-    categoryId: 'categoryId'
+    categoryName: 'categoryName'
   };
 
   export type ArticleScalarFieldEnum = (typeof ArticleScalarFieldEnum)[keyof typeof ArticleScalarFieldEnum]
 
 
   export const CategoryScalarFieldEnum: {
-    id: 'id',
-    name: 'name',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    name: 'name'
   };
 
   export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
@@ -5624,17 +5562,14 @@ export namespace Prisma {
     description: 'description',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
-    seriesId: 'seriesId'
+    seriesName: 'seriesName'
   };
 
   export type NovelScalarFieldEnum = (typeof NovelScalarFieldEnum)[keyof typeof NovelScalarFieldEnum]
 
 
   export const SeriesScalarFieldEnum: {
-    id: 'id',
-    name: 'name',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    name: 'name'
   };
 
   export type SeriesScalarFieldEnum = (typeof SeriesScalarFieldEnum)[keyof typeof SeriesScalarFieldEnum]
@@ -5740,8 +5675,8 @@ export namespace Prisma {
     readTimes?: IntFilter<"Article"> | number
     createdAt?: DateTimeFilter<"Article"> | Date | string
     updatedAt?: DateTimeFilter<"Article"> | Date | string
-    categoryId?: StringFilter<"Article"> | string
-    Category?: XOR<CategoryScalarRelationFilter, CategoryWhereInput>
+    categoryName?: StringNullableFilter<"Article"> | string | null
+    Category?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
   }
 
   export type ArticleOrderByWithRelationInput = {
@@ -5753,7 +5688,7 @@ export namespace Prisma {
     readTimes?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    categoryId?: SortOrder
+    categoryName?: SortOrderInput | SortOrder
     Category?: CategoryOrderByWithRelationInput
   }
 
@@ -5769,8 +5704,8 @@ export namespace Prisma {
     readTimes?: IntFilter<"Article"> | number
     createdAt?: DateTimeFilter<"Article"> | Date | string
     updatedAt?: DateTimeFilter<"Article"> | Date | string
-    categoryId?: StringFilter<"Article"> | string
-    Category?: XOR<CategoryScalarRelationFilter, CategoryWhereInput>
+    categoryName?: StringNullableFilter<"Article"> | string | null
+    Category?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
   }, "id">
 
   export type ArticleOrderByWithAggregationInput = {
@@ -5782,7 +5717,7 @@ export namespace Prisma {
     readTimes?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    categoryId?: SortOrder
+    categoryName?: SortOrderInput | SortOrder
     _count?: ArticleCountOrderByAggregateInput
     _avg?: ArticleAvgOrderByAggregateInput
     _max?: ArticleMaxOrderByAggregateInput
@@ -5802,44 +5737,32 @@ export namespace Prisma {
     readTimes?: IntWithAggregatesFilter<"Article"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Article"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Article"> | Date | string
-    categoryId?: StringWithAggregatesFilter<"Article"> | string
+    categoryName?: StringNullableWithAggregatesFilter<"Article"> | string | null
   }
 
   export type CategoryWhereInput = {
     AND?: CategoryWhereInput | CategoryWhereInput[]
     OR?: CategoryWhereInput[]
     NOT?: CategoryWhereInput | CategoryWhereInput[]
-    id?: StringFilter<"Category"> | string
     name?: StringFilter<"Category"> | string
-    createdAt?: DateTimeFilter<"Category"> | Date | string
-    updatedAt?: DateTimeFilter<"Category"> | Date | string
     articles?: ArticleListRelationFilter
   }
 
   export type CategoryOrderByWithRelationInput = {
-    id?: SortOrder
     name?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
     articles?: ArticleOrderByRelationAggregateInput
   }
 
   export type CategoryWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
     name?: string
     AND?: CategoryWhereInput | CategoryWhereInput[]
     OR?: CategoryWhereInput[]
     NOT?: CategoryWhereInput | CategoryWhereInput[]
-    createdAt?: DateTimeFilter<"Category"> | Date | string
-    updatedAt?: DateTimeFilter<"Category"> | Date | string
     articles?: ArticleListRelationFilter
-  }, "id" | "name">
+  }, "name">
 
   export type CategoryOrderByWithAggregationInput = {
-    id?: SortOrder
     name?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
     _count?: CategoryCountOrderByAggregateInput
     _max?: CategoryMaxOrderByAggregateInput
     _min?: CategoryMinOrderByAggregateInput
@@ -5849,10 +5772,7 @@ export namespace Prisma {
     AND?: CategoryScalarWhereWithAggregatesInput | CategoryScalarWhereWithAggregatesInput[]
     OR?: CategoryScalarWhereWithAggregatesInput[]
     NOT?: CategoryScalarWhereWithAggregatesInput | CategoryScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Category"> | string
     name?: StringWithAggregatesFilter<"Category"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"Category"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"Category"> | Date | string
   }
 
   export type NovelWhereInput = {
@@ -5866,7 +5786,7 @@ export namespace Prisma {
     description?: StringFilter<"Novel"> | string
     createdAt?: DateTimeFilter<"Novel"> | Date | string
     updatedAt?: DateTimeFilter<"Novel"> | Date | string
-    seriesId?: StringNullableFilter<"Novel"> | string | null
+    seriesName?: StringNullableFilter<"Novel"> | string | null
     Series?: XOR<SeriesNullableScalarRelationFilter, SeriesWhereInput> | null
   }
 
@@ -5878,7 +5798,7 @@ export namespace Prisma {
     description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    seriesId?: SortOrderInput | SortOrder
+    seriesName?: SortOrderInput | SortOrder
     Series?: SeriesOrderByWithRelationInput
   }
 
@@ -5893,7 +5813,7 @@ export namespace Prisma {
     description?: StringFilter<"Novel"> | string
     createdAt?: DateTimeFilter<"Novel"> | Date | string
     updatedAt?: DateTimeFilter<"Novel"> | Date | string
-    seriesId?: StringNullableFilter<"Novel"> | string | null
+    seriesName?: StringNullableFilter<"Novel"> | string | null
     Series?: XOR<SeriesNullableScalarRelationFilter, SeriesWhereInput> | null
   }, "id">
 
@@ -5905,7 +5825,7 @@ export namespace Prisma {
     description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    seriesId?: SortOrderInput | SortOrder
+    seriesName?: SortOrderInput | SortOrder
     _count?: NovelCountOrderByAggregateInput
     _max?: NovelMaxOrderByAggregateInput
     _min?: NovelMinOrderByAggregateInput
@@ -5922,44 +5842,32 @@ export namespace Prisma {
     description?: StringWithAggregatesFilter<"Novel"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Novel"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Novel"> | Date | string
-    seriesId?: StringNullableWithAggregatesFilter<"Novel"> | string | null
+    seriesName?: StringNullableWithAggregatesFilter<"Novel"> | string | null
   }
 
   export type SeriesWhereInput = {
     AND?: SeriesWhereInput | SeriesWhereInput[]
     OR?: SeriesWhereInput[]
     NOT?: SeriesWhereInput | SeriesWhereInput[]
-    id?: StringFilter<"Series"> | string
     name?: StringFilter<"Series"> | string
-    createdAt?: DateTimeFilter<"Series"> | Date | string
-    updatedAt?: DateTimeFilter<"Series"> | Date | string
     novels?: NovelListRelationFilter
   }
 
   export type SeriesOrderByWithRelationInput = {
-    id?: SortOrder
     name?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
     novels?: NovelOrderByRelationAggregateInput
   }
 
   export type SeriesWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
+    name?: string
     AND?: SeriesWhereInput | SeriesWhereInput[]
     OR?: SeriesWhereInput[]
     NOT?: SeriesWhereInput | SeriesWhereInput[]
-    name?: StringFilter<"Series"> | string
-    createdAt?: DateTimeFilter<"Series"> | Date | string
-    updatedAt?: DateTimeFilter<"Series"> | Date | string
     novels?: NovelListRelationFilter
-  }, "id">
+  }, "name">
 
   export type SeriesOrderByWithAggregationInput = {
-    id?: SortOrder
     name?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
     _count?: SeriesCountOrderByAggregateInput
     _max?: SeriesMaxOrderByAggregateInput
     _min?: SeriesMinOrderByAggregateInput
@@ -5969,14 +5877,11 @@ export namespace Prisma {
     AND?: SeriesScalarWhereWithAggregatesInput | SeriesScalarWhereWithAggregatesInput[]
     OR?: SeriesScalarWhereWithAggregatesInput[]
     NOT?: SeriesScalarWhereWithAggregatesInput | SeriesScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Series"> | string
     name?: StringWithAggregatesFilter<"Series"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"Series"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"Series"> | Date | string
   }
 
   export type ArticleCreateInput = {
-    id?: string
+    id: string
     title: string
     imageUrl: string
     content: string
@@ -5984,11 +5889,11 @@ export namespace Prisma {
     readTimes?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    Category: CategoryCreateNestedOneWithoutArticlesInput
+    Category?: CategoryCreateNestedOneWithoutArticlesInput
   }
 
   export type ArticleUncheckedCreateInput = {
-    id?: string
+    id: string
     title: string
     imageUrl: string
     content: string
@@ -5996,7 +5901,7 @@ export namespace Prisma {
     readTimes?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    categoryId: string
+    categoryName?: string | null
   }
 
   export type ArticleUpdateInput = {
@@ -6008,7 +5913,7 @@ export namespace Prisma {
     readTimes?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Category?: CategoryUpdateOneRequiredWithoutArticlesNestedInput
+    Category?: CategoryUpdateOneWithoutArticlesNestedInput
   }
 
   export type ArticleUncheckedUpdateInput = {
@@ -6020,11 +5925,11 @@ export namespace Prisma {
     readTimes?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    categoryId?: StringFieldUpdateOperationsInput | string
+    categoryName?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ArticleCreateManyInput = {
-    id?: string
+    id: string
     title: string
     imageUrl: string
     content: string
@@ -6032,7 +5937,7 @@ export namespace Prisma {
     readTimes?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    categoryId: string
+    categoryName?: string | null
   }
 
   export type ArticleUpdateManyMutationInput = {
@@ -6055,64 +5960,43 @@ export namespace Prisma {
     readTimes?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    categoryId?: StringFieldUpdateOperationsInput | string
+    categoryName?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CategoryCreateInput = {
-    id?: string
     name: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
     articles?: ArticleCreateNestedManyWithoutCategoryInput
   }
 
   export type CategoryUncheckedCreateInput = {
-    id?: string
     name: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
     articles?: ArticleUncheckedCreateNestedManyWithoutCategoryInput
   }
 
   export type CategoryUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     articles?: ArticleUpdateManyWithoutCategoryNestedInput
   }
 
   export type CategoryUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     articles?: ArticleUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
   export type CategoryCreateManyInput = {
-    id?: string
     name: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
   export type CategoryUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CategoryUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type NovelCreateInput = {
-    id?: string
+    id: string
     title: string
     imageUrl: string
     content: string
@@ -6123,14 +6007,14 @@ export namespace Prisma {
   }
 
   export type NovelUncheckedCreateInput = {
-    id?: string
+    id: string
     title: string
     imageUrl: string
     content: string
     description: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    seriesId?: string | null
+    seriesName?: string | null
   }
 
   export type NovelUpdateInput = {
@@ -6152,18 +6036,18 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    seriesId?: NullableStringFieldUpdateOperationsInput | string | null
+    seriesName?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type NovelCreateManyInput = {
-    id?: string
+    id: string
     title: string
     imageUrl: string
     content: string
     description: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    seriesId?: string | null
+    seriesName?: string | null
   }
 
   export type NovelUpdateManyMutationInput = {
@@ -6184,60 +6068,39 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    seriesId?: NullableStringFieldUpdateOperationsInput | string | null
+    seriesName?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SeriesCreateInput = {
-    id?: string
     name: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
     novels?: NovelCreateNestedManyWithoutSeriesInput
   }
 
   export type SeriesUncheckedCreateInput = {
-    id?: string
     name: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
     novels?: NovelUncheckedCreateNestedManyWithoutSeriesInput
   }
 
   export type SeriesUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     novels?: NovelUpdateManyWithoutSeriesNestedInput
   }
 
   export type SeriesUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     novels?: NovelUncheckedUpdateManyWithoutSeriesNestedInput
   }
 
   export type SeriesCreateManyInput = {
-    id?: string
     name: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
   export type SeriesUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SeriesUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -6277,9 +6140,29 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type CategoryScalarRelationFilter = {
-    is?: CategoryWhereInput
-    isNot?: CategoryWhereInput
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type CategoryNullableScalarRelationFilter = {
+    is?: CategoryWhereInput | null
+    isNot?: CategoryWhereInput | null
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type ArticleCountOrderByAggregateInput = {
@@ -6291,7 +6174,7 @@ export namespace Prisma {
     readTimes?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    categoryId?: SortOrder
+    categoryName?: SortOrder
   }
 
   export type ArticleAvgOrderByAggregateInput = {
@@ -6307,7 +6190,7 @@ export namespace Prisma {
     readTimes?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    categoryId?: SortOrder
+    categoryName?: SortOrder
   }
 
   export type ArticleMinOrderByAggregateInput = {
@@ -6319,7 +6202,7 @@ export namespace Prisma {
     readTimes?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    categoryId?: SortOrder
+    categoryName?: SortOrder
   }
 
   export type ArticleSumOrderByAggregateInput = {
@@ -6374,95 +6257,6 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type ArticleListRelationFilter = {
-    every?: ArticleWhereInput
-    some?: ArticleWhereInput
-    none?: ArticleWhereInput
-  }
-
-  export type ArticleOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type CategoryCountOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type CategoryMaxOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type CategoryMinOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type SeriesNullableScalarRelationFilter = {
-    is?: SeriesWhereInput | null
-    isNot?: SeriesWhereInput | null
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
-  }
-
-  export type NovelCountOrderByAggregateInput = {
-    id?: SortOrder
-    title?: SortOrder
-    imageUrl?: SortOrder
-    content?: SortOrder
-    description?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    seriesId?: SortOrder
-  }
-
-  export type NovelMaxOrderByAggregateInput = {
-    id?: SortOrder
-    title?: SortOrder
-    imageUrl?: SortOrder
-    content?: SortOrder
-    description?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    seriesId?: SortOrder
-  }
-
-  export type NovelMinOrderByAggregateInput = {
-    id?: SortOrder
-    title?: SortOrder
-    imageUrl?: SortOrder
-    content?: SortOrder
-    description?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    seriesId?: SortOrder
-  }
-
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -6481,6 +6275,66 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
+  export type ArticleListRelationFilter = {
+    every?: ArticleWhereInput
+    some?: ArticleWhereInput
+    none?: ArticleWhereInput
+  }
+
+  export type ArticleOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type CategoryCountOrderByAggregateInput = {
+    name?: SortOrder
+  }
+
+  export type CategoryMaxOrderByAggregateInput = {
+    name?: SortOrder
+  }
+
+  export type CategoryMinOrderByAggregateInput = {
+    name?: SortOrder
+  }
+
+  export type SeriesNullableScalarRelationFilter = {
+    is?: SeriesWhereInput | null
+    isNot?: SeriesWhereInput | null
+  }
+
+  export type NovelCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    imageUrl?: SortOrder
+    content?: SortOrder
+    description?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    seriesName?: SortOrder
+  }
+
+  export type NovelMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    imageUrl?: SortOrder
+    content?: SortOrder
+    description?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    seriesName?: SortOrder
+  }
+
+  export type NovelMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    imageUrl?: SortOrder
+    content?: SortOrder
+    description?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    seriesName?: SortOrder
+  }
+
   export type NovelListRelationFilter = {
     every?: NovelWhereInput
     some?: NovelWhereInput
@@ -6492,24 +6346,15 @@ export namespace Prisma {
   }
 
   export type SeriesCountOrderByAggregateInput = {
-    id?: SortOrder
     name?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
   }
 
   export type SeriesMaxOrderByAggregateInput = {
-    id?: SortOrder
     name?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
   }
 
   export type SeriesMinOrderByAggregateInput = {
-    id?: SortOrder
     name?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
   }
 
   export type CategoryCreateNestedOneWithoutArticlesInput = {
@@ -6534,12 +6379,18 @@ export namespace Prisma {
     set?: Date | string
   }
 
-  export type CategoryUpdateOneRequiredWithoutArticlesNestedInput = {
+  export type CategoryUpdateOneWithoutArticlesNestedInput = {
     create?: XOR<CategoryCreateWithoutArticlesInput, CategoryUncheckedCreateWithoutArticlesInput>
     connectOrCreate?: CategoryCreateOrConnectWithoutArticlesInput
     upsert?: CategoryUpsertWithoutArticlesInput
+    disconnect?: CategoryWhereInput | boolean
+    delete?: CategoryWhereInput | boolean
     connect?: CategoryWhereUniqueInput
     update?: XOR<XOR<CategoryUpdateToOneWithWhereWithoutArticlesInput, CategoryUpdateWithoutArticlesInput>, CategoryUncheckedUpdateWithoutArticlesInput>
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
   }
 
   export type ArticleCreateNestedManyWithoutCategoryInput = {
@@ -6598,10 +6449,6 @@ export namespace Prisma {
     delete?: SeriesWhereInput | boolean
     connect?: SeriesWhereUniqueInput
     update?: XOR<XOR<SeriesUpdateToOneWithWhereWithoutNovelsInput, SeriesUpdateWithoutNovelsInput>, SeriesUncheckedUpdateWithoutNovelsInput>
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
   }
 
   export type NovelCreateNestedManyWithoutSeriesInput = {
@@ -6682,6 +6529,20 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -6740,20 +6601,6 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -6783,17 +6630,11 @@ export namespace Prisma {
   }
 
   export type CategoryCreateWithoutArticlesInput = {
-    id?: string
     name: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
   export type CategoryUncheckedCreateWithoutArticlesInput = {
-    id?: string
     name: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
   export type CategoryCreateOrConnectWithoutArticlesInput = {
@@ -6813,21 +6654,15 @@ export namespace Prisma {
   }
 
   export type CategoryUpdateWithoutArticlesInput = {
-    id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CategoryUncheckedUpdateWithoutArticlesInput = {
-    id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ArticleCreateWithoutCategoryInput = {
-    id?: string
+    id: string
     title: string
     imageUrl: string
     content: string
@@ -6838,7 +6673,7 @@ export namespace Prisma {
   }
 
   export type ArticleUncheckedCreateWithoutCategoryInput = {
-    id?: string
+    id: string
     title: string
     imageUrl: string
     content: string
@@ -6886,21 +6721,15 @@ export namespace Prisma {
     readTimes?: IntFilter<"Article"> | number
     createdAt?: DateTimeFilter<"Article"> | Date | string
     updatedAt?: DateTimeFilter<"Article"> | Date | string
-    categoryId?: StringFilter<"Article"> | string
+    categoryName?: StringNullableFilter<"Article"> | string | null
   }
 
   export type SeriesCreateWithoutNovelsInput = {
-    id?: string
     name: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
   export type SeriesUncheckedCreateWithoutNovelsInput = {
-    id?: string
     name: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
   export type SeriesCreateOrConnectWithoutNovelsInput = {
@@ -6920,21 +6749,15 @@ export namespace Prisma {
   }
 
   export type SeriesUpdateWithoutNovelsInput = {
-    id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SeriesUncheckedUpdateWithoutNovelsInput = {
-    id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type NovelCreateWithoutSeriesInput = {
-    id?: string
+    id: string
     title: string
     imageUrl: string
     content: string
@@ -6944,7 +6767,7 @@ export namespace Prisma {
   }
 
   export type NovelUncheckedCreateWithoutSeriesInput = {
-    id?: string
+    id: string
     title: string
     imageUrl: string
     content: string
@@ -6990,11 +6813,11 @@ export namespace Prisma {
     description?: StringFilter<"Novel"> | string
     createdAt?: DateTimeFilter<"Novel"> | Date | string
     updatedAt?: DateTimeFilter<"Novel"> | Date | string
-    seriesId?: StringNullableFilter<"Novel"> | string | null
+    seriesName?: StringNullableFilter<"Novel"> | string | null
   }
 
   export type ArticleCreateManyCategoryInput = {
-    id?: string
+    id: string
     title: string
     imageUrl: string
     content: string
@@ -7038,7 +6861,7 @@ export namespace Prisma {
   }
 
   export type NovelCreateManySeriesInput = {
-    id?: string
+    id: string
     title: string
     imageUrl: string
     content: string

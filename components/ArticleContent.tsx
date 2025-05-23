@@ -15,7 +15,7 @@ function ArticleContent({ article }: Props) {
 			<header className="mb-8">
 				<div className="flex items-center gap-4 mb-4">
 					<div className="text-sm font-medium text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
-						{article.Category.name}
+						{article.Category?.name}
 					</div>
 				</div>
 

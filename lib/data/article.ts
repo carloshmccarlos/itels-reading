@@ -1,22 +1,13 @@
 import { prisma } from "@/lib/prisma";
 import type { ArticleWithCategory } from "@/types/interface";
 
-export async function getAllArticles(): Promise<ArticleWithCategory[]> {
-	return prisma.article.findMany({
-		include: {
-			Category: true,
-		},
-		orderBy: {
-			createdAt: "desc",
-		},
-	});
-}
-
 export async function getArticleById(
 	id: string,
 ): Promise<ArticleWithCategory | null> {
+	console.log(id);
+
 	return prisma.article.findUnique({
-		where: { id },
+		where: { id: id },
 		include: {
 			Category: true,
 		},
@@ -24,11 +15,11 @@ export async function getArticleById(
 }
 
 export async function getArticlesByCategory(
-	categoryId: string,
+	categoryName: string,
 ): Promise<ArticleWithCategory[]> {
 	return prisma.article.findMany({
 		where: {
-			categoryId,
+			categoryName: categoryName,
 		},
 		include: {
 			Category: true,

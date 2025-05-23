@@ -9,10 +9,10 @@ datasource db {
 }
 
 model Article {
-  id          String   @id @default(cuid())
-  title       String
-  imageUrl    String
-  /// The main content of the article in markdown format
+  id       String @id
+  title    String
+  imageUrl String
+
   content     String   @db.Text
   description String
   readTimes   Int      @default(0)
@@ -20,21 +20,19 @@ model Article {
   updatedAt   DateTime @updatedAt
 
   // Relations
-  Category   Category @relation(fields: [categoryId], references: [id])
-  categoryId String
+  Category     Category? @relation(fields: [categoryName], references: [name])
+  categoryName String?
 }
 
 model Category {
-  id        String    @id @default(cuid())
-  name      String    @unique
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  name String @unique
+
   // Relations
-  articles  Article[]
+  articles Article[]
 }
 
 model Novel {
-  id          String   @id @default(cuid())
+  id          String   @id
   title       String
   imageUrl    String
   content     String
@@ -42,15 +40,12 @@ model Novel {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  Series   Series? @relation(fields: [seriesId], references: [id])
-  seriesId String?
+  Series     Series? @relation(fields: [seriesName], references: [name])
+  seriesName String?
 }
 
 model Series {
-  id        String   @id @default(cuid())
-  name      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  name String @unique
 
   novels Novel[]
 }

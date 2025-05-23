@@ -7,14 +7,16 @@ import { Suspense } from "react";
 // Update the Props interface to reflect that params is a Promise
 interface Props {
 	params: Promise<{
-		id: string;
+		slug: string;
 	}>;
 }
 
 export default async function ArticlePage({ params }: Props) {
-	const { id } = await params;
+	const { slug } = await params;
 
-	const article = await getArticleById(id);
+	const Id = slug.split("-")[0];
+
+	const article = await getArticleById(Id);
 
 	if (!article) {
 		notFound();

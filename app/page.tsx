@@ -32,7 +32,10 @@ export default async function Home() {
 					{/* Vertical Card Section */}
 					<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mb-12">
 						{latestArticles.slice(3, 9).map((article) => (
-							<VerticalCard key={article.title} article={article} />
+							<VerticalCard
+								key={`${article.title}-VerticalCard`}
+								article={article}
+							/>
 						))}
 					</div>
 
@@ -47,7 +50,10 @@ export default async function Home() {
 						{/* NoImageCards on the right */}
 						<div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
 							{hottestArticles.slice(1, 7).map((article) => (
-								<NoImageCard key={article.title} article={article} />
+								<NoImageCard
+									key={`${article.title}${article.id}`}
+									article={article}
+								/>
 							))}
 						</div>
 					</div>

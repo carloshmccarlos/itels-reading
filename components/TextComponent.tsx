@@ -18,7 +18,7 @@ async function TextComponent({ className, article, titleSize }: Props) {
 				)}
 			>
 				<div className="text-lg font-bold text-red-700 ">
-					{article.Category.name}
+					{article.Category?.name}
 				</div>
 				<h2 className={`${titleSize ? titleSize : "text-lg"}    font-bold `}>
 					<span
