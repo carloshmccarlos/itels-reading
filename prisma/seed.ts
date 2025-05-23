@@ -5,19 +5,20 @@ async function main() {
 	console.log("Start seeding ...");
 
 	// Seed Categories
-	/*	for (const category of categories) {
+	for (const category of categories) {
 		await prisma.category.create({
 			data: {
 				name: category.name,
 			},
 		});
 	}
-	console.log("Categories seeded.");*/
+	console.log("Categories seeded.");
 
 	// Seed Articles
 	for (const article of articles) {
 		await prisma.article.create({
 			data: {
+				id: article.id,
 				title: article.title,
 				imageUrl: article.imageUrl,
 				content: article.content,

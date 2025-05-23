@@ -4,8 +4,6 @@ import type { ArticleWithCategory } from "@/types/interface";
 export async function getArticleById(
 	id: string,
 ): Promise<ArticleWithCategory | null> {
-	console.log(id);
-
 	return prisma.article.findUnique({
 		where: { id: id },
 		include: {
