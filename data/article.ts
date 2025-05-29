@@ -1,14 +1,5 @@
 import { prisma } from "@/lib/prisma";
 
-export async function deleteArticle() {
-	return prisma.article.deleteMany();
-}
-export async function createArticle() {
-	return prisma.article.createMany({
-		data: data,
-	});
-}
-
 export async function getArticleById(id: number) {
 	return prisma.article.findUnique({
 		where: { id: id },
