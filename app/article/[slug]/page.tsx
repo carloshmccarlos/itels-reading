@@ -1,6 +1,6 @@
 import ArticleContent from "@/components/ArticleContent";
 import Spinner from "@/components/Spinner";
-import { getArticleById } from "@/lib/data/article";
+import { getArticleById } from "@/data/article";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
@@ -14,9 +14,9 @@ interface Props {
 export default async function ArticlePage({ params }: Props) {
 	const { slug } = await params;
 
-	const Id = slug.split("-")[0];
+	const id = slug.split("-")[0];
 
-	const article = await getArticleById(Id);
+	const article = await getArticleById(Number(id));
 
 	if (!article) {
 		notFound();

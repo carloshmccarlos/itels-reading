@@ -4,7 +4,8 @@ import VerticalCard from "@/components/VerticalCard";
 import BigCard from "@/components/BigCard";
 import Footer from "@/components/Footer";
 import NoImageCard from "@/components/NoImageCard";
-import { getHottestArticles, getLatestArticles } from "@/lib/data/article";
+import { getHottestArticles, getLatestArticles } from "@/data/article";
+import type React from "react";
 
 export default async function Home() {
 	const latestArticles = await getLatestArticles();
@@ -58,8 +59,8 @@ export default async function Home() {
 						</div>
 					</div>
 				</div>
+				<Footer />
 			</main>
-			<Footer />
 		</>
 	);
 }

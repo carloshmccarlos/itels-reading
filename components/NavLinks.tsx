@@ -2,7 +2,7 @@
 
 import { ScrollArea } from "@/components/ui/scroll-area";
 import type { Category } from "@/lib/generated/prisma";
-import { cn, generateToPath } from "@/lib/utils";
+import { cn, generateToPath, transformCategoryName } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -25,7 +25,7 @@ function NavLinks({ className, type, categories }: Props) {
 					className={cn(
 						" rounded-sm px-3 py-2 text-xl font-semibold transition-colors border-b border-gray-100",
 						pathname === "/"
-							? "bg-gray-100 border-l-8 border-black"
+							? "bg-gray-100 border-l-8 border-l-black"
 							: "hover:bg-gray-100",
 					)}
 				>
@@ -35,15 +35,15 @@ function NavLinks({ className, type, categories }: Props) {
 					categories.map((category) => (
 						<Link
 							key={category.name}
-							href={`/category/${generateToPath(category.name)}`}
+							href={`/category/${category.name}`}
 							className={cn(
 								"rounded-sm px-3 py-2 text-xl font-semibold transition-colors border-b border-gray-100",
-								currentCategory === generateToPath(category.name)
-									? "bg-gray-100 border-l-8 border-l-black"
+								currentCategory === category.name
+									? "bg-b-100 border-l-8 border-l-black"
 									: "hover:bg-gray-100",
 							)}
 						>
-							{category.name}
+							{transformCategoryName(category.name)}
 						</Link>
 					))}
 			</div>

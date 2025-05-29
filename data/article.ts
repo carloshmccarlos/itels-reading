@@ -1,9 +1,15 @@
 import { prisma } from "@/lib/prisma";
-import type { ArticleWithCategory } from "@/types/interface";
 
-export async function getArticleById(
-	id: string,
-): Promise<ArticleWithCategory | null> {
+export async function deleteArticle() {
+	return prisma.article.deleteMany();
+}
+export async function createArticle() {
+	return prisma.article.createMany({
+		data: data,
+	});
+}
+
+export async function getArticleById(id: number) {
 	return prisma.article.findUnique({
 		where: { id: id },
 		include: {
@@ -12,9 +18,7 @@ export async function getArticleById(
 	});
 }
 
-export async function getArticlesByCategory(
-	categoryName: string,
-): Promise<ArticleWithCategory[]> {
+export async function getArticlesByCategory(categoryName: string) {
 	return prisma.article.findMany({
 		where: {
 			categoryName: categoryName,
@@ -28,9 +32,7 @@ export async function getArticlesByCategory(
 	});
 }
 
-export async function searchArticles(
-	query: string,
-): Promise<ArticleWithCategory[]> {
+export async function searchArticles(query: string) {
 	return prisma.article.findMany({
 		where: {
 			OR: [
@@ -51,7 +53,7 @@ export async function searchArticles(
 	});
 }
 
-export async function getLatestArticles(): Promise<ArticleWithCategory[]> {
+export async function getLatestArticles() {
 	return prisma.article.findMany({
 		take: 9,
 		include: {
@@ -63,7 +65,7 @@ export async function getLatestArticles(): Promise<ArticleWithCategory[]> {
 	});
 }
 
-export async function getHottestArticles(): Promise<ArticleWithCategory[]> {
+export async function getHottestArticles() {
 	return prisma.article.findMany({
 		take: 7,
 		include: {

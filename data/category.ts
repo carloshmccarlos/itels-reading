@@ -1,7 +1,7 @@
 import type { Category } from "@/lib/generated/prisma";
 import { prisma } from "@/lib/prisma";
 
-export async function getAllCategories(): Promise<Category[]> {
+export async function getAllCategories() {
 	return prisma.category.findMany({
 		orderBy: {
 			name: "asc",
@@ -16,13 +16,13 @@ export async function getCategoryByName(
 	});
 }
 
-export async function createCategory(name: string): Promise<Category> {
+export async function createCategory(name: string) {
 	return prisma.category.create({
 		data: { name },
 	});
 }
 
-export async function updateCategory(name: string): Promise<Category> {
+export async function updateCategory(name: string) {
 	return prisma.category.update({
 		where: { name },
 		data: { name },

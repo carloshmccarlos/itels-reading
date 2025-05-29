@@ -5,6 +5,10 @@ import Image from "next/image";
 import Link from "next/link";
 
 function HorizontalCard({ article, className }: CardProps) {
+	if (!article) {
+		return null;
+	}
+
 	const toPath = generateToPath(article.title);
 	return (
 		<Link

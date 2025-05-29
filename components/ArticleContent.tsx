@@ -1,9 +1,9 @@
 import MarkdownRenderer from "@/components/MarkdownRender";
 import { Button } from "@/components/ui/button";
-
-import type { ArticleWithCategory } from "@/types/interface";
 import { Share2 } from "lucide-react";
 import Image from "next/image";
+
+import type { ArticleWithCategory } from "@/types/interface";
 
 interface Props {
 	article: ArticleWithCategory;
@@ -60,7 +60,7 @@ function ArticleContent({ article }: Props) {
 				</div>
 			)}
 
-			<MarkdownRenderer markdownContent={article.content} />
+			<MarkdownRenderer content={article.content} />
 		</article>
 	);
 }

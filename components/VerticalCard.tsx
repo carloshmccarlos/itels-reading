@@ -7,6 +7,9 @@ import { generateToPath } from "@/lib/utils";
 import type { CardProps } from "@/types/interface";
 
 function VerticalCard({ article, className }: CardProps) {
+	if (!article) {
+		return null;
+	}
 	const toPath = generateToPath(article.title);
 	return (
 		<Link
