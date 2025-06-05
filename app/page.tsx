@@ -16,7 +16,9 @@ export default async function Home() {
 			<main className="min-h-screen">
 				{/* Latest Card Section */}
 				<div className="max-w-[2000px] mx-auto px-2 sm:px-4 lg:px-8 xl:px-16 2xl:px-32 py-2 sm:py-2 lg:py-4">
-					<h2 className="text-3xl font-bold mb-6">Latest Articles</h2>
+					<h2 className=" font-serif lg:text-5xl text-3xl font-bold mb-6">
+						Latest Articles
+					</h2>
 					<div className="grid grid-cols-1 lg:grid-cols-6 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12 items-stretch">
 						{/* Latest Big Card  */}
 						<div className="lg:col-span-4 ">
@@ -41,7 +43,9 @@ export default async function Home() {
 					</div>
 
 					{/* Hottest Section */}
-					<h2 className="text-3xl font-bold mb-6">Hottest Articles</h2>
+					<h2 className=" font-serif lg:text-5xl text-3xl font-bold mb-6">
+						Hottest Articles
+					</h2>
 					<div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
 						{/* Two Big Cards on the left */}
 						<div className="flex items-center justify-center">

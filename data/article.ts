@@ -9,7 +9,7 @@ export async function getArticleById(id: number) {
 	});
 }
 
-export async function getArticlesByCategory(categoryName: string) {
+export async function getArticlesByCategory(categoryName: string, skip = 0, take = 17) {
 	return prisma.article.findMany({
 		where: {
 			categoryName: categoryName,
@@ -20,6 +20,8 @@ export async function getArticlesByCategory(categoryName: string) {
 		orderBy: {
 			createdAt: "desc",
 		},
+		skip,
+		take,
 	});
 }
 
@@ -64,6 +66,14 @@ export async function getHottestArticles() {
 		},
 		orderBy: {
 			readTimes: "desc",
+		},
+	});
+}
+
+export async function countArticlesByCategory(categoryName: string) {
+	return prisma.article.count({
+		where: {
+			categoryName: categoryName,
 		},
 	});
 }

@@ -15,20 +15,24 @@ async function main() {
 	}
 	console.log("Categories seeded.");*/
 
-	const articles = JSON.parse(fs.readFileSync("./data/articles.json", "utf-8"));
+	const articles = JSON.parse(
+		fs.readFileSync("../data/articles.json", "utf-8"),
+	);
 
 	// Seed Articles
-	for (const article of articles) {
-		await prisma.article.create({
-			data: {
-				title: article.title,
-				imageUrl: article.imageUrl,
-				content: article.content,
-				description: article.description,
-				readTimes: article.readTimes,
-				categoryName: article.categoryName,
-			},
-		});
+	for (let i = 0; i < 5; i++) {
+		for (const article of articles) {
+			await prisma.article.create({
+				data: {
+					title: article.title,
+					imageUrl: article.imageUrl,
+					content: article.content,
+					description: article.description,
+					readTimes: article.readTimes,
+					categoryName: article.categoryName,
+				},
+			});
+		}
 	}
 	console.log("Articles seeded.");
 

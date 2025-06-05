@@ -19,12 +19,12 @@ interface Props {
 }
 
 function Menu({ categories }: Props) {
-	const inputRef = useRef<HTMLInputElement>(null);
+	// const inputRef = useRef<HTMLInputElement>(null);
 
 	return (
 		<Sheet>
 			<SheetTrigger className={"text-start"}>
-				<div className={" hover:cursor-pointer hover:bg-gray-300"}>
+				<div className={"hover:cursor-pointer hover:bg-gray-300 pr-1"}>
 					<MenuIcon />
 				</div>
 			</SheetTrigger>
@@ -39,7 +39,7 @@ function Menu({ categories }: Props) {
 					</SheetTitle>
 				</SheetHeader>
 
-				<div className="w-full flex items-center px-4 relative bg-gray-100 py-4 group">
+				{/*<div className="w-full flex items-center px-4 relative bg-gray-100 py-4 group">
 					<Input
 						ref={inputRef}
 						type="text"
@@ -58,7 +58,7 @@ function Menu({ categories }: Props) {
 					>
 						Search
 					</Button>
-				</div>
+				</div>*/}
 
 				{/* login and register function, hidden for now, realised later*/}
 				{/*	<div className={"flex justify-center items-center gap-2 md:gap-4"}>

@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { getAllCategories } from "@/data/category";
 import type React from "react";
@@ -36,7 +35,7 @@ export default async function RootLayout({
 
 	return (
 		<html lang="en">
-			<body className="overflow-y-scroll flex flex-col font-serif justify-center items-stretch antialiased">
+			<body className="overflow-y-scroll  flex flex-col font-serif justify-center items-stretch antialiased">
 				<Navbar categories={categories} />
 				{children}
 			</body>

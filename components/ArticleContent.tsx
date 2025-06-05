@@ -19,7 +19,7 @@ function ArticleContent({ article }: Props) {
 					</div>
 				</div>
 
-				<h1 className="text-4xl font-bold mb-4 leading-tight">
+				<h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-4 leading-tight">
 					{article.title}
 				</h1>
 
@@ -41,14 +41,14 @@ function ArticleContent({ article }: Props) {
 				</div>
 
 				{article.description && (
-					<p className="text-lg text-gray-600 mb-4 leading-relaxed">
+					<p className="text-lg md:text-xl text-gray-600 leading-relaxed">
 						{article.description}
 					</p>
 				)}
 			</header>
 
 			{article.imageUrl && (
-				<div className="relative w-full mb-8 aspect-[16/9] rounded-lg overflow-hidden shadow-lg">
+				<div className=" relative w-full mb-8 aspect-[16/9] rounded-lg overflow-hidden shadow-lg">
 					<Image
 						src={article.imageUrl}
 						alt={article.title}

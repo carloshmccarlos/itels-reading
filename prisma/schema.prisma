@@ -22,7 +22,26 @@ model Article {
   // Relations
   Category     Category? @relation(fields: [categoryName], references: [name])
   categoryName String?
+
+  // words WordToArticle[]
 }
+
+/**
+ * model Word {
+ * name String @id
+ * articles WordToArticle[]
+ * }
+ */
+
+/**
+ * model WordToArticle {
+ * article   Article @relation(fields: [articleId], references: [id])
+ * articleId Int
+ * word      Word    @relation(fields: [wordName], references: [name])
+ * wordName  String
+ * @@id([articleId, wordName])
+ * }
+ */
 
 model Category {
   name String @unique

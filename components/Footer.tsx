@@ -6,8 +6,21 @@ function Footer() {
 	return (
 		<footer className="bg-black mt-12 text-white">
 			<div className="max-w-[2000px] mx-auto px-2 sm:px-4 lg:px-8 xl:px-16 2xl:px-32 py-12">
-				<div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-					{/* About Section */}
+				<span className=" text-center text-lg text-gray-300 mb-4 leading-relaxed ">
+					Our IELTS Reading platform offers high-quality, AI-generated articles
+					based on over 3,000 core IELTS vocabulary words, designed to help you
+					enhance your reading skills and master essential vocabulary. If you
+					encounter any bugs or have suggestions to improve the platform, please
+					send an email to
+				</span>
+				<span className={"font-bold text-xl"}>
+					<Link href={"mailto:carloshmccarlos@gmail.com"}>
+						{" "}
+						carloshmccarlos@gmail.com.
+					</Link>
+				</span>
+				{/*<div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+					 About Section
 					<div className="col-span-1 px-4 md:px-8lg:px-0">
 						<h3 className="text-center  text-2xl font-bold mb-4 text-white">
 							About
@@ -19,7 +32,7 @@ function Footer() {
 						</p>
 					</div>
 
-					{/* Quick Links */}
+							 Quick Links
 					<div className={"justify-self-center"}>
 						<h3 className="text-center text-2xl font-bold mb-4 text-white">
 							Quick Links
@@ -60,7 +73,7 @@ function Footer() {
 						</ul>
 					</div>
 
-					{/* Contact */}
+					 Contact
 					<div className={" lg:justify-self-end"}>
 						<h3 className="text-2xl font-bold mb-4 text-white  text-center">
 							Contact
@@ -90,7 +103,7 @@ function Footer() {
 							</li>
 						</ul>
 					</div>
-				</div>
+				</div>*/}
 
 				{/* Bottom Bar */}
 				<div

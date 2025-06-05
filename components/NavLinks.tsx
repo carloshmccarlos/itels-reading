@@ -18,7 +18,7 @@ function NavLinks({ className, type, categories }: Props) {
 	const currentCategory = pathname.split("/")[2]; // string1-string2;
 
 	return (
-		<ScrollArea className={cn("h-4/5 w-full", className)}>
+		<ScrollArea className={cn("h-9/10 w-full", className)}>
 			<div className="flex flex-col space-y-1 p-2">
 				<Link
 					href="/"

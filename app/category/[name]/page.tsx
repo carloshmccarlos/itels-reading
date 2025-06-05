@@ -5,32 +5,60 @@ import BigCard from "@/components/BigCard";
 import Footer from "@/components/Footer";
 import HorizontalCard from "@/components/HorizontalCard";
 import NoImageCard from "@/components/NoImageCard";
+import PaginationComponent from "@/components/PaginationComponent";
 import Spinner from "@/components/Spinner";
 import VerticalCard from "@/components/VerticalCard";
-import { getArticlesByCategory } from "@/data/article";
+import { countArticlesByCategory, getArticlesByCategory } from "@/data/article";
 import { transformCategoryName } from "@/lib/utils";
+import Link from "next/link";
 
 interface Props {
 	params: Promise<{
 		name: string;
 	}>;
+	searchParams?: { [key: string]: string | string[] | undefined };
 }
 
-export default async function ArticleByCategory({ params }: Props) {
+export default async function ArticleByCategory({
+	params,
+	searchParams,
+}: Props) {
 	const { name: categoryName } = await params;
+	const pageSize = 16;
+	const currentPage = searchParams?.page
+		? Number.parseInt(
+				Array.isArray(searchParams.page)
+					? searchParams.page[0]
+					: searchParams.page,
+				10,
+			)
+		: 1;
+	const skip = (currentPage - 1) * pageSize;
 
-	const articles = await getArticlesByCategory(categoryName);
+	const [articles, totalCount] = await Promise.all([
+		getArticlesByCategory(categoryName, skip, pageSize),
+		countArticlesByCategory(categoryName),
+	]);
 
 	if (!articles || articles.length === 0) {
 		notFound();
 	}
 
+	const totalPages = Math.ceil(totalCount / pageSize);
+
 	return (
-		<main className="min-h-screen">
+		<main className="h-[30vh] bg-[url('/content-image/1.png')] bg-cover bg-center">
 			<div className="max-w-[2000px] mx-auto px-2 sm:px-4 lg:px-8 xl:px-16 2xl:px-32 py-2 sm:py-2 lg:py-4">
-				<h2 className="lg:text-4xl text-3xl font-bold mb-6">
-					{transformCategoryName(categoryName)}
+				<h2 className="text-white font-serif lg:text-5xl text-3xl font-bold my-6">
+					<Link href={`/category/${categoryName}`}>
+						{transformCategoryName(categoryName)}
+					</Link>
 				</h2>
+				<p className="text-white font-serif text-lg font-bold mb-6 w-1/2">
+					Animal protection is a broad and multifaceted concept that encompasses
+					a range of efforts aimed at safeguarding the well-being, health, and
+					inherent value of non-human animals.
+				</p>
 				<div className="grid grid-cols-1 lg:grid-cols-6 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12 items-stretch">
 					{/* Latest Big Card  */}
 					<div className="lg:col-span-4 ">
@@ -69,6 +97,13 @@ export default async function ArticleByCategory({ params }: Props) {
 							/>
 						))}
 					</div>
+				</div>
+				<div className={"mt-12 "}>
+					<PaginationComponent
+						currentPage={currentPage}
+						totalPages={totalPages}
+						getPageHref={(page) => `/category/${categoryName}?page=${page}`}
+					/>
 				</div>
 			</div>
 			<Footer />
