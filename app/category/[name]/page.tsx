@@ -15,9 +15,7 @@ interface Props {
 	params: Promise<{
 		name: string;
 	}>;
-	searchParams?: {
-		page: number;
-	};
+	searchParams?: { [key: string]: string | string[] | undefined };
 }
 
 export default async function ArticleByCategory({
