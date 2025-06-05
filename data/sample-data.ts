@@ -1,5 +1,3 @@
-import { Prisma } from "@/lib/generated/prisma";
-
 export const categories = [
 	{
 		name: "nature-geography",

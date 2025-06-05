@@ -1,12 +1,11 @@
 import { notFound } from "next/navigation";
-import React, { Suspense } from "react";
+import React from "react";
 
 import BigCard from "@/components/BigCard";
 import Footer from "@/components/Footer";
 import HorizontalCard from "@/components/HorizontalCard";
 import NoImageCard from "@/components/NoImageCard";
 import PaginationComponent from "@/components/PaginationComponent";
-import Spinner from "@/components/Spinner";
 import VerticalCard from "@/components/VerticalCard";
 import { countArticlesByCategory, getArticlesByCategory } from "@/data/article";
 import { transformCategoryName } from "@/lib/utils";

@@ -1,5 +1,5 @@
 import * as fs from "node:fs";
-import { categories } from "@/data/sample-data";
+
 import { prisma } from "@/lib/prisma";
 
 async function main() {
