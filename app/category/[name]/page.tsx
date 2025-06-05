@@ -12,25 +12,23 @@ import { transformCategoryName } from "@/lib/utils";
 import Link from "next/link";
 
 interface Props {
-	params: {
+	params: Promise<{
 		name: string;
-	};
-	searchParams?: { [key: string]: string | string[] | undefined };
+	}>;
+	searchParams: Promise<{
+		page: number;
+	}>;
 }
 
 export default async function ArticleByCategory({
 	params,
 	searchParams,
 }: Props) {
-	const { name: categoryName } = params;
+	const { name: categoryName } = await params;
+	const { page } = await searchParams;
 	const pageSize = 16;
-	const currentPage = searchParams?.page
-		? Number.parseInt(
-				Array.isArray(searchParams.page)
-					? searchParams.page[0]
-					: searchParams.page,
-				10,
-			)
+	const currentPage = page
+		? Number.parseInt(Array.isArray(page) ? page[0] : page, 10)
 		: 1;
 	const skip = (currentPage - 1) * pageSize;
 

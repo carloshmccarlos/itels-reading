@@ -70,7 +70,11 @@ export default function PaginationComponent({
 				</Link>
 			)}
 
-			<span className="px-4  text-lg font-semibold flex items-center">...</span>
+			{currentPage === totalPages || (
+				<span className="px-4  text-lg font-semibold flex items-center">
+					...
+				</span>
+			)}
 
 			<Link
 				href={currentPage < totalPages ? getPageHref(currentPage + 1) : "#"}
