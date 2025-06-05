@@ -12,9 +12,9 @@ import { transformCategoryName } from "@/lib/utils";
 import Link from "next/link";
 
 interface Props {
-	params: Promise<{
+	params: {
 		name: string;
-	}>;
+	};
 	searchParams?: { [key: string]: string | string[] | undefined };
 }
 
@@ -22,7 +22,7 @@ export default async function ArticleByCategory({
 	params,
 	searchParams,
 }: Props) {
-	const { name: categoryName } = await params;
+	const { name: categoryName } = params;
 	const pageSize = 16;
 	const currentPage = searchParams?.page
 		? Number.parseInt(
