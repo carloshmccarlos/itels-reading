@@ -12,7 +12,7 @@ export function generateToPath(name: string): string {
 // transform category name from string-string to String String
 export function transformCategoryName(name: string): string {
 	return name
-		.split("-")
-		.map(word => word.charAt(0).toUpperCase() + word.slice(1))
+		.split("_")
+		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
 		.join(" ");
 }

@@ -1,3 +1,4 @@
+import type { CategoryName } from "@/lib/generated/prisma";
 import { prisma } from "@/lib/prisma";
 
 export async function getArticleById(id: number) {
@@ -9,10 +10,15 @@ export async function getArticleById(id: number) {
 	});
 }
 
-export async function getArticlesByCategory(categoryName: string, skip = 0, take = 17) {
+export async function getArticlesByCategory(
+	categoryName: string,
+	skip = 0,
+	take = 16,
+) {
+	console.log(1);
 	return prisma.article.findMany({
 		where: {
-			categoryName: categoryName,
+			categoryName: categoryName as CategoryName,
 		},
 		include: {
 			Category: true,
@@ -73,7 +79,7 @@ export async function getHottestArticles() {
 export async function countArticlesByCategory(categoryName: string) {
 	return prisma.article.count({
 		where: {
-			categoryName: categoryName,
+			categoryName: categoryName as CategoryName,
 		},
 	});
 }

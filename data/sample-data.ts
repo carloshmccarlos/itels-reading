@@ -1,68 +1,68 @@
 export const categories = [
 	{
-		name: "nature-geography",
+		name: "nature_geography",
 	},
 	{
-		name: "plant-research",
+		name: "plant_research",
 	},
 	{
-		name: "animal-protection",
+		name: "animal_protection",
 	},
 	{
-		name: "space-exploration",
+		name: "space_exploration",
 	},
 	{
-		name: "school-education",
+		name: "school_education",
 	},
 	{
-		name: "technology-invention",
+		name: "technology_invention",
 	},
 	{
-		name: "culture-history",
+		name: "culture_history",
 	},
 	{
-		name: "language-evolution",
+		name: "language_evolution",
 	},
 	{
-		name: "entertainment-sports",
+		name: "entertainment_sports",
 	},
 	{
-		name: "objects-materials",
+		name: "objects_materials",
 	},
 	{
-		name: "fashion-trends",
+		name: "fashion_trends",
 	},
 	{
-		name: "diet-health",
+		name: "diet_health",
 	},
 	{
-		name: "architecture-places",
+		name: "architecture_places",
 	},
 	{
-		name: "transportation-travel",
+		name: "transportation_travel",
 	},
 	{
-		name: "national-government",
+		name: "national_government",
 	},
 	{
-		name: "society-economy",
+		name: "society_economy",
 	},
 	{
-		name: "laws-regulations",
+		name: "laws_regulations",
 	},
 	{
-		name: "battlefield-contention",
+		name: "battlefield_contention",
 	},
 	{
-		name: "social-roles",
+		name: "social_roles",
 	},
 	{
-		name: "behavior-actions",
+		name: "behavior_actions",
 	},
 	{
-		name: "physical-mental-health",
+		name: "physical_mental_health",
 	},
 	{
-		name: "time-date",
+		name: "time_date",
 	},
 ];

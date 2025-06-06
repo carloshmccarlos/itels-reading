@@ -26,7 +26,7 @@ export default function PaginationComponent({
 				<ChevronLeftIcon className="w-6 h-6" />
 			</Link>
 
-			{currentPage === totalPages && (
+			{currentPage === totalPages && currentPage !== 1 && (
 				<Link
 					href={getPageHref(currentPage - 2)}
 					className="text-lg font-semibold px-4 py-2 rounded-md  hover:bg-gray-100"

@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import React from "react";
+import React, { use } from "react";
 
 import BigCard from "@/components/BigCard";
 import Footer from "@/components/Footer";
@@ -8,6 +8,8 @@ import NoImageCard from "@/components/NoImageCard";
 import PaginationComponent from "@/components/PaginationComponent";
 import VerticalCard from "@/components/VerticalCard";
 import { countArticlesByCategory, getArticlesByCategory } from "@/data/article";
+
+import { CategoryName } from "@/lib/generated/prisma";
 import { transformCategoryName } from "@/lib/utils";
 import Link from "next/link";
 
@@ -31,6 +33,13 @@ export default async function ArticleByCategory({
 		? Number.parseInt(Array.isArray(page) ? page[0] : page, 10)
 		: 1;
 	const skip = (currentPage - 1) * pageSize;
+
+	// 验证categoryName是否为有效的分类
+
+	const isValidCategory = Object.keys(CategoryName).includes(categoryName);
+	if (!isValidCategory) {
+		notFound();
+	}
 
 	const [articles, totalCount] = await Promise.all([
 		getArticlesByCategory(categoryName, skip, pageSize),

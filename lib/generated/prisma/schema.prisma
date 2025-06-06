@@ -20,15 +20,59 @@ model Article {
   updatedAt   DateTime @updatedAt
 
   // Relations
-  Category     Category? @relation(fields: [categoryName], references: [name])
-  categoryName String?
+  Category     Category?     @relation(fields: [categoryName], references: [name])
+  categoryName CategoryName?
+
+  // words WordToArticle[]
 }
 
+/**
+ * model Word {
+ * name String @id
+ * articles WordToArticle[]
+ * }
+ */
+
+/**
+ * model WordToArticle {
+ * article   Article @relation(fields: [articleId], references: [id])
+ * articleId Int
+ * word      Word    @relation(fields: [wordName], references: [name])
+ * wordName  String
+ * @@id([articleId, wordName])
+ * }
+ */
+
 model Category {
-  name String @unique
+  name CategoryName @unique
 
   // Relations
   articles Article[]
+}
+
+enum CategoryName {
+  nature_geography       @map("nature-geography")
+  plant_research         @map("plant-research")
+  animal_protection      @map("animal-protection")
+  space_exploration      @map("space-exploration")
+  school_education       @map("school-education")
+  technology_invention   @map("technology-invention")
+  culture_history        @map("culture-history")
+  language_evolution     @map("language-evolution")
+  entertainment_sports   @map("entertainment-sports")
+  objects_materials      @map("objects-materials")
+  fashion_trends         @map("fashion-trends")
+  diet_health            @map("diet-health")
+  architecture_places    @map("architecture-places")
+  transportation_travel  @map("transportation-travel")
+  national_government    @map("national-government")
+  society_economy        @map("society-economy")
+  laws_regulations       @map("laws-regulations")
+  battlefield_contention @map("battlefield-contention")
+  social_roles           @map("social-roles")
+  behavior_actions       @map("behavior-actions")
+  physical_mental_health @map("physical-mental-health")
+  time_date              @map("time-date")
 }
 
 model Novel {

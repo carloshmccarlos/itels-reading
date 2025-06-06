@@ -1,21 +1,23 @@
 import * as fs from "node:fs";
 
+import { categories } from "@/data/sample-data";
+import type { CategoryName } from "@/lib/generated/prisma";
 import { prisma } from "@/lib/prisma";
 
 async function main() {
 	console.log("Start seeding ...");
 
 	// Seed Categories
-	/*for (const category of categories) {
+	for (const category of categories) {
 		await prisma.category.create({
 			data: {
-				name: category.name,
+				name: category.name as CategoryName,
 			},
 		});
 	}
-	console.log("Categories seeded.");*/
+	console.log("Categories seeded.");
 
-	const articles = JSON.parse(
+	/*const articles = JSON.parse(
 		fs.readFileSync("../data/articles.json", "utf-8"),
 	);
 
@@ -34,7 +36,7 @@ async function main() {
 			});
 		}
 	}
-	console.log("Articles seeded.");
+	console.log("Articles seeded.");*/
 
 	console.log("Seeding finished.");
 }
