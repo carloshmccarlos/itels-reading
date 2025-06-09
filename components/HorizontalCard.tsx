@@ -1,5 +1,5 @@
 import TextComponent from "@/components/TextComponent";
-import { generateToPath } from "@/lib/utils";
+import { categoryToPath, titleToPath } from "@/lib/utils";
 import type { CardProps } from "@/types/interface";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,11 +8,12 @@ function HorizontalCard({ article, className }: CardProps) {
 	if (!article) {
 		return null;
 	}
+	const titlePath = titleToPath(article.title);
+	const categoryPath = categoryToPath(article.Category?.name || "");
 
-	const toPath = generateToPath(article.title);
 	return (
 		<Link
-			href={`/article/${article.id}-${toPath}`}
+			href={`/article/${article.id}-${categoryPath}-${titlePath}`}
 			className={`shadow-sm p-4 lg:p-0 group hover:shadow-lg bg-gray-100 hover:bg-gray-50 transition-all duration-500 rounded-sm flex flex-row w-full ${className}`}
 		>
 			<div

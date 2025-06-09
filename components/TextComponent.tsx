@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn, transformCategoryName } from "@/lib/utils";
 import type { ArticleWithCategory } from "@/types/interface";
 
 interface Props {
@@ -8,6 +8,8 @@ interface Props {
 }
 
 async function TextComponent({ className, article, titleSize }: Props) {
+	const showCategoryName = transformCategoryName(article.Category?.name || "");
+
 	return (
 		<>
 			<div
@@ -18,7 +20,7 @@ async function TextComponent({ className, article, titleSize }: Props) {
 				)}
 			>
 				<div className="text-lg font-bold text-red-700 ">
-					{article.Category?.name}
+					{showCategoryName}
 				</div>
 				<h2 className={`${titleSize ? titleSize : "text-lg"}    font-bold `}>
 					<span

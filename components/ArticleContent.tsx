@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Share2 } from "lucide-react";
 import Image from "next/image";
 
+import { transformCategoryName } from "@/lib/utils";
 import type { ArticleWithCategory } from "@/types/interface";
 
 interface Props {
@@ -10,12 +11,14 @@ interface Props {
 }
 
 function ArticleContent({ article }: Props) {
+	const showCategoryName = transformCategoryName(article.Category?.name || "");
+
 	return (
 		<article className="py-8 px-4 md:px-8 lg:px-16 max-w-7xl mx-auto relative">
 			<header className="mb-8">
 				<div className="flex items-center gap-4 mb-4">
-					<div className="text-sm font-medium text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
-						{article.Category?.name}
+					<div className="text-lg font-bold text-red-700 ">
+						{showCategoryName}
 					</div>
 				</div>
 

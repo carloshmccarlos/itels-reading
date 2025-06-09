@@ -3,17 +3,18 @@ import Link from "next/link";
 import { memo } from "react";
 
 import TextComponent from "@/components/TextComponent";
-import { generateToPath } from "@/lib/utils";
+import { categoryToPath, titleToPath } from "@/lib/utils";
 import type { CardProps } from "@/types/interface";
 
 function VerticalCard({ article, className }: CardProps) {
 	if (!article) {
 		return null;
 	}
-	const toPath = generateToPath(article.title);
+	const titlePath = titleToPath(article.title);
+	const categoryPath = categoryToPath(article.Category?.name || "");
 	return (
 		<Link
-			href={`/article/${article.id}-${toPath}`}
+			href={`/article/${article.id}-${categoryPath}-${titlePath}`}
 			className={`shadow-sm hover:shadow-lg group bg-gray-100  transition-all duration-500 rounded-sm flex flex-col h-full ${className}`}
 		>
 			<div className="rounded-t-sm relative aspect-[10/7] sm:aspect-[3/2] overflow-hidden">

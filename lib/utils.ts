@@ -5,8 +5,16 @@ export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
 }
 
-export function generateToPath(name: string): string {
+export function titleToPath(name: string): string {
 	return name.toLowerCase().replaceAll(" ", "-");
+}
+
+export function categoryToPath(name: string): string {
+	return name.toLowerCase().replaceAll("_", "-");
+}
+
+export function pathToCategory(name: string): string {
+	return name.toLowerCase().replaceAll("-", "_");
 }
 
 // transform category name from string-string to String String
