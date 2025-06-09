@@ -5,9 +5,21 @@ import BigCard from "@/components/BigCard";
 import Footer from "@/components/Footer";
 import NoImageCard from "@/components/NoImageCard";
 import { getHottestArticles, getLatestArticles } from "@/data/article";
+import { auth } from "@/lib/auth/auth";
+import { authClient } from "@/lib/auth/auth-client";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 import type React from "react";
 
 export default async function Home() {
+	const session = await auth.api.getSession({
+		headers: await headers(), // you need to pass the headers object.
+	});
+
+	if (!session) {
+		return redirect("/auth/login");
+	}
+
 	const latestArticles = await getLatestArticles();
 	const hottestArticles = await getHottestArticles();
 
@@ -53,7 +65,7 @@ export default async function Home() {
 						</div>
 
 						{/* NoImageCards on the right */}
-						<div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+						<div className="grid grid-cols-2 lg:grid-rows-2 lg:grid-cols-3 gap-4">
 							{hottestArticles.slice(1, 7).map((article) => (
 								<NoImageCard
 									key={`${article.title}${article.id}`}

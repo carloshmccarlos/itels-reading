@@ -34,6 +34,7 @@
     "@radix-ui/react-select": "^2.2.5",
     "@radix-ui/react-separator": "^1.1.6",
     "@radix-ui/react-slot": "^1.2.3",
+    "better-auth": "^1.2.8",
     "canvas": "^3.1.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -53,6 +54,7 @@
     "zod": "^3.25.53"
   },
   "devDependencies": {
+    "@babel/plugin-syntax-import-attributes": "^7.27.1",
     "@babel/preset-env": "^7.27.2",
     "@babel/preset-react": "^7.27.1",
     "@babel/preset-typescript": "^7.27.1",
