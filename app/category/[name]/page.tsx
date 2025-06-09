@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import React, { use } from "react";
+import React from "react";
 
 import BigCard from "@/components/BigCard";
 import Footer from "@/components/Footer";
