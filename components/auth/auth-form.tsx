@@ -34,7 +34,7 @@ export function AuthForm({ type, onSubmit, error, loading }: AuthFormProps) {
 		defaultValues: {
 			email: "",
 			password: "",
-			name: "",
+			name: type === "login" ? "login" : "",
 		},
 	});
 
