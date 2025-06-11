@@ -1,3 +1,4 @@
+import type { CategoryName } from "@/lib/generated/prisma";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
@@ -8,6 +9,7 @@ export async function GET(
 ) {
 	try {
 		const id = Number.parseInt((await params).id, 10);
+
 		if (Number.isNaN(id)) {
 			return NextResponse.json({ error: "无效的ID" }, { status: 400 });
 		}
@@ -62,6 +64,8 @@ export async function PUT(
 		}
 
 		// 更新文章
+		console.log(categoryName);
+
 		const updatedArticle = await prisma.article.update({
 			where: { id },
 			data: {
@@ -69,7 +73,7 @@ export async function PUT(
 				imageUrl,
 				content,
 				description,
-				categoryName: categoryName.replaceAll("_", "-"),
+				categoryName: categoryName,
 			},
 			include: {
 				Category: true,

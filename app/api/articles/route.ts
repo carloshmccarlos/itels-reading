@@ -34,6 +34,9 @@ export async function POST(request: NextRequest) {
 				description,
 				categoryName: categoryName.replaceAll("-", "_") as CategoryName,
 			},
+			include: {
+				Category: true,
+			},
 		});
 
 		console.log(article);

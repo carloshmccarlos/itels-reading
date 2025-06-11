@@ -1,9 +1,10 @@
 "use client";
 
 import Menu from "@/components/Menu";
-import NavLinks from "@/components/NavLinks";
+
 import type { Category } from "@/lib/generated/prisma";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface Props {
@@ -12,6 +13,7 @@ interface Props {
 
 function NavBar({ categories }: Props) {
 	const [scrolled, setScrolled] = useState(false);
+	const pathname = usePathname();
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -36,19 +38,35 @@ function NavBar({ categories }: Props) {
 			>
 				<div className="mx-auto flex items-center px-4 relative">
 					<div className="absolute left-0 sm:left-4">
-						<Menu categories={categories} />
+						{pathname.startsWith("/auth") ? (
+							""
+						) : (
+							<Menu categories={categories} />
+						)}
 					</div>
 					<div className="w-full flex justify-center">
-						<Link
-							href={"/"}
-							className={`font-serif font-bold text-center transition-all duration-300 ${
-								scrolled
-									? "text-3xl md:text-4xl lg:text-5xl"
-									: "text-4xl md:text-5xl lg:text-6xl"
-							}`}
-						>
-							I READ
-						</Link>
+						{pathname.startsWith("/auth") ? (
+							<div
+								className={`font-serif font-bold text-center transition-all duration-300 ${
+									scrolled
+										? "text-3xl md:text-4xl lg:text-5xl"
+										: "text-4xl md:text-5xl lg:text-6xl"
+								}`}
+							>
+								I READ
+							</div>
+						) : (
+							<Link
+								href={"/"}
+								className={`font-serif font-bold text-center transition-all duration-300 ${
+									scrolled
+										? "text-3xl md:text-4xl lg:text-5xl"
+										: "text-4xl md:text-5xl lg:text-6xl"
+								}`}
+							>
+								I READ
+							</Link>
+						)}
 					</div>
 
 					{/* login and register function, hidden for now, realised later*/}
