@@ -28,10 +28,8 @@ export const auth = betterAuth({
 	// 邮箱密码认证配置
 	emailAndPassword: {
 		enabled: true,
-		verification: {
-			required: true,
-			expiresIn: 86400, // 24小时（秒）
-		},
+		minPasswordLength: 8,
+		maxPasswordLength: 16,
 		requireEmailVerification: true,
 	},
 
