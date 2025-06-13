@@ -16,9 +16,12 @@ export const auth = betterAuth({
 			await sendEmail({
 				to: user.email,
 				subject: "Verify your email address",
-				text: `Click the link to verify your email: ${url}`,
+				text: `Click the link to verify your email: ${url}, 
+				this link will expire in 5 minutes.`,
 			});
 		},
+		expiresIn: 300,
+		autoSignInAfterVerification: true,
 		sendOnSignUp: true,
 	},
 

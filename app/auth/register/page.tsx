@@ -36,7 +36,7 @@ export default function RegisterPage() {
 						"Registration failed. Please try again later.",
 				);
 			} else {
-				router.push("/auth/login?registered=true");
+				router.push("/auth/login");
 			}
 		} catch (error: unknown) {
 			console.error("Registration error:", error);

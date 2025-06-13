@@ -1,15 +1,17 @@
 import { authClient } from "@/lib/auth/auth-client";
 
-export async function signUp({ 
-	email, 
-	password, 
-	name, 
-	image 
-}: { 
-	email: string; 
-	password: string; 
-	name: string; 
-	image?: string; 
+import { toast } from "sonner";
+
+export async function signUp({
+	email,
+	password,
+	name,
+	image,
+}: {
+	email: string;
+	password: string;
+	name: string;
+	image?: string;
 }) {
 	const { data, error } = await authClient.signUp.email(
 		{
@@ -24,7 +26,7 @@ export async function signUp({
 				//show loading
 			},
 			onSuccess: (ctx) => {
-				//redirect to the dashboard or sign in page
+				toast.success("Verification email has been sent!");
 			},
 			onError: (ctx) => {
 				// display the error message
