@@ -8,6 +8,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import { authClient } from "@/lib/auth/auth-client";
 import { signIn } from "@/lib/auth/sign-in";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -46,6 +47,15 @@ export default function LoginPage() {
 		}
 	};
 
+	async function test() {
+		await authClient.sendVerificationEmail({
+			email: "hmc19961219@gmail.com",
+			callbackURL: "/", // The redirect URL after verification
+		});
+
+		console.log(1);
+	}
+
 	return (
 		<div className="flex  flex-col items-center py-24 px-4 sm:px-6 lg:px-8">
 			<Card className="w-full max-w-md">
@@ -57,7 +67,11 @@ export default function LoginPage() {
 						Enter your credentials to access your account
 					</CardDescription>
 				</CardHeader>
+
 				<CardContent>
+					<button type={"button"} onClick={test}>
+						test
+					</button>
 					<AuthForm
 						type="login"
 						onSubmit={handleSubmit}

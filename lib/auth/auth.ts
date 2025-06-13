@@ -1,6 +1,8 @@
 import { prisma } from "@/lib/prisma";
+import { sendEmail } from "@/lib/send-email";
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
+import { emailOTP } from "better-auth/plugins";
 
 // 创建认证处理程序
 export const auth = betterAuth({
@@ -9,6 +11,17 @@ export const auth = betterAuth({
 		provider: "postgresql",
 	}),
 
+	emailVerification: {
+		sendVerificationEmail: async ({ user, url, token }, request) => {
+			await sendEmail({
+				to: user.email,
+				subject: "Verify your email address",
+				text: `Click the link to verify your email: ${url}`,
+			});
+		},
+		sendOnSignUp: true,
+	},
+
 	// 邮箱密码认证配置
 	emailAndPassword: {
 		enabled: true,
@@ -16,6 +29,7 @@ export const auth = betterAuth({
 			required: true,
 			expiresIn: 86400, // 24小时（秒）
 		},
+		requireEmailVerification: true,
 	},
 
 	// 会话配置

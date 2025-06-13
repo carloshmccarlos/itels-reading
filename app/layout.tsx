@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/nav/Navbar";
 import { getAllCategories } from "@/data/category";
 import { auth } from "@/lib/auth/auth";
 import { headers } from "next/headers";

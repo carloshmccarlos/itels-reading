@@ -2,16 +2,16 @@
 
 import MarkdownRenderer from "@/components/MarkdownRender";
 import { Button } from "@/components/ui/button";
-import { SmilePlus, Star } from "lucide-react";
-import Image from "next/image";
-
 import {
 	getUserArticleStats,
 	incrementReadCount,
 	toggleMarkArticle,
 } from "@/data/article-stats";
+import { authClient } from "@/lib/auth/auth-client";
 import { transformCategoryName } from "@/lib/utils";
 import type { ArticleWithCategory } from "@/types/interface";
+import { SmilePlus, Star } from "lucide-react";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -20,11 +20,14 @@ interface Props {
 }
 
 function ArticleContent({ article }: Props) {
+	const session = authClient.useSession();
 	const showCategoryName = transformCategoryName(article.Category?.name || "");
 	const [isMarked, setIsMarked] = useState(false);
 	const [readTimes, setReadTimes] = useState(0);
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
+
 	const [isLoading, setIsLoading] = useState(false);
+
+	const isLoggedIn = !!session.data?.user;
 
 	// Load user stats for this article
 	useEffect(() => {
@@ -33,7 +36,6 @@ function ArticleContent({ article }: Props) {
 				const stats = await getUserArticleStats(article.id);
 				setIsMarked(stats.marked);
 				setReadTimes(stats.readTimes);
-				setIsLoggedIn(stats.isLoggedIn);
 			} catch (error) {
 				console.error("Failed to load article stats:", error);
 			}

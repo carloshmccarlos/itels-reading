@@ -1,9 +1,9 @@
 "use client";
 
 import LoginButton from "@/components/LoginButton";
-import MenuIcon from "@/components/MenuIcon";
-import NavLinks from "@/components/NavLinks";
 import RegisterButton from "@/components/RegisterButton";
+import MenuIcon from "@/components/nav/MenuIcon";
+import NavLinks from "@/components/nav/NavLinks";
 import {
 	Sheet,
 	SheetContent,

@@ -31,7 +31,7 @@ function NavLinks({ className, type, categories }: Props) {
 		<ScrollArea className={cn("h-9/10 w-full", className)}>
 			<div className="flex flex-col space-y-1 p-2">
 				<Link
-					href="/"
+					href="/public"
 					className={cn(
 						" rounded-sm px-3 py-2 text-xl font-semibold transition-colors border-b border-gray-100",
 						pathname === "/"

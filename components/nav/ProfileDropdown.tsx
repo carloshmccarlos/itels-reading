@@ -10,9 +10,11 @@ import {
 import { authClient } from "@/lib/auth/auth-client";
 import { BookMarked, Power, User } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function ProfileDropdown() {
 	const session = authClient.useSession();
+	const router = useRouter();
 
 	return (
 		<DropdownMenu>
@@ -37,7 +39,15 @@ export default function ProfileDropdown() {
 				</DropdownMenuItem>
 				<DropdownMenuSeparator />
 				<DropdownMenuItem
-					onClick={() => authClient.signOut()}
+					onClick={() =>
+						authClient.signOut({
+							fetchOptions: {
+								onSuccess: () => {
+									router.push("/");
+								},
+							},
+						})
+					}
 					className=" text-destructive focus:text-destructive cursor-pointer text-[16px]"
 				>
 					<Power className={"h-4 w-4 inline"} />
