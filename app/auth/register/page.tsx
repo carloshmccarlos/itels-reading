@@ -12,7 +12,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-import { AuthForm, type AuthFormSchema } from "@/components/auth/auth-form";
+import { AuthForm, type AuthFormSchema } from "@/components/auth/AuthForm";
 
 export default function RegisterPage() {
 	const [loading, setLoading] = useState(false);

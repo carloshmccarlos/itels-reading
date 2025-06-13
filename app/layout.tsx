@@ -2,7 +2,11 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { getAllCategories } from "@/data/category";
+import { auth } from "@/lib/auth/auth";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 import type React from "react";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
 	title: "I READ",
@@ -38,6 +42,7 @@ export default async function RootLayout({
 			<body className="overflow-y-scroll  flex flex-col font-serif justify-center items-stretch antialiased">
 				<Navbar categories={categories} />
 				{children}
+				<Toaster position="top-center" />
 			</body>
 		</html>
 	);

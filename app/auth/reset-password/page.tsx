@@ -3,7 +3,7 @@
 import {
 	RequestResetForm,
 	ResetPasswordForm,
-} from "@/components/auth/reset-password-form";
+} from "@/components/auth/ResetPasswordForm";
 import {
 	Card,
 	CardContent,

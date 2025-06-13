@@ -1,9 +1,9 @@
 "use client";
 
+import LoginButton from "@/components/LoginButton";
 import MenuIcon from "@/components/MenuIcon";
 import NavLinks from "@/components/NavLinks";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import RegisterButton from "@/components/RegisterButton";
 import {
 	Sheet,
 	SheetContent,
@@ -11,8 +11,8 @@ import {
 	SheetTitle,
 	SheetTrigger,
 } from "@/components/ui/sheet";
+import { authClient } from "@/lib/auth/auth-client";
 import type { Category } from "@/lib/generated/prisma";
-import { useRef } from "react";
 
 interface Props {
 	categories: Category[];
@@ -20,6 +20,7 @@ interface Props {
 
 function Menu({ categories }: Props) {
 	// const inputRef = useRef<HTMLInputElement>(null);
+	const session = authClient.useSession();
 
 	return (
 		<Sheet>
@@ -61,10 +62,12 @@ function Menu({ categories }: Props) {
 				</div>*/}
 
 				{/* login and register function, hidden for now, realised later*/}
-				{/*	<div className={"flex justify-center items-center gap-2 md:gap-4"}>
-					<RegisterButton />
-					<LoginButton />
-				</div>*/}
+				{!session.data && (
+					<div className={"flex justify-center items-center gap-2 md:gap-4"}>
+						<RegisterButton />
+						<LoginButton />
+					</div>
+				)}
 
 				<NavLinks
 					categories={categories}

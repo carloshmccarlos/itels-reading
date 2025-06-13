@@ -1,6 +1,6 @@
 "use client";
 
-import { AuthForm, type AuthFormSchema } from "@/components/auth/auth-form";
+import { AuthForm, type AuthFormSchema } from "@/components/auth/AuthForm";
 import {
 	Card,
 	CardContent,
@@ -12,7 +12,6 @@ import { signIn } from "@/lib/auth/sign-in";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
-import type { z } from "zod";
 
 export default function LoginPage() {
 	const router = useRouter();

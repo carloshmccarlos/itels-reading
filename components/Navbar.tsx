@@ -1,11 +1,15 @@
 "use client";
 
+import LoginButton from "@/components/LoginButton";
 import Menu from "@/components/Menu";
-
+import NavLinks from "@/components/NavLinks";
+import ProfileDropdown from "@/components/ProfileDropdown";
+import { authClient } from "@/lib/auth/auth-client";
 import type { Category } from "@/lib/generated/prisma";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import RegisterButton from "./RegisterButton";
 
 interface Props {
 	categories: Category[];
@@ -14,6 +18,7 @@ interface Props {
 function NavBar({ categories }: Props) {
 	const [scrolled, setScrolled] = useState(false);
 	const pathname = usePathname();
+	const session = authClient.useSession();
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -45,39 +50,32 @@ function NavBar({ categories }: Props) {
 						)}
 					</div>
 					<div className="w-full flex justify-center">
-						{pathname.startsWith("/auth") ? (
-							<div
-								className={`font-serif font-bold text-center transition-all duration-300 ${
-									scrolled
-										? "text-3xl md:text-4xl lg:text-5xl"
-										: "text-4xl md:text-5xl lg:text-6xl"
-								}`}
-							>
-								I READ
-							</div>
-						) : (
-							<Link
-								href={"/"}
-								className={`font-serif font-bold text-center transition-all duration-300 ${
-									scrolled
-										? "text-3xl md:text-4xl lg:text-5xl"
-										: "text-4xl md:text-5xl lg:text-6xl"
-								}`}
-							>
-								I READ
-							</Link>
-						)}
+						<Link
+							href={"/"}
+							className={`font-serif font-bold text-center transition-all duration-300 ${
+								scrolled
+									? "text-3xl md:text-4xl lg:text-5xl"
+									: "text-4xl md:text-5xl lg:text-6xl"
+							}`}
+						>
+							I READ
+						</Link>
 					</div>
 
-					{/* login and register function, hidden for now, realised later*/}
-					{/*<div className="hidden lg:flex items-center gap-2 md:gap-4 absolute right-0 sm:right-4">
-						<RegisterButton />
-						<LoginButton />
-					</div>*/}
+					{session?.data ? (
+						<div className=" lg:flex items-center gap-2 md:gap-4 absolute right-0 sm:right-4">
+							<ProfileDropdown />
+						</div>
+					) : (
+						<div className="hidden lg:flex items-center gap-2 md:gap-4 absolute right-0 sm:right-4">
+							<RegisterButton />
+							<LoginButton />
+						</div>
+					)}
 				</div>
 			</nav>
 
-			{/*	<div className="bg-white">
+			{/*<div className="bg-white">
 				<NavLinks
 					categories={categories}
 					type={"row"}

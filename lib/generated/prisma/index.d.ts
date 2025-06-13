@@ -24,20 +24,20 @@ export type Article = $Result.DefaultSelection<Prisma.$ArticlePayload>
  */
 export type Category = $Result.DefaultSelection<Prisma.$CategoryPayload>
 /**
- * Model Novel
- * 
- */
-export type Novel = $Result.DefaultSelection<Prisma.$NovelPayload>
-/**
- * Model Series
- * 
- */
-export type Series = $Result.DefaultSelection<Prisma.$SeriesPayload>
-/**
  * Model User
  * 
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
+/**
+ * Model MarkedArticles
+ * 
+ */
+export type MarkedArticles = $Result.DefaultSelection<Prisma.$MarkedArticlesPayload>
+/**
+ * Model ReadedTimeCount
+ * 
+ */
+export type ReadedTimeCount = $Result.DefaultSelection<Prisma.$ReadedTimeCountPayload>
 /**
  * Model Session
  * 
@@ -237,26 +237,6 @@ export class PrismaClient<
   get category(): Prisma.CategoryDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.novel`: Exposes CRUD operations for the **Novel** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Novels
-    * const novels = await prisma.novel.findMany()
-    * ```
-    */
-  get novel(): Prisma.NovelDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.series`: Exposes CRUD operations for the **Series** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Series
-    * const series = await prisma.series.findMany()
-    * ```
-    */
-  get series(): Prisma.SeriesDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.user`: Exposes CRUD operations for the **User** model.
     * Example usage:
     * ```ts
@@ -265,6 +245,26 @@ export class PrismaClient<
     * ```
     */
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.markedArticles`: Exposes CRUD operations for the **MarkedArticles** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MarkedArticles
+    * const markedArticles = await prisma.markedArticles.findMany()
+    * ```
+    */
+  get markedArticles(): Prisma.MarkedArticlesDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.readedTimeCount`: Exposes CRUD operations for the **ReadedTimeCount** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ReadedTimeCounts
+    * const readedTimeCounts = await prisma.readedTimeCount.findMany()
+    * ```
+    */
+  get readedTimeCount(): Prisma.ReadedTimeCountDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.session`: Exposes CRUD operations for the **Session** model.
@@ -737,9 +737,9 @@ export namespace Prisma {
   export const ModelName: {
     Article: 'Article',
     Category: 'Category',
-    Novel: 'Novel',
-    Series: 'Series',
     User: 'User',
+    MarkedArticles: 'MarkedArticles',
+    ReadedTimeCount: 'ReadedTimeCount',
     Session: 'Session',
     Account: 'Account',
     Verification: 'Verification'
@@ -761,7 +761,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "article" | "category" | "novel" | "series" | "user" | "session" | "account" | "verification"
+      modelProps: "article" | "category" | "user" | "markedArticles" | "readedTimeCount" | "session" | "account" | "verification"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -913,154 +913,6 @@ export namespace Prisma {
           }
         }
       }
-      Novel: {
-        payload: Prisma.$NovelPayload<ExtArgs>
-        fields: Prisma.NovelFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.NovelFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NovelPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.NovelFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NovelPayload>
-          }
-          findFirst: {
-            args: Prisma.NovelFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NovelPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.NovelFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NovelPayload>
-          }
-          findMany: {
-            args: Prisma.NovelFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NovelPayload>[]
-          }
-          create: {
-            args: Prisma.NovelCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NovelPayload>
-          }
-          createMany: {
-            args: Prisma.NovelCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.NovelCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NovelPayload>[]
-          }
-          delete: {
-            args: Prisma.NovelDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NovelPayload>
-          }
-          update: {
-            args: Prisma.NovelUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NovelPayload>
-          }
-          deleteMany: {
-            args: Prisma.NovelDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.NovelUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.NovelUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NovelPayload>[]
-          }
-          upsert: {
-            args: Prisma.NovelUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NovelPayload>
-          }
-          aggregate: {
-            args: Prisma.NovelAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateNovel>
-          }
-          groupBy: {
-            args: Prisma.NovelGroupByArgs<ExtArgs>
-            result: $Utils.Optional<NovelGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.NovelCountArgs<ExtArgs>
-            result: $Utils.Optional<NovelCountAggregateOutputType> | number
-          }
-        }
-      }
-      Series: {
-        payload: Prisma.$SeriesPayload<ExtArgs>
-        fields: Prisma.SeriesFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.SeriesFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SeriesPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.SeriesFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SeriesPayload>
-          }
-          findFirst: {
-            args: Prisma.SeriesFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SeriesPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.SeriesFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SeriesPayload>
-          }
-          findMany: {
-            args: Prisma.SeriesFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SeriesPayload>[]
-          }
-          create: {
-            args: Prisma.SeriesCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SeriesPayload>
-          }
-          createMany: {
-            args: Prisma.SeriesCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.SeriesCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SeriesPayload>[]
-          }
-          delete: {
-            args: Prisma.SeriesDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SeriesPayload>
-          }
-          update: {
-            args: Prisma.SeriesUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SeriesPayload>
-          }
-          deleteMany: {
-            args: Prisma.SeriesDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.SeriesUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.SeriesUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SeriesPayload>[]
-          }
-          upsert: {
-            args: Prisma.SeriesUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SeriesPayload>
-          }
-          aggregate: {
-            args: Prisma.SeriesAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateSeries>
-          }
-          groupBy: {
-            args: Prisma.SeriesGroupByArgs<ExtArgs>
-            result: $Utils.Optional<SeriesGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.SeriesCountArgs<ExtArgs>
-            result: $Utils.Optional<SeriesCountAggregateOutputType> | number
-          }
-        }
-      }
       User: {
         payload: Prisma.$UserPayload<ExtArgs>
         fields: Prisma.UserFieldRefs
@@ -1132,6 +984,154 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      MarkedArticles: {
+        payload: Prisma.$MarkedArticlesPayload<ExtArgs>
+        fields: Prisma.MarkedArticlesFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MarkedArticlesFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MarkedArticlesPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MarkedArticlesFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MarkedArticlesPayload>
+          }
+          findFirst: {
+            args: Prisma.MarkedArticlesFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MarkedArticlesPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MarkedArticlesFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MarkedArticlesPayload>
+          }
+          findMany: {
+            args: Prisma.MarkedArticlesFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MarkedArticlesPayload>[]
+          }
+          create: {
+            args: Prisma.MarkedArticlesCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MarkedArticlesPayload>
+          }
+          createMany: {
+            args: Prisma.MarkedArticlesCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MarkedArticlesCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MarkedArticlesPayload>[]
+          }
+          delete: {
+            args: Prisma.MarkedArticlesDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MarkedArticlesPayload>
+          }
+          update: {
+            args: Prisma.MarkedArticlesUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MarkedArticlesPayload>
+          }
+          deleteMany: {
+            args: Prisma.MarkedArticlesDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MarkedArticlesUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MarkedArticlesUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MarkedArticlesPayload>[]
+          }
+          upsert: {
+            args: Prisma.MarkedArticlesUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MarkedArticlesPayload>
+          }
+          aggregate: {
+            args: Prisma.MarkedArticlesAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMarkedArticles>
+          }
+          groupBy: {
+            args: Prisma.MarkedArticlesGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MarkedArticlesGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MarkedArticlesCountArgs<ExtArgs>
+            result: $Utils.Optional<MarkedArticlesCountAggregateOutputType> | number
+          }
+        }
+      }
+      ReadedTimeCount: {
+        payload: Prisma.$ReadedTimeCountPayload<ExtArgs>
+        fields: Prisma.ReadedTimeCountFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ReadedTimeCountFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReadedTimeCountPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ReadedTimeCountFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReadedTimeCountPayload>
+          }
+          findFirst: {
+            args: Prisma.ReadedTimeCountFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReadedTimeCountPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ReadedTimeCountFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReadedTimeCountPayload>
+          }
+          findMany: {
+            args: Prisma.ReadedTimeCountFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReadedTimeCountPayload>[]
+          }
+          create: {
+            args: Prisma.ReadedTimeCountCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReadedTimeCountPayload>
+          }
+          createMany: {
+            args: Prisma.ReadedTimeCountCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ReadedTimeCountCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReadedTimeCountPayload>[]
+          }
+          delete: {
+            args: Prisma.ReadedTimeCountDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReadedTimeCountPayload>
+          }
+          update: {
+            args: Prisma.ReadedTimeCountUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReadedTimeCountPayload>
+          }
+          deleteMany: {
+            args: Prisma.ReadedTimeCountDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ReadedTimeCountUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ReadedTimeCountUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReadedTimeCountPayload>[]
+          }
+          upsert: {
+            args: Prisma.ReadedTimeCountUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReadedTimeCountPayload>
+          }
+          aggregate: {
+            args: Prisma.ReadedTimeCountAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateReadedTimeCount>
+          }
+          groupBy: {
+            args: Prisma.ReadedTimeCountGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ReadedTimeCountGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ReadedTimeCountCountArgs<ExtArgs>
+            result: $Utils.Optional<ReadedTimeCountCountAggregateOutputType> | number
           }
         }
       }
@@ -1443,9 +1443,9 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     article?: ArticleOmit
     category?: CategoryOmit
-    novel?: NovelOmit
-    series?: SeriesOmit
     user?: UserOmit
+    markedArticles?: MarkedArticlesOmit
+    readedTimeCount?: ReadedTimeCountOmit
     session?: SessionOmit
     account?: AccountOmit
     verification?: VerificationOmit
@@ -1539,6 +1539,46 @@ export namespace Prisma {
 
 
   /**
+   * Count Type ArticleCountOutputType
+   */
+
+  export type ArticleCountOutputType = {
+    ReadedTimeCount: number
+    MarkedArticles: number
+  }
+
+  export type ArticleCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    ReadedTimeCount?: boolean | ArticleCountOutputTypeCountReadedTimeCountArgs
+    MarkedArticles?: boolean | ArticleCountOutputTypeCountMarkedArticlesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ArticleCountOutputType without action
+   */
+  export type ArticleCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ArticleCountOutputType
+     */
+    select?: ArticleCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ArticleCountOutputType without action
+   */
+  export type ArticleCountOutputTypeCountReadedTimeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReadedTimeCountWhereInput
+  }
+
+  /**
+   * ArticleCountOutputType without action
+   */
+  export type ArticleCountOutputTypeCountMarkedArticlesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MarkedArticlesWhereInput
+  }
+
+
+  /**
    * Count Type CategoryCountOutputType
    */
 
@@ -1570,48 +1610,21 @@ export namespace Prisma {
 
 
   /**
-   * Count Type SeriesCountOutputType
-   */
-
-  export type SeriesCountOutputType = {
-    novels: number
-  }
-
-  export type SeriesCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    novels?: boolean | SeriesCountOutputTypeCountNovelsArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * SeriesCountOutputType without action
-   */
-  export type SeriesCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SeriesCountOutputType
-     */
-    select?: SeriesCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * SeriesCountOutputType without action
-   */
-  export type SeriesCountOutputTypeCountNovelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: NovelWhereInput
-  }
-
-
-  /**
    * Count Type UserCountOutputType
    */
 
   export type UserCountOutputType = {
     sessions: number
     accounts: number
+    ReadedTimeCount: number
+    MarkedArticles: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     accounts?: boolean | UserCountOutputTypeCountAccountsArgs
+    ReadedTimeCount?: boolean | UserCountOutputTypeCountReadedTimeCountArgs
+    MarkedArticles?: boolean | UserCountOutputTypeCountMarkedArticlesArgs
   }
 
   // Custom InputTypes
@@ -1637,6 +1650,20 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountAccountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AccountWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountReadedTimeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReadedTimeCountWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountMarkedArticlesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MarkedArticlesWhereInput
   }
 
 
@@ -1879,6 +1906,9 @@ export namespace Prisma {
     updatedAt?: boolean
     categoryName?: boolean
     Category?: boolean | Article$CategoryArgs<ExtArgs>
+    ReadedTimeCount?: boolean | Article$ReadedTimeCountArgs<ExtArgs>
+    MarkedArticles?: boolean | Article$MarkedArticlesArgs<ExtArgs>
+    _count?: boolean | ArticleCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["article"]>
 
   export type ArticleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1922,6 +1952,9 @@ export namespace Prisma {
   export type ArticleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "imageUrl" | "content" | "description" | "readTimes" | "createdAt" | "updatedAt" | "categoryName", ExtArgs["result"]["article"]>
   export type ArticleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Category?: boolean | Article$CategoryArgs<ExtArgs>
+    ReadedTimeCount?: boolean | Article$ReadedTimeCountArgs<ExtArgs>
+    MarkedArticles?: boolean | Article$MarkedArticlesArgs<ExtArgs>
+    _count?: boolean | ArticleCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ArticleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Category?: boolean | Article$CategoryArgs<ExtArgs>
@@ -1934,6 +1967,8 @@ export namespace Prisma {
     name: "Article"
     objects: {
       Category: Prisma.$CategoryPayload<ExtArgs> | null
+      ReadedTimeCount: Prisma.$ReadedTimeCountPayload<ExtArgs>[]
+      MarkedArticles: Prisma.$MarkedArticlesPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -2340,6 +2375,8 @@ export namespace Prisma {
   export interface Prisma__ArticleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     Category<T extends Article$CategoryArgs<ExtArgs> = {}>(args?: Subset<T, Article$CategoryArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    ReadedTimeCount<T extends Article$ReadedTimeCountArgs<ExtArgs> = {}>(args?: Subset<T, Article$ReadedTimeCountArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReadedTimeCountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    MarkedArticles<T extends Article$MarkedArticlesArgs<ExtArgs> = {}>(args?: Subset<T, Article$MarkedArticlesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MarkedArticlesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2790,6 +2827,54 @@ export namespace Prisma {
      */
     include?: CategoryInclude<ExtArgs> | null
     where?: CategoryWhereInput
+  }
+
+  /**
+   * Article.ReadedTimeCount
+   */
+  export type Article$ReadedTimeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReadedTimeCount
+     */
+    select?: ReadedTimeCountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReadedTimeCount
+     */
+    omit?: ReadedTimeCountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReadedTimeCountInclude<ExtArgs> | null
+    where?: ReadedTimeCountWhereInput
+    orderBy?: ReadedTimeCountOrderByWithRelationInput | ReadedTimeCountOrderByWithRelationInput[]
+    cursor?: ReadedTimeCountWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ReadedTimeCountScalarFieldEnum | ReadedTimeCountScalarFieldEnum[]
+  }
+
+  /**
+   * Article.MarkedArticles
+   */
+  export type Article$MarkedArticlesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MarkedArticles
+     */
+    select?: MarkedArticlesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MarkedArticles
+     */
+    omit?: MarkedArticlesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MarkedArticlesInclude<ExtArgs> | null
+    where?: MarkedArticlesWhereInput
+    orderBy?: MarkedArticlesOrderByWithRelationInput | MarkedArticlesOrderByWithRelationInput[]
+    cursor?: MarkedArticlesWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MarkedArticlesScalarFieldEnum | MarkedArticlesScalarFieldEnum[]
   }
 
   /**
@@ -3811,2140 +3896,6 @@ export namespace Prisma {
 
 
   /**
-   * Model Novel
-   */
-
-  export type AggregateNovel = {
-    _count: NovelCountAggregateOutputType | null
-    _min: NovelMinAggregateOutputType | null
-    _max: NovelMaxAggregateOutputType | null
-  }
-
-  export type NovelMinAggregateOutputType = {
-    id: string | null
-    title: string | null
-    imageUrl: string | null
-    content: string | null
-    description: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-    seriesName: string | null
-  }
-
-  export type NovelMaxAggregateOutputType = {
-    id: string | null
-    title: string | null
-    imageUrl: string | null
-    content: string | null
-    description: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-    seriesName: string | null
-  }
-
-  export type NovelCountAggregateOutputType = {
-    id: number
-    title: number
-    imageUrl: number
-    content: number
-    description: number
-    createdAt: number
-    updatedAt: number
-    seriesName: number
-    _all: number
-  }
-
-
-  export type NovelMinAggregateInputType = {
-    id?: true
-    title?: true
-    imageUrl?: true
-    content?: true
-    description?: true
-    createdAt?: true
-    updatedAt?: true
-    seriesName?: true
-  }
-
-  export type NovelMaxAggregateInputType = {
-    id?: true
-    title?: true
-    imageUrl?: true
-    content?: true
-    description?: true
-    createdAt?: true
-    updatedAt?: true
-    seriesName?: true
-  }
-
-  export type NovelCountAggregateInputType = {
-    id?: true
-    title?: true
-    imageUrl?: true
-    content?: true
-    description?: true
-    createdAt?: true
-    updatedAt?: true
-    seriesName?: true
-    _all?: true
-  }
-
-  export type NovelAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Novel to aggregate.
-     */
-    where?: NovelWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Novels to fetch.
-     */
-    orderBy?: NovelOrderByWithRelationInput | NovelOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: NovelWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Novels from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Novels.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Novels
-    **/
-    _count?: true | NovelCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: NovelMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: NovelMaxAggregateInputType
-  }
-
-  export type GetNovelAggregateType<T extends NovelAggregateArgs> = {
-        [P in keyof T & keyof AggregateNovel]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateNovel[P]>
-      : GetScalarType<T[P], AggregateNovel[P]>
-  }
-
-
-
-
-  export type NovelGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: NovelWhereInput
-    orderBy?: NovelOrderByWithAggregationInput | NovelOrderByWithAggregationInput[]
-    by: NovelScalarFieldEnum[] | NovelScalarFieldEnum
-    having?: NovelScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: NovelCountAggregateInputType | true
-    _min?: NovelMinAggregateInputType
-    _max?: NovelMaxAggregateInputType
-  }
-
-  export type NovelGroupByOutputType = {
-    id: string
-    title: string
-    imageUrl: string
-    content: string
-    description: string
-    createdAt: Date
-    updatedAt: Date
-    seriesName: string | null
-    _count: NovelCountAggregateOutputType | null
-    _min: NovelMinAggregateOutputType | null
-    _max: NovelMaxAggregateOutputType | null
-  }
-
-  type GetNovelGroupByPayload<T extends NovelGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<NovelGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof NovelGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], NovelGroupByOutputType[P]>
-            : GetScalarType<T[P], NovelGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type NovelSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    title?: boolean
-    imageUrl?: boolean
-    content?: boolean
-    description?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    seriesName?: boolean
-    Series?: boolean | Novel$SeriesArgs<ExtArgs>
-  }, ExtArgs["result"]["novel"]>
-
-  export type NovelSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    title?: boolean
-    imageUrl?: boolean
-    content?: boolean
-    description?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    seriesName?: boolean
-    Series?: boolean | Novel$SeriesArgs<ExtArgs>
-  }, ExtArgs["result"]["novel"]>
-
-  export type NovelSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    title?: boolean
-    imageUrl?: boolean
-    content?: boolean
-    description?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    seriesName?: boolean
-    Series?: boolean | Novel$SeriesArgs<ExtArgs>
-  }, ExtArgs["result"]["novel"]>
-
-  export type NovelSelectScalar = {
-    id?: boolean
-    title?: boolean
-    imageUrl?: boolean
-    content?: boolean
-    description?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    seriesName?: boolean
-  }
-
-  export type NovelOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "imageUrl" | "content" | "description" | "createdAt" | "updatedAt" | "seriesName", ExtArgs["result"]["novel"]>
-  export type NovelInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Series?: boolean | Novel$SeriesArgs<ExtArgs>
-  }
-  export type NovelIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Series?: boolean | Novel$SeriesArgs<ExtArgs>
-  }
-  export type NovelIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Series?: boolean | Novel$SeriesArgs<ExtArgs>
-  }
-
-  export type $NovelPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Novel"
-    objects: {
-      Series: Prisma.$SeriesPayload<ExtArgs> | null
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      title: string
-      imageUrl: string
-      content: string
-      description: string
-      createdAt: Date
-      updatedAt: Date
-      seriesName: string | null
-    }, ExtArgs["result"]["novel"]>
-    composites: {}
-  }
-
-  type NovelGetPayload<S extends boolean | null | undefined | NovelDefaultArgs> = $Result.GetResult<Prisma.$NovelPayload, S>
-
-  type NovelCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<NovelFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: NovelCountAggregateInputType | true
-    }
-
-  export interface NovelDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Novel'], meta: { name: 'Novel' } }
-    /**
-     * Find zero or one Novel that matches the filter.
-     * @param {NovelFindUniqueArgs} args - Arguments to find a Novel
-     * @example
-     * // Get one Novel
-     * const novel = await prisma.novel.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends NovelFindUniqueArgs>(args: SelectSubset<T, NovelFindUniqueArgs<ExtArgs>>): Prisma__NovelClient<$Result.GetResult<Prisma.$NovelPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Novel that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {NovelFindUniqueOrThrowArgs} args - Arguments to find a Novel
-     * @example
-     * // Get one Novel
-     * const novel = await prisma.novel.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends NovelFindUniqueOrThrowArgs>(args: SelectSubset<T, NovelFindUniqueOrThrowArgs<ExtArgs>>): Prisma__NovelClient<$Result.GetResult<Prisma.$NovelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Novel that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NovelFindFirstArgs} args - Arguments to find a Novel
-     * @example
-     * // Get one Novel
-     * const novel = await prisma.novel.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends NovelFindFirstArgs>(args?: SelectSubset<T, NovelFindFirstArgs<ExtArgs>>): Prisma__NovelClient<$Result.GetResult<Prisma.$NovelPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Novel that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NovelFindFirstOrThrowArgs} args - Arguments to find a Novel
-     * @example
-     * // Get one Novel
-     * const novel = await prisma.novel.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends NovelFindFirstOrThrowArgs>(args?: SelectSubset<T, NovelFindFirstOrThrowArgs<ExtArgs>>): Prisma__NovelClient<$Result.GetResult<Prisma.$NovelPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Novels that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NovelFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Novels
-     * const novels = await prisma.novel.findMany()
-     * 
-     * // Get first 10 Novels
-     * const novels = await prisma.novel.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const novelWithIdOnly = await prisma.novel.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends NovelFindManyArgs>(args?: SelectSubset<T, NovelFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NovelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Novel.
-     * @param {NovelCreateArgs} args - Arguments to create a Novel.
-     * @example
-     * // Create one Novel
-     * const Novel = await prisma.novel.create({
-     *   data: {
-     *     // ... data to create a Novel
-     *   }
-     * })
-     * 
-     */
-    create<T extends NovelCreateArgs>(args: SelectSubset<T, NovelCreateArgs<ExtArgs>>): Prisma__NovelClient<$Result.GetResult<Prisma.$NovelPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Novels.
-     * @param {NovelCreateManyArgs} args - Arguments to create many Novels.
-     * @example
-     * // Create many Novels
-     * const novel = await prisma.novel.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends NovelCreateManyArgs>(args?: SelectSubset<T, NovelCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Novels and returns the data saved in the database.
-     * @param {NovelCreateManyAndReturnArgs} args - Arguments to create many Novels.
-     * @example
-     * // Create many Novels
-     * const novel = await prisma.novel.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Novels and only return the `id`
-     * const novelWithIdOnly = await prisma.novel.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends NovelCreateManyAndReturnArgs>(args?: SelectSubset<T, NovelCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NovelPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Novel.
-     * @param {NovelDeleteArgs} args - Arguments to delete one Novel.
-     * @example
-     * // Delete one Novel
-     * const Novel = await prisma.novel.delete({
-     *   where: {
-     *     // ... filter to delete one Novel
-     *   }
-     * })
-     * 
-     */
-    delete<T extends NovelDeleteArgs>(args: SelectSubset<T, NovelDeleteArgs<ExtArgs>>): Prisma__NovelClient<$Result.GetResult<Prisma.$NovelPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Novel.
-     * @param {NovelUpdateArgs} args - Arguments to update one Novel.
-     * @example
-     * // Update one Novel
-     * const novel = await prisma.novel.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends NovelUpdateArgs>(args: SelectSubset<T, NovelUpdateArgs<ExtArgs>>): Prisma__NovelClient<$Result.GetResult<Prisma.$NovelPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Novels.
-     * @param {NovelDeleteManyArgs} args - Arguments to filter Novels to delete.
-     * @example
-     * // Delete a few Novels
-     * const { count } = await prisma.novel.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends NovelDeleteManyArgs>(args?: SelectSubset<T, NovelDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Novels.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NovelUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Novels
-     * const novel = await prisma.novel.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends NovelUpdateManyArgs>(args: SelectSubset<T, NovelUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Novels and returns the data updated in the database.
-     * @param {NovelUpdateManyAndReturnArgs} args - Arguments to update many Novels.
-     * @example
-     * // Update many Novels
-     * const novel = await prisma.novel.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Novels and only return the `id`
-     * const novelWithIdOnly = await prisma.novel.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends NovelUpdateManyAndReturnArgs>(args: SelectSubset<T, NovelUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NovelPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Novel.
-     * @param {NovelUpsertArgs} args - Arguments to update or create a Novel.
-     * @example
-     * // Update or create a Novel
-     * const novel = await prisma.novel.upsert({
-     *   create: {
-     *     // ... data to create a Novel
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Novel we want to update
-     *   }
-     * })
-     */
-    upsert<T extends NovelUpsertArgs>(args: SelectSubset<T, NovelUpsertArgs<ExtArgs>>): Prisma__NovelClient<$Result.GetResult<Prisma.$NovelPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Novels.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NovelCountArgs} args - Arguments to filter Novels to count.
-     * @example
-     * // Count the number of Novels
-     * const count = await prisma.novel.count({
-     *   where: {
-     *     // ... the filter for the Novels we want to count
-     *   }
-     * })
-    **/
-    count<T extends NovelCountArgs>(
-      args?: Subset<T, NovelCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], NovelCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Novel.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NovelAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends NovelAggregateArgs>(args: Subset<T, NovelAggregateArgs>): Prisma.PrismaPromise<GetNovelAggregateType<T>>
-
-    /**
-     * Group by Novel.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NovelGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends NovelGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: NovelGroupByArgs['orderBy'] }
-        : { orderBy?: NovelGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, NovelGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNovelGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Novel model
-   */
-  readonly fields: NovelFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Novel.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__NovelClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    Series<T extends Novel$SeriesArgs<ExtArgs> = {}>(args?: Subset<T, Novel$SeriesArgs<ExtArgs>>): Prisma__SeriesClient<$Result.GetResult<Prisma.$SeriesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Novel model
-   */
-  interface NovelFieldRefs {
-    readonly id: FieldRef<"Novel", 'String'>
-    readonly title: FieldRef<"Novel", 'String'>
-    readonly imageUrl: FieldRef<"Novel", 'String'>
-    readonly content: FieldRef<"Novel", 'String'>
-    readonly description: FieldRef<"Novel", 'String'>
-    readonly createdAt: FieldRef<"Novel", 'DateTime'>
-    readonly updatedAt: FieldRef<"Novel", 'DateTime'>
-    readonly seriesName: FieldRef<"Novel", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Novel findUnique
-   */
-  export type NovelFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Novel
-     */
-    select?: NovelSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Novel
-     */
-    omit?: NovelOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NovelInclude<ExtArgs> | null
-    /**
-     * Filter, which Novel to fetch.
-     */
-    where: NovelWhereUniqueInput
-  }
-
-  /**
-   * Novel findUniqueOrThrow
-   */
-  export type NovelFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Novel
-     */
-    select?: NovelSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Novel
-     */
-    omit?: NovelOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NovelInclude<ExtArgs> | null
-    /**
-     * Filter, which Novel to fetch.
-     */
-    where: NovelWhereUniqueInput
-  }
-
-  /**
-   * Novel findFirst
-   */
-  export type NovelFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Novel
-     */
-    select?: NovelSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Novel
-     */
-    omit?: NovelOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NovelInclude<ExtArgs> | null
-    /**
-     * Filter, which Novel to fetch.
-     */
-    where?: NovelWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Novels to fetch.
-     */
-    orderBy?: NovelOrderByWithRelationInput | NovelOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Novels.
-     */
-    cursor?: NovelWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Novels from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Novels.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Novels.
-     */
-    distinct?: NovelScalarFieldEnum | NovelScalarFieldEnum[]
-  }
-
-  /**
-   * Novel findFirstOrThrow
-   */
-  export type NovelFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Novel
-     */
-    select?: NovelSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Novel
-     */
-    omit?: NovelOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NovelInclude<ExtArgs> | null
-    /**
-     * Filter, which Novel to fetch.
-     */
-    where?: NovelWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Novels to fetch.
-     */
-    orderBy?: NovelOrderByWithRelationInput | NovelOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Novels.
-     */
-    cursor?: NovelWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Novels from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Novels.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Novels.
-     */
-    distinct?: NovelScalarFieldEnum | NovelScalarFieldEnum[]
-  }
-
-  /**
-   * Novel findMany
-   */
-  export type NovelFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Novel
-     */
-    select?: NovelSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Novel
-     */
-    omit?: NovelOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NovelInclude<ExtArgs> | null
-    /**
-     * Filter, which Novels to fetch.
-     */
-    where?: NovelWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Novels to fetch.
-     */
-    orderBy?: NovelOrderByWithRelationInput | NovelOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Novels.
-     */
-    cursor?: NovelWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Novels from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Novels.
-     */
-    skip?: number
-    distinct?: NovelScalarFieldEnum | NovelScalarFieldEnum[]
-  }
-
-  /**
-   * Novel create
-   */
-  export type NovelCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Novel
-     */
-    select?: NovelSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Novel
-     */
-    omit?: NovelOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NovelInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Novel.
-     */
-    data: XOR<NovelCreateInput, NovelUncheckedCreateInput>
-  }
-
-  /**
-   * Novel createMany
-   */
-  export type NovelCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Novels.
-     */
-    data: NovelCreateManyInput | NovelCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Novel createManyAndReturn
-   */
-  export type NovelCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Novel
-     */
-    select?: NovelSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Novel
-     */
-    omit?: NovelOmit<ExtArgs> | null
-    /**
-     * The data used to create many Novels.
-     */
-    data: NovelCreateManyInput | NovelCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NovelIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Novel update
-   */
-  export type NovelUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Novel
-     */
-    select?: NovelSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Novel
-     */
-    omit?: NovelOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NovelInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Novel.
-     */
-    data: XOR<NovelUpdateInput, NovelUncheckedUpdateInput>
-    /**
-     * Choose, which Novel to update.
-     */
-    where: NovelWhereUniqueInput
-  }
-
-  /**
-   * Novel updateMany
-   */
-  export type NovelUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Novels.
-     */
-    data: XOR<NovelUpdateManyMutationInput, NovelUncheckedUpdateManyInput>
-    /**
-     * Filter which Novels to update
-     */
-    where?: NovelWhereInput
-    /**
-     * Limit how many Novels to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Novel updateManyAndReturn
-   */
-  export type NovelUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Novel
-     */
-    select?: NovelSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Novel
-     */
-    omit?: NovelOmit<ExtArgs> | null
-    /**
-     * The data used to update Novels.
-     */
-    data: XOR<NovelUpdateManyMutationInput, NovelUncheckedUpdateManyInput>
-    /**
-     * Filter which Novels to update
-     */
-    where?: NovelWhereInput
-    /**
-     * Limit how many Novels to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NovelIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Novel upsert
-   */
-  export type NovelUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Novel
-     */
-    select?: NovelSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Novel
-     */
-    omit?: NovelOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NovelInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Novel to update in case it exists.
-     */
-    where: NovelWhereUniqueInput
-    /**
-     * In case the Novel found by the `where` argument doesn't exist, create a new Novel with this data.
-     */
-    create: XOR<NovelCreateInput, NovelUncheckedCreateInput>
-    /**
-     * In case the Novel was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<NovelUpdateInput, NovelUncheckedUpdateInput>
-  }
-
-  /**
-   * Novel delete
-   */
-  export type NovelDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Novel
-     */
-    select?: NovelSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Novel
-     */
-    omit?: NovelOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NovelInclude<ExtArgs> | null
-    /**
-     * Filter which Novel to delete.
-     */
-    where: NovelWhereUniqueInput
-  }
-
-  /**
-   * Novel deleteMany
-   */
-  export type NovelDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Novels to delete
-     */
-    where?: NovelWhereInput
-    /**
-     * Limit how many Novels to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Novel.Series
-   */
-  export type Novel$SeriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Series
-     */
-    select?: SeriesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Series
-     */
-    omit?: SeriesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SeriesInclude<ExtArgs> | null
-    where?: SeriesWhereInput
-  }
-
-  /**
-   * Novel without action
-   */
-  export type NovelDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Novel
-     */
-    select?: NovelSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Novel
-     */
-    omit?: NovelOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NovelInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model Series
-   */
-
-  export type AggregateSeries = {
-    _count: SeriesCountAggregateOutputType | null
-    _min: SeriesMinAggregateOutputType | null
-    _max: SeriesMaxAggregateOutputType | null
-  }
-
-  export type SeriesMinAggregateOutputType = {
-    name: string | null
-  }
-
-  export type SeriesMaxAggregateOutputType = {
-    name: string | null
-  }
-
-  export type SeriesCountAggregateOutputType = {
-    name: number
-    _all: number
-  }
-
-
-  export type SeriesMinAggregateInputType = {
-    name?: true
-  }
-
-  export type SeriesMaxAggregateInputType = {
-    name?: true
-  }
-
-  export type SeriesCountAggregateInputType = {
-    name?: true
-    _all?: true
-  }
-
-  export type SeriesAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Series to aggregate.
-     */
-    where?: SeriesWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Series to fetch.
-     */
-    orderBy?: SeriesOrderByWithRelationInput | SeriesOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: SeriesWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Series from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Series.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Series
-    **/
-    _count?: true | SeriesCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: SeriesMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: SeriesMaxAggregateInputType
-  }
-
-  export type GetSeriesAggregateType<T extends SeriesAggregateArgs> = {
-        [P in keyof T & keyof AggregateSeries]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateSeries[P]>
-      : GetScalarType<T[P], AggregateSeries[P]>
-  }
-
-
-
-
-  export type SeriesGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SeriesWhereInput
-    orderBy?: SeriesOrderByWithAggregationInput | SeriesOrderByWithAggregationInput[]
-    by: SeriesScalarFieldEnum[] | SeriesScalarFieldEnum
-    having?: SeriesScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: SeriesCountAggregateInputType | true
-    _min?: SeriesMinAggregateInputType
-    _max?: SeriesMaxAggregateInputType
-  }
-
-  export type SeriesGroupByOutputType = {
-    name: string
-    _count: SeriesCountAggregateOutputType | null
-    _min: SeriesMinAggregateOutputType | null
-    _max: SeriesMaxAggregateOutputType | null
-  }
-
-  type GetSeriesGroupByPayload<T extends SeriesGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<SeriesGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof SeriesGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], SeriesGroupByOutputType[P]>
-            : GetScalarType<T[P], SeriesGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type SeriesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    name?: boolean
-    novels?: boolean | Series$novelsArgs<ExtArgs>
-    _count?: boolean | SeriesCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["series"]>
-
-  export type SeriesSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    name?: boolean
-  }, ExtArgs["result"]["series"]>
-
-  export type SeriesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    name?: boolean
-  }, ExtArgs["result"]["series"]>
-
-  export type SeriesSelectScalar = {
-    name?: boolean
-  }
-
-  export type SeriesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"name", ExtArgs["result"]["series"]>
-  export type SeriesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    novels?: boolean | Series$novelsArgs<ExtArgs>
-    _count?: boolean | SeriesCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type SeriesIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type SeriesIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-
-  export type $SeriesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Series"
-    objects: {
-      novels: Prisma.$NovelPayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      name: string
-    }, ExtArgs["result"]["series"]>
-    composites: {}
-  }
-
-  type SeriesGetPayload<S extends boolean | null | undefined | SeriesDefaultArgs> = $Result.GetResult<Prisma.$SeriesPayload, S>
-
-  type SeriesCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<SeriesFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: SeriesCountAggregateInputType | true
-    }
-
-  export interface SeriesDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Series'], meta: { name: 'Series' } }
-    /**
-     * Find zero or one Series that matches the filter.
-     * @param {SeriesFindUniqueArgs} args - Arguments to find a Series
-     * @example
-     * // Get one Series
-     * const series = await prisma.series.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends SeriesFindUniqueArgs>(args: SelectSubset<T, SeriesFindUniqueArgs<ExtArgs>>): Prisma__SeriesClient<$Result.GetResult<Prisma.$SeriesPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Series that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {SeriesFindUniqueOrThrowArgs} args - Arguments to find a Series
-     * @example
-     * // Get one Series
-     * const series = await prisma.series.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends SeriesFindUniqueOrThrowArgs>(args: SelectSubset<T, SeriesFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SeriesClient<$Result.GetResult<Prisma.$SeriesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Series that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SeriesFindFirstArgs} args - Arguments to find a Series
-     * @example
-     * // Get one Series
-     * const series = await prisma.series.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends SeriesFindFirstArgs>(args?: SelectSubset<T, SeriesFindFirstArgs<ExtArgs>>): Prisma__SeriesClient<$Result.GetResult<Prisma.$SeriesPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Series that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SeriesFindFirstOrThrowArgs} args - Arguments to find a Series
-     * @example
-     * // Get one Series
-     * const series = await prisma.series.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends SeriesFindFirstOrThrowArgs>(args?: SelectSubset<T, SeriesFindFirstOrThrowArgs<ExtArgs>>): Prisma__SeriesClient<$Result.GetResult<Prisma.$SeriesPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Series that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SeriesFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Series
-     * const series = await prisma.series.findMany()
-     * 
-     * // Get first 10 Series
-     * const series = await prisma.series.findMany({ take: 10 })
-     * 
-     * // Only select the `name`
-     * const seriesWithNameOnly = await prisma.series.findMany({ select: { name: true } })
-     * 
-     */
-    findMany<T extends SeriesFindManyArgs>(args?: SelectSubset<T, SeriesFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SeriesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Series.
-     * @param {SeriesCreateArgs} args - Arguments to create a Series.
-     * @example
-     * // Create one Series
-     * const Series = await prisma.series.create({
-     *   data: {
-     *     // ... data to create a Series
-     *   }
-     * })
-     * 
-     */
-    create<T extends SeriesCreateArgs>(args: SelectSubset<T, SeriesCreateArgs<ExtArgs>>): Prisma__SeriesClient<$Result.GetResult<Prisma.$SeriesPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Series.
-     * @param {SeriesCreateManyArgs} args - Arguments to create many Series.
-     * @example
-     * // Create many Series
-     * const series = await prisma.series.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends SeriesCreateManyArgs>(args?: SelectSubset<T, SeriesCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Series and returns the data saved in the database.
-     * @param {SeriesCreateManyAndReturnArgs} args - Arguments to create many Series.
-     * @example
-     * // Create many Series
-     * const series = await prisma.series.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Series and only return the `name`
-     * const seriesWithNameOnly = await prisma.series.createManyAndReturn({
-     *   select: { name: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends SeriesCreateManyAndReturnArgs>(args?: SelectSubset<T, SeriesCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SeriesPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Series.
-     * @param {SeriesDeleteArgs} args - Arguments to delete one Series.
-     * @example
-     * // Delete one Series
-     * const Series = await prisma.series.delete({
-     *   where: {
-     *     // ... filter to delete one Series
-     *   }
-     * })
-     * 
-     */
-    delete<T extends SeriesDeleteArgs>(args: SelectSubset<T, SeriesDeleteArgs<ExtArgs>>): Prisma__SeriesClient<$Result.GetResult<Prisma.$SeriesPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Series.
-     * @param {SeriesUpdateArgs} args - Arguments to update one Series.
-     * @example
-     * // Update one Series
-     * const series = await prisma.series.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends SeriesUpdateArgs>(args: SelectSubset<T, SeriesUpdateArgs<ExtArgs>>): Prisma__SeriesClient<$Result.GetResult<Prisma.$SeriesPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Series.
-     * @param {SeriesDeleteManyArgs} args - Arguments to filter Series to delete.
-     * @example
-     * // Delete a few Series
-     * const { count } = await prisma.series.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends SeriesDeleteManyArgs>(args?: SelectSubset<T, SeriesDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Series.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SeriesUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Series
-     * const series = await prisma.series.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends SeriesUpdateManyArgs>(args: SelectSubset<T, SeriesUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Series and returns the data updated in the database.
-     * @param {SeriesUpdateManyAndReturnArgs} args - Arguments to update many Series.
-     * @example
-     * // Update many Series
-     * const series = await prisma.series.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Series and only return the `name`
-     * const seriesWithNameOnly = await prisma.series.updateManyAndReturn({
-     *   select: { name: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends SeriesUpdateManyAndReturnArgs>(args: SelectSubset<T, SeriesUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SeriesPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Series.
-     * @param {SeriesUpsertArgs} args - Arguments to update or create a Series.
-     * @example
-     * // Update or create a Series
-     * const series = await prisma.series.upsert({
-     *   create: {
-     *     // ... data to create a Series
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Series we want to update
-     *   }
-     * })
-     */
-    upsert<T extends SeriesUpsertArgs>(args: SelectSubset<T, SeriesUpsertArgs<ExtArgs>>): Prisma__SeriesClient<$Result.GetResult<Prisma.$SeriesPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Series.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SeriesCountArgs} args - Arguments to filter Series to count.
-     * @example
-     * // Count the number of Series
-     * const count = await prisma.series.count({
-     *   where: {
-     *     // ... the filter for the Series we want to count
-     *   }
-     * })
-    **/
-    count<T extends SeriesCountArgs>(
-      args?: Subset<T, SeriesCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], SeriesCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Series.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SeriesAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends SeriesAggregateArgs>(args: Subset<T, SeriesAggregateArgs>): Prisma.PrismaPromise<GetSeriesAggregateType<T>>
-
-    /**
-     * Group by Series.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SeriesGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends SeriesGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: SeriesGroupByArgs['orderBy'] }
-        : { orderBy?: SeriesGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, SeriesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSeriesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Series model
-   */
-  readonly fields: SeriesFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Series.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__SeriesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    novels<T extends Series$novelsArgs<ExtArgs> = {}>(args?: Subset<T, Series$novelsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NovelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Series model
-   */
-  interface SeriesFieldRefs {
-    readonly name: FieldRef<"Series", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Series findUnique
-   */
-  export type SeriesFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Series
-     */
-    select?: SeriesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Series
-     */
-    omit?: SeriesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SeriesInclude<ExtArgs> | null
-    /**
-     * Filter, which Series to fetch.
-     */
-    where: SeriesWhereUniqueInput
-  }
-
-  /**
-   * Series findUniqueOrThrow
-   */
-  export type SeriesFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Series
-     */
-    select?: SeriesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Series
-     */
-    omit?: SeriesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SeriesInclude<ExtArgs> | null
-    /**
-     * Filter, which Series to fetch.
-     */
-    where: SeriesWhereUniqueInput
-  }
-
-  /**
-   * Series findFirst
-   */
-  export type SeriesFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Series
-     */
-    select?: SeriesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Series
-     */
-    omit?: SeriesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SeriesInclude<ExtArgs> | null
-    /**
-     * Filter, which Series to fetch.
-     */
-    where?: SeriesWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Series to fetch.
-     */
-    orderBy?: SeriesOrderByWithRelationInput | SeriesOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Series.
-     */
-    cursor?: SeriesWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Series from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Series.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Series.
-     */
-    distinct?: SeriesScalarFieldEnum | SeriesScalarFieldEnum[]
-  }
-
-  /**
-   * Series findFirstOrThrow
-   */
-  export type SeriesFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Series
-     */
-    select?: SeriesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Series
-     */
-    omit?: SeriesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SeriesInclude<ExtArgs> | null
-    /**
-     * Filter, which Series to fetch.
-     */
-    where?: SeriesWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Series to fetch.
-     */
-    orderBy?: SeriesOrderByWithRelationInput | SeriesOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Series.
-     */
-    cursor?: SeriesWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Series from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Series.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Series.
-     */
-    distinct?: SeriesScalarFieldEnum | SeriesScalarFieldEnum[]
-  }
-
-  /**
-   * Series findMany
-   */
-  export type SeriesFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Series
-     */
-    select?: SeriesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Series
-     */
-    omit?: SeriesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SeriesInclude<ExtArgs> | null
-    /**
-     * Filter, which Series to fetch.
-     */
-    where?: SeriesWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Series to fetch.
-     */
-    orderBy?: SeriesOrderByWithRelationInput | SeriesOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Series.
-     */
-    cursor?: SeriesWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Series from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Series.
-     */
-    skip?: number
-    distinct?: SeriesScalarFieldEnum | SeriesScalarFieldEnum[]
-  }
-
-  /**
-   * Series create
-   */
-  export type SeriesCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Series
-     */
-    select?: SeriesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Series
-     */
-    omit?: SeriesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SeriesInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Series.
-     */
-    data: XOR<SeriesCreateInput, SeriesUncheckedCreateInput>
-  }
-
-  /**
-   * Series createMany
-   */
-  export type SeriesCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Series.
-     */
-    data: SeriesCreateManyInput | SeriesCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Series createManyAndReturn
-   */
-  export type SeriesCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Series
-     */
-    select?: SeriesSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Series
-     */
-    omit?: SeriesOmit<ExtArgs> | null
-    /**
-     * The data used to create many Series.
-     */
-    data: SeriesCreateManyInput | SeriesCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Series update
-   */
-  export type SeriesUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Series
-     */
-    select?: SeriesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Series
-     */
-    omit?: SeriesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SeriesInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Series.
-     */
-    data: XOR<SeriesUpdateInput, SeriesUncheckedUpdateInput>
-    /**
-     * Choose, which Series to update.
-     */
-    where: SeriesWhereUniqueInput
-  }
-
-  /**
-   * Series updateMany
-   */
-  export type SeriesUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Series.
-     */
-    data: XOR<SeriesUpdateManyMutationInput, SeriesUncheckedUpdateManyInput>
-    /**
-     * Filter which Series to update
-     */
-    where?: SeriesWhereInput
-    /**
-     * Limit how many Series to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Series updateManyAndReturn
-   */
-  export type SeriesUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Series
-     */
-    select?: SeriesSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Series
-     */
-    omit?: SeriesOmit<ExtArgs> | null
-    /**
-     * The data used to update Series.
-     */
-    data: XOR<SeriesUpdateManyMutationInput, SeriesUncheckedUpdateManyInput>
-    /**
-     * Filter which Series to update
-     */
-    where?: SeriesWhereInput
-    /**
-     * Limit how many Series to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Series upsert
-   */
-  export type SeriesUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Series
-     */
-    select?: SeriesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Series
-     */
-    omit?: SeriesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SeriesInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Series to update in case it exists.
-     */
-    where: SeriesWhereUniqueInput
-    /**
-     * In case the Series found by the `where` argument doesn't exist, create a new Series with this data.
-     */
-    create: XOR<SeriesCreateInput, SeriesUncheckedCreateInput>
-    /**
-     * In case the Series was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<SeriesUpdateInput, SeriesUncheckedUpdateInput>
-  }
-
-  /**
-   * Series delete
-   */
-  export type SeriesDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Series
-     */
-    select?: SeriesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Series
-     */
-    omit?: SeriesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SeriesInclude<ExtArgs> | null
-    /**
-     * Filter which Series to delete.
-     */
-    where: SeriesWhereUniqueInput
-  }
-
-  /**
-   * Series deleteMany
-   */
-  export type SeriesDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Series to delete
-     */
-    where?: SeriesWhereInput
-    /**
-     * Limit how many Series to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Series.novels
-   */
-  export type Series$novelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Novel
-     */
-    select?: NovelSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Novel
-     */
-    omit?: NovelOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NovelInclude<ExtArgs> | null
-    where?: NovelWhereInput
-    orderBy?: NovelOrderByWithRelationInput | NovelOrderByWithRelationInput[]
-    cursor?: NovelWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: NovelScalarFieldEnum | NovelScalarFieldEnum[]
-  }
-
-  /**
-   * Series without action
-   */
-  export type SeriesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Series
-     */
-    select?: SeriesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Series
-     */
-    omit?: SeriesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SeriesInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Model User
    */
 
@@ -6126,6 +4077,8 @@ export namespace Prisma {
     updatedAt?: boolean
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
+    ReadedTimeCount?: boolean | User$ReadedTimeCountArgs<ExtArgs>
+    MarkedArticles?: boolean | User$MarkedArticlesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -6163,6 +4116,8 @@ export namespace Prisma {
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
+    ReadedTimeCount?: boolean | User$ReadedTimeCountArgs<ExtArgs>
+    MarkedArticles?: boolean | User$MarkedArticlesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -6173,6 +4128,8 @@ export namespace Prisma {
     objects: {
       sessions: Prisma.$SessionPayload<ExtArgs>[]
       accounts: Prisma.$AccountPayload<ExtArgs>[]
+      ReadedTimeCount: Prisma.$ReadedTimeCountPayload<ExtArgs>[]
+      MarkedArticles: Prisma.$MarkedArticlesPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -6578,6 +4535,8 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    ReadedTimeCount<T extends User$ReadedTimeCountArgs<ExtArgs> = {}>(args?: Subset<T, User$ReadedTimeCountArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReadedTimeCountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    MarkedArticles<T extends User$MarkedArticlesArgs<ExtArgs> = {}>(args?: Subset<T, User$MarkedArticlesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MarkedArticlesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7050,6 +5009,54 @@ export namespace Prisma {
   }
 
   /**
+   * User.ReadedTimeCount
+   */
+  export type User$ReadedTimeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReadedTimeCount
+     */
+    select?: ReadedTimeCountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReadedTimeCount
+     */
+    omit?: ReadedTimeCountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReadedTimeCountInclude<ExtArgs> | null
+    where?: ReadedTimeCountWhereInput
+    orderBy?: ReadedTimeCountOrderByWithRelationInput | ReadedTimeCountOrderByWithRelationInput[]
+    cursor?: ReadedTimeCountWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ReadedTimeCountScalarFieldEnum | ReadedTimeCountScalarFieldEnum[]
+  }
+
+  /**
+   * User.MarkedArticles
+   */
+  export type User$MarkedArticlesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MarkedArticles
+     */
+    select?: MarkedArticlesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MarkedArticles
+     */
+    omit?: MarkedArticlesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MarkedArticlesInclude<ExtArgs> | null
+    where?: MarkedArticlesWhereInput
+    orderBy?: MarkedArticlesOrderByWithRelationInput | MarkedArticlesOrderByWithRelationInput[]
+    cursor?: MarkedArticlesWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MarkedArticlesScalarFieldEnum | MarkedArticlesScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7065,6 +5072,2179 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model MarkedArticles
+   */
+
+  export type AggregateMarkedArticles = {
+    _count: MarkedArticlesCountAggregateOutputType | null
+    _avg: MarkedArticlesAvgAggregateOutputType | null
+    _sum: MarkedArticlesSumAggregateOutputType | null
+    _min: MarkedArticlesMinAggregateOutputType | null
+    _max: MarkedArticlesMaxAggregateOutputType | null
+  }
+
+  export type MarkedArticlesAvgAggregateOutputType = {
+    id: number | null
+    articleId: number | null
+  }
+
+  export type MarkedArticlesSumAggregateOutputType = {
+    id: number | null
+    articleId: number | null
+  }
+
+  export type MarkedArticlesMinAggregateOutputType = {
+    id: number | null
+    articleId: number | null
+    userId: string | null
+  }
+
+  export type MarkedArticlesMaxAggregateOutputType = {
+    id: number | null
+    articleId: number | null
+    userId: string | null
+  }
+
+  export type MarkedArticlesCountAggregateOutputType = {
+    id: number
+    articleId: number
+    userId: number
+    _all: number
+  }
+
+
+  export type MarkedArticlesAvgAggregateInputType = {
+    id?: true
+    articleId?: true
+  }
+
+  export type MarkedArticlesSumAggregateInputType = {
+    id?: true
+    articleId?: true
+  }
+
+  export type MarkedArticlesMinAggregateInputType = {
+    id?: true
+    articleId?: true
+    userId?: true
+  }
+
+  export type MarkedArticlesMaxAggregateInputType = {
+    id?: true
+    articleId?: true
+    userId?: true
+  }
+
+  export type MarkedArticlesCountAggregateInputType = {
+    id?: true
+    articleId?: true
+    userId?: true
+    _all?: true
+  }
+
+  export type MarkedArticlesAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MarkedArticles to aggregate.
+     */
+    where?: MarkedArticlesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MarkedArticles to fetch.
+     */
+    orderBy?: MarkedArticlesOrderByWithRelationInput | MarkedArticlesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MarkedArticlesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MarkedArticles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MarkedArticles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MarkedArticles
+    **/
+    _count?: true | MarkedArticlesCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: MarkedArticlesAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: MarkedArticlesSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MarkedArticlesMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MarkedArticlesMaxAggregateInputType
+  }
+
+  export type GetMarkedArticlesAggregateType<T extends MarkedArticlesAggregateArgs> = {
+        [P in keyof T & keyof AggregateMarkedArticles]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMarkedArticles[P]>
+      : GetScalarType<T[P], AggregateMarkedArticles[P]>
+  }
+
+
+
+
+  export type MarkedArticlesGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MarkedArticlesWhereInput
+    orderBy?: MarkedArticlesOrderByWithAggregationInput | MarkedArticlesOrderByWithAggregationInput[]
+    by: MarkedArticlesScalarFieldEnum[] | MarkedArticlesScalarFieldEnum
+    having?: MarkedArticlesScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MarkedArticlesCountAggregateInputType | true
+    _avg?: MarkedArticlesAvgAggregateInputType
+    _sum?: MarkedArticlesSumAggregateInputType
+    _min?: MarkedArticlesMinAggregateInputType
+    _max?: MarkedArticlesMaxAggregateInputType
+  }
+
+  export type MarkedArticlesGroupByOutputType = {
+    id: number
+    articleId: number
+    userId: string
+    _count: MarkedArticlesCountAggregateOutputType | null
+    _avg: MarkedArticlesAvgAggregateOutputType | null
+    _sum: MarkedArticlesSumAggregateOutputType | null
+    _min: MarkedArticlesMinAggregateOutputType | null
+    _max: MarkedArticlesMaxAggregateOutputType | null
+  }
+
+  type GetMarkedArticlesGroupByPayload<T extends MarkedArticlesGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MarkedArticlesGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MarkedArticlesGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MarkedArticlesGroupByOutputType[P]>
+            : GetScalarType<T[P], MarkedArticlesGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MarkedArticlesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    articleId?: boolean
+    userId?: boolean
+    article?: boolean | ArticleDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["markedArticles"]>
+
+  export type MarkedArticlesSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    articleId?: boolean
+    userId?: boolean
+    article?: boolean | ArticleDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["markedArticles"]>
+
+  export type MarkedArticlesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    articleId?: boolean
+    userId?: boolean
+    article?: boolean | ArticleDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["markedArticles"]>
+
+  export type MarkedArticlesSelectScalar = {
+    id?: boolean
+    articleId?: boolean
+    userId?: boolean
+  }
+
+  export type MarkedArticlesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "articleId" | "userId", ExtArgs["result"]["markedArticles"]>
+  export type MarkedArticlesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    article?: boolean | ArticleDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type MarkedArticlesIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    article?: boolean | ArticleDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type MarkedArticlesIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    article?: boolean | ArticleDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $MarkedArticlesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MarkedArticles"
+    objects: {
+      article: Prisma.$ArticlePayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      articleId: number
+      userId: string
+    }, ExtArgs["result"]["markedArticles"]>
+    composites: {}
+  }
+
+  type MarkedArticlesGetPayload<S extends boolean | null | undefined | MarkedArticlesDefaultArgs> = $Result.GetResult<Prisma.$MarkedArticlesPayload, S>
+
+  type MarkedArticlesCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MarkedArticlesFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MarkedArticlesCountAggregateInputType | true
+    }
+
+  export interface MarkedArticlesDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MarkedArticles'], meta: { name: 'MarkedArticles' } }
+    /**
+     * Find zero or one MarkedArticles that matches the filter.
+     * @param {MarkedArticlesFindUniqueArgs} args - Arguments to find a MarkedArticles
+     * @example
+     * // Get one MarkedArticles
+     * const markedArticles = await prisma.markedArticles.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MarkedArticlesFindUniqueArgs>(args: SelectSubset<T, MarkedArticlesFindUniqueArgs<ExtArgs>>): Prisma__MarkedArticlesClient<$Result.GetResult<Prisma.$MarkedArticlesPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one MarkedArticles that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MarkedArticlesFindUniqueOrThrowArgs} args - Arguments to find a MarkedArticles
+     * @example
+     * // Get one MarkedArticles
+     * const markedArticles = await prisma.markedArticles.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MarkedArticlesFindUniqueOrThrowArgs>(args: SelectSubset<T, MarkedArticlesFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MarkedArticlesClient<$Result.GetResult<Prisma.$MarkedArticlesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MarkedArticles that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MarkedArticlesFindFirstArgs} args - Arguments to find a MarkedArticles
+     * @example
+     * // Get one MarkedArticles
+     * const markedArticles = await prisma.markedArticles.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MarkedArticlesFindFirstArgs>(args?: SelectSubset<T, MarkedArticlesFindFirstArgs<ExtArgs>>): Prisma__MarkedArticlesClient<$Result.GetResult<Prisma.$MarkedArticlesPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MarkedArticles that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MarkedArticlesFindFirstOrThrowArgs} args - Arguments to find a MarkedArticles
+     * @example
+     * // Get one MarkedArticles
+     * const markedArticles = await prisma.markedArticles.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MarkedArticlesFindFirstOrThrowArgs>(args?: SelectSubset<T, MarkedArticlesFindFirstOrThrowArgs<ExtArgs>>): Prisma__MarkedArticlesClient<$Result.GetResult<Prisma.$MarkedArticlesPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more MarkedArticles that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MarkedArticlesFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MarkedArticles
+     * const markedArticles = await prisma.markedArticles.findMany()
+     * 
+     * // Get first 10 MarkedArticles
+     * const markedArticles = await prisma.markedArticles.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const markedArticlesWithIdOnly = await prisma.markedArticles.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MarkedArticlesFindManyArgs>(args?: SelectSubset<T, MarkedArticlesFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MarkedArticlesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a MarkedArticles.
+     * @param {MarkedArticlesCreateArgs} args - Arguments to create a MarkedArticles.
+     * @example
+     * // Create one MarkedArticles
+     * const MarkedArticles = await prisma.markedArticles.create({
+     *   data: {
+     *     // ... data to create a MarkedArticles
+     *   }
+     * })
+     * 
+     */
+    create<T extends MarkedArticlesCreateArgs>(args: SelectSubset<T, MarkedArticlesCreateArgs<ExtArgs>>): Prisma__MarkedArticlesClient<$Result.GetResult<Prisma.$MarkedArticlesPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many MarkedArticles.
+     * @param {MarkedArticlesCreateManyArgs} args - Arguments to create many MarkedArticles.
+     * @example
+     * // Create many MarkedArticles
+     * const markedArticles = await prisma.markedArticles.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MarkedArticlesCreateManyArgs>(args?: SelectSubset<T, MarkedArticlesCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many MarkedArticles and returns the data saved in the database.
+     * @param {MarkedArticlesCreateManyAndReturnArgs} args - Arguments to create many MarkedArticles.
+     * @example
+     * // Create many MarkedArticles
+     * const markedArticles = await prisma.markedArticles.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many MarkedArticles and only return the `id`
+     * const markedArticlesWithIdOnly = await prisma.markedArticles.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MarkedArticlesCreateManyAndReturnArgs>(args?: SelectSubset<T, MarkedArticlesCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MarkedArticlesPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a MarkedArticles.
+     * @param {MarkedArticlesDeleteArgs} args - Arguments to delete one MarkedArticles.
+     * @example
+     * // Delete one MarkedArticles
+     * const MarkedArticles = await prisma.markedArticles.delete({
+     *   where: {
+     *     // ... filter to delete one MarkedArticles
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MarkedArticlesDeleteArgs>(args: SelectSubset<T, MarkedArticlesDeleteArgs<ExtArgs>>): Prisma__MarkedArticlesClient<$Result.GetResult<Prisma.$MarkedArticlesPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one MarkedArticles.
+     * @param {MarkedArticlesUpdateArgs} args - Arguments to update one MarkedArticles.
+     * @example
+     * // Update one MarkedArticles
+     * const markedArticles = await prisma.markedArticles.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MarkedArticlesUpdateArgs>(args: SelectSubset<T, MarkedArticlesUpdateArgs<ExtArgs>>): Prisma__MarkedArticlesClient<$Result.GetResult<Prisma.$MarkedArticlesPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more MarkedArticles.
+     * @param {MarkedArticlesDeleteManyArgs} args - Arguments to filter MarkedArticles to delete.
+     * @example
+     * // Delete a few MarkedArticles
+     * const { count } = await prisma.markedArticles.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MarkedArticlesDeleteManyArgs>(args?: SelectSubset<T, MarkedArticlesDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MarkedArticles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MarkedArticlesUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MarkedArticles
+     * const markedArticles = await prisma.markedArticles.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MarkedArticlesUpdateManyArgs>(args: SelectSubset<T, MarkedArticlesUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MarkedArticles and returns the data updated in the database.
+     * @param {MarkedArticlesUpdateManyAndReturnArgs} args - Arguments to update many MarkedArticles.
+     * @example
+     * // Update many MarkedArticles
+     * const markedArticles = await prisma.markedArticles.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more MarkedArticles and only return the `id`
+     * const markedArticlesWithIdOnly = await prisma.markedArticles.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MarkedArticlesUpdateManyAndReturnArgs>(args: SelectSubset<T, MarkedArticlesUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MarkedArticlesPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one MarkedArticles.
+     * @param {MarkedArticlesUpsertArgs} args - Arguments to update or create a MarkedArticles.
+     * @example
+     * // Update or create a MarkedArticles
+     * const markedArticles = await prisma.markedArticles.upsert({
+     *   create: {
+     *     // ... data to create a MarkedArticles
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MarkedArticles we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MarkedArticlesUpsertArgs>(args: SelectSubset<T, MarkedArticlesUpsertArgs<ExtArgs>>): Prisma__MarkedArticlesClient<$Result.GetResult<Prisma.$MarkedArticlesPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of MarkedArticles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MarkedArticlesCountArgs} args - Arguments to filter MarkedArticles to count.
+     * @example
+     * // Count the number of MarkedArticles
+     * const count = await prisma.markedArticles.count({
+     *   where: {
+     *     // ... the filter for the MarkedArticles we want to count
+     *   }
+     * })
+    **/
+    count<T extends MarkedArticlesCountArgs>(
+      args?: Subset<T, MarkedArticlesCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MarkedArticlesCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MarkedArticles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MarkedArticlesAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MarkedArticlesAggregateArgs>(args: Subset<T, MarkedArticlesAggregateArgs>): Prisma.PrismaPromise<GetMarkedArticlesAggregateType<T>>
+
+    /**
+     * Group by MarkedArticles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MarkedArticlesGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MarkedArticlesGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MarkedArticlesGroupByArgs['orderBy'] }
+        : { orderBy?: MarkedArticlesGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MarkedArticlesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMarkedArticlesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MarkedArticles model
+   */
+  readonly fields: MarkedArticlesFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MarkedArticles.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MarkedArticlesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    article<T extends ArticleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ArticleDefaultArgs<ExtArgs>>): Prisma__ArticleClient<$Result.GetResult<Prisma.$ArticlePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the MarkedArticles model
+   */
+  interface MarkedArticlesFieldRefs {
+    readonly id: FieldRef<"MarkedArticles", 'Int'>
+    readonly articleId: FieldRef<"MarkedArticles", 'Int'>
+    readonly userId: FieldRef<"MarkedArticles", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MarkedArticles findUnique
+   */
+  export type MarkedArticlesFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MarkedArticles
+     */
+    select?: MarkedArticlesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MarkedArticles
+     */
+    omit?: MarkedArticlesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MarkedArticlesInclude<ExtArgs> | null
+    /**
+     * Filter, which MarkedArticles to fetch.
+     */
+    where: MarkedArticlesWhereUniqueInput
+  }
+
+  /**
+   * MarkedArticles findUniqueOrThrow
+   */
+  export type MarkedArticlesFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MarkedArticles
+     */
+    select?: MarkedArticlesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MarkedArticles
+     */
+    omit?: MarkedArticlesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MarkedArticlesInclude<ExtArgs> | null
+    /**
+     * Filter, which MarkedArticles to fetch.
+     */
+    where: MarkedArticlesWhereUniqueInput
+  }
+
+  /**
+   * MarkedArticles findFirst
+   */
+  export type MarkedArticlesFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MarkedArticles
+     */
+    select?: MarkedArticlesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MarkedArticles
+     */
+    omit?: MarkedArticlesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MarkedArticlesInclude<ExtArgs> | null
+    /**
+     * Filter, which MarkedArticles to fetch.
+     */
+    where?: MarkedArticlesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MarkedArticles to fetch.
+     */
+    orderBy?: MarkedArticlesOrderByWithRelationInput | MarkedArticlesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MarkedArticles.
+     */
+    cursor?: MarkedArticlesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MarkedArticles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MarkedArticles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MarkedArticles.
+     */
+    distinct?: MarkedArticlesScalarFieldEnum | MarkedArticlesScalarFieldEnum[]
+  }
+
+  /**
+   * MarkedArticles findFirstOrThrow
+   */
+  export type MarkedArticlesFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MarkedArticles
+     */
+    select?: MarkedArticlesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MarkedArticles
+     */
+    omit?: MarkedArticlesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MarkedArticlesInclude<ExtArgs> | null
+    /**
+     * Filter, which MarkedArticles to fetch.
+     */
+    where?: MarkedArticlesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MarkedArticles to fetch.
+     */
+    orderBy?: MarkedArticlesOrderByWithRelationInput | MarkedArticlesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MarkedArticles.
+     */
+    cursor?: MarkedArticlesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MarkedArticles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MarkedArticles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MarkedArticles.
+     */
+    distinct?: MarkedArticlesScalarFieldEnum | MarkedArticlesScalarFieldEnum[]
+  }
+
+  /**
+   * MarkedArticles findMany
+   */
+  export type MarkedArticlesFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MarkedArticles
+     */
+    select?: MarkedArticlesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MarkedArticles
+     */
+    omit?: MarkedArticlesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MarkedArticlesInclude<ExtArgs> | null
+    /**
+     * Filter, which MarkedArticles to fetch.
+     */
+    where?: MarkedArticlesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MarkedArticles to fetch.
+     */
+    orderBy?: MarkedArticlesOrderByWithRelationInput | MarkedArticlesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MarkedArticles.
+     */
+    cursor?: MarkedArticlesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MarkedArticles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MarkedArticles.
+     */
+    skip?: number
+    distinct?: MarkedArticlesScalarFieldEnum | MarkedArticlesScalarFieldEnum[]
+  }
+
+  /**
+   * MarkedArticles create
+   */
+  export type MarkedArticlesCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MarkedArticles
+     */
+    select?: MarkedArticlesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MarkedArticles
+     */
+    omit?: MarkedArticlesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MarkedArticlesInclude<ExtArgs> | null
+    /**
+     * The data needed to create a MarkedArticles.
+     */
+    data: XOR<MarkedArticlesCreateInput, MarkedArticlesUncheckedCreateInput>
+  }
+
+  /**
+   * MarkedArticles createMany
+   */
+  export type MarkedArticlesCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MarkedArticles.
+     */
+    data: MarkedArticlesCreateManyInput | MarkedArticlesCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MarkedArticles createManyAndReturn
+   */
+  export type MarkedArticlesCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MarkedArticles
+     */
+    select?: MarkedArticlesSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MarkedArticles
+     */
+    omit?: MarkedArticlesOmit<ExtArgs> | null
+    /**
+     * The data used to create many MarkedArticles.
+     */
+    data: MarkedArticlesCreateManyInput | MarkedArticlesCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MarkedArticlesIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MarkedArticles update
+   */
+  export type MarkedArticlesUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MarkedArticles
+     */
+    select?: MarkedArticlesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MarkedArticles
+     */
+    omit?: MarkedArticlesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MarkedArticlesInclude<ExtArgs> | null
+    /**
+     * The data needed to update a MarkedArticles.
+     */
+    data: XOR<MarkedArticlesUpdateInput, MarkedArticlesUncheckedUpdateInput>
+    /**
+     * Choose, which MarkedArticles to update.
+     */
+    where: MarkedArticlesWhereUniqueInput
+  }
+
+  /**
+   * MarkedArticles updateMany
+   */
+  export type MarkedArticlesUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MarkedArticles.
+     */
+    data: XOR<MarkedArticlesUpdateManyMutationInput, MarkedArticlesUncheckedUpdateManyInput>
+    /**
+     * Filter which MarkedArticles to update
+     */
+    where?: MarkedArticlesWhereInput
+    /**
+     * Limit how many MarkedArticles to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * MarkedArticles updateManyAndReturn
+   */
+  export type MarkedArticlesUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MarkedArticles
+     */
+    select?: MarkedArticlesSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MarkedArticles
+     */
+    omit?: MarkedArticlesOmit<ExtArgs> | null
+    /**
+     * The data used to update MarkedArticles.
+     */
+    data: XOR<MarkedArticlesUpdateManyMutationInput, MarkedArticlesUncheckedUpdateManyInput>
+    /**
+     * Filter which MarkedArticles to update
+     */
+    where?: MarkedArticlesWhereInput
+    /**
+     * Limit how many MarkedArticles to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MarkedArticlesIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MarkedArticles upsert
+   */
+  export type MarkedArticlesUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MarkedArticles
+     */
+    select?: MarkedArticlesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MarkedArticles
+     */
+    omit?: MarkedArticlesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MarkedArticlesInclude<ExtArgs> | null
+    /**
+     * The filter to search for the MarkedArticles to update in case it exists.
+     */
+    where: MarkedArticlesWhereUniqueInput
+    /**
+     * In case the MarkedArticles found by the `where` argument doesn't exist, create a new MarkedArticles with this data.
+     */
+    create: XOR<MarkedArticlesCreateInput, MarkedArticlesUncheckedCreateInput>
+    /**
+     * In case the MarkedArticles was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MarkedArticlesUpdateInput, MarkedArticlesUncheckedUpdateInput>
+  }
+
+  /**
+   * MarkedArticles delete
+   */
+  export type MarkedArticlesDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MarkedArticles
+     */
+    select?: MarkedArticlesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MarkedArticles
+     */
+    omit?: MarkedArticlesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MarkedArticlesInclude<ExtArgs> | null
+    /**
+     * Filter which MarkedArticles to delete.
+     */
+    where: MarkedArticlesWhereUniqueInput
+  }
+
+  /**
+   * MarkedArticles deleteMany
+   */
+  export type MarkedArticlesDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MarkedArticles to delete
+     */
+    where?: MarkedArticlesWhereInput
+    /**
+     * Limit how many MarkedArticles to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * MarkedArticles without action
+   */
+  export type MarkedArticlesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MarkedArticles
+     */
+    select?: MarkedArticlesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MarkedArticles
+     */
+    omit?: MarkedArticlesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MarkedArticlesInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ReadedTimeCount
+   */
+
+  export type AggregateReadedTimeCount = {
+    _count: ReadedTimeCountCountAggregateOutputType | null
+    _avg: ReadedTimeCountAvgAggregateOutputType | null
+    _sum: ReadedTimeCountSumAggregateOutputType | null
+    _min: ReadedTimeCountMinAggregateOutputType | null
+    _max: ReadedTimeCountMaxAggregateOutputType | null
+  }
+
+  export type ReadedTimeCountAvgAggregateOutputType = {
+    id: number | null
+    times: number | null
+    articleId: number | null
+  }
+
+  export type ReadedTimeCountSumAggregateOutputType = {
+    id: number | null
+    times: number | null
+    articleId: number | null
+  }
+
+  export type ReadedTimeCountMinAggregateOutputType = {
+    id: number | null
+    times: number | null
+    articleId: number | null
+    userId: string | null
+  }
+
+  export type ReadedTimeCountMaxAggregateOutputType = {
+    id: number | null
+    times: number | null
+    articleId: number | null
+    userId: string | null
+  }
+
+  export type ReadedTimeCountCountAggregateOutputType = {
+    id: number
+    times: number
+    articleId: number
+    userId: number
+    _all: number
+  }
+
+
+  export type ReadedTimeCountAvgAggregateInputType = {
+    id?: true
+    times?: true
+    articleId?: true
+  }
+
+  export type ReadedTimeCountSumAggregateInputType = {
+    id?: true
+    times?: true
+    articleId?: true
+  }
+
+  export type ReadedTimeCountMinAggregateInputType = {
+    id?: true
+    times?: true
+    articleId?: true
+    userId?: true
+  }
+
+  export type ReadedTimeCountMaxAggregateInputType = {
+    id?: true
+    times?: true
+    articleId?: true
+    userId?: true
+  }
+
+  export type ReadedTimeCountCountAggregateInputType = {
+    id?: true
+    times?: true
+    articleId?: true
+    userId?: true
+    _all?: true
+  }
+
+  export type ReadedTimeCountAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ReadedTimeCount to aggregate.
+     */
+    where?: ReadedTimeCountWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ReadedTimeCounts to fetch.
+     */
+    orderBy?: ReadedTimeCountOrderByWithRelationInput | ReadedTimeCountOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ReadedTimeCountWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ReadedTimeCounts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ReadedTimeCounts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ReadedTimeCounts
+    **/
+    _count?: true | ReadedTimeCountCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ReadedTimeCountAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ReadedTimeCountSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ReadedTimeCountMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ReadedTimeCountMaxAggregateInputType
+  }
+
+  export type GetReadedTimeCountAggregateType<T extends ReadedTimeCountAggregateArgs> = {
+        [P in keyof T & keyof AggregateReadedTimeCount]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateReadedTimeCount[P]>
+      : GetScalarType<T[P], AggregateReadedTimeCount[P]>
+  }
+
+
+
+
+  export type ReadedTimeCountGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReadedTimeCountWhereInput
+    orderBy?: ReadedTimeCountOrderByWithAggregationInput | ReadedTimeCountOrderByWithAggregationInput[]
+    by: ReadedTimeCountScalarFieldEnum[] | ReadedTimeCountScalarFieldEnum
+    having?: ReadedTimeCountScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ReadedTimeCountCountAggregateInputType | true
+    _avg?: ReadedTimeCountAvgAggregateInputType
+    _sum?: ReadedTimeCountSumAggregateInputType
+    _min?: ReadedTimeCountMinAggregateInputType
+    _max?: ReadedTimeCountMaxAggregateInputType
+  }
+
+  export type ReadedTimeCountGroupByOutputType = {
+    id: number
+    times: number
+    articleId: number
+    userId: string
+    _count: ReadedTimeCountCountAggregateOutputType | null
+    _avg: ReadedTimeCountAvgAggregateOutputType | null
+    _sum: ReadedTimeCountSumAggregateOutputType | null
+    _min: ReadedTimeCountMinAggregateOutputType | null
+    _max: ReadedTimeCountMaxAggregateOutputType | null
+  }
+
+  type GetReadedTimeCountGroupByPayload<T extends ReadedTimeCountGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ReadedTimeCountGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ReadedTimeCountGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ReadedTimeCountGroupByOutputType[P]>
+            : GetScalarType<T[P], ReadedTimeCountGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ReadedTimeCountSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    times?: boolean
+    articleId?: boolean
+    userId?: boolean
+    article?: boolean | ArticleDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["readedTimeCount"]>
+
+  export type ReadedTimeCountSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    times?: boolean
+    articleId?: boolean
+    userId?: boolean
+    article?: boolean | ArticleDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["readedTimeCount"]>
+
+  export type ReadedTimeCountSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    times?: boolean
+    articleId?: boolean
+    userId?: boolean
+    article?: boolean | ArticleDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["readedTimeCount"]>
+
+  export type ReadedTimeCountSelectScalar = {
+    id?: boolean
+    times?: boolean
+    articleId?: boolean
+    userId?: boolean
+  }
+
+  export type ReadedTimeCountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "times" | "articleId" | "userId", ExtArgs["result"]["readedTimeCount"]>
+  export type ReadedTimeCountInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    article?: boolean | ArticleDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ReadedTimeCountIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    article?: boolean | ArticleDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ReadedTimeCountIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    article?: boolean | ArticleDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $ReadedTimeCountPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ReadedTimeCount"
+    objects: {
+      article: Prisma.$ArticlePayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      times: number
+      articleId: number
+      userId: string
+    }, ExtArgs["result"]["readedTimeCount"]>
+    composites: {}
+  }
+
+  type ReadedTimeCountGetPayload<S extends boolean | null | undefined | ReadedTimeCountDefaultArgs> = $Result.GetResult<Prisma.$ReadedTimeCountPayload, S>
+
+  type ReadedTimeCountCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ReadedTimeCountFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ReadedTimeCountCountAggregateInputType | true
+    }
+
+  export interface ReadedTimeCountDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ReadedTimeCount'], meta: { name: 'ReadedTimeCount' } }
+    /**
+     * Find zero or one ReadedTimeCount that matches the filter.
+     * @param {ReadedTimeCountFindUniqueArgs} args - Arguments to find a ReadedTimeCount
+     * @example
+     * // Get one ReadedTimeCount
+     * const readedTimeCount = await prisma.readedTimeCount.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ReadedTimeCountFindUniqueArgs>(args: SelectSubset<T, ReadedTimeCountFindUniqueArgs<ExtArgs>>): Prisma__ReadedTimeCountClient<$Result.GetResult<Prisma.$ReadedTimeCountPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ReadedTimeCount that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ReadedTimeCountFindUniqueOrThrowArgs} args - Arguments to find a ReadedTimeCount
+     * @example
+     * // Get one ReadedTimeCount
+     * const readedTimeCount = await prisma.readedTimeCount.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ReadedTimeCountFindUniqueOrThrowArgs>(args: SelectSubset<T, ReadedTimeCountFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ReadedTimeCountClient<$Result.GetResult<Prisma.$ReadedTimeCountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ReadedTimeCount that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReadedTimeCountFindFirstArgs} args - Arguments to find a ReadedTimeCount
+     * @example
+     * // Get one ReadedTimeCount
+     * const readedTimeCount = await prisma.readedTimeCount.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ReadedTimeCountFindFirstArgs>(args?: SelectSubset<T, ReadedTimeCountFindFirstArgs<ExtArgs>>): Prisma__ReadedTimeCountClient<$Result.GetResult<Prisma.$ReadedTimeCountPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ReadedTimeCount that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReadedTimeCountFindFirstOrThrowArgs} args - Arguments to find a ReadedTimeCount
+     * @example
+     * // Get one ReadedTimeCount
+     * const readedTimeCount = await prisma.readedTimeCount.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ReadedTimeCountFindFirstOrThrowArgs>(args?: SelectSubset<T, ReadedTimeCountFindFirstOrThrowArgs<ExtArgs>>): Prisma__ReadedTimeCountClient<$Result.GetResult<Prisma.$ReadedTimeCountPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ReadedTimeCounts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReadedTimeCountFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ReadedTimeCounts
+     * const readedTimeCounts = await prisma.readedTimeCount.findMany()
+     * 
+     * // Get first 10 ReadedTimeCounts
+     * const readedTimeCounts = await prisma.readedTimeCount.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const readedTimeCountWithIdOnly = await prisma.readedTimeCount.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ReadedTimeCountFindManyArgs>(args?: SelectSubset<T, ReadedTimeCountFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReadedTimeCountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ReadedTimeCount.
+     * @param {ReadedTimeCountCreateArgs} args - Arguments to create a ReadedTimeCount.
+     * @example
+     * // Create one ReadedTimeCount
+     * const ReadedTimeCount = await prisma.readedTimeCount.create({
+     *   data: {
+     *     // ... data to create a ReadedTimeCount
+     *   }
+     * })
+     * 
+     */
+    create<T extends ReadedTimeCountCreateArgs>(args: SelectSubset<T, ReadedTimeCountCreateArgs<ExtArgs>>): Prisma__ReadedTimeCountClient<$Result.GetResult<Prisma.$ReadedTimeCountPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ReadedTimeCounts.
+     * @param {ReadedTimeCountCreateManyArgs} args - Arguments to create many ReadedTimeCounts.
+     * @example
+     * // Create many ReadedTimeCounts
+     * const readedTimeCount = await prisma.readedTimeCount.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ReadedTimeCountCreateManyArgs>(args?: SelectSubset<T, ReadedTimeCountCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ReadedTimeCounts and returns the data saved in the database.
+     * @param {ReadedTimeCountCreateManyAndReturnArgs} args - Arguments to create many ReadedTimeCounts.
+     * @example
+     * // Create many ReadedTimeCounts
+     * const readedTimeCount = await prisma.readedTimeCount.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ReadedTimeCounts and only return the `id`
+     * const readedTimeCountWithIdOnly = await prisma.readedTimeCount.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ReadedTimeCountCreateManyAndReturnArgs>(args?: SelectSubset<T, ReadedTimeCountCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReadedTimeCountPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ReadedTimeCount.
+     * @param {ReadedTimeCountDeleteArgs} args - Arguments to delete one ReadedTimeCount.
+     * @example
+     * // Delete one ReadedTimeCount
+     * const ReadedTimeCount = await prisma.readedTimeCount.delete({
+     *   where: {
+     *     // ... filter to delete one ReadedTimeCount
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ReadedTimeCountDeleteArgs>(args: SelectSubset<T, ReadedTimeCountDeleteArgs<ExtArgs>>): Prisma__ReadedTimeCountClient<$Result.GetResult<Prisma.$ReadedTimeCountPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ReadedTimeCount.
+     * @param {ReadedTimeCountUpdateArgs} args - Arguments to update one ReadedTimeCount.
+     * @example
+     * // Update one ReadedTimeCount
+     * const readedTimeCount = await prisma.readedTimeCount.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ReadedTimeCountUpdateArgs>(args: SelectSubset<T, ReadedTimeCountUpdateArgs<ExtArgs>>): Prisma__ReadedTimeCountClient<$Result.GetResult<Prisma.$ReadedTimeCountPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ReadedTimeCounts.
+     * @param {ReadedTimeCountDeleteManyArgs} args - Arguments to filter ReadedTimeCounts to delete.
+     * @example
+     * // Delete a few ReadedTimeCounts
+     * const { count } = await prisma.readedTimeCount.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ReadedTimeCountDeleteManyArgs>(args?: SelectSubset<T, ReadedTimeCountDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ReadedTimeCounts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReadedTimeCountUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ReadedTimeCounts
+     * const readedTimeCount = await prisma.readedTimeCount.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ReadedTimeCountUpdateManyArgs>(args: SelectSubset<T, ReadedTimeCountUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ReadedTimeCounts and returns the data updated in the database.
+     * @param {ReadedTimeCountUpdateManyAndReturnArgs} args - Arguments to update many ReadedTimeCounts.
+     * @example
+     * // Update many ReadedTimeCounts
+     * const readedTimeCount = await prisma.readedTimeCount.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ReadedTimeCounts and only return the `id`
+     * const readedTimeCountWithIdOnly = await prisma.readedTimeCount.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ReadedTimeCountUpdateManyAndReturnArgs>(args: SelectSubset<T, ReadedTimeCountUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReadedTimeCountPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ReadedTimeCount.
+     * @param {ReadedTimeCountUpsertArgs} args - Arguments to update or create a ReadedTimeCount.
+     * @example
+     * // Update or create a ReadedTimeCount
+     * const readedTimeCount = await prisma.readedTimeCount.upsert({
+     *   create: {
+     *     // ... data to create a ReadedTimeCount
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ReadedTimeCount we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ReadedTimeCountUpsertArgs>(args: SelectSubset<T, ReadedTimeCountUpsertArgs<ExtArgs>>): Prisma__ReadedTimeCountClient<$Result.GetResult<Prisma.$ReadedTimeCountPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ReadedTimeCounts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReadedTimeCountCountArgs} args - Arguments to filter ReadedTimeCounts to count.
+     * @example
+     * // Count the number of ReadedTimeCounts
+     * const count = await prisma.readedTimeCount.count({
+     *   where: {
+     *     // ... the filter for the ReadedTimeCounts we want to count
+     *   }
+     * })
+    **/
+    count<T extends ReadedTimeCountCountArgs>(
+      args?: Subset<T, ReadedTimeCountCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ReadedTimeCountCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ReadedTimeCount.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReadedTimeCountAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ReadedTimeCountAggregateArgs>(args: Subset<T, ReadedTimeCountAggregateArgs>): Prisma.PrismaPromise<GetReadedTimeCountAggregateType<T>>
+
+    /**
+     * Group by ReadedTimeCount.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReadedTimeCountGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ReadedTimeCountGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ReadedTimeCountGroupByArgs['orderBy'] }
+        : { orderBy?: ReadedTimeCountGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ReadedTimeCountGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetReadedTimeCountGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ReadedTimeCount model
+   */
+  readonly fields: ReadedTimeCountFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ReadedTimeCount.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ReadedTimeCountClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    article<T extends ArticleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ArticleDefaultArgs<ExtArgs>>): Prisma__ArticleClient<$Result.GetResult<Prisma.$ArticlePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ReadedTimeCount model
+   */
+  interface ReadedTimeCountFieldRefs {
+    readonly id: FieldRef<"ReadedTimeCount", 'Int'>
+    readonly times: FieldRef<"ReadedTimeCount", 'Int'>
+    readonly articleId: FieldRef<"ReadedTimeCount", 'Int'>
+    readonly userId: FieldRef<"ReadedTimeCount", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ReadedTimeCount findUnique
+   */
+  export type ReadedTimeCountFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReadedTimeCount
+     */
+    select?: ReadedTimeCountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReadedTimeCount
+     */
+    omit?: ReadedTimeCountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReadedTimeCountInclude<ExtArgs> | null
+    /**
+     * Filter, which ReadedTimeCount to fetch.
+     */
+    where: ReadedTimeCountWhereUniqueInput
+  }
+
+  /**
+   * ReadedTimeCount findUniqueOrThrow
+   */
+  export type ReadedTimeCountFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReadedTimeCount
+     */
+    select?: ReadedTimeCountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReadedTimeCount
+     */
+    omit?: ReadedTimeCountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReadedTimeCountInclude<ExtArgs> | null
+    /**
+     * Filter, which ReadedTimeCount to fetch.
+     */
+    where: ReadedTimeCountWhereUniqueInput
+  }
+
+  /**
+   * ReadedTimeCount findFirst
+   */
+  export type ReadedTimeCountFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReadedTimeCount
+     */
+    select?: ReadedTimeCountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReadedTimeCount
+     */
+    omit?: ReadedTimeCountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReadedTimeCountInclude<ExtArgs> | null
+    /**
+     * Filter, which ReadedTimeCount to fetch.
+     */
+    where?: ReadedTimeCountWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ReadedTimeCounts to fetch.
+     */
+    orderBy?: ReadedTimeCountOrderByWithRelationInput | ReadedTimeCountOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ReadedTimeCounts.
+     */
+    cursor?: ReadedTimeCountWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ReadedTimeCounts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ReadedTimeCounts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ReadedTimeCounts.
+     */
+    distinct?: ReadedTimeCountScalarFieldEnum | ReadedTimeCountScalarFieldEnum[]
+  }
+
+  /**
+   * ReadedTimeCount findFirstOrThrow
+   */
+  export type ReadedTimeCountFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReadedTimeCount
+     */
+    select?: ReadedTimeCountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReadedTimeCount
+     */
+    omit?: ReadedTimeCountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReadedTimeCountInclude<ExtArgs> | null
+    /**
+     * Filter, which ReadedTimeCount to fetch.
+     */
+    where?: ReadedTimeCountWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ReadedTimeCounts to fetch.
+     */
+    orderBy?: ReadedTimeCountOrderByWithRelationInput | ReadedTimeCountOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ReadedTimeCounts.
+     */
+    cursor?: ReadedTimeCountWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ReadedTimeCounts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ReadedTimeCounts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ReadedTimeCounts.
+     */
+    distinct?: ReadedTimeCountScalarFieldEnum | ReadedTimeCountScalarFieldEnum[]
+  }
+
+  /**
+   * ReadedTimeCount findMany
+   */
+  export type ReadedTimeCountFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReadedTimeCount
+     */
+    select?: ReadedTimeCountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReadedTimeCount
+     */
+    omit?: ReadedTimeCountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReadedTimeCountInclude<ExtArgs> | null
+    /**
+     * Filter, which ReadedTimeCounts to fetch.
+     */
+    where?: ReadedTimeCountWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ReadedTimeCounts to fetch.
+     */
+    orderBy?: ReadedTimeCountOrderByWithRelationInput | ReadedTimeCountOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ReadedTimeCounts.
+     */
+    cursor?: ReadedTimeCountWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ReadedTimeCounts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ReadedTimeCounts.
+     */
+    skip?: number
+    distinct?: ReadedTimeCountScalarFieldEnum | ReadedTimeCountScalarFieldEnum[]
+  }
+
+  /**
+   * ReadedTimeCount create
+   */
+  export type ReadedTimeCountCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReadedTimeCount
+     */
+    select?: ReadedTimeCountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReadedTimeCount
+     */
+    omit?: ReadedTimeCountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReadedTimeCountInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ReadedTimeCount.
+     */
+    data: XOR<ReadedTimeCountCreateInput, ReadedTimeCountUncheckedCreateInput>
+  }
+
+  /**
+   * ReadedTimeCount createMany
+   */
+  export type ReadedTimeCountCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ReadedTimeCounts.
+     */
+    data: ReadedTimeCountCreateManyInput | ReadedTimeCountCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ReadedTimeCount createManyAndReturn
+   */
+  export type ReadedTimeCountCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReadedTimeCount
+     */
+    select?: ReadedTimeCountSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReadedTimeCount
+     */
+    omit?: ReadedTimeCountOmit<ExtArgs> | null
+    /**
+     * The data used to create many ReadedTimeCounts.
+     */
+    data: ReadedTimeCountCreateManyInput | ReadedTimeCountCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReadedTimeCountIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ReadedTimeCount update
+   */
+  export type ReadedTimeCountUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReadedTimeCount
+     */
+    select?: ReadedTimeCountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReadedTimeCount
+     */
+    omit?: ReadedTimeCountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReadedTimeCountInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ReadedTimeCount.
+     */
+    data: XOR<ReadedTimeCountUpdateInput, ReadedTimeCountUncheckedUpdateInput>
+    /**
+     * Choose, which ReadedTimeCount to update.
+     */
+    where: ReadedTimeCountWhereUniqueInput
+  }
+
+  /**
+   * ReadedTimeCount updateMany
+   */
+  export type ReadedTimeCountUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ReadedTimeCounts.
+     */
+    data: XOR<ReadedTimeCountUpdateManyMutationInput, ReadedTimeCountUncheckedUpdateManyInput>
+    /**
+     * Filter which ReadedTimeCounts to update
+     */
+    where?: ReadedTimeCountWhereInput
+    /**
+     * Limit how many ReadedTimeCounts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ReadedTimeCount updateManyAndReturn
+   */
+  export type ReadedTimeCountUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReadedTimeCount
+     */
+    select?: ReadedTimeCountSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReadedTimeCount
+     */
+    omit?: ReadedTimeCountOmit<ExtArgs> | null
+    /**
+     * The data used to update ReadedTimeCounts.
+     */
+    data: XOR<ReadedTimeCountUpdateManyMutationInput, ReadedTimeCountUncheckedUpdateManyInput>
+    /**
+     * Filter which ReadedTimeCounts to update
+     */
+    where?: ReadedTimeCountWhereInput
+    /**
+     * Limit how many ReadedTimeCounts to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReadedTimeCountIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ReadedTimeCount upsert
+   */
+  export type ReadedTimeCountUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReadedTimeCount
+     */
+    select?: ReadedTimeCountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReadedTimeCount
+     */
+    omit?: ReadedTimeCountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReadedTimeCountInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ReadedTimeCount to update in case it exists.
+     */
+    where: ReadedTimeCountWhereUniqueInput
+    /**
+     * In case the ReadedTimeCount found by the `where` argument doesn't exist, create a new ReadedTimeCount with this data.
+     */
+    create: XOR<ReadedTimeCountCreateInput, ReadedTimeCountUncheckedCreateInput>
+    /**
+     * In case the ReadedTimeCount was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ReadedTimeCountUpdateInput, ReadedTimeCountUncheckedUpdateInput>
+  }
+
+  /**
+   * ReadedTimeCount delete
+   */
+  export type ReadedTimeCountDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReadedTimeCount
+     */
+    select?: ReadedTimeCountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReadedTimeCount
+     */
+    omit?: ReadedTimeCountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReadedTimeCountInclude<ExtArgs> | null
+    /**
+     * Filter which ReadedTimeCount to delete.
+     */
+    where: ReadedTimeCountWhereUniqueInput
+  }
+
+  /**
+   * ReadedTimeCount deleteMany
+   */
+  export type ReadedTimeCountDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ReadedTimeCounts to delete
+     */
+    where?: ReadedTimeCountWhereInput
+    /**
+     * Limit how many ReadedTimeCounts to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ReadedTimeCount without action
+   */
+  export type ReadedTimeCountDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReadedTimeCount
+     */
+    select?: ReadedTimeCountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReadedTimeCount
+     */
+    omit?: ReadedTimeCountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReadedTimeCountInclude<ExtArgs> | null
   }
 
 
@@ -10371,27 +10551,6 @@ export namespace Prisma {
   export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
 
 
-  export const NovelScalarFieldEnum: {
-    id: 'id',
-    title: 'title',
-    imageUrl: 'imageUrl',
-    content: 'content',
-    description: 'description',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt',
-    seriesName: 'seriesName'
-  };
-
-  export type NovelScalarFieldEnum = (typeof NovelScalarFieldEnum)[keyof typeof NovelScalarFieldEnum]
-
-
-  export const SeriesScalarFieldEnum: {
-    name: 'name'
-  };
-
-  export type SeriesScalarFieldEnum = (typeof SeriesScalarFieldEnum)[keyof typeof SeriesScalarFieldEnum]
-
-
   export const UserScalarFieldEnum: {
     id: 'id',
     name: 'name',
@@ -10403,6 +10562,25 @@ export namespace Prisma {
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+  export const MarkedArticlesScalarFieldEnum: {
+    id: 'id',
+    articleId: 'articleId',
+    userId: 'userId'
+  };
+
+  export type MarkedArticlesScalarFieldEnum = (typeof MarkedArticlesScalarFieldEnum)[keyof typeof MarkedArticlesScalarFieldEnum]
+
+
+  export const ReadedTimeCountScalarFieldEnum: {
+    id: 'id',
+    times: 'times',
+    articleId: 'articleId',
+    userId: 'userId'
+  };
+
+  export type ReadedTimeCountScalarFieldEnum = (typeof ReadedTimeCountScalarFieldEnum)[keyof typeof ReadedTimeCountScalarFieldEnum]
 
 
   export const SessionScalarFieldEnum: {
@@ -10573,6 +10751,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Article"> | Date | string
     categoryName?: EnumCategoryNameNullableFilter<"Article"> | $Enums.CategoryName | null
     Category?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
+    ReadedTimeCount?: ReadedTimeCountListRelationFilter
+    MarkedArticles?: MarkedArticlesListRelationFilter
   }
 
   export type ArticleOrderByWithRelationInput = {
@@ -10586,6 +10766,8 @@ export namespace Prisma {
     updatedAt?: SortOrder
     categoryName?: SortOrderInput | SortOrder
     Category?: CategoryOrderByWithRelationInput
+    ReadedTimeCount?: ReadedTimeCountOrderByRelationAggregateInput
+    MarkedArticles?: MarkedArticlesOrderByRelationAggregateInput
   }
 
   export type ArticleWhereUniqueInput = Prisma.AtLeast<{
@@ -10602,6 +10784,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Article"> | Date | string
     categoryName?: EnumCategoryNameNullableFilter<"Article"> | $Enums.CategoryName | null
     Category?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
+    ReadedTimeCount?: ReadedTimeCountListRelationFilter
+    MarkedArticles?: MarkedArticlesListRelationFilter
   }, "id">
 
   export type ArticleOrderByWithAggregationInput = {
@@ -10671,111 +10855,6 @@ export namespace Prisma {
     name?: EnumCategoryNameWithAggregatesFilter<"Category"> | $Enums.CategoryName
   }
 
-  export type NovelWhereInput = {
-    AND?: NovelWhereInput | NovelWhereInput[]
-    OR?: NovelWhereInput[]
-    NOT?: NovelWhereInput | NovelWhereInput[]
-    id?: StringFilter<"Novel"> | string
-    title?: StringFilter<"Novel"> | string
-    imageUrl?: StringFilter<"Novel"> | string
-    content?: StringFilter<"Novel"> | string
-    description?: StringFilter<"Novel"> | string
-    createdAt?: DateTimeFilter<"Novel"> | Date | string
-    updatedAt?: DateTimeFilter<"Novel"> | Date | string
-    seriesName?: StringNullableFilter<"Novel"> | string | null
-    Series?: XOR<SeriesNullableScalarRelationFilter, SeriesWhereInput> | null
-  }
-
-  export type NovelOrderByWithRelationInput = {
-    id?: SortOrder
-    title?: SortOrder
-    imageUrl?: SortOrder
-    content?: SortOrder
-    description?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    seriesName?: SortOrderInput | SortOrder
-    Series?: SeriesOrderByWithRelationInput
-  }
-
-  export type NovelWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: NovelWhereInput | NovelWhereInput[]
-    OR?: NovelWhereInput[]
-    NOT?: NovelWhereInput | NovelWhereInput[]
-    title?: StringFilter<"Novel"> | string
-    imageUrl?: StringFilter<"Novel"> | string
-    content?: StringFilter<"Novel"> | string
-    description?: StringFilter<"Novel"> | string
-    createdAt?: DateTimeFilter<"Novel"> | Date | string
-    updatedAt?: DateTimeFilter<"Novel"> | Date | string
-    seriesName?: StringNullableFilter<"Novel"> | string | null
-    Series?: XOR<SeriesNullableScalarRelationFilter, SeriesWhereInput> | null
-  }, "id">
-
-  export type NovelOrderByWithAggregationInput = {
-    id?: SortOrder
-    title?: SortOrder
-    imageUrl?: SortOrder
-    content?: SortOrder
-    description?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    seriesName?: SortOrderInput | SortOrder
-    _count?: NovelCountOrderByAggregateInput
-    _max?: NovelMaxOrderByAggregateInput
-    _min?: NovelMinOrderByAggregateInput
-  }
-
-  export type NovelScalarWhereWithAggregatesInput = {
-    AND?: NovelScalarWhereWithAggregatesInput | NovelScalarWhereWithAggregatesInput[]
-    OR?: NovelScalarWhereWithAggregatesInput[]
-    NOT?: NovelScalarWhereWithAggregatesInput | NovelScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Novel"> | string
-    title?: StringWithAggregatesFilter<"Novel"> | string
-    imageUrl?: StringWithAggregatesFilter<"Novel"> | string
-    content?: StringWithAggregatesFilter<"Novel"> | string
-    description?: StringWithAggregatesFilter<"Novel"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"Novel"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"Novel"> | Date | string
-    seriesName?: StringNullableWithAggregatesFilter<"Novel"> | string | null
-  }
-
-  export type SeriesWhereInput = {
-    AND?: SeriesWhereInput | SeriesWhereInput[]
-    OR?: SeriesWhereInput[]
-    NOT?: SeriesWhereInput | SeriesWhereInput[]
-    name?: StringFilter<"Series"> | string
-    novels?: NovelListRelationFilter
-  }
-
-  export type SeriesOrderByWithRelationInput = {
-    name?: SortOrder
-    novels?: NovelOrderByRelationAggregateInput
-  }
-
-  export type SeriesWhereUniqueInput = Prisma.AtLeast<{
-    name?: string
-    AND?: SeriesWhereInput | SeriesWhereInput[]
-    OR?: SeriesWhereInput[]
-    NOT?: SeriesWhereInput | SeriesWhereInput[]
-    novels?: NovelListRelationFilter
-  }, "name">
-
-  export type SeriesOrderByWithAggregationInput = {
-    name?: SortOrder
-    _count?: SeriesCountOrderByAggregateInput
-    _max?: SeriesMaxOrderByAggregateInput
-    _min?: SeriesMinOrderByAggregateInput
-  }
-
-  export type SeriesScalarWhereWithAggregatesInput = {
-    AND?: SeriesScalarWhereWithAggregatesInput | SeriesScalarWhereWithAggregatesInput[]
-    OR?: SeriesScalarWhereWithAggregatesInput[]
-    NOT?: SeriesScalarWhereWithAggregatesInput | SeriesScalarWhereWithAggregatesInput[]
-    name?: StringWithAggregatesFilter<"Series"> | string
-  }
-
   export type UserWhereInput = {
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
@@ -10789,6 +10868,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     sessions?: SessionListRelationFilter
     accounts?: AccountListRelationFilter
+    ReadedTimeCount?: ReadedTimeCountListRelationFilter
+    MarkedArticles?: MarkedArticlesListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -10801,6 +10882,8 @@ export namespace Prisma {
     updatedAt?: SortOrder
     sessions?: SessionOrderByRelationAggregateInput
     accounts?: AccountOrderByRelationAggregateInput
+    ReadedTimeCount?: ReadedTimeCountOrderByRelationAggregateInput
+    MarkedArticles?: MarkedArticlesOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -10816,6 +10899,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     sessions?: SessionListRelationFilter
     accounts?: AccountListRelationFilter
+    ReadedTimeCount?: ReadedTimeCountListRelationFilter
+    MarkedArticles?: MarkedArticlesListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -10842,6 +10927,113 @@ export namespace Prisma {
     image?: StringNullableWithAggregatesFilter<"User"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+  }
+
+  export type MarkedArticlesWhereInput = {
+    AND?: MarkedArticlesWhereInput | MarkedArticlesWhereInput[]
+    OR?: MarkedArticlesWhereInput[]
+    NOT?: MarkedArticlesWhereInput | MarkedArticlesWhereInput[]
+    id?: IntFilter<"MarkedArticles"> | number
+    articleId?: IntFilter<"MarkedArticles"> | number
+    userId?: StringFilter<"MarkedArticles"> | string
+    article?: XOR<ArticleScalarRelationFilter, ArticleWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type MarkedArticlesOrderByWithRelationInput = {
+    id?: SortOrder
+    articleId?: SortOrder
+    userId?: SortOrder
+    article?: ArticleOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type MarkedArticlesWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    userId_articleId?: MarkedArticlesUserIdArticleIdCompoundUniqueInput
+    AND?: MarkedArticlesWhereInput | MarkedArticlesWhereInput[]
+    OR?: MarkedArticlesWhereInput[]
+    NOT?: MarkedArticlesWhereInput | MarkedArticlesWhereInput[]
+    articleId?: IntFilter<"MarkedArticles"> | number
+    userId?: StringFilter<"MarkedArticles"> | string
+    article?: XOR<ArticleScalarRelationFilter, ArticleWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "userId_articleId">
+
+  export type MarkedArticlesOrderByWithAggregationInput = {
+    id?: SortOrder
+    articleId?: SortOrder
+    userId?: SortOrder
+    _count?: MarkedArticlesCountOrderByAggregateInput
+    _avg?: MarkedArticlesAvgOrderByAggregateInput
+    _max?: MarkedArticlesMaxOrderByAggregateInput
+    _min?: MarkedArticlesMinOrderByAggregateInput
+    _sum?: MarkedArticlesSumOrderByAggregateInput
+  }
+
+  export type MarkedArticlesScalarWhereWithAggregatesInput = {
+    AND?: MarkedArticlesScalarWhereWithAggregatesInput | MarkedArticlesScalarWhereWithAggregatesInput[]
+    OR?: MarkedArticlesScalarWhereWithAggregatesInput[]
+    NOT?: MarkedArticlesScalarWhereWithAggregatesInput | MarkedArticlesScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"MarkedArticles"> | number
+    articleId?: IntWithAggregatesFilter<"MarkedArticles"> | number
+    userId?: StringWithAggregatesFilter<"MarkedArticles"> | string
+  }
+
+  export type ReadedTimeCountWhereInput = {
+    AND?: ReadedTimeCountWhereInput | ReadedTimeCountWhereInput[]
+    OR?: ReadedTimeCountWhereInput[]
+    NOT?: ReadedTimeCountWhereInput | ReadedTimeCountWhereInput[]
+    id?: IntFilter<"ReadedTimeCount"> | number
+    times?: IntFilter<"ReadedTimeCount"> | number
+    articleId?: IntFilter<"ReadedTimeCount"> | number
+    userId?: StringFilter<"ReadedTimeCount"> | string
+    article?: XOR<ArticleScalarRelationFilter, ArticleWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type ReadedTimeCountOrderByWithRelationInput = {
+    id?: SortOrder
+    times?: SortOrder
+    articleId?: SortOrder
+    userId?: SortOrder
+    article?: ArticleOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type ReadedTimeCountWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    userId_articleId?: ReadedTimeCountUserIdArticleIdCompoundUniqueInput
+    AND?: ReadedTimeCountWhereInput | ReadedTimeCountWhereInput[]
+    OR?: ReadedTimeCountWhereInput[]
+    NOT?: ReadedTimeCountWhereInput | ReadedTimeCountWhereInput[]
+    times?: IntFilter<"ReadedTimeCount"> | number
+    articleId?: IntFilter<"ReadedTimeCount"> | number
+    userId?: StringFilter<"ReadedTimeCount"> | string
+    article?: XOR<ArticleScalarRelationFilter, ArticleWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "userId_articleId">
+
+  export type ReadedTimeCountOrderByWithAggregationInput = {
+    id?: SortOrder
+    times?: SortOrder
+    articleId?: SortOrder
+    userId?: SortOrder
+    _count?: ReadedTimeCountCountOrderByAggregateInput
+    _avg?: ReadedTimeCountAvgOrderByAggregateInput
+    _max?: ReadedTimeCountMaxOrderByAggregateInput
+    _min?: ReadedTimeCountMinOrderByAggregateInput
+    _sum?: ReadedTimeCountSumOrderByAggregateInput
+  }
+
+  export type ReadedTimeCountScalarWhereWithAggregatesInput = {
+    AND?: ReadedTimeCountScalarWhereWithAggregatesInput | ReadedTimeCountScalarWhereWithAggregatesInput[]
+    OR?: ReadedTimeCountScalarWhereWithAggregatesInput[]
+    NOT?: ReadedTimeCountScalarWhereWithAggregatesInput | ReadedTimeCountScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"ReadedTimeCount"> | number
+    times?: IntWithAggregatesFilter<"ReadedTimeCount"> | number
+    articleId?: IntWithAggregatesFilter<"ReadedTimeCount"> | number
+    userId?: StringWithAggregatesFilter<"ReadedTimeCount"> | string
   }
 
   export type SessionWhereInput = {
@@ -11075,6 +11267,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     Category?: CategoryCreateNestedOneWithoutArticlesInput
+    ReadedTimeCount?: ReadedTimeCountCreateNestedManyWithoutArticleInput
+    MarkedArticles?: MarkedArticlesCreateNestedManyWithoutArticleInput
   }
 
   export type ArticleUncheckedCreateInput = {
@@ -11087,6 +11281,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     categoryName?: $Enums.CategoryName | null
+    ReadedTimeCount?: ReadedTimeCountUncheckedCreateNestedManyWithoutArticleInput
+    MarkedArticles?: MarkedArticlesUncheckedCreateNestedManyWithoutArticleInput
   }
 
   export type ArticleUpdateInput = {
@@ -11098,6 +11294,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Category?: CategoryUpdateOneWithoutArticlesNestedInput
+    ReadedTimeCount?: ReadedTimeCountUpdateManyWithoutArticleNestedInput
+    MarkedArticles?: MarkedArticlesUpdateManyWithoutArticleNestedInput
   }
 
   export type ArticleUncheckedUpdateInput = {
@@ -11110,6 +11308,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categoryName?: NullableEnumCategoryNameFieldUpdateOperationsInput | $Enums.CategoryName | null
+    ReadedTimeCount?: ReadedTimeCountUncheckedUpdateManyWithoutArticleNestedInput
+    MarkedArticles?: MarkedArticlesUncheckedUpdateManyWithoutArticleNestedInput
   }
 
   export type ArticleCreateManyInput = {
@@ -11178,114 +11378,6 @@ export namespace Prisma {
     name?: EnumCategoryNameFieldUpdateOperationsInput | $Enums.CategoryName
   }
 
-  export type NovelCreateInput = {
-    id: string
-    title: string
-    imageUrl: string
-    content: string
-    description: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    Series?: SeriesCreateNestedOneWithoutNovelsInput
-  }
-
-  export type NovelUncheckedCreateInput = {
-    id: string
-    title: string
-    imageUrl: string
-    content: string
-    description: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    seriesName?: string | null
-  }
-
-  export type NovelUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    imageUrl?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Series?: SeriesUpdateOneWithoutNovelsNestedInput
-  }
-
-  export type NovelUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    imageUrl?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    seriesName?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type NovelCreateManyInput = {
-    id: string
-    title: string
-    imageUrl: string
-    content: string
-    description: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    seriesName?: string | null
-  }
-
-  export type NovelUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    imageUrl?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type NovelUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    imageUrl?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    seriesName?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type SeriesCreateInput = {
-    name: string
-    novels?: NovelCreateNestedManyWithoutSeriesInput
-  }
-
-  export type SeriesUncheckedCreateInput = {
-    name: string
-    novels?: NovelUncheckedCreateNestedManyWithoutSeriesInput
-  }
-
-  export type SeriesUpdateInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    novels?: NovelUpdateManyWithoutSeriesNestedInput
-  }
-
-  export type SeriesUncheckedUpdateInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    novels?: NovelUncheckedUpdateManyWithoutSeriesNestedInput
-  }
-
-  export type SeriesCreateManyInput = {
-    name: string
-  }
-
-  export type SeriesUpdateManyMutationInput = {
-    name?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type SeriesUncheckedUpdateManyInput = {
-    name?: StringFieldUpdateOperationsInput | string
-  }
-
   export type UserCreateInput = {
     id: string
     name: string
@@ -11296,6 +11388,8 @@ export namespace Prisma {
     updatedAt: Date | string
     sessions?: SessionCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
+    ReadedTimeCount?: ReadedTimeCountCreateNestedManyWithoutUserInput
+    MarkedArticles?: MarkedArticlesCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -11308,6 +11402,8 @@ export namespace Prisma {
     updatedAt: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    ReadedTimeCount?: ReadedTimeCountUncheckedCreateNestedManyWithoutUserInput
+    MarkedArticles?: MarkedArticlesUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -11320,6 +11416,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
+    ReadedTimeCount?: ReadedTimeCountUpdateManyWithoutUserNestedInput
+    MarkedArticles?: MarkedArticlesUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -11332,6 +11430,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    ReadedTimeCount?: ReadedTimeCountUncheckedUpdateManyWithoutUserNestedInput
+    MarkedArticles?: MarkedArticlesUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -11362,6 +11462,88 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MarkedArticlesCreateInput = {
+    article: ArticleCreateNestedOneWithoutMarkedArticlesInput
+    user: UserCreateNestedOneWithoutMarkedArticlesInput
+  }
+
+  export type MarkedArticlesUncheckedCreateInput = {
+    id?: number
+    articleId: number
+    userId: string
+  }
+
+  export type MarkedArticlesUpdateInput = {
+    article?: ArticleUpdateOneRequiredWithoutMarkedArticlesNestedInput
+    user?: UserUpdateOneRequiredWithoutMarkedArticlesNestedInput
+  }
+
+  export type MarkedArticlesUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    articleId?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type MarkedArticlesCreateManyInput = {
+    id?: number
+    articleId: number
+    userId: string
+  }
+
+  export type MarkedArticlesUpdateManyMutationInput = {
+
+  }
+
+  export type MarkedArticlesUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    articleId?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ReadedTimeCountCreateInput = {
+    times: number
+    article: ArticleCreateNestedOneWithoutReadedTimeCountInput
+    user: UserCreateNestedOneWithoutReadedTimeCountInput
+  }
+
+  export type ReadedTimeCountUncheckedCreateInput = {
+    id?: number
+    times: number
+    articleId: number
+    userId: string
+  }
+
+  export type ReadedTimeCountUpdateInput = {
+    times?: IntFieldUpdateOperationsInput | number
+    article?: ArticleUpdateOneRequiredWithoutReadedTimeCountNestedInput
+    user?: UserUpdateOneRequiredWithoutReadedTimeCountNestedInput
+  }
+
+  export type ReadedTimeCountUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    times?: IntFieldUpdateOperationsInput | number
+    articleId?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ReadedTimeCountCreateManyInput = {
+    id?: number
+    times: number
+    articleId: number
+    userId: string
+  }
+
+  export type ReadedTimeCountUpdateManyMutationInput = {
+    times?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ReadedTimeCountUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    times?: IntFieldUpdateOperationsInput | number
+    articleId?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type SessionCreateInput = {
@@ -11663,9 +11845,29 @@ export namespace Prisma {
     isNot?: CategoryWhereInput | null
   }
 
+  export type ReadedTimeCountListRelationFilter = {
+    every?: ReadedTimeCountWhereInput
+    some?: ReadedTimeCountWhereInput
+    none?: ReadedTimeCountWhereInput
+  }
+
+  export type MarkedArticlesListRelationFilter = {
+    every?: MarkedArticlesWhereInput
+    some?: MarkedArticlesWhereInput
+    none?: MarkedArticlesWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
+  }
+
+  export type ReadedTimeCountOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MarkedArticlesOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type ArticleCountOrderByAggregateInput = {
@@ -11811,6 +12013,11 @@ export namespace Prisma {
     _max?: NestedEnumCategoryNameFilter<$PrismaModel>
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type StringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -11824,89 +12031,6 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type SeriesNullableScalarRelationFilter = {
-    is?: SeriesWhereInput | null
-    isNot?: SeriesWhereInput | null
-  }
-
-  export type NovelCountOrderByAggregateInput = {
-    id?: SortOrder
-    title?: SortOrder
-    imageUrl?: SortOrder
-    content?: SortOrder
-    description?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    seriesName?: SortOrder
-  }
-
-  export type NovelMaxOrderByAggregateInput = {
-    id?: SortOrder
-    title?: SortOrder
-    imageUrl?: SortOrder
-    content?: SortOrder
-    description?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    seriesName?: SortOrder
-  }
-
-  export type NovelMinOrderByAggregateInput = {
-    id?: SortOrder
-    title?: SortOrder
-    imageUrl?: SortOrder
-    content?: SortOrder
-    description?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    seriesName?: SortOrder
-  }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type NovelListRelationFilter = {
-    every?: NovelWhereInput
-    some?: NovelWhereInput
-    none?: NovelWhereInput
-  }
-
-  export type NovelOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type SeriesCountOrderByAggregateInput = {
-    name?: SortOrder
-  }
-
-  export type SeriesMaxOrderByAggregateInput = {
-    name?: SortOrder
-  }
-
-  export type SeriesMinOrderByAggregateInput = {
-    name?: SortOrder
-  }
-
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type SessionListRelationFilter = {
@@ -11967,9 +12091,103 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type ArticleScalarRelationFilter = {
+    is?: ArticleWhereInput
+    isNot?: ArticleWhereInput
+  }
+
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
+  }
+
+  export type MarkedArticlesUserIdArticleIdCompoundUniqueInput = {
+    userId: string
+    articleId: number
+  }
+
+  export type MarkedArticlesCountOrderByAggregateInput = {
+    id?: SortOrder
+    articleId?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type MarkedArticlesAvgOrderByAggregateInput = {
+    id?: SortOrder
+    articleId?: SortOrder
+  }
+
+  export type MarkedArticlesMaxOrderByAggregateInput = {
+    id?: SortOrder
+    articleId?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type MarkedArticlesMinOrderByAggregateInput = {
+    id?: SortOrder
+    articleId?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type MarkedArticlesSumOrderByAggregateInput = {
+    id?: SortOrder
+    articleId?: SortOrder
+  }
+
+  export type ReadedTimeCountUserIdArticleIdCompoundUniqueInput = {
+    userId: string
+    articleId: number
+  }
+
+  export type ReadedTimeCountCountOrderByAggregateInput = {
+    id?: SortOrder
+    times?: SortOrder
+    articleId?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type ReadedTimeCountAvgOrderByAggregateInput = {
+    id?: SortOrder
+    times?: SortOrder
+    articleId?: SortOrder
+  }
+
+  export type ReadedTimeCountMaxOrderByAggregateInput = {
+    id?: SortOrder
+    times?: SortOrder
+    articleId?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type ReadedTimeCountMinOrderByAggregateInput = {
+    id?: SortOrder
+    times?: SortOrder
+    articleId?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type ReadedTimeCountSumOrderByAggregateInput = {
+    id?: SortOrder
+    times?: SortOrder
+    articleId?: SortOrder
   }
 
   export type SessionCountOrderByAggregateInput = {
@@ -12111,6 +12329,34 @@ export namespace Prisma {
     connect?: CategoryWhereUniqueInput
   }
 
+  export type ReadedTimeCountCreateNestedManyWithoutArticleInput = {
+    create?: XOR<ReadedTimeCountCreateWithoutArticleInput, ReadedTimeCountUncheckedCreateWithoutArticleInput> | ReadedTimeCountCreateWithoutArticleInput[] | ReadedTimeCountUncheckedCreateWithoutArticleInput[]
+    connectOrCreate?: ReadedTimeCountCreateOrConnectWithoutArticleInput | ReadedTimeCountCreateOrConnectWithoutArticleInput[]
+    createMany?: ReadedTimeCountCreateManyArticleInputEnvelope
+    connect?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
+  }
+
+  export type MarkedArticlesCreateNestedManyWithoutArticleInput = {
+    create?: XOR<MarkedArticlesCreateWithoutArticleInput, MarkedArticlesUncheckedCreateWithoutArticleInput> | MarkedArticlesCreateWithoutArticleInput[] | MarkedArticlesUncheckedCreateWithoutArticleInput[]
+    connectOrCreate?: MarkedArticlesCreateOrConnectWithoutArticleInput | MarkedArticlesCreateOrConnectWithoutArticleInput[]
+    createMany?: MarkedArticlesCreateManyArticleInputEnvelope
+    connect?: MarkedArticlesWhereUniqueInput | MarkedArticlesWhereUniqueInput[]
+  }
+
+  export type ReadedTimeCountUncheckedCreateNestedManyWithoutArticleInput = {
+    create?: XOR<ReadedTimeCountCreateWithoutArticleInput, ReadedTimeCountUncheckedCreateWithoutArticleInput> | ReadedTimeCountCreateWithoutArticleInput[] | ReadedTimeCountUncheckedCreateWithoutArticleInput[]
+    connectOrCreate?: ReadedTimeCountCreateOrConnectWithoutArticleInput | ReadedTimeCountCreateOrConnectWithoutArticleInput[]
+    createMany?: ReadedTimeCountCreateManyArticleInputEnvelope
+    connect?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
+  }
+
+  export type MarkedArticlesUncheckedCreateNestedManyWithoutArticleInput = {
+    create?: XOR<MarkedArticlesCreateWithoutArticleInput, MarkedArticlesUncheckedCreateWithoutArticleInput> | MarkedArticlesCreateWithoutArticleInput[] | MarkedArticlesUncheckedCreateWithoutArticleInput[]
+    connectOrCreate?: MarkedArticlesCreateOrConnectWithoutArticleInput | MarkedArticlesCreateOrConnectWithoutArticleInput[]
+    createMany?: MarkedArticlesCreateManyArticleInputEnvelope
+    connect?: MarkedArticlesWhereUniqueInput | MarkedArticlesWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -12137,8 +12383,64 @@ export namespace Prisma {
     update?: XOR<XOR<CategoryUpdateToOneWithWhereWithoutArticlesInput, CategoryUpdateWithoutArticlesInput>, CategoryUncheckedUpdateWithoutArticlesInput>
   }
 
+  export type ReadedTimeCountUpdateManyWithoutArticleNestedInput = {
+    create?: XOR<ReadedTimeCountCreateWithoutArticleInput, ReadedTimeCountUncheckedCreateWithoutArticleInput> | ReadedTimeCountCreateWithoutArticleInput[] | ReadedTimeCountUncheckedCreateWithoutArticleInput[]
+    connectOrCreate?: ReadedTimeCountCreateOrConnectWithoutArticleInput | ReadedTimeCountCreateOrConnectWithoutArticleInput[]
+    upsert?: ReadedTimeCountUpsertWithWhereUniqueWithoutArticleInput | ReadedTimeCountUpsertWithWhereUniqueWithoutArticleInput[]
+    createMany?: ReadedTimeCountCreateManyArticleInputEnvelope
+    set?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
+    disconnect?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
+    delete?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
+    connect?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
+    update?: ReadedTimeCountUpdateWithWhereUniqueWithoutArticleInput | ReadedTimeCountUpdateWithWhereUniqueWithoutArticleInput[]
+    updateMany?: ReadedTimeCountUpdateManyWithWhereWithoutArticleInput | ReadedTimeCountUpdateManyWithWhereWithoutArticleInput[]
+    deleteMany?: ReadedTimeCountScalarWhereInput | ReadedTimeCountScalarWhereInput[]
+  }
+
+  export type MarkedArticlesUpdateManyWithoutArticleNestedInput = {
+    create?: XOR<MarkedArticlesCreateWithoutArticleInput, MarkedArticlesUncheckedCreateWithoutArticleInput> | MarkedArticlesCreateWithoutArticleInput[] | MarkedArticlesUncheckedCreateWithoutArticleInput[]
+    connectOrCreate?: MarkedArticlesCreateOrConnectWithoutArticleInput | MarkedArticlesCreateOrConnectWithoutArticleInput[]
+    upsert?: MarkedArticlesUpsertWithWhereUniqueWithoutArticleInput | MarkedArticlesUpsertWithWhereUniqueWithoutArticleInput[]
+    createMany?: MarkedArticlesCreateManyArticleInputEnvelope
+    set?: MarkedArticlesWhereUniqueInput | MarkedArticlesWhereUniqueInput[]
+    disconnect?: MarkedArticlesWhereUniqueInput | MarkedArticlesWhereUniqueInput[]
+    delete?: MarkedArticlesWhereUniqueInput | MarkedArticlesWhereUniqueInput[]
+    connect?: MarkedArticlesWhereUniqueInput | MarkedArticlesWhereUniqueInput[]
+    update?: MarkedArticlesUpdateWithWhereUniqueWithoutArticleInput | MarkedArticlesUpdateWithWhereUniqueWithoutArticleInput[]
+    updateMany?: MarkedArticlesUpdateManyWithWhereWithoutArticleInput | MarkedArticlesUpdateManyWithWhereWithoutArticleInput[]
+    deleteMany?: MarkedArticlesScalarWhereInput | MarkedArticlesScalarWhereInput[]
+  }
+
   export type NullableEnumCategoryNameFieldUpdateOperationsInput = {
     set?: $Enums.CategoryName | null
+  }
+
+  export type ReadedTimeCountUncheckedUpdateManyWithoutArticleNestedInput = {
+    create?: XOR<ReadedTimeCountCreateWithoutArticleInput, ReadedTimeCountUncheckedCreateWithoutArticleInput> | ReadedTimeCountCreateWithoutArticleInput[] | ReadedTimeCountUncheckedCreateWithoutArticleInput[]
+    connectOrCreate?: ReadedTimeCountCreateOrConnectWithoutArticleInput | ReadedTimeCountCreateOrConnectWithoutArticleInput[]
+    upsert?: ReadedTimeCountUpsertWithWhereUniqueWithoutArticleInput | ReadedTimeCountUpsertWithWhereUniqueWithoutArticleInput[]
+    createMany?: ReadedTimeCountCreateManyArticleInputEnvelope
+    set?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
+    disconnect?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
+    delete?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
+    connect?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
+    update?: ReadedTimeCountUpdateWithWhereUniqueWithoutArticleInput | ReadedTimeCountUpdateWithWhereUniqueWithoutArticleInput[]
+    updateMany?: ReadedTimeCountUpdateManyWithWhereWithoutArticleInput | ReadedTimeCountUpdateManyWithWhereWithoutArticleInput[]
+    deleteMany?: ReadedTimeCountScalarWhereInput | ReadedTimeCountScalarWhereInput[]
+  }
+
+  export type MarkedArticlesUncheckedUpdateManyWithoutArticleNestedInput = {
+    create?: XOR<MarkedArticlesCreateWithoutArticleInput, MarkedArticlesUncheckedCreateWithoutArticleInput> | MarkedArticlesCreateWithoutArticleInput[] | MarkedArticlesUncheckedCreateWithoutArticleInput[]
+    connectOrCreate?: MarkedArticlesCreateOrConnectWithoutArticleInput | MarkedArticlesCreateOrConnectWithoutArticleInput[]
+    upsert?: MarkedArticlesUpsertWithWhereUniqueWithoutArticleInput | MarkedArticlesUpsertWithWhereUniqueWithoutArticleInput[]
+    createMany?: MarkedArticlesCreateManyArticleInputEnvelope
+    set?: MarkedArticlesWhereUniqueInput | MarkedArticlesWhereUniqueInput[]
+    disconnect?: MarkedArticlesWhereUniqueInput | MarkedArticlesWhereUniqueInput[]
+    delete?: MarkedArticlesWhereUniqueInput | MarkedArticlesWhereUniqueInput[]
+    connect?: MarkedArticlesWhereUniqueInput | MarkedArticlesWhereUniqueInput[]
+    update?: MarkedArticlesUpdateWithWhereUniqueWithoutArticleInput | MarkedArticlesUpdateWithWhereUniqueWithoutArticleInput[]
+    updateMany?: MarkedArticlesUpdateManyWithWhereWithoutArticleInput | MarkedArticlesUpdateManyWithWhereWithoutArticleInput[]
+    deleteMany?: MarkedArticlesScalarWhereInput | MarkedArticlesScalarWhereInput[]
   }
 
   export type ArticleCreateNestedManyWithoutCategoryInput = {
@@ -12187,68 +12489,6 @@ export namespace Prisma {
     deleteMany?: ArticleScalarWhereInput | ArticleScalarWhereInput[]
   }
 
-  export type SeriesCreateNestedOneWithoutNovelsInput = {
-    create?: XOR<SeriesCreateWithoutNovelsInput, SeriesUncheckedCreateWithoutNovelsInput>
-    connectOrCreate?: SeriesCreateOrConnectWithoutNovelsInput
-    connect?: SeriesWhereUniqueInput
-  }
-
-  export type SeriesUpdateOneWithoutNovelsNestedInput = {
-    create?: XOR<SeriesCreateWithoutNovelsInput, SeriesUncheckedCreateWithoutNovelsInput>
-    connectOrCreate?: SeriesCreateOrConnectWithoutNovelsInput
-    upsert?: SeriesUpsertWithoutNovelsInput
-    disconnect?: SeriesWhereInput | boolean
-    delete?: SeriesWhereInput | boolean
-    connect?: SeriesWhereUniqueInput
-    update?: XOR<XOR<SeriesUpdateToOneWithWhereWithoutNovelsInput, SeriesUpdateWithoutNovelsInput>, SeriesUncheckedUpdateWithoutNovelsInput>
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
-  }
-
-  export type NovelCreateNestedManyWithoutSeriesInput = {
-    create?: XOR<NovelCreateWithoutSeriesInput, NovelUncheckedCreateWithoutSeriesInput> | NovelCreateWithoutSeriesInput[] | NovelUncheckedCreateWithoutSeriesInput[]
-    connectOrCreate?: NovelCreateOrConnectWithoutSeriesInput | NovelCreateOrConnectWithoutSeriesInput[]
-    createMany?: NovelCreateManySeriesInputEnvelope
-    connect?: NovelWhereUniqueInput | NovelWhereUniqueInput[]
-  }
-
-  export type NovelUncheckedCreateNestedManyWithoutSeriesInput = {
-    create?: XOR<NovelCreateWithoutSeriesInput, NovelUncheckedCreateWithoutSeriesInput> | NovelCreateWithoutSeriesInput[] | NovelUncheckedCreateWithoutSeriesInput[]
-    connectOrCreate?: NovelCreateOrConnectWithoutSeriesInput | NovelCreateOrConnectWithoutSeriesInput[]
-    createMany?: NovelCreateManySeriesInputEnvelope
-    connect?: NovelWhereUniqueInput | NovelWhereUniqueInput[]
-  }
-
-  export type NovelUpdateManyWithoutSeriesNestedInput = {
-    create?: XOR<NovelCreateWithoutSeriesInput, NovelUncheckedCreateWithoutSeriesInput> | NovelCreateWithoutSeriesInput[] | NovelUncheckedCreateWithoutSeriesInput[]
-    connectOrCreate?: NovelCreateOrConnectWithoutSeriesInput | NovelCreateOrConnectWithoutSeriesInput[]
-    upsert?: NovelUpsertWithWhereUniqueWithoutSeriesInput | NovelUpsertWithWhereUniqueWithoutSeriesInput[]
-    createMany?: NovelCreateManySeriesInputEnvelope
-    set?: NovelWhereUniqueInput | NovelWhereUniqueInput[]
-    disconnect?: NovelWhereUniqueInput | NovelWhereUniqueInput[]
-    delete?: NovelWhereUniqueInput | NovelWhereUniqueInput[]
-    connect?: NovelWhereUniqueInput | NovelWhereUniqueInput[]
-    update?: NovelUpdateWithWhereUniqueWithoutSeriesInput | NovelUpdateWithWhereUniqueWithoutSeriesInput[]
-    updateMany?: NovelUpdateManyWithWhereWithoutSeriesInput | NovelUpdateManyWithWhereWithoutSeriesInput[]
-    deleteMany?: NovelScalarWhereInput | NovelScalarWhereInput[]
-  }
-
-  export type NovelUncheckedUpdateManyWithoutSeriesNestedInput = {
-    create?: XOR<NovelCreateWithoutSeriesInput, NovelUncheckedCreateWithoutSeriesInput> | NovelCreateWithoutSeriesInput[] | NovelUncheckedCreateWithoutSeriesInput[]
-    connectOrCreate?: NovelCreateOrConnectWithoutSeriesInput | NovelCreateOrConnectWithoutSeriesInput[]
-    upsert?: NovelUpsertWithWhereUniqueWithoutSeriesInput | NovelUpsertWithWhereUniqueWithoutSeriesInput[]
-    createMany?: NovelCreateManySeriesInputEnvelope
-    set?: NovelWhereUniqueInput | NovelWhereUniqueInput[]
-    disconnect?: NovelWhereUniqueInput | NovelWhereUniqueInput[]
-    delete?: NovelWhereUniqueInput | NovelWhereUniqueInput[]
-    connect?: NovelWhereUniqueInput | NovelWhereUniqueInput[]
-    update?: NovelUpdateWithWhereUniqueWithoutSeriesInput | NovelUpdateWithWhereUniqueWithoutSeriesInput[]
-    updateMany?: NovelUpdateManyWithWhereWithoutSeriesInput | NovelUpdateManyWithWhereWithoutSeriesInput[]
-    deleteMany?: NovelScalarWhereInput | NovelScalarWhereInput[]
-  }
-
   export type SessionCreateNestedManyWithoutUserInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -12261,6 +12501,20 @@ export namespace Prisma {
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
     createMany?: AccountCreateManyUserInputEnvelope
     connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+  }
+
+  export type ReadedTimeCountCreateNestedManyWithoutUserInput = {
+    create?: XOR<ReadedTimeCountCreateWithoutUserInput, ReadedTimeCountUncheckedCreateWithoutUserInput> | ReadedTimeCountCreateWithoutUserInput[] | ReadedTimeCountUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ReadedTimeCountCreateOrConnectWithoutUserInput | ReadedTimeCountCreateOrConnectWithoutUserInput[]
+    createMany?: ReadedTimeCountCreateManyUserInputEnvelope
+    connect?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
+  }
+
+  export type MarkedArticlesCreateNestedManyWithoutUserInput = {
+    create?: XOR<MarkedArticlesCreateWithoutUserInput, MarkedArticlesUncheckedCreateWithoutUserInput> | MarkedArticlesCreateWithoutUserInput[] | MarkedArticlesUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MarkedArticlesCreateOrConnectWithoutUserInput | MarkedArticlesCreateOrConnectWithoutUserInput[]
+    createMany?: MarkedArticlesCreateManyUserInputEnvelope
+    connect?: MarkedArticlesWhereUniqueInput | MarkedArticlesWhereUniqueInput[]
   }
 
   export type SessionUncheckedCreateNestedManyWithoutUserInput = {
@@ -12277,8 +12531,26 @@ export namespace Prisma {
     connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
   }
 
+  export type ReadedTimeCountUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ReadedTimeCountCreateWithoutUserInput, ReadedTimeCountUncheckedCreateWithoutUserInput> | ReadedTimeCountCreateWithoutUserInput[] | ReadedTimeCountUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ReadedTimeCountCreateOrConnectWithoutUserInput | ReadedTimeCountCreateOrConnectWithoutUserInput[]
+    createMany?: ReadedTimeCountCreateManyUserInputEnvelope
+    connect?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
+  }
+
+  export type MarkedArticlesUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<MarkedArticlesCreateWithoutUserInput, MarkedArticlesUncheckedCreateWithoutUserInput> | MarkedArticlesCreateWithoutUserInput[] | MarkedArticlesUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MarkedArticlesCreateOrConnectWithoutUserInput | MarkedArticlesCreateOrConnectWithoutUserInput[]
+    createMany?: MarkedArticlesCreateManyUserInputEnvelope
+    connect?: MarkedArticlesWhereUniqueInput | MarkedArticlesWhereUniqueInput[]
+  }
+
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
   }
 
   export type SessionUpdateManyWithoutUserNestedInput = {
@@ -12309,6 +12581,34 @@ export namespace Prisma {
     deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
   }
 
+  export type ReadedTimeCountUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ReadedTimeCountCreateWithoutUserInput, ReadedTimeCountUncheckedCreateWithoutUserInput> | ReadedTimeCountCreateWithoutUserInput[] | ReadedTimeCountUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ReadedTimeCountCreateOrConnectWithoutUserInput | ReadedTimeCountCreateOrConnectWithoutUserInput[]
+    upsert?: ReadedTimeCountUpsertWithWhereUniqueWithoutUserInput | ReadedTimeCountUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ReadedTimeCountCreateManyUserInputEnvelope
+    set?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
+    disconnect?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
+    delete?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
+    connect?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
+    update?: ReadedTimeCountUpdateWithWhereUniqueWithoutUserInput | ReadedTimeCountUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ReadedTimeCountUpdateManyWithWhereWithoutUserInput | ReadedTimeCountUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ReadedTimeCountScalarWhereInput | ReadedTimeCountScalarWhereInput[]
+  }
+
+  export type MarkedArticlesUpdateManyWithoutUserNestedInput = {
+    create?: XOR<MarkedArticlesCreateWithoutUserInput, MarkedArticlesUncheckedCreateWithoutUserInput> | MarkedArticlesCreateWithoutUserInput[] | MarkedArticlesUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MarkedArticlesCreateOrConnectWithoutUserInput | MarkedArticlesCreateOrConnectWithoutUserInput[]
+    upsert?: MarkedArticlesUpsertWithWhereUniqueWithoutUserInput | MarkedArticlesUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: MarkedArticlesCreateManyUserInputEnvelope
+    set?: MarkedArticlesWhereUniqueInput | MarkedArticlesWhereUniqueInput[]
+    disconnect?: MarkedArticlesWhereUniqueInput | MarkedArticlesWhereUniqueInput[]
+    delete?: MarkedArticlesWhereUniqueInput | MarkedArticlesWhereUniqueInput[]
+    connect?: MarkedArticlesWhereUniqueInput | MarkedArticlesWhereUniqueInput[]
+    update?: MarkedArticlesUpdateWithWhereUniqueWithoutUserInput | MarkedArticlesUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: MarkedArticlesUpdateManyWithWhereWithoutUserInput | MarkedArticlesUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: MarkedArticlesScalarWhereInput | MarkedArticlesScalarWhereInput[]
+  }
+
   export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -12335,6 +12635,90 @@ export namespace Prisma {
     update?: AccountUpdateWithWhereUniqueWithoutUserInput | AccountUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: AccountUpdateManyWithWhereWithoutUserInput | AccountUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
+  }
+
+  export type ReadedTimeCountUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ReadedTimeCountCreateWithoutUserInput, ReadedTimeCountUncheckedCreateWithoutUserInput> | ReadedTimeCountCreateWithoutUserInput[] | ReadedTimeCountUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ReadedTimeCountCreateOrConnectWithoutUserInput | ReadedTimeCountCreateOrConnectWithoutUserInput[]
+    upsert?: ReadedTimeCountUpsertWithWhereUniqueWithoutUserInput | ReadedTimeCountUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ReadedTimeCountCreateManyUserInputEnvelope
+    set?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
+    disconnect?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
+    delete?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
+    connect?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
+    update?: ReadedTimeCountUpdateWithWhereUniqueWithoutUserInput | ReadedTimeCountUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ReadedTimeCountUpdateManyWithWhereWithoutUserInput | ReadedTimeCountUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ReadedTimeCountScalarWhereInput | ReadedTimeCountScalarWhereInput[]
+  }
+
+  export type MarkedArticlesUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<MarkedArticlesCreateWithoutUserInput, MarkedArticlesUncheckedCreateWithoutUserInput> | MarkedArticlesCreateWithoutUserInput[] | MarkedArticlesUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MarkedArticlesCreateOrConnectWithoutUserInput | MarkedArticlesCreateOrConnectWithoutUserInput[]
+    upsert?: MarkedArticlesUpsertWithWhereUniqueWithoutUserInput | MarkedArticlesUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: MarkedArticlesCreateManyUserInputEnvelope
+    set?: MarkedArticlesWhereUniqueInput | MarkedArticlesWhereUniqueInput[]
+    disconnect?: MarkedArticlesWhereUniqueInput | MarkedArticlesWhereUniqueInput[]
+    delete?: MarkedArticlesWhereUniqueInput | MarkedArticlesWhereUniqueInput[]
+    connect?: MarkedArticlesWhereUniqueInput | MarkedArticlesWhereUniqueInput[]
+    update?: MarkedArticlesUpdateWithWhereUniqueWithoutUserInput | MarkedArticlesUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: MarkedArticlesUpdateManyWithWhereWithoutUserInput | MarkedArticlesUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: MarkedArticlesScalarWhereInput | MarkedArticlesScalarWhereInput[]
+  }
+
+  export type ArticleCreateNestedOneWithoutMarkedArticlesInput = {
+    create?: XOR<ArticleCreateWithoutMarkedArticlesInput, ArticleUncheckedCreateWithoutMarkedArticlesInput>
+    connectOrCreate?: ArticleCreateOrConnectWithoutMarkedArticlesInput
+    connect?: ArticleWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutMarkedArticlesInput = {
+    create?: XOR<UserCreateWithoutMarkedArticlesInput, UserUncheckedCreateWithoutMarkedArticlesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMarkedArticlesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ArticleUpdateOneRequiredWithoutMarkedArticlesNestedInput = {
+    create?: XOR<ArticleCreateWithoutMarkedArticlesInput, ArticleUncheckedCreateWithoutMarkedArticlesInput>
+    connectOrCreate?: ArticleCreateOrConnectWithoutMarkedArticlesInput
+    upsert?: ArticleUpsertWithoutMarkedArticlesInput
+    connect?: ArticleWhereUniqueInput
+    update?: XOR<XOR<ArticleUpdateToOneWithWhereWithoutMarkedArticlesInput, ArticleUpdateWithoutMarkedArticlesInput>, ArticleUncheckedUpdateWithoutMarkedArticlesInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutMarkedArticlesNestedInput = {
+    create?: XOR<UserCreateWithoutMarkedArticlesInput, UserUncheckedCreateWithoutMarkedArticlesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMarkedArticlesInput
+    upsert?: UserUpsertWithoutMarkedArticlesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMarkedArticlesInput, UserUpdateWithoutMarkedArticlesInput>, UserUncheckedUpdateWithoutMarkedArticlesInput>
+  }
+
+  export type ArticleCreateNestedOneWithoutReadedTimeCountInput = {
+    create?: XOR<ArticleCreateWithoutReadedTimeCountInput, ArticleUncheckedCreateWithoutReadedTimeCountInput>
+    connectOrCreate?: ArticleCreateOrConnectWithoutReadedTimeCountInput
+    connect?: ArticleWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutReadedTimeCountInput = {
+    create?: XOR<UserCreateWithoutReadedTimeCountInput, UserUncheckedCreateWithoutReadedTimeCountInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReadedTimeCountInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ArticleUpdateOneRequiredWithoutReadedTimeCountNestedInput = {
+    create?: XOR<ArticleCreateWithoutReadedTimeCountInput, ArticleUncheckedCreateWithoutReadedTimeCountInput>
+    connectOrCreate?: ArticleCreateOrConnectWithoutReadedTimeCountInput
+    upsert?: ArticleUpsertWithoutReadedTimeCountInput
+    connect?: ArticleWhereUniqueInput
+    update?: XOR<XOR<ArticleUpdateToOneWithWhereWithoutReadedTimeCountInput, ArticleUpdateWithoutReadedTimeCountInput>, ArticleUncheckedUpdateWithoutReadedTimeCountInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutReadedTimeCountNestedInput = {
+    create?: XOR<UserCreateWithoutReadedTimeCountInput, UserUncheckedCreateWithoutReadedTimeCountInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReadedTimeCountInput
+    upsert?: UserUpsertWithoutReadedTimeCountInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutReadedTimeCountInput, UserUpdateWithoutReadedTimeCountInput>, UserUncheckedUpdateWithoutReadedTimeCountInput>
   }
 
   export type UserCreateNestedOneWithoutSessionsInput = {
@@ -12508,6 +12892,11 @@ export namespace Prisma {
     _max?: NestedEnumCategoryNameFilter<$PrismaModel>
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type NestedStringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -12520,6 +12909,14 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -12537,19 +12934,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
@@ -12590,6 +12974,46 @@ export namespace Prisma {
     create: XOR<CategoryCreateWithoutArticlesInput, CategoryUncheckedCreateWithoutArticlesInput>
   }
 
+  export type ReadedTimeCountCreateWithoutArticleInput = {
+    times: number
+    user: UserCreateNestedOneWithoutReadedTimeCountInput
+  }
+
+  export type ReadedTimeCountUncheckedCreateWithoutArticleInput = {
+    id?: number
+    times: number
+    userId: string
+  }
+
+  export type ReadedTimeCountCreateOrConnectWithoutArticleInput = {
+    where: ReadedTimeCountWhereUniqueInput
+    create: XOR<ReadedTimeCountCreateWithoutArticleInput, ReadedTimeCountUncheckedCreateWithoutArticleInput>
+  }
+
+  export type ReadedTimeCountCreateManyArticleInputEnvelope = {
+    data: ReadedTimeCountCreateManyArticleInput | ReadedTimeCountCreateManyArticleInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MarkedArticlesCreateWithoutArticleInput = {
+    user: UserCreateNestedOneWithoutMarkedArticlesInput
+  }
+
+  export type MarkedArticlesUncheckedCreateWithoutArticleInput = {
+    id?: number
+    userId: string
+  }
+
+  export type MarkedArticlesCreateOrConnectWithoutArticleInput = {
+    where: MarkedArticlesWhereUniqueInput
+    create: XOR<MarkedArticlesCreateWithoutArticleInput, MarkedArticlesUncheckedCreateWithoutArticleInput>
+  }
+
+  export type MarkedArticlesCreateManyArticleInputEnvelope = {
+    data: MarkedArticlesCreateManyArticleInput | MarkedArticlesCreateManyArticleInput[]
+    skipDuplicates?: boolean
+  }
+
   export type CategoryUpsertWithoutArticlesInput = {
     update: XOR<CategoryUpdateWithoutArticlesInput, CategoryUncheckedUpdateWithoutArticlesInput>
     create: XOR<CategoryCreateWithoutArticlesInput, CategoryUncheckedCreateWithoutArticlesInput>
@@ -12609,6 +13033,57 @@ export namespace Prisma {
     name?: EnumCategoryNameFieldUpdateOperationsInput | $Enums.CategoryName
   }
 
+  export type ReadedTimeCountUpsertWithWhereUniqueWithoutArticleInput = {
+    where: ReadedTimeCountWhereUniqueInput
+    update: XOR<ReadedTimeCountUpdateWithoutArticleInput, ReadedTimeCountUncheckedUpdateWithoutArticleInput>
+    create: XOR<ReadedTimeCountCreateWithoutArticleInput, ReadedTimeCountUncheckedCreateWithoutArticleInput>
+  }
+
+  export type ReadedTimeCountUpdateWithWhereUniqueWithoutArticleInput = {
+    where: ReadedTimeCountWhereUniqueInput
+    data: XOR<ReadedTimeCountUpdateWithoutArticleInput, ReadedTimeCountUncheckedUpdateWithoutArticleInput>
+  }
+
+  export type ReadedTimeCountUpdateManyWithWhereWithoutArticleInput = {
+    where: ReadedTimeCountScalarWhereInput
+    data: XOR<ReadedTimeCountUpdateManyMutationInput, ReadedTimeCountUncheckedUpdateManyWithoutArticleInput>
+  }
+
+  export type ReadedTimeCountScalarWhereInput = {
+    AND?: ReadedTimeCountScalarWhereInput | ReadedTimeCountScalarWhereInput[]
+    OR?: ReadedTimeCountScalarWhereInput[]
+    NOT?: ReadedTimeCountScalarWhereInput | ReadedTimeCountScalarWhereInput[]
+    id?: IntFilter<"ReadedTimeCount"> | number
+    times?: IntFilter<"ReadedTimeCount"> | number
+    articleId?: IntFilter<"ReadedTimeCount"> | number
+    userId?: StringFilter<"ReadedTimeCount"> | string
+  }
+
+  export type MarkedArticlesUpsertWithWhereUniqueWithoutArticleInput = {
+    where: MarkedArticlesWhereUniqueInput
+    update: XOR<MarkedArticlesUpdateWithoutArticleInput, MarkedArticlesUncheckedUpdateWithoutArticleInput>
+    create: XOR<MarkedArticlesCreateWithoutArticleInput, MarkedArticlesUncheckedCreateWithoutArticleInput>
+  }
+
+  export type MarkedArticlesUpdateWithWhereUniqueWithoutArticleInput = {
+    where: MarkedArticlesWhereUniqueInput
+    data: XOR<MarkedArticlesUpdateWithoutArticleInput, MarkedArticlesUncheckedUpdateWithoutArticleInput>
+  }
+
+  export type MarkedArticlesUpdateManyWithWhereWithoutArticleInput = {
+    where: MarkedArticlesScalarWhereInput
+    data: XOR<MarkedArticlesUpdateManyMutationInput, MarkedArticlesUncheckedUpdateManyWithoutArticleInput>
+  }
+
+  export type MarkedArticlesScalarWhereInput = {
+    AND?: MarkedArticlesScalarWhereInput | MarkedArticlesScalarWhereInput[]
+    OR?: MarkedArticlesScalarWhereInput[]
+    NOT?: MarkedArticlesScalarWhereInput | MarkedArticlesScalarWhereInput[]
+    id?: IntFilter<"MarkedArticles"> | number
+    articleId?: IntFilter<"MarkedArticles"> | number
+    userId?: StringFilter<"MarkedArticles"> | string
+  }
+
   export type ArticleCreateWithoutCategoryInput = {
     title: string
     imageUrl: string
@@ -12617,6 +13092,8 @@ export namespace Prisma {
     readTimes?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    ReadedTimeCount?: ReadedTimeCountCreateNestedManyWithoutArticleInput
+    MarkedArticles?: MarkedArticlesCreateNestedManyWithoutArticleInput
   }
 
   export type ArticleUncheckedCreateWithoutCategoryInput = {
@@ -12628,6 +13105,8 @@ export namespace Prisma {
     readTimes?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    ReadedTimeCount?: ReadedTimeCountUncheckedCreateNestedManyWithoutArticleInput
+    MarkedArticles?: MarkedArticlesUncheckedCreateNestedManyWithoutArticleInput
   }
 
   export type ArticleCreateOrConnectWithoutCategoryInput = {
@@ -12669,98 +13148,6 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Article"> | Date | string
     updatedAt?: DateTimeFilter<"Article"> | Date | string
     categoryName?: EnumCategoryNameNullableFilter<"Article"> | $Enums.CategoryName | null
-  }
-
-  export type SeriesCreateWithoutNovelsInput = {
-    name: string
-  }
-
-  export type SeriesUncheckedCreateWithoutNovelsInput = {
-    name: string
-  }
-
-  export type SeriesCreateOrConnectWithoutNovelsInput = {
-    where: SeriesWhereUniqueInput
-    create: XOR<SeriesCreateWithoutNovelsInput, SeriesUncheckedCreateWithoutNovelsInput>
-  }
-
-  export type SeriesUpsertWithoutNovelsInput = {
-    update: XOR<SeriesUpdateWithoutNovelsInput, SeriesUncheckedUpdateWithoutNovelsInput>
-    create: XOR<SeriesCreateWithoutNovelsInput, SeriesUncheckedCreateWithoutNovelsInput>
-    where?: SeriesWhereInput
-  }
-
-  export type SeriesUpdateToOneWithWhereWithoutNovelsInput = {
-    where?: SeriesWhereInput
-    data: XOR<SeriesUpdateWithoutNovelsInput, SeriesUncheckedUpdateWithoutNovelsInput>
-  }
-
-  export type SeriesUpdateWithoutNovelsInput = {
-    name?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type SeriesUncheckedUpdateWithoutNovelsInput = {
-    name?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type NovelCreateWithoutSeriesInput = {
-    id: string
-    title: string
-    imageUrl: string
-    content: string
-    description: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type NovelUncheckedCreateWithoutSeriesInput = {
-    id: string
-    title: string
-    imageUrl: string
-    content: string
-    description: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type NovelCreateOrConnectWithoutSeriesInput = {
-    where: NovelWhereUniqueInput
-    create: XOR<NovelCreateWithoutSeriesInput, NovelUncheckedCreateWithoutSeriesInput>
-  }
-
-  export type NovelCreateManySeriesInputEnvelope = {
-    data: NovelCreateManySeriesInput | NovelCreateManySeriesInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type NovelUpsertWithWhereUniqueWithoutSeriesInput = {
-    where: NovelWhereUniqueInput
-    update: XOR<NovelUpdateWithoutSeriesInput, NovelUncheckedUpdateWithoutSeriesInput>
-    create: XOR<NovelCreateWithoutSeriesInput, NovelUncheckedCreateWithoutSeriesInput>
-  }
-
-  export type NovelUpdateWithWhereUniqueWithoutSeriesInput = {
-    where: NovelWhereUniqueInput
-    data: XOR<NovelUpdateWithoutSeriesInput, NovelUncheckedUpdateWithoutSeriesInput>
-  }
-
-  export type NovelUpdateManyWithWhereWithoutSeriesInput = {
-    where: NovelScalarWhereInput
-    data: XOR<NovelUpdateManyMutationInput, NovelUncheckedUpdateManyWithoutSeriesInput>
-  }
-
-  export type NovelScalarWhereInput = {
-    AND?: NovelScalarWhereInput | NovelScalarWhereInput[]
-    OR?: NovelScalarWhereInput[]
-    NOT?: NovelScalarWhereInput | NovelScalarWhereInput[]
-    id?: StringFilter<"Novel"> | string
-    title?: StringFilter<"Novel"> | string
-    imageUrl?: StringFilter<"Novel"> | string
-    content?: StringFilter<"Novel"> | string
-    description?: StringFilter<"Novel"> | string
-    createdAt?: DateTimeFilter<"Novel"> | Date | string
-    updatedAt?: DateTimeFilter<"Novel"> | Date | string
-    seriesName?: StringNullableFilter<"Novel"> | string | null
   }
 
   export type SessionCreateWithoutUserInput = {
@@ -12833,6 +13220,46 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ReadedTimeCountCreateWithoutUserInput = {
+    times: number
+    article: ArticleCreateNestedOneWithoutReadedTimeCountInput
+  }
+
+  export type ReadedTimeCountUncheckedCreateWithoutUserInput = {
+    id?: number
+    times: number
+    articleId: number
+  }
+
+  export type ReadedTimeCountCreateOrConnectWithoutUserInput = {
+    where: ReadedTimeCountWhereUniqueInput
+    create: XOR<ReadedTimeCountCreateWithoutUserInput, ReadedTimeCountUncheckedCreateWithoutUserInput>
+  }
+
+  export type ReadedTimeCountCreateManyUserInputEnvelope = {
+    data: ReadedTimeCountCreateManyUserInput | ReadedTimeCountCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MarkedArticlesCreateWithoutUserInput = {
+    article: ArticleCreateNestedOneWithoutMarkedArticlesInput
+  }
+
+  export type MarkedArticlesUncheckedCreateWithoutUserInput = {
+    id?: number
+    articleId: number
+  }
+
+  export type MarkedArticlesCreateOrConnectWithoutUserInput = {
+    where: MarkedArticlesWhereUniqueInput
+    create: XOR<MarkedArticlesCreateWithoutUserInput, MarkedArticlesUncheckedCreateWithoutUserInput>
+  }
+
+  export type MarkedArticlesCreateManyUserInputEnvelope = {
+    data: MarkedArticlesCreateManyUserInput | MarkedArticlesCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type SessionUpsertWithWhereUniqueWithoutUserInput = {
     where: SessionWhereUniqueInput
     update: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
@@ -12898,6 +13325,306 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Account"> | Date | string
   }
 
+  export type ReadedTimeCountUpsertWithWhereUniqueWithoutUserInput = {
+    where: ReadedTimeCountWhereUniqueInput
+    update: XOR<ReadedTimeCountUpdateWithoutUserInput, ReadedTimeCountUncheckedUpdateWithoutUserInput>
+    create: XOR<ReadedTimeCountCreateWithoutUserInput, ReadedTimeCountUncheckedCreateWithoutUserInput>
+  }
+
+  export type ReadedTimeCountUpdateWithWhereUniqueWithoutUserInput = {
+    where: ReadedTimeCountWhereUniqueInput
+    data: XOR<ReadedTimeCountUpdateWithoutUserInput, ReadedTimeCountUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ReadedTimeCountUpdateManyWithWhereWithoutUserInput = {
+    where: ReadedTimeCountScalarWhereInput
+    data: XOR<ReadedTimeCountUpdateManyMutationInput, ReadedTimeCountUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type MarkedArticlesUpsertWithWhereUniqueWithoutUserInput = {
+    where: MarkedArticlesWhereUniqueInput
+    update: XOR<MarkedArticlesUpdateWithoutUserInput, MarkedArticlesUncheckedUpdateWithoutUserInput>
+    create: XOR<MarkedArticlesCreateWithoutUserInput, MarkedArticlesUncheckedCreateWithoutUserInput>
+  }
+
+  export type MarkedArticlesUpdateWithWhereUniqueWithoutUserInput = {
+    where: MarkedArticlesWhereUniqueInput
+    data: XOR<MarkedArticlesUpdateWithoutUserInput, MarkedArticlesUncheckedUpdateWithoutUserInput>
+  }
+
+  export type MarkedArticlesUpdateManyWithWhereWithoutUserInput = {
+    where: MarkedArticlesScalarWhereInput
+    data: XOR<MarkedArticlesUpdateManyMutationInput, MarkedArticlesUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ArticleCreateWithoutMarkedArticlesInput = {
+    title: string
+    imageUrl: string
+    content: string
+    description: string
+    readTimes?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Category?: CategoryCreateNestedOneWithoutArticlesInput
+    ReadedTimeCount?: ReadedTimeCountCreateNestedManyWithoutArticleInput
+  }
+
+  export type ArticleUncheckedCreateWithoutMarkedArticlesInput = {
+    id?: number
+    title: string
+    imageUrl: string
+    content: string
+    description: string
+    readTimes?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    categoryName?: $Enums.CategoryName | null
+    ReadedTimeCount?: ReadedTimeCountUncheckedCreateNestedManyWithoutArticleInput
+  }
+
+  export type ArticleCreateOrConnectWithoutMarkedArticlesInput = {
+    where: ArticleWhereUniqueInput
+    create: XOR<ArticleCreateWithoutMarkedArticlesInput, ArticleUncheckedCreateWithoutMarkedArticlesInput>
+  }
+
+  export type UserCreateWithoutMarkedArticlesInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified: boolean
+    image?: string | null
+    createdAt: Date | string
+    updatedAt: Date | string
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    ReadedTimeCount?: ReadedTimeCountCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutMarkedArticlesInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified: boolean
+    image?: string | null
+    createdAt: Date | string
+    updatedAt: Date | string
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    ReadedTimeCount?: ReadedTimeCountUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutMarkedArticlesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutMarkedArticlesInput, UserUncheckedCreateWithoutMarkedArticlesInput>
+  }
+
+  export type ArticleUpsertWithoutMarkedArticlesInput = {
+    update: XOR<ArticleUpdateWithoutMarkedArticlesInput, ArticleUncheckedUpdateWithoutMarkedArticlesInput>
+    create: XOR<ArticleCreateWithoutMarkedArticlesInput, ArticleUncheckedCreateWithoutMarkedArticlesInput>
+    where?: ArticleWhereInput
+  }
+
+  export type ArticleUpdateToOneWithWhereWithoutMarkedArticlesInput = {
+    where?: ArticleWhereInput
+    data: XOR<ArticleUpdateWithoutMarkedArticlesInput, ArticleUncheckedUpdateWithoutMarkedArticlesInput>
+  }
+
+  export type ArticleUpdateWithoutMarkedArticlesInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    readTimes?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Category?: CategoryUpdateOneWithoutArticlesNestedInput
+    ReadedTimeCount?: ReadedTimeCountUpdateManyWithoutArticleNestedInput
+  }
+
+  export type ArticleUncheckedUpdateWithoutMarkedArticlesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    readTimes?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoryName?: NullableEnumCategoryNameFieldUpdateOperationsInput | $Enums.CategoryName | null
+    ReadedTimeCount?: ReadedTimeCountUncheckedUpdateManyWithoutArticleNestedInput
+  }
+
+  export type UserUpsertWithoutMarkedArticlesInput = {
+    update: XOR<UserUpdateWithoutMarkedArticlesInput, UserUncheckedUpdateWithoutMarkedArticlesInput>
+    create: XOR<UserCreateWithoutMarkedArticlesInput, UserUncheckedCreateWithoutMarkedArticlesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutMarkedArticlesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutMarkedArticlesInput, UserUncheckedUpdateWithoutMarkedArticlesInput>
+  }
+
+  export type UserUpdateWithoutMarkedArticlesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    ReadedTimeCount?: ReadedTimeCountUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutMarkedArticlesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    ReadedTimeCount?: ReadedTimeCountUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type ArticleCreateWithoutReadedTimeCountInput = {
+    title: string
+    imageUrl: string
+    content: string
+    description: string
+    readTimes?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Category?: CategoryCreateNestedOneWithoutArticlesInput
+    MarkedArticles?: MarkedArticlesCreateNestedManyWithoutArticleInput
+  }
+
+  export type ArticleUncheckedCreateWithoutReadedTimeCountInput = {
+    id?: number
+    title: string
+    imageUrl: string
+    content: string
+    description: string
+    readTimes?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    categoryName?: $Enums.CategoryName | null
+    MarkedArticles?: MarkedArticlesUncheckedCreateNestedManyWithoutArticleInput
+  }
+
+  export type ArticleCreateOrConnectWithoutReadedTimeCountInput = {
+    where: ArticleWhereUniqueInput
+    create: XOR<ArticleCreateWithoutReadedTimeCountInput, ArticleUncheckedCreateWithoutReadedTimeCountInput>
+  }
+
+  export type UserCreateWithoutReadedTimeCountInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified: boolean
+    image?: string | null
+    createdAt: Date | string
+    updatedAt: Date | string
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    MarkedArticles?: MarkedArticlesCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutReadedTimeCountInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified: boolean
+    image?: string | null
+    createdAt: Date | string
+    updatedAt: Date | string
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    MarkedArticles?: MarkedArticlesUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutReadedTimeCountInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutReadedTimeCountInput, UserUncheckedCreateWithoutReadedTimeCountInput>
+  }
+
+  export type ArticleUpsertWithoutReadedTimeCountInput = {
+    update: XOR<ArticleUpdateWithoutReadedTimeCountInput, ArticleUncheckedUpdateWithoutReadedTimeCountInput>
+    create: XOR<ArticleCreateWithoutReadedTimeCountInput, ArticleUncheckedCreateWithoutReadedTimeCountInput>
+    where?: ArticleWhereInput
+  }
+
+  export type ArticleUpdateToOneWithWhereWithoutReadedTimeCountInput = {
+    where?: ArticleWhereInput
+    data: XOR<ArticleUpdateWithoutReadedTimeCountInput, ArticleUncheckedUpdateWithoutReadedTimeCountInput>
+  }
+
+  export type ArticleUpdateWithoutReadedTimeCountInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    readTimes?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Category?: CategoryUpdateOneWithoutArticlesNestedInput
+    MarkedArticles?: MarkedArticlesUpdateManyWithoutArticleNestedInput
+  }
+
+  export type ArticleUncheckedUpdateWithoutReadedTimeCountInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    readTimes?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoryName?: NullableEnumCategoryNameFieldUpdateOperationsInput | $Enums.CategoryName | null
+    MarkedArticles?: MarkedArticlesUncheckedUpdateManyWithoutArticleNestedInput
+  }
+
+  export type UserUpsertWithoutReadedTimeCountInput = {
+    update: XOR<UserUpdateWithoutReadedTimeCountInput, UserUncheckedUpdateWithoutReadedTimeCountInput>
+    create: XOR<UserCreateWithoutReadedTimeCountInput, UserUncheckedCreateWithoutReadedTimeCountInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutReadedTimeCountInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutReadedTimeCountInput, UserUncheckedUpdateWithoutReadedTimeCountInput>
+  }
+
+  export type UserUpdateWithoutReadedTimeCountInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    MarkedArticles?: MarkedArticlesUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutReadedTimeCountInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    MarkedArticles?: MarkedArticlesUncheckedUpdateManyWithoutUserNestedInput
+  }
+
   export type UserCreateWithoutSessionsInput = {
     id: string
     name: string
@@ -12907,6 +13634,8 @@ export namespace Prisma {
     createdAt: Date | string
     updatedAt: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
+    ReadedTimeCount?: ReadedTimeCountCreateNestedManyWithoutUserInput
+    MarkedArticles?: MarkedArticlesCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -12918,6 +13647,8 @@ export namespace Prisma {
     createdAt: Date | string
     updatedAt: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    ReadedTimeCount?: ReadedTimeCountUncheckedCreateNestedManyWithoutUserInput
+    MarkedArticles?: MarkedArticlesUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -12945,6 +13676,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
+    ReadedTimeCount?: ReadedTimeCountUpdateManyWithoutUserNestedInput
+    MarkedArticles?: MarkedArticlesUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -12956,6 +13689,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    ReadedTimeCount?: ReadedTimeCountUncheckedUpdateManyWithoutUserNestedInput
+    MarkedArticles?: MarkedArticlesUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAccountsInput = {
@@ -12967,6 +13702,8 @@ export namespace Prisma {
     createdAt: Date | string
     updatedAt: Date | string
     sessions?: SessionCreateNestedManyWithoutUserInput
+    ReadedTimeCount?: ReadedTimeCountCreateNestedManyWithoutUserInput
+    MarkedArticles?: MarkedArticlesCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -12978,6 +13715,8 @@ export namespace Prisma {
     createdAt: Date | string
     updatedAt: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    ReadedTimeCount?: ReadedTimeCountUncheckedCreateNestedManyWithoutUserInput
+    MarkedArticles?: MarkedArticlesUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -13005,6 +13744,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
+    ReadedTimeCount?: ReadedTimeCountUpdateManyWithoutUserNestedInput
+    MarkedArticles?: MarkedArticlesUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -13016,6 +13757,50 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    ReadedTimeCount?: ReadedTimeCountUncheckedUpdateManyWithoutUserNestedInput
+    MarkedArticles?: MarkedArticlesUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type ReadedTimeCountCreateManyArticleInput = {
+    id?: number
+    times: number
+    userId: string
+  }
+
+  export type MarkedArticlesCreateManyArticleInput = {
+    id?: number
+    userId: string
+  }
+
+  export type ReadedTimeCountUpdateWithoutArticleInput = {
+    times?: IntFieldUpdateOperationsInput | number
+    user?: UserUpdateOneRequiredWithoutReadedTimeCountNestedInput
+  }
+
+  export type ReadedTimeCountUncheckedUpdateWithoutArticleInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    times?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ReadedTimeCountUncheckedUpdateManyWithoutArticleInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    times?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type MarkedArticlesUpdateWithoutArticleInput = {
+    user?: UserUpdateOneRequiredWithoutMarkedArticlesNestedInput
+  }
+
+  export type MarkedArticlesUncheckedUpdateWithoutArticleInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type MarkedArticlesUncheckedUpdateManyWithoutArticleInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type ArticleCreateManyCategoryInput = {
@@ -13037,6 +13822,8 @@ export namespace Prisma {
     readTimes?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ReadedTimeCount?: ReadedTimeCountUpdateManyWithoutArticleNestedInput
+    MarkedArticles?: MarkedArticlesUpdateManyWithoutArticleNestedInput
   }
 
   export type ArticleUncheckedUpdateWithoutCategoryInput = {
@@ -13048,6 +13835,8 @@ export namespace Prisma {
     readTimes?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ReadedTimeCount?: ReadedTimeCountUncheckedUpdateManyWithoutArticleNestedInput
+    MarkedArticles?: MarkedArticlesUncheckedUpdateManyWithoutArticleNestedInput
   }
 
   export type ArticleUncheckedUpdateManyWithoutCategoryInput = {
@@ -13057,46 +13846,6 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     readTimes?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type NovelCreateManySeriesInput = {
-    id: string
-    title: string
-    imageUrl: string
-    content: string
-    description: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type NovelUpdateWithoutSeriesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    imageUrl?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type NovelUncheckedUpdateWithoutSeriesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    imageUrl?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type NovelUncheckedUpdateManyWithoutSeriesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    imageUrl?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13124,6 +13873,17 @@ export namespace Prisma {
     password?: string | null
     createdAt: Date | string
     updatedAt: Date | string
+  }
+
+  export type ReadedTimeCountCreateManyUserInput = {
+    id?: number
+    times: number
+    articleId: number
+  }
+
+  export type MarkedArticlesCreateManyUserInput = {
+    id?: number
+    articleId: number
   }
 
   export type SessionUpdateWithoutUserInput = {
@@ -13199,6 +13959,37 @@ export namespace Prisma {
     password?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReadedTimeCountUpdateWithoutUserInput = {
+    times?: IntFieldUpdateOperationsInput | number
+    article?: ArticleUpdateOneRequiredWithoutReadedTimeCountNestedInput
+  }
+
+  export type ReadedTimeCountUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    times?: IntFieldUpdateOperationsInput | number
+    articleId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ReadedTimeCountUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    times?: IntFieldUpdateOperationsInput | number
+    articleId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type MarkedArticlesUpdateWithoutUserInput = {
+    article?: ArticleUpdateOneRequiredWithoutMarkedArticlesNestedInput
+  }
+
+  export type MarkedArticlesUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    articleId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type MarkedArticlesUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    articleId?: IntFieldUpdateOperationsInput | number
   }
 
 

@@ -6,7 +6,7 @@ import TextComponent from "@/components/TextComponent";
 import { categoryToPath, titleToPath } from "@/lib/utils";
 import type { CardProps } from "@/types/interface";
 
-function VerticalCard({ article, className }: CardProps) {
+function VerticalCard({ article, className, readCount }: CardProps) {
 	if (!article) {
 		return null;
 	}
@@ -27,7 +27,7 @@ function VerticalCard({ article, className }: CardProps) {
 				/>
 			</div>
 
-			<TextComponent article={article} />
+			<TextComponent article={article} readCount={readCount} />
 		</Link>
 	);
 }

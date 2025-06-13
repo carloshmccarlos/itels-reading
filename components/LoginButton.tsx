@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 function LoginButton() {
 	const buttonBaseStyles = "text-lg font-bold rounded-none cursor-pointer";
@@ -8,7 +9,7 @@ function LoginButton() {
 			variant="ghost"
 			className={`${buttonBaseStyles} bg-white text-black hover:bg-black hover:text-white`}
 		>
-			Sign In
+			<Link href="/auth/login">Login</Link>
 		</Button>
 	);
 }

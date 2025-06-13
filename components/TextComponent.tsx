@@ -5,9 +5,15 @@ interface Props {
 	className?: string;
 	article: ArticleWithCategory;
 	titleSize?: string;
+	readCount?: number | null;
 }
 
-async function TextComponent({ className, article, titleSize }: Props) {
+async function TextComponent({
+	className,
+	article,
+	titleSize,
+	readCount,
+}: Props) {
 	const showCategoryName = transformCategoryName(article.Category?.name || "");
 
 	return (
@@ -22,7 +28,9 @@ async function TextComponent({ className, article, titleSize }: Props) {
 				<div className="text-lg font-bold text-red-700 ">
 					{showCategoryName}
 				</div>
-				<h2 className={`${titleSize ? titleSize : "text-lg"}    font-bold `}>
+				<h2
+					className={`${titleSize ? titleSize : "text-lg"}    font-bold flex justify-between`}
+				>
 					<span
 						className=" bg-[length:0%_2px]   bg-gradient-to-r from-pink-700 to-violet-700
 					bg-no-repeat bg-left-bottom transition-all duration-700 group-hover:bg-[length:100%_2px]
@@ -30,6 +38,12 @@ async function TextComponent({ className, article, titleSize }: Props) {
 					>
 						{article.title}
 					</span>
+
+					{readCount && (
+						<span className="text-sm text-gray-500">
+							Read {readCount} times
+						</span>
+					)}
 				</h2>
 
 				{titleSize && (
