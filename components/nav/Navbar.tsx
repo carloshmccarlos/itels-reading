@@ -50,7 +50,7 @@ function NavBar({ categories }: Props) {
 					</div>
 					<div className="w-full flex justify-center">
 						<Link
-							href={"/public"}
+							href={"/"}
 							className={`font-serif font-bold text-center transition-all duration-300 ${
 								scrolled
 									? "text-3xl md:text-4xl lg:text-5xl"
