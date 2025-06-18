@@ -1,9 +1,7 @@
 "use client";
 
-import {
-	RequestResetForm,
-	ResetPasswordForm,
-} from "@/components/auth/ResetPasswordForm";
+import { ChangePasswordForm } from "@/components/auth/ChangePasswordForm";
+import { RequestResetForm } from "@/components/auth/ResetPasswordForm";
 import {
 	Card,
 	CardContent,
@@ -11,6 +9,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import { authClient } from "@/lib/auth/auth-client";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -25,37 +24,91 @@ export default function ResetPasswordPage() {
 	const isResetForm = !!token;
 
 	const handleRequestReset = async (values: { email: string }) => {
+		if (loading) return;
+
 		setLoading(true);
 		setStatus("idle");
+		setMessage("");
 
 		try {
-			// Add logic to send reset password email
+			const { data, error } = await authClient.requestPasswordReset({
+				email: values.email,
+				redirectTo: "/auth/reset-password",
+			});
+
+			console.log(data);
+
+			if (error) {
+				setStatus("error");
+				setMessage(
+					error.message || "Failed to send reset link. Please try again.",
+				);
+				console.error("Reset password request failed:", error);
+				return;
+			}
+
 			setStatus("success");
 			setMessage("Reset password link has been sent to your email!");
 		} catch (error) {
+			console.error("Reset password request exception:", error);
 			setStatus("error");
-			setMessage("Failed to send reset link. Please try again later.");
-			console.error("Reset password request failed:", error);
+
+			// More specific error handling based on error type
+			const errorMessage =
+				error instanceof Error
+					? error.message
+					: "Failed to send reset link. Please try again later.";
+
+			setMessage(errorMessage);
 		} finally {
 			setLoading(false);
 		}
 	};
 
-	const handleResetPassword = async (values: {
+	const handleChangePassword = async (values: {
 		password: string;
 		confirmPassword: string;
 	}) => {
+		if (loading) return;
+		
 		setLoading(true);
 		setStatus("idle");
+		setMessage("");
+		const { password, confirmPassword } = values;
+
+		if (password !== confirmPassword) {
+			setStatus("error");
+			setMessage("Passwords do not match");
+			setLoading(false);
+			return;
+		}
 
 		try {
-			// Add logic to reset password using token
+			const { data, error } = await authClient.resetPassword({
+				newPassword: password,
+				token: token || undefined,
+			});
+
+			if (error) {
+				setStatus("error");
+				setMessage(error.message || "Failed to reset password. Please try again.");
+				console.error("Reset password failed:", error);
+				return;
+			}
+
 			setStatus("success");
 			setMessage("Password has been reset successfully!");
 		} catch (error) {
+			console.error("Reset password exception:", error);
 			setStatus("error");
-			setMessage("Failed to reset password. Please try again later.");
-			console.error("Reset password failed:", error);
+			
+			// More specific error handling based on error type
+			const errorMessage = 
+				error instanceof Error
+					? error.message
+					: "Failed to reset password. Please try again later.";
+					
+			setMessage(errorMessage);
 		} finally {
 			setLoading(false);
 		}
@@ -88,8 +141,8 @@ export default function ResetPasswordPage() {
 							</div>
 						</div>
 					) : isResetForm ? (
-						<ResetPasswordForm
-							onSubmit={handleResetPassword}
+						<ChangePasswordForm
+							onSubmit={handleChangePassword}
 							error={status === "error" ? message : undefined}
 							loading={loading}
 						/>

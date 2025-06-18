@@ -74,7 +74,7 @@ export default async function ArticleByCategory({
 					</div>
 
 					{/* Horizontal Cards */}
-					<div className="lg:col-span-2 grid grid-cols-1 gap-4 sm:gap-6 ">
+					<div className="lg:col-span-2 grid grid-rows-2 grid-cols-1 gap-4 sm:gap-6 ">
 						<HorizontalCard article={articles[1]} />
 						<HorizontalCard article={articles[2]} />
 					</div>

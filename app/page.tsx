@@ -27,7 +27,7 @@ export default async function Home() {
 						</div>
 
 						{/* Horizontal Cards */}
-						<div className="lg:col-span-2 grid grid-cols-1 gap-4 sm:gap-6 ">
+						<div className="lg:col-span-2 grid grid-cols-1 grid-rows-2 gap-4 sm:gap-6 ">
 							<HorizontalCard article={latestArticles[1]} />
 							<HorizontalCard article={latestArticles[2]} />
 						</div>

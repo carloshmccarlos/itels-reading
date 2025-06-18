@@ -31,6 +31,15 @@ export const auth = betterAuth({
 		minPasswordLength: 8,
 		maxPasswordLength: 16,
 		requireEmailVerification: true,
+
+		sendResetPassword: async ({ user, url, token }, request) => {
+			await sendEmail({
+				to: user.email,
+				subject: "Reset your password",
+				text: `Click the link to reset your password: ${url}, 
+				this link will expire in 5 minutes.`,
+			});
+		},
 	},
 
 	// 会话配置
@@ -54,4 +63,34 @@ export const auth = betterAuth({
 		verifyEmail: "/auth/verify-email",
 		resetPassword: "/auth/reset-password",
 	},
+
+	// Rate limiting configuration
+	rateLimit: {
+		enabled: true,
+		window: 60,
+		max: 1,
+		storage: "database",
+		modelName: "rateLimit",
+	},
+
+	// Add email OTP plugin
+	plugins: [
+		emailOTP({
+			async sendVerificationOTP({ email, otp, type }) {
+				await sendEmail({
+					to: email,
+					subject:
+						type === "sign-in"
+							? "Your login code for IELTS Reading"
+							: type === "email-verification"
+								? "Verify your email address"
+								: "Reset your password",
+					text: `Your verification code is: <strong>${otp}</strong><br><br>This code will expire in 5 minutes.`,
+				});
+			},
+			otpLength: 6,
+			expiresIn: 300, // 5 minutes
+			allowedAttempts: 5,
+		}),
+	],
 });

@@ -17,7 +17,7 @@ export async function signIn({
 			/**
 			 * A URL to redirect to after the user verifies their email (optional)
 			 */
-			callbackURL: "/article/create",
+			callbackURL: "/",
 			/**
 			 * remember the user session after the browser is closed.
 			 * @default true
@@ -35,6 +35,34 @@ export async function signIn({
 			},
 		},
 	);
+
+	return { data, error };
+}
+
+export async function signInWithEmailOTP({
+	email,
+	otp,
+}: { 
+	email: string; 
+	otp: string;
+}) {
+	const { data, error } = await authClient.signIn.emailOtp({
+		email,
+		otp,
+	});
+
+	return { data, error };
+}
+
+export async function sendEmailOTP({
+	email,
+}: {
+	email: string;
+}) {
+	const { data, error } = await authClient.emailOtp.sendVerificationOtp({
+		email,
+		type: "sign-in",
+	});
 
 	return { data, error };
 }

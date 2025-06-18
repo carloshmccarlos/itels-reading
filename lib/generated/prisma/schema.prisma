@@ -89,8 +89,8 @@ model MarkedArticles {
   userId    String
 
   // Integrity: Ensures a user cannot mark the same article multiple times.
-  @@unique([userId, articleId])
   // Optimization: Speeds up queries for a user's marked articles.
+  @@unique([userId, articleId])
   @@index([userId, articleId])
 }
 
@@ -104,8 +104,8 @@ model ReadedTimeCount {
   userId    String
 
   // Integrity: Ensures there is only one read-count record per user-article pair.
-  @@unique([userId, articleId])
   // Optimization: Speeds up queries for user read counts.
+  @@unique([userId, articleId])
   @@index([userId, articleId])
 }
 
@@ -152,4 +152,13 @@ model Verification {
   updatedAt  DateTime?
 
   @@map("verification")
+}
+
+model RateLimit {
+  id          String  @id
+  key         String?
+  count       Int?
+  lastRequest BigInt?
+
+  @@map("rateLimit")
 }

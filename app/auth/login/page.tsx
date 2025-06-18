@@ -1,6 +1,7 @@
 "use client";
 
 import { AuthForm, type AuthFormSchema } from "@/components/auth/AuthForm";
+import { EmailOTPForm } from "@/components/auth/EmailOTPForm";
 import {
 	Card,
 	CardContent,
@@ -8,6 +9,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { signIn } from "@/lib/auth/sign-in";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -47,24 +49,37 @@ export default function LoginPage() {
 	};
 
 	return (
-		<div className="flex  flex-col items-center py-24 px-4 sm:px-6 lg:px-8">
+		<div className="flex flex-col items-center py-24 px-4 sm:px-6 lg:px-8">
 			<Card className="w-full max-w-md">
 				<CardHeader>
 					<CardTitle className="text-2xl text-center">
 						Sign in to your account
 					</CardTitle>
 					<CardDescription className="text-center">
-						Enter your credentials to access your account
+						Choose your preferred login method
 					</CardDescription>
 				</CardHeader>
 
 				<CardContent>
-					<AuthForm
-						type="login"
-						onSubmit={handleSubmit}
-						error={error}
-						loading={loading}
-					/>
+					<Tabs defaultValue="password" className="w-full">
+						<TabsList className="grid w-full grid-cols-2 mb-6">
+							<TabsTrigger value="password">Password</TabsTrigger>
+							<TabsTrigger value="email-otp">Email Code</TabsTrigger>
+						</TabsList>
+						
+						<TabsContent value="password">
+							<AuthForm
+								type="login"
+								onSubmit={handleSubmit}
+								error={error}
+								loading={loading}
+							/>
+						</TabsContent>
+						
+						<TabsContent value="email-otp">
+							<EmailOTPForm callbackUrl={callbackUrl} />
+						</TabsContent>
+					</Tabs>
 
 					<div className="mt-6 space-y-4">
 						<div className="text-center text-sm">

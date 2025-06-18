@@ -1,9 +1,20 @@
 import ArticleContent from "@/components/ArticleContent";
 import Spinner from "@/components/Spinner";
-import { getArticleById } from "@/data/article";
+import { getArticleById, increaseReadTimes } from "@/data/article";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
+import { cache } from "react";
+
+// Cache the article fetching to avoid redundant database calls
+const getArticle = cache(async (id: number) => {
+	return getArticleById(id);
+});
+
+// Cache the read count increment to ensure it only happens once per request
+const incrementReadCount = cache(async (id: number) => {
+	return increaseReadTimes(id);
+});
 
 // Update the Props interface to reflect that params is a Promise
 interface Props {
@@ -20,8 +31,13 @@ export default async function ArticlePage({ params }: Props) {
 	}
 
 	const id = slug.split("-")[0];
+	const articleId = Number(id);
 
-	const article = await getArticleById(Number(id));
+	// Fetch article data and increment read count in parallel
+	const [article] = await Promise.all([
+		getArticle(articleId),
+		incrementReadCount(articleId),
+	]);
 
 	if (!article) {
 		notFound();

@@ -13,8 +13,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { authClient } from "@/lib/auth/auth-client";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { redirect, useRouter } from "next/navigation";
+import { use, useEffect, useState } from "react";
+import { toast } from "sonner";
 
 interface UserWithCounts {
 	id: string;
@@ -31,21 +32,21 @@ interface UserWithCounts {
 interface ProfileData {
 	user: UserWithCounts;
 	totalReadTimes: number;
-	session: {
-		user: {
-			id: string;
-			name: string;
-			email: string;
-			image?: string;
-		};
-	};
 }
 
 export default function ProfilePage() {
+	const session = authClient.useSession();
+
+	if (!session) {
+		return redirect("/");
+	}
+
 	const router = useRouter();
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
 	const [profileData, setProfileData] = useState<ProfileData | null>(null);
+	const [newUsername, setNewUsername] = useState<string>("");
+	const [isProcessing, setIsProcessing] = useState(false);
 
 	useEffect(() => {
 		const fetchProfileData = async () => {
@@ -62,6 +63,7 @@ export default function ProfilePage() {
 
 				const data = await response.json();
 				setProfileData(data);
+				setNewUsername(data.user.name);
 			} catch (err) {
 				console.error("Failed to fetch profile data:", err);
 				setError(
@@ -115,6 +117,47 @@ export default function ProfilePage() {
 		month: "long",
 		day: "numeric",
 	});
+
+	async function handleSaveChanges() {
+		if (!newUsername) {
+			toast.error("Username cannot be empty");
+			return;
+		}
+
+		if (newUsername === profileData?.user?.name) {
+			toast.message("Nothing changed.");
+			return;
+		}
+
+		try {
+			setIsProcessing(true);
+			const response = await fetch("/api/user/profile", {
+				method: "PATCH",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					name: newUsername,
+				}),
+			});
+
+			if (!response.ok) {
+				const errorData = await response.json();
+				throw new Error(errorData.error || "Failed to update profile");
+			}
+
+			const data = await response.json();
+			setProfileData(data);
+			toast.success("Profile updated successfully");
+		} catch (err) {
+			console.error("Failed to update profile:", err);
+			toast.error(
+				err instanceof Error ? err.message : "Failed to update profile",
+			);
+		} finally {
+			setIsProcessing(false);
+		}
+	}
 
 	return (
 		<div className="container mx-auto py-10 px-4 md:px-8">
@@ -185,8 +228,20 @@ export default function ProfilePage() {
 					</CardHeader>
 					<CardContent className="space-y-6">
 						<div className="space-y-2">
-							<Label htmlFor="name">Display Name</Label>
-							<Input id="name" defaultValue={user.name || ""} disabled />
+							<Label htmlFor="name">Username</Label>
+							<div className={"relative"}>
+								<Input
+									value={newUsername}
+									id="name"
+									onChange={(e) => setNewUsername(e.target.value)}
+								/>
+								<Button
+									onClick={() => setNewUsername(profileData.user.name || "")}
+									className={"absolute top-0 right-0 rounded-l-none"}
+								>
+									Restore
+								</Button>
+							</div>
 						</div>
 
 						<div className="space-y-2">
@@ -221,12 +276,19 @@ export default function ProfilePage() {
 							</p>
 						</div>
 					</CardContent>
-					{/*<CardFooter className="flex justify-between">
-						<Button variant="outline" disabled>
+					<CardFooter className="flex justify-between">
+						{/*<Button variant="outline" disabled>
 							Cancel
-						</Button>
-						<Button disabled>Save Changes</Button>
-					</CardFooter>*/}
+						</Button>*/}
+						<div>{""}</div>
+						{newUsername === profileData.user.name || newUsername === "" ? (
+							<Button disabled>Save Changes</Button>
+						) : (
+							<Button onClick={handleSaveChanges} disabled={isProcessing}>
+								{isProcessing ? "Saving..." : "Save Changes"}
+							</Button>
+						)}
+					</CardFooter>
 				</Card>
 			</div>
 		</div>

@@ -1,19 +1,19 @@
 import ArticleCard from "@/components/ArticleCard";
-import VerticalCard from "@/components/VerticalCard";
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from "@/components/ui/card";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { type ArticleWithCategory, getUserData } from "@/data/user";
-import { transformCategoryName } from "@/lib/utils";
-import Image from "next/image";
+import { getUserData } from "@/data/user";
+import { auth } from "@/lib/auth/auth";
+import { headers } from "next/headers";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default async function MyPage() {
+	const session = await auth.api.getSession({ headers: await headers() });
+
+	if (!session?.user?.id) {
+		return redirect("/");
+	}
+
 	const data = await getUserData();
 
 	return (

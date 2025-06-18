@@ -21,14 +21,14 @@ export default async function UserLayout({
 
 	return (
 		<div className="container mx-auto py-6">
-			<div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+			<div className="grid grid-cols-1 md:grid-cols-11 gap-4">
 				{/* Sidebar Navigation */}
 				<aside className="md:col-span-2 lg:col-span-1">
 					<nav className="space-y-2 sticky top-24">
 						<Link href="/user/collection">
 							<Button
 								variant="ghost"
-								className="w-full justify-start cursor-pointer text-lg"
+								className="w-full justify-start items-center cursor-pointer text-lg"
 							>
 								<BookMarked className=" h-4 w-4" />
 								Collection
@@ -37,7 +37,7 @@ export default async function UserLayout({
 						<Link href="/user/profile">
 							<Button
 								variant="ghost"
-								className="w-full justify-start cursor-pointer text-lg"
+								className="w-full justify-start items-center cursor-pointer text-lg"
 							>
 								<User className=" h-4 w-4" />
 								Profile
@@ -47,7 +47,7 @@ export default async function UserLayout({
 				</aside>
 
 				{/* Main Content */}
-				<main className="md:col-span-10 lg:col-span-11">{children}</main>
+				<main className="md:col-span-9 lg:col-span-10">{children}</main>
 			</div>
 		</div>
 	);

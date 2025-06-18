@@ -76,6 +76,17 @@ export async function getHottestArticles() {
 	});
 }
 
+export async function increaseReadTimes(articleId: number) {
+	return prisma.article.update({
+		where: { id: articleId },
+		data: {
+			readTimes: {
+				increment: 1,
+			},
+		},
+	});
+}
+
 export async function countArticlesByCategory(categoryName: string) {
 	return prisma.article.count({
 		where: {
