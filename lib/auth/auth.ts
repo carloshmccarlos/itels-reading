@@ -69,8 +69,7 @@ export const auth = betterAuth({
 		enabled: true,
 		window: 60,
 		max: 1,
-		storage: "database",
-		modelName: "rateLimit",
+		storage: "memory",
 	},
 
 	// Add email OTP plugin
