@@ -80,7 +80,11 @@ export default function ProfilePage() {
 
 	// Show loading state
 	if (isLoading) {
-		return null;
+		return (
+			<div className="container mx-auto py-10 px-4 md:px-8">
+				<Spinner />
+			</div>
+		);
 	}
 
 	// Show error state
