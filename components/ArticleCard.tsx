@@ -6,7 +6,7 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import type { ArticleWithCategory } from "@/data/user";
-import { transformCategoryName } from "@/lib/utils";
+import {categoryToPath, titleToPath, transformCategoryName} from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -17,8 +17,12 @@ interface ArticleCardProps {
 
 export default function ArticleCard({ article, readCount }: ArticleCardProps) {
 	const categoryName = transformCategoryName(article.Category?.name || "");
+	const titlePath = titleToPath(article.title);
+	const categoryPath = categoryToPath(article.Category?.name || "");
 
 	return (
+		<Link href={`/article/${article.id}-${categoryPath}-${titlePath}`} className="hover:text-blue-700">
+
 		<Card className="pt-0 overflow-hidden hover:shadow-lg transition-shadow">
 			<div className="relative w-full h-48">
 				<Image
@@ -41,9 +45,8 @@ export default function ArticleCard({ article, readCount }: ArticleCardProps) {
 					)}
 				</div>
 				<CardTitle className="line-clamp-2 text-lg">
-					<Link href={`/article/${article.id}`} className="hover:text-blue-700">
 						{article.title}
-					</Link>
+
 				</CardTitle>
 			</CardHeader>
 			<CardContent>
@@ -59,5 +62,6 @@ export default function ArticleCard({ article, readCount }: ArticleCardProps) {
 				</div>
 			</CardContent>
 		</Card>
+		</Link>
 	);
 }

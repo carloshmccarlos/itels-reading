@@ -68,8 +68,9 @@ export const auth = betterAuth({
 	rateLimit: {
 		enabled: true,
 		window: 60,
-		max: 1,
-		storage: "memory",
+		max: 100,
+		storage: "database",
+		modelName: "rateLimit",
 	},
 
 	// Add email OTP plugin
@@ -89,7 +90,7 @@ export const auth = betterAuth({
 			},
 			otpLength: 6,
 			expiresIn: 300, // 5 minutes
-			allowedAttempts: 5,
+			allowedAttempts: 3,
 		}),
 	],
 });

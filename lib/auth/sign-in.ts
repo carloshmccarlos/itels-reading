@@ -54,15 +54,46 @@ export async function signInWithEmailOTP({
 	return { data, error };
 }
 
+// Custom response for email OTP sending
+export interface EmailOTPResponse {
+	error?: boolean;
+	message?: string;
+	remainingSeconds?: number;
+	data?: { success: boolean } | null;
+}
+
 export async function sendEmailOTP({
 	email,
 }: {
 	email: string;
-}) {
-	const { data, error } = await authClient.emailOtp.sendVerificationOtp({
-		email,
-		type: "sign-in",
-	});
+}): Promise<EmailOTPResponse> {
+	try {
+		const response = await authClient.emailOtp.sendVerificationOtp({
+			email,
+			type: "sign-in",
+		});
 
-	return { data, error };
+		// If there's an error from the auth client, format it for our UI
+		if (response.error) {
+			return {
+				error: true,
+				message: response.error.message || "Failed to send verification code",
+				data: null
+			};
+		}
+
+		// If successful, return the data
+		return {
+			error: false,
+			data: response.data
+		};
+	} catch (err: unknown) {
+		// Handle unexpected errors
+		const error = err as Error;
+		return {
+			error: true,
+			message: error.message || "An unexpected error occurred",
+			data: null
+		};
+	}
 }

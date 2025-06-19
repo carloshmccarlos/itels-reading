@@ -1,4 +1,3 @@
-
 generator client {
   provider = "prisma-client-js"
   output   = "../lib/generated/prisma"
@@ -10,102 +9,62 @@ datasource db {
 }
 
 model Article {
-  id       Int    @id @default(autoincrement())
-  title    String
-  imageUrl String
-
-  content     String   @db.Text
-  description String
-  readTimes   Int      @default(0)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  // Relations
-  Category     Category?     @relation(fields: [categoryName], references: [name])
-  categoryName CategoryName?
-
-  ReadedTimeCount ReadedTimeCount[]
+  title           String
+  imageUrl        String
+  content         String
+  description     String
+  readTimes       Int               @default(0)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  id              Int               @id @default(autoincrement())
+  categoryName    CategoryName?
+  Category        Category?         @relation(fields: [categoryName], references: [name])
   MarkedArticles  MarkedArticles[]
+  ReadedTimeCount ReadedTimeCount[]
 
-  // Optimization: Added index for faster lookups by category.
   @@index([categoryName])
 }
 
 model Category {
-  name CategoryName @unique
-
-  // Relations
+  name     CategoryName @unique
   articles Article[]
 }
 
-enum CategoryName {
-  nature_geography @map("nature-geography")
-  plant_research @map("plant-research")
-  animal_protection @map("animal-protection")
-  space_exploration @map("space-exploration")
-  school_education @map("school-education")
-  technology_invention @map("technology-invention")
-  culture_history @map("culture-history")
-  language_evolution @map("language-evolution")
-  entertainment_sports @map("entertainment-sports")
-  objects_materials @map("objects-materials")
-  fashion_trends @map("fashion-trends")
-  diet_health @map("diet-health")
-  architecture_places @map("architecture-places")
-  transportation_travel @map("transportation-travel")
-  national_government @map("national-government")
-  society_economy @map("society-economy")
-  laws_regulations @map("laws-regulations")
-  battlefield_contention @map("battlefield-contention")
-  social_roles @map("social-roles")
-  behavior_actions @map("behavior-actions")
-  physical_mental_health @map("physical-mental-health")
-  time_date @map("time-date")
-}
-
 model User {
-  id            String    @id
-  name          String
-  email         String
-  emailVerified Boolean
-  image         String?
-  createdAt     DateTime
-  updatedAt     DateTime
-  sessions      Session[]
-  accounts      Account[]
-
-  ReadedTimeCount ReadedTimeCount[]
+  id              String            @id
+  name            String
+  email           String            @unique
+  emailVerified   Boolean
+  image           String?
+  createdAt       DateTime
+  updatedAt       DateTime
   MarkedArticles  MarkedArticles[]
+  ReadedTimeCount ReadedTimeCount[]
+  accounts        Account[]
+  sessions        Session[]
 
-  @@unique([email])
   @@map("user")
 }
 
 model MarkedArticles {
-  id      Int     @id @default(autoincrement())
-  article Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
-  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-
+  id        Int     @id @default(autoincrement())
   articleId Int
   userId    String
+  article   Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  // Integrity: Ensures a user cannot mark the same article multiple times.
-  // Optimization: Speeds up queries for a user's marked articles.
   @@unique([userId, articleId])
   @@index([userId, articleId])
 }
 
 model ReadedTimeCount {
-  id      Int     @id @default(autoincrement())
-  times   Int
-  article Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
-  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-
+  id        Int     @id @default(autoincrement())
+  times     Int
   articleId Int
   userId    String
+  article   Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  // Integrity: Ensures there is only one read-count record per user-article pair.
-  // Optimization: Speeds up queries for user read counts.
   @@unique([userId, articleId])
   @@index([userId, articleId])
 }
@@ -113,7 +72,7 @@ model ReadedTimeCount {
 model Session {
   id        String   @id
   expiresAt DateTime
-  token     String
+  token     String   @unique
   createdAt DateTime
   updatedAt DateTime
   ipAddress String?
@@ -121,7 +80,6 @@ model Session {
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([token])
   @@map("session")
 }
 
@@ -130,7 +88,6 @@ model Account {
   accountId             String
   providerId            String
   userId                String
-  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   accessToken           String?
   refreshToken          String?
   idToken               String?
@@ -140,6 +97,7 @@ model Account {
   password              String?
   createdAt             DateTime
   updatedAt             DateTime
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("account")
 }
@@ -162,4 +120,40 @@ model RateLimit {
   lastRequest BigInt?
 
   @@map("rateLimit")
+}
+
+model EmailRateLimit {
+  id               String   @id @default(cuid())
+  email            String   @unique
+  lastEmailSentAt  DateTime
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@map("emailRateLimit")
+  @@index([email])
+}
+
+enum CategoryName {
+  nature_geography       @map("nature-geography")
+  plant_research         @map("plant-research")
+  animal_protection      @map("animal-protection")
+  space_exploration      @map("space-exploration")
+  school_education       @map("school-education")
+  technology_invention   @map("technology-invention")
+  culture_history        @map("culture-history")
+  language_evolution     @map("language-evolution")
+  entertainment_sports   @map("entertainment-sports")
+  objects_materials      @map("objects-materials")
+  fashion_trends         @map("fashion-trends")
+  diet_health            @map("diet-health")
+  architecture_places    @map("architecture-places")
+  transportation_travel  @map("transportation-travel")
+  national_government    @map("national-government")
+  society_economy        @map("society-economy")
+  laws_regulations       @map("laws-regulations")
+  battlefield_contention @map("battlefield-contention")
+  social_roles           @map("social-roles")
+  behavior_actions       @map("behavior-actions")
+  physical_mental_health @map("physical-mental-health")
+  time_date              @map("time-date")
 }

@@ -58,6 +58,11 @@ export type Verification = $Result.DefaultSelection<Prisma.$VerificationPayload>
  * 
  */
 export type RateLimit = $Result.DefaultSelection<Prisma.$RateLimitPayload>
+/**
+ * Model EmailRateLimit
+ * 
+ */
+export type EmailRateLimit = $Result.DefaultSelection<Prisma.$EmailRateLimitPayload>
 
 /**
  * Enums
@@ -310,6 +315,16 @@ export class PrismaClient<
     * ```
     */
   get rateLimit(): Prisma.RateLimitDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.emailRateLimit`: Exposes CRUD operations for the **EmailRateLimit** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more EmailRateLimits
+    * const emailRateLimits = await prisma.emailRateLimit.findMany()
+    * ```
+    */
+  get emailRateLimit(): Prisma.EmailRateLimitDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -758,7 +773,8 @@ export namespace Prisma {
     Session: 'Session',
     Account: 'Account',
     Verification: 'Verification',
-    RateLimit: 'RateLimit'
+    RateLimit: 'RateLimit',
+    EmailRateLimit: 'EmailRateLimit'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -777,7 +793,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "article" | "category" | "user" | "markedArticles" | "readedTimeCount" | "session" | "account" | "verification" | "rateLimit"
+      modelProps: "article" | "category" | "user" | "markedArticles" | "readedTimeCount" | "session" | "account" | "verification" | "rateLimit" | "emailRateLimit"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1447,6 +1463,80 @@ export namespace Prisma {
           }
         }
       }
+      EmailRateLimit: {
+        payload: Prisma.$EmailRateLimitPayload<ExtArgs>
+        fields: Prisma.EmailRateLimitFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EmailRateLimitFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailRateLimitPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EmailRateLimitFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailRateLimitPayload>
+          }
+          findFirst: {
+            args: Prisma.EmailRateLimitFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailRateLimitPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EmailRateLimitFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailRateLimitPayload>
+          }
+          findMany: {
+            args: Prisma.EmailRateLimitFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailRateLimitPayload>[]
+          }
+          create: {
+            args: Prisma.EmailRateLimitCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailRateLimitPayload>
+          }
+          createMany: {
+            args: Prisma.EmailRateLimitCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EmailRateLimitCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailRateLimitPayload>[]
+          }
+          delete: {
+            args: Prisma.EmailRateLimitDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailRateLimitPayload>
+          }
+          update: {
+            args: Prisma.EmailRateLimitUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailRateLimitPayload>
+          }
+          deleteMany: {
+            args: Prisma.EmailRateLimitDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EmailRateLimitUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EmailRateLimitUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailRateLimitPayload>[]
+          }
+          upsert: {
+            args: Prisma.EmailRateLimitUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailRateLimitPayload>
+          }
+          aggregate: {
+            args: Prisma.EmailRateLimitAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEmailRateLimit>
+          }
+          groupBy: {
+            args: Prisma.EmailRateLimitGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EmailRateLimitGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EmailRateLimitCountArgs<ExtArgs>
+            result: $Utils.Optional<EmailRateLimitCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1540,6 +1630,7 @@ export namespace Prisma {
     account?: AccountOmit
     verification?: VerificationOmit
     rateLimit?: RateLimitOmit
+    emailRateLimit?: EmailRateLimitOmit
   }
 
   /* Types for Logging */
@@ -1634,13 +1725,13 @@ export namespace Prisma {
    */
 
   export type ArticleCountOutputType = {
-    ReadedTimeCount: number
     MarkedArticles: number
+    ReadedTimeCount: number
   }
 
   export type ArticleCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    ReadedTimeCount?: boolean | ArticleCountOutputTypeCountReadedTimeCountArgs
     MarkedArticles?: boolean | ArticleCountOutputTypeCountMarkedArticlesArgs
+    ReadedTimeCount?: boolean | ArticleCountOutputTypeCountReadedTimeCountArgs
   }
 
   // Custom InputTypes
@@ -1657,15 +1748,15 @@ export namespace Prisma {
   /**
    * ArticleCountOutputType without action
    */
-  export type ArticleCountOutputTypeCountReadedTimeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ReadedTimeCountWhereInput
+  export type ArticleCountOutputTypeCountMarkedArticlesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MarkedArticlesWhereInput
   }
 
   /**
    * ArticleCountOutputType without action
    */
-  export type ArticleCountOutputTypeCountMarkedArticlesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: MarkedArticlesWhereInput
+  export type ArticleCountOutputTypeCountReadedTimeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReadedTimeCountWhereInput
   }
 
 
@@ -1705,17 +1796,17 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
-    sessions: number
-    accounts: number
-    ReadedTimeCount: number
     MarkedArticles: number
+    ReadedTimeCount: number
+    accounts: number
+    sessions: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    sessions?: boolean | UserCountOutputTypeCountSessionsArgs
-    accounts?: boolean | UserCountOutputTypeCountAccountsArgs
-    ReadedTimeCount?: boolean | UserCountOutputTypeCountReadedTimeCountArgs
     MarkedArticles?: boolean | UserCountOutputTypeCountMarkedArticlesArgs
+    ReadedTimeCount?: boolean | UserCountOutputTypeCountReadedTimeCountArgs
+    accounts?: boolean | UserCountOutputTypeCountAccountsArgs
+    sessions?: boolean | UserCountOutputTypeCountSessionsArgs
   }
 
   // Custom InputTypes
@@ -1732,15 +1823,8 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SessionWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountAccountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: AccountWhereInput
+  export type UserCountOutputTypeCountMarkedArticlesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MarkedArticlesWhereInput
   }
 
   /**
@@ -1753,8 +1837,15 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountMarkedArticlesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: MarkedArticlesWhereInput
+  export type UserCountOutputTypeCountAccountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AccountWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SessionWhereInput
   }
 
 
@@ -1775,17 +1866,16 @@ export namespace Prisma {
   }
 
   export type ArticleAvgAggregateOutputType = {
-    id: number | null
     readTimes: number | null
+    id: number | null
   }
 
   export type ArticleSumAggregateOutputType = {
-    id: number | null
     readTimes: number | null
+    id: number | null
   }
 
   export type ArticleMinAggregateOutputType = {
-    id: number | null
     title: string | null
     imageUrl: string | null
     content: string | null
@@ -1793,11 +1883,11 @@ export namespace Prisma {
     readTimes: number | null
     createdAt: Date | null
     updatedAt: Date | null
+    id: number | null
     categoryName: $Enums.CategoryName | null
   }
 
   export type ArticleMaxAggregateOutputType = {
-    id: number | null
     title: string | null
     imageUrl: string | null
     content: string | null
@@ -1805,11 +1895,11 @@ export namespace Prisma {
     readTimes: number | null
     createdAt: Date | null
     updatedAt: Date | null
+    id: number | null
     categoryName: $Enums.CategoryName | null
   }
 
   export type ArticleCountAggregateOutputType = {
-    id: number
     title: number
     imageUrl: number
     content: number
@@ -1817,23 +1907,23 @@ export namespace Prisma {
     readTimes: number
     createdAt: number
     updatedAt: number
+    id: number
     categoryName: number
     _all: number
   }
 
 
   export type ArticleAvgAggregateInputType = {
-    id?: true
     readTimes?: true
+    id?: true
   }
 
   export type ArticleSumAggregateInputType = {
-    id?: true
     readTimes?: true
+    id?: true
   }
 
   export type ArticleMinAggregateInputType = {
-    id?: true
     title?: true
     imageUrl?: true
     content?: true
@@ -1841,11 +1931,11 @@ export namespace Prisma {
     readTimes?: true
     createdAt?: true
     updatedAt?: true
+    id?: true
     categoryName?: true
   }
 
   export type ArticleMaxAggregateInputType = {
-    id?: true
     title?: true
     imageUrl?: true
     content?: true
@@ -1853,11 +1943,11 @@ export namespace Prisma {
     readTimes?: true
     createdAt?: true
     updatedAt?: true
+    id?: true
     categoryName?: true
   }
 
   export type ArticleCountAggregateInputType = {
-    id?: true
     title?: true
     imageUrl?: true
     content?: true
@@ -1865,6 +1955,7 @@ export namespace Prisma {
     readTimes?: true
     createdAt?: true
     updatedAt?: true
+    id?: true
     categoryName?: true
     _all?: true
   }
@@ -1956,7 +2047,6 @@ export namespace Prisma {
   }
 
   export type ArticleGroupByOutputType = {
-    id: number
     title: string
     imageUrl: string
     content: string
@@ -1964,6 +2054,7 @@ export namespace Prisma {
     readTimes: number
     createdAt: Date
     updatedAt: Date
+    id: number
     categoryName: $Enums.CategoryName | null
     _count: ArticleCountAggregateOutputType | null
     _avg: ArticleAvgAggregateOutputType | null
@@ -1987,7 +2078,6 @@ export namespace Prisma {
 
 
   export type ArticleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
     title?: boolean
     imageUrl?: boolean
     content?: boolean
@@ -1995,15 +2085,15 @@ export namespace Prisma {
     readTimes?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    id?: boolean
     categoryName?: boolean
     Category?: boolean | Article$CategoryArgs<ExtArgs>
-    ReadedTimeCount?: boolean | Article$ReadedTimeCountArgs<ExtArgs>
     MarkedArticles?: boolean | Article$MarkedArticlesArgs<ExtArgs>
+    ReadedTimeCount?: boolean | Article$ReadedTimeCountArgs<ExtArgs>
     _count?: boolean | ArticleCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["article"]>
 
   export type ArticleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
     title?: boolean
     imageUrl?: boolean
     content?: boolean
@@ -2011,12 +2101,12 @@ export namespace Prisma {
     readTimes?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    id?: boolean
     categoryName?: boolean
     Category?: boolean | Article$CategoryArgs<ExtArgs>
   }, ExtArgs["result"]["article"]>
 
   export type ArticleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
     title?: boolean
     imageUrl?: boolean
     content?: boolean
@@ -2024,12 +2114,12 @@ export namespace Prisma {
     readTimes?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    id?: boolean
     categoryName?: boolean
     Category?: boolean | Article$CategoryArgs<ExtArgs>
   }, ExtArgs["result"]["article"]>
 
   export type ArticleSelectScalar = {
-    id?: boolean
     title?: boolean
     imageUrl?: boolean
     content?: boolean
@@ -2037,14 +2127,15 @@ export namespace Prisma {
     readTimes?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    id?: boolean
     categoryName?: boolean
   }
 
-  export type ArticleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "imageUrl" | "content" | "description" | "readTimes" | "createdAt" | "updatedAt" | "categoryName", ExtArgs["result"]["article"]>
+  export type ArticleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"title" | "imageUrl" | "content" | "description" | "readTimes" | "createdAt" | "updatedAt" | "id" | "categoryName", ExtArgs["result"]["article"]>
   export type ArticleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Category?: boolean | Article$CategoryArgs<ExtArgs>
-    ReadedTimeCount?: boolean | Article$ReadedTimeCountArgs<ExtArgs>
     MarkedArticles?: boolean | Article$MarkedArticlesArgs<ExtArgs>
+    ReadedTimeCount?: boolean | Article$ReadedTimeCountArgs<ExtArgs>
     _count?: boolean | ArticleCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ArticleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2058,11 +2149,10 @@ export namespace Prisma {
     name: "Article"
     objects: {
       Category: Prisma.$CategoryPayload<ExtArgs> | null
-      ReadedTimeCount: Prisma.$ReadedTimeCountPayload<ExtArgs>[]
       MarkedArticles: Prisma.$MarkedArticlesPayload<ExtArgs>[]
+      ReadedTimeCount: Prisma.$ReadedTimeCountPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: number
       title: string
       imageUrl: string
       content: string
@@ -2070,6 +2160,7 @@ export namespace Prisma {
       readTimes: number
       createdAt: Date
       updatedAt: Date
+      id: number
       categoryName: $Enums.CategoryName | null
     }, ExtArgs["result"]["article"]>
     composites: {}
@@ -2154,8 +2245,8 @@ export namespace Prisma {
      * // Get first 10 Articles
      * const articles = await prisma.article.findMany({ take: 10 })
      * 
-     * // Only select the `id`
-     * const articleWithIdOnly = await prisma.article.findMany({ select: { id: true } })
+     * // Only select the `title`
+     * const articleWithTitleOnly = await prisma.article.findMany({ select: { title: true } })
      * 
      */
     findMany<T extends ArticleFindManyArgs>(args?: SelectSubset<T, ArticleFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ArticlePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -2199,9 +2290,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Create many Articles and only return the `id`
-     * const articleWithIdOnly = await prisma.article.createManyAndReturn({
-     *   select: { id: true },
+     * // Create many Articles and only return the `title`
+     * const articleWithTitleOnly = await prisma.article.createManyAndReturn({
+     *   select: { title: true },
      *   data: [
      *     // ... provide data here
      *   ]
@@ -2290,9 +2381,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Articles and only return the `id`
-     * const articleWithIdOnly = await prisma.article.updateManyAndReturn({
-     *   select: { id: true },
+     * // Update zero or more Articles and only return the `title`
+     * const articleWithTitleOnly = await prisma.article.updateManyAndReturn({
+     *   select: { title: true },
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2466,8 +2557,8 @@ export namespace Prisma {
   export interface Prisma__ArticleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     Category<T extends Article$CategoryArgs<ExtArgs> = {}>(args?: Subset<T, Article$CategoryArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    ReadedTimeCount<T extends Article$ReadedTimeCountArgs<ExtArgs> = {}>(args?: Subset<T, Article$ReadedTimeCountArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReadedTimeCountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     MarkedArticles<T extends Article$MarkedArticlesArgs<ExtArgs> = {}>(args?: Subset<T, Article$MarkedArticlesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MarkedArticlesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    ReadedTimeCount<T extends Article$ReadedTimeCountArgs<ExtArgs> = {}>(args?: Subset<T, Article$ReadedTimeCountArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReadedTimeCountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2497,7 +2588,6 @@ export namespace Prisma {
    * Fields of the Article model
    */
   interface ArticleFieldRefs {
-    readonly id: FieldRef<"Article", 'Int'>
     readonly title: FieldRef<"Article", 'String'>
     readonly imageUrl: FieldRef<"Article", 'String'>
     readonly content: FieldRef<"Article", 'String'>
@@ -2505,6 +2595,7 @@ export namespace Prisma {
     readonly readTimes: FieldRef<"Article", 'Int'>
     readonly createdAt: FieldRef<"Article", 'DateTime'>
     readonly updatedAt: FieldRef<"Article", 'DateTime'>
+    readonly id: FieldRef<"Article", 'Int'>
     readonly categoryName: FieldRef<"Article", 'CategoryName'>
   }
     
@@ -2921,30 +3012,6 @@ export namespace Prisma {
   }
 
   /**
-   * Article.ReadedTimeCount
-   */
-  export type Article$ReadedTimeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReadedTimeCount
-     */
-    select?: ReadedTimeCountSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReadedTimeCount
-     */
-    omit?: ReadedTimeCountOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReadedTimeCountInclude<ExtArgs> | null
-    where?: ReadedTimeCountWhereInput
-    orderBy?: ReadedTimeCountOrderByWithRelationInput | ReadedTimeCountOrderByWithRelationInput[]
-    cursor?: ReadedTimeCountWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ReadedTimeCountScalarFieldEnum | ReadedTimeCountScalarFieldEnum[]
-  }
-
-  /**
    * Article.MarkedArticles
    */
   export type Article$MarkedArticlesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2966,6 +3033,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: MarkedArticlesScalarFieldEnum | MarkedArticlesScalarFieldEnum[]
+  }
+
+  /**
+   * Article.ReadedTimeCount
+   */
+  export type Article$ReadedTimeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReadedTimeCount
+     */
+    select?: ReadedTimeCountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReadedTimeCount
+     */
+    omit?: ReadedTimeCountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReadedTimeCountInclude<ExtArgs> | null
+    where?: ReadedTimeCountWhereInput
+    orderBy?: ReadedTimeCountOrderByWithRelationInput | ReadedTimeCountOrderByWithRelationInput[]
+    cursor?: ReadedTimeCountWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ReadedTimeCountScalarFieldEnum | ReadedTimeCountScalarFieldEnum[]
   }
 
   /**
@@ -4166,10 +4257,10 @@ export namespace Prisma {
     image?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    sessions?: boolean | User$sessionsArgs<ExtArgs>
-    accounts?: boolean | User$accountsArgs<ExtArgs>
-    ReadedTimeCount?: boolean | User$ReadedTimeCountArgs<ExtArgs>
     MarkedArticles?: boolean | User$MarkedArticlesArgs<ExtArgs>
+    ReadedTimeCount?: boolean | User$ReadedTimeCountArgs<ExtArgs>
+    accounts?: boolean | User$accountsArgs<ExtArgs>
+    sessions?: boolean | User$sessionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -4205,10 +4296,10 @@ export namespace Prisma {
 
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    sessions?: boolean | User$sessionsArgs<ExtArgs>
-    accounts?: boolean | User$accountsArgs<ExtArgs>
-    ReadedTimeCount?: boolean | User$ReadedTimeCountArgs<ExtArgs>
     MarkedArticles?: boolean | User$MarkedArticlesArgs<ExtArgs>
+    ReadedTimeCount?: boolean | User$ReadedTimeCountArgs<ExtArgs>
+    accounts?: boolean | User$accountsArgs<ExtArgs>
+    sessions?: boolean | User$sessionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -4217,10 +4308,10 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
-      sessions: Prisma.$SessionPayload<ExtArgs>[]
-      accounts: Prisma.$AccountPayload<ExtArgs>[]
-      ReadedTimeCount: Prisma.$ReadedTimeCountPayload<ExtArgs>[]
       MarkedArticles: Prisma.$MarkedArticlesPayload<ExtArgs>[]
+      ReadedTimeCount: Prisma.$ReadedTimeCountPayload<ExtArgs>[]
+      accounts: Prisma.$AccountPayload<ExtArgs>[]
+      sessions: Prisma.$SessionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4624,10 +4715,10 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    ReadedTimeCount<T extends User$ReadedTimeCountArgs<ExtArgs> = {}>(args?: Subset<T, User$ReadedTimeCountArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReadedTimeCountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     MarkedArticles<T extends User$MarkedArticlesArgs<ExtArgs> = {}>(args?: Subset<T, User$MarkedArticlesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MarkedArticlesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    ReadedTimeCount<T extends User$ReadedTimeCountArgs<ExtArgs> = {}>(args?: Subset<T, User$ReadedTimeCountArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReadedTimeCountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5052,51 +5143,27 @@ export namespace Prisma {
   }
 
   /**
-   * User.sessions
+   * User.MarkedArticles
    */
-  export type User$sessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$MarkedArticlesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Session
+     * Select specific fields to fetch from the MarkedArticles
      */
-    select?: SessionSelect<ExtArgs> | null
+    select?: MarkedArticlesSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Session
+     * Omit specific fields from the MarkedArticles
      */
-    omit?: SessionOmit<ExtArgs> | null
+    omit?: MarkedArticlesOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: SessionInclude<ExtArgs> | null
-    where?: SessionWhereInput
-    orderBy?: SessionOrderByWithRelationInput | SessionOrderByWithRelationInput[]
-    cursor?: SessionWhereUniqueInput
+    include?: MarkedArticlesInclude<ExtArgs> | null
+    where?: MarkedArticlesWhereInput
+    orderBy?: MarkedArticlesOrderByWithRelationInput | MarkedArticlesOrderByWithRelationInput[]
+    cursor?: MarkedArticlesWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
-  }
-
-  /**
-   * User.accounts
-   */
-  export type User$accountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Account
-     */
-    select?: AccountSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Account
-     */
-    omit?: AccountOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AccountInclude<ExtArgs> | null
-    where?: AccountWhereInput
-    orderBy?: AccountOrderByWithRelationInput | AccountOrderByWithRelationInput[]
-    cursor?: AccountWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: AccountScalarFieldEnum | AccountScalarFieldEnum[]
+    distinct?: MarkedArticlesScalarFieldEnum | MarkedArticlesScalarFieldEnum[]
   }
 
   /**
@@ -5124,27 +5191,51 @@ export namespace Prisma {
   }
 
   /**
-   * User.MarkedArticles
+   * User.accounts
    */
-  export type User$MarkedArticlesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$accountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the MarkedArticles
+     * Select specific fields to fetch from the Account
      */
-    select?: MarkedArticlesSelect<ExtArgs> | null
+    select?: AccountSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the MarkedArticles
+     * Omit specific fields from the Account
      */
-    omit?: MarkedArticlesOmit<ExtArgs> | null
+    omit?: AccountOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: MarkedArticlesInclude<ExtArgs> | null
-    where?: MarkedArticlesWhereInput
-    orderBy?: MarkedArticlesOrderByWithRelationInput | MarkedArticlesOrderByWithRelationInput[]
-    cursor?: MarkedArticlesWhereUniqueInput
+    include?: AccountInclude<ExtArgs> | null
+    where?: AccountWhereInput
+    orderBy?: AccountOrderByWithRelationInput | AccountOrderByWithRelationInput[]
+    cursor?: AccountWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: MarkedArticlesScalarFieldEnum | MarkedArticlesScalarFieldEnum[]
+    distinct?: AccountScalarFieldEnum | AccountScalarFieldEnum[]
+  }
+
+  /**
+   * User.sessions
+   */
+  export type User$sessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Session
+     */
+    omit?: SessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    where?: SessionWhereInput
+    orderBy?: SessionOrderByWithRelationInput | SessionOrderByWithRelationInput[]
+    cursor?: SessionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
   }
 
   /**
@@ -11627,6 +11718,1001 @@ export namespace Prisma {
 
 
   /**
+   * Model EmailRateLimit
+   */
+
+  export type AggregateEmailRateLimit = {
+    _count: EmailRateLimitCountAggregateOutputType | null
+    _min: EmailRateLimitMinAggregateOutputType | null
+    _max: EmailRateLimitMaxAggregateOutputType | null
+  }
+
+  export type EmailRateLimitMinAggregateOutputType = {
+    id: string | null
+    email: string | null
+    lastEmailSentAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EmailRateLimitMaxAggregateOutputType = {
+    id: string | null
+    email: string | null
+    lastEmailSentAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EmailRateLimitCountAggregateOutputType = {
+    id: number
+    email: number
+    lastEmailSentAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type EmailRateLimitMinAggregateInputType = {
+    id?: true
+    email?: true
+    lastEmailSentAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EmailRateLimitMaxAggregateInputType = {
+    id?: true
+    email?: true
+    lastEmailSentAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EmailRateLimitCountAggregateInputType = {
+    id?: true
+    email?: true
+    lastEmailSentAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type EmailRateLimitAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EmailRateLimit to aggregate.
+     */
+    where?: EmailRateLimitWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailRateLimits to fetch.
+     */
+    orderBy?: EmailRateLimitOrderByWithRelationInput | EmailRateLimitOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EmailRateLimitWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailRateLimits from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailRateLimits.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned EmailRateLimits
+    **/
+    _count?: true | EmailRateLimitCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EmailRateLimitMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EmailRateLimitMaxAggregateInputType
+  }
+
+  export type GetEmailRateLimitAggregateType<T extends EmailRateLimitAggregateArgs> = {
+        [P in keyof T & keyof AggregateEmailRateLimit]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEmailRateLimit[P]>
+      : GetScalarType<T[P], AggregateEmailRateLimit[P]>
+  }
+
+
+
+
+  export type EmailRateLimitGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EmailRateLimitWhereInput
+    orderBy?: EmailRateLimitOrderByWithAggregationInput | EmailRateLimitOrderByWithAggregationInput[]
+    by: EmailRateLimitScalarFieldEnum[] | EmailRateLimitScalarFieldEnum
+    having?: EmailRateLimitScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EmailRateLimitCountAggregateInputType | true
+    _min?: EmailRateLimitMinAggregateInputType
+    _max?: EmailRateLimitMaxAggregateInputType
+  }
+
+  export type EmailRateLimitGroupByOutputType = {
+    id: string
+    email: string
+    lastEmailSentAt: Date
+    createdAt: Date
+    updatedAt: Date
+    _count: EmailRateLimitCountAggregateOutputType | null
+    _min: EmailRateLimitMinAggregateOutputType | null
+    _max: EmailRateLimitMaxAggregateOutputType | null
+  }
+
+  type GetEmailRateLimitGroupByPayload<T extends EmailRateLimitGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EmailRateLimitGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EmailRateLimitGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EmailRateLimitGroupByOutputType[P]>
+            : GetScalarType<T[P], EmailRateLimitGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EmailRateLimitSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email?: boolean
+    lastEmailSentAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["emailRateLimit"]>
+
+  export type EmailRateLimitSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email?: boolean
+    lastEmailSentAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["emailRateLimit"]>
+
+  export type EmailRateLimitSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email?: boolean
+    lastEmailSentAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["emailRateLimit"]>
+
+  export type EmailRateLimitSelectScalar = {
+    id?: boolean
+    email?: boolean
+    lastEmailSentAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type EmailRateLimitOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "lastEmailSentAt" | "createdAt" | "updatedAt", ExtArgs["result"]["emailRateLimit"]>
+
+  export type $EmailRateLimitPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "EmailRateLimit"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      email: string
+      lastEmailSentAt: Date
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["emailRateLimit"]>
+    composites: {}
+  }
+
+  type EmailRateLimitGetPayload<S extends boolean | null | undefined | EmailRateLimitDefaultArgs> = $Result.GetResult<Prisma.$EmailRateLimitPayload, S>
+
+  type EmailRateLimitCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EmailRateLimitFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EmailRateLimitCountAggregateInputType | true
+    }
+
+  export interface EmailRateLimitDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EmailRateLimit'], meta: { name: 'EmailRateLimit' } }
+    /**
+     * Find zero or one EmailRateLimit that matches the filter.
+     * @param {EmailRateLimitFindUniqueArgs} args - Arguments to find a EmailRateLimit
+     * @example
+     * // Get one EmailRateLimit
+     * const emailRateLimit = await prisma.emailRateLimit.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EmailRateLimitFindUniqueArgs>(args: SelectSubset<T, EmailRateLimitFindUniqueArgs<ExtArgs>>): Prisma__EmailRateLimitClient<$Result.GetResult<Prisma.$EmailRateLimitPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one EmailRateLimit that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EmailRateLimitFindUniqueOrThrowArgs} args - Arguments to find a EmailRateLimit
+     * @example
+     * // Get one EmailRateLimit
+     * const emailRateLimit = await prisma.emailRateLimit.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EmailRateLimitFindUniqueOrThrowArgs>(args: SelectSubset<T, EmailRateLimitFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EmailRateLimitClient<$Result.GetResult<Prisma.$EmailRateLimitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EmailRateLimit that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailRateLimitFindFirstArgs} args - Arguments to find a EmailRateLimit
+     * @example
+     * // Get one EmailRateLimit
+     * const emailRateLimit = await prisma.emailRateLimit.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EmailRateLimitFindFirstArgs>(args?: SelectSubset<T, EmailRateLimitFindFirstArgs<ExtArgs>>): Prisma__EmailRateLimitClient<$Result.GetResult<Prisma.$EmailRateLimitPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EmailRateLimit that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailRateLimitFindFirstOrThrowArgs} args - Arguments to find a EmailRateLimit
+     * @example
+     * // Get one EmailRateLimit
+     * const emailRateLimit = await prisma.emailRateLimit.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EmailRateLimitFindFirstOrThrowArgs>(args?: SelectSubset<T, EmailRateLimitFindFirstOrThrowArgs<ExtArgs>>): Prisma__EmailRateLimitClient<$Result.GetResult<Prisma.$EmailRateLimitPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more EmailRateLimits that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailRateLimitFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EmailRateLimits
+     * const emailRateLimits = await prisma.emailRateLimit.findMany()
+     * 
+     * // Get first 10 EmailRateLimits
+     * const emailRateLimits = await prisma.emailRateLimit.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const emailRateLimitWithIdOnly = await prisma.emailRateLimit.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EmailRateLimitFindManyArgs>(args?: SelectSubset<T, EmailRateLimitFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailRateLimitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a EmailRateLimit.
+     * @param {EmailRateLimitCreateArgs} args - Arguments to create a EmailRateLimit.
+     * @example
+     * // Create one EmailRateLimit
+     * const EmailRateLimit = await prisma.emailRateLimit.create({
+     *   data: {
+     *     // ... data to create a EmailRateLimit
+     *   }
+     * })
+     * 
+     */
+    create<T extends EmailRateLimitCreateArgs>(args: SelectSubset<T, EmailRateLimitCreateArgs<ExtArgs>>): Prisma__EmailRateLimitClient<$Result.GetResult<Prisma.$EmailRateLimitPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many EmailRateLimits.
+     * @param {EmailRateLimitCreateManyArgs} args - Arguments to create many EmailRateLimits.
+     * @example
+     * // Create many EmailRateLimits
+     * const emailRateLimit = await prisma.emailRateLimit.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EmailRateLimitCreateManyArgs>(args?: SelectSubset<T, EmailRateLimitCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many EmailRateLimits and returns the data saved in the database.
+     * @param {EmailRateLimitCreateManyAndReturnArgs} args - Arguments to create many EmailRateLimits.
+     * @example
+     * // Create many EmailRateLimits
+     * const emailRateLimit = await prisma.emailRateLimit.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many EmailRateLimits and only return the `id`
+     * const emailRateLimitWithIdOnly = await prisma.emailRateLimit.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EmailRateLimitCreateManyAndReturnArgs>(args?: SelectSubset<T, EmailRateLimitCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailRateLimitPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a EmailRateLimit.
+     * @param {EmailRateLimitDeleteArgs} args - Arguments to delete one EmailRateLimit.
+     * @example
+     * // Delete one EmailRateLimit
+     * const EmailRateLimit = await prisma.emailRateLimit.delete({
+     *   where: {
+     *     // ... filter to delete one EmailRateLimit
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EmailRateLimitDeleteArgs>(args: SelectSubset<T, EmailRateLimitDeleteArgs<ExtArgs>>): Prisma__EmailRateLimitClient<$Result.GetResult<Prisma.$EmailRateLimitPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one EmailRateLimit.
+     * @param {EmailRateLimitUpdateArgs} args - Arguments to update one EmailRateLimit.
+     * @example
+     * // Update one EmailRateLimit
+     * const emailRateLimit = await prisma.emailRateLimit.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EmailRateLimitUpdateArgs>(args: SelectSubset<T, EmailRateLimitUpdateArgs<ExtArgs>>): Prisma__EmailRateLimitClient<$Result.GetResult<Prisma.$EmailRateLimitPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more EmailRateLimits.
+     * @param {EmailRateLimitDeleteManyArgs} args - Arguments to filter EmailRateLimits to delete.
+     * @example
+     * // Delete a few EmailRateLimits
+     * const { count } = await prisma.emailRateLimit.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EmailRateLimitDeleteManyArgs>(args?: SelectSubset<T, EmailRateLimitDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EmailRateLimits.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailRateLimitUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EmailRateLimits
+     * const emailRateLimit = await prisma.emailRateLimit.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EmailRateLimitUpdateManyArgs>(args: SelectSubset<T, EmailRateLimitUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EmailRateLimits and returns the data updated in the database.
+     * @param {EmailRateLimitUpdateManyAndReturnArgs} args - Arguments to update many EmailRateLimits.
+     * @example
+     * // Update many EmailRateLimits
+     * const emailRateLimit = await prisma.emailRateLimit.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more EmailRateLimits and only return the `id`
+     * const emailRateLimitWithIdOnly = await prisma.emailRateLimit.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EmailRateLimitUpdateManyAndReturnArgs>(args: SelectSubset<T, EmailRateLimitUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailRateLimitPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one EmailRateLimit.
+     * @param {EmailRateLimitUpsertArgs} args - Arguments to update or create a EmailRateLimit.
+     * @example
+     * // Update or create a EmailRateLimit
+     * const emailRateLimit = await prisma.emailRateLimit.upsert({
+     *   create: {
+     *     // ... data to create a EmailRateLimit
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EmailRateLimit we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EmailRateLimitUpsertArgs>(args: SelectSubset<T, EmailRateLimitUpsertArgs<ExtArgs>>): Prisma__EmailRateLimitClient<$Result.GetResult<Prisma.$EmailRateLimitPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of EmailRateLimits.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailRateLimitCountArgs} args - Arguments to filter EmailRateLimits to count.
+     * @example
+     * // Count the number of EmailRateLimits
+     * const count = await prisma.emailRateLimit.count({
+     *   where: {
+     *     // ... the filter for the EmailRateLimits we want to count
+     *   }
+     * })
+    **/
+    count<T extends EmailRateLimitCountArgs>(
+      args?: Subset<T, EmailRateLimitCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EmailRateLimitCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a EmailRateLimit.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailRateLimitAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EmailRateLimitAggregateArgs>(args: Subset<T, EmailRateLimitAggregateArgs>): Prisma.PrismaPromise<GetEmailRateLimitAggregateType<T>>
+
+    /**
+     * Group by EmailRateLimit.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailRateLimitGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EmailRateLimitGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EmailRateLimitGroupByArgs['orderBy'] }
+        : { orderBy?: EmailRateLimitGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EmailRateLimitGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEmailRateLimitGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the EmailRateLimit model
+   */
+  readonly fields: EmailRateLimitFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for EmailRateLimit.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EmailRateLimitClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the EmailRateLimit model
+   */
+  interface EmailRateLimitFieldRefs {
+    readonly id: FieldRef<"EmailRateLimit", 'String'>
+    readonly email: FieldRef<"EmailRateLimit", 'String'>
+    readonly lastEmailSentAt: FieldRef<"EmailRateLimit", 'DateTime'>
+    readonly createdAt: FieldRef<"EmailRateLimit", 'DateTime'>
+    readonly updatedAt: FieldRef<"EmailRateLimit", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * EmailRateLimit findUnique
+   */
+  export type EmailRateLimitFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailRateLimit
+     */
+    select?: EmailRateLimitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailRateLimit
+     */
+    omit?: EmailRateLimitOmit<ExtArgs> | null
+    /**
+     * Filter, which EmailRateLimit to fetch.
+     */
+    where: EmailRateLimitWhereUniqueInput
+  }
+
+  /**
+   * EmailRateLimit findUniqueOrThrow
+   */
+  export type EmailRateLimitFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailRateLimit
+     */
+    select?: EmailRateLimitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailRateLimit
+     */
+    omit?: EmailRateLimitOmit<ExtArgs> | null
+    /**
+     * Filter, which EmailRateLimit to fetch.
+     */
+    where: EmailRateLimitWhereUniqueInput
+  }
+
+  /**
+   * EmailRateLimit findFirst
+   */
+  export type EmailRateLimitFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailRateLimit
+     */
+    select?: EmailRateLimitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailRateLimit
+     */
+    omit?: EmailRateLimitOmit<ExtArgs> | null
+    /**
+     * Filter, which EmailRateLimit to fetch.
+     */
+    where?: EmailRateLimitWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailRateLimits to fetch.
+     */
+    orderBy?: EmailRateLimitOrderByWithRelationInput | EmailRateLimitOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EmailRateLimits.
+     */
+    cursor?: EmailRateLimitWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailRateLimits from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailRateLimits.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EmailRateLimits.
+     */
+    distinct?: EmailRateLimitScalarFieldEnum | EmailRateLimitScalarFieldEnum[]
+  }
+
+  /**
+   * EmailRateLimit findFirstOrThrow
+   */
+  export type EmailRateLimitFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailRateLimit
+     */
+    select?: EmailRateLimitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailRateLimit
+     */
+    omit?: EmailRateLimitOmit<ExtArgs> | null
+    /**
+     * Filter, which EmailRateLimit to fetch.
+     */
+    where?: EmailRateLimitWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailRateLimits to fetch.
+     */
+    orderBy?: EmailRateLimitOrderByWithRelationInput | EmailRateLimitOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EmailRateLimits.
+     */
+    cursor?: EmailRateLimitWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailRateLimits from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailRateLimits.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EmailRateLimits.
+     */
+    distinct?: EmailRateLimitScalarFieldEnum | EmailRateLimitScalarFieldEnum[]
+  }
+
+  /**
+   * EmailRateLimit findMany
+   */
+  export type EmailRateLimitFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailRateLimit
+     */
+    select?: EmailRateLimitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailRateLimit
+     */
+    omit?: EmailRateLimitOmit<ExtArgs> | null
+    /**
+     * Filter, which EmailRateLimits to fetch.
+     */
+    where?: EmailRateLimitWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailRateLimits to fetch.
+     */
+    orderBy?: EmailRateLimitOrderByWithRelationInput | EmailRateLimitOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing EmailRateLimits.
+     */
+    cursor?: EmailRateLimitWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailRateLimits from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailRateLimits.
+     */
+    skip?: number
+    distinct?: EmailRateLimitScalarFieldEnum | EmailRateLimitScalarFieldEnum[]
+  }
+
+  /**
+   * EmailRateLimit create
+   */
+  export type EmailRateLimitCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailRateLimit
+     */
+    select?: EmailRateLimitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailRateLimit
+     */
+    omit?: EmailRateLimitOmit<ExtArgs> | null
+    /**
+     * The data needed to create a EmailRateLimit.
+     */
+    data: XOR<EmailRateLimitCreateInput, EmailRateLimitUncheckedCreateInput>
+  }
+
+  /**
+   * EmailRateLimit createMany
+   */
+  export type EmailRateLimitCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many EmailRateLimits.
+     */
+    data: EmailRateLimitCreateManyInput | EmailRateLimitCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EmailRateLimit createManyAndReturn
+   */
+  export type EmailRateLimitCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailRateLimit
+     */
+    select?: EmailRateLimitSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailRateLimit
+     */
+    omit?: EmailRateLimitOmit<ExtArgs> | null
+    /**
+     * The data used to create many EmailRateLimits.
+     */
+    data: EmailRateLimitCreateManyInput | EmailRateLimitCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EmailRateLimit update
+   */
+  export type EmailRateLimitUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailRateLimit
+     */
+    select?: EmailRateLimitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailRateLimit
+     */
+    omit?: EmailRateLimitOmit<ExtArgs> | null
+    /**
+     * The data needed to update a EmailRateLimit.
+     */
+    data: XOR<EmailRateLimitUpdateInput, EmailRateLimitUncheckedUpdateInput>
+    /**
+     * Choose, which EmailRateLimit to update.
+     */
+    where: EmailRateLimitWhereUniqueInput
+  }
+
+  /**
+   * EmailRateLimit updateMany
+   */
+  export type EmailRateLimitUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update EmailRateLimits.
+     */
+    data: XOR<EmailRateLimitUpdateManyMutationInput, EmailRateLimitUncheckedUpdateManyInput>
+    /**
+     * Filter which EmailRateLimits to update
+     */
+    where?: EmailRateLimitWhereInput
+    /**
+     * Limit how many EmailRateLimits to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmailRateLimit updateManyAndReturn
+   */
+  export type EmailRateLimitUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailRateLimit
+     */
+    select?: EmailRateLimitSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailRateLimit
+     */
+    omit?: EmailRateLimitOmit<ExtArgs> | null
+    /**
+     * The data used to update EmailRateLimits.
+     */
+    data: XOR<EmailRateLimitUpdateManyMutationInput, EmailRateLimitUncheckedUpdateManyInput>
+    /**
+     * Filter which EmailRateLimits to update
+     */
+    where?: EmailRateLimitWhereInput
+    /**
+     * Limit how many EmailRateLimits to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmailRateLimit upsert
+   */
+  export type EmailRateLimitUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailRateLimit
+     */
+    select?: EmailRateLimitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailRateLimit
+     */
+    omit?: EmailRateLimitOmit<ExtArgs> | null
+    /**
+     * The filter to search for the EmailRateLimit to update in case it exists.
+     */
+    where: EmailRateLimitWhereUniqueInput
+    /**
+     * In case the EmailRateLimit found by the `where` argument doesn't exist, create a new EmailRateLimit with this data.
+     */
+    create: XOR<EmailRateLimitCreateInput, EmailRateLimitUncheckedCreateInput>
+    /**
+     * In case the EmailRateLimit was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EmailRateLimitUpdateInput, EmailRateLimitUncheckedUpdateInput>
+  }
+
+  /**
+   * EmailRateLimit delete
+   */
+  export type EmailRateLimitDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailRateLimit
+     */
+    select?: EmailRateLimitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailRateLimit
+     */
+    omit?: EmailRateLimitOmit<ExtArgs> | null
+    /**
+     * Filter which EmailRateLimit to delete.
+     */
+    where: EmailRateLimitWhereUniqueInput
+  }
+
+  /**
+   * EmailRateLimit deleteMany
+   */
+  export type EmailRateLimitDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EmailRateLimits to delete
+     */
+    where?: EmailRateLimitWhereInput
+    /**
+     * Limit how many EmailRateLimits to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmailRateLimit without action
+   */
+  export type EmailRateLimitDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailRateLimit
+     */
+    select?: EmailRateLimitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailRateLimit
+     */
+    omit?: EmailRateLimitOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -11641,7 +12727,6 @@ export namespace Prisma {
 
 
   export const ArticleScalarFieldEnum: {
-    id: 'id',
     title: 'title',
     imageUrl: 'imageUrl',
     content: 'content',
@@ -11649,6 +12734,7 @@ export namespace Prisma {
     readTimes: 'readTimes',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
+    id: 'id',
     categoryName: 'categoryName'
   };
 
@@ -11749,6 +12835,17 @@ export namespace Prisma {
   export type RateLimitScalarFieldEnum = (typeof RateLimitScalarFieldEnum)[keyof typeof RateLimitScalarFieldEnum]
 
 
+  export const EmailRateLimitScalarFieldEnum: {
+    id: 'id',
+    email: 'email',
+    lastEmailSentAt: 'lastEmailSentAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type EmailRateLimitScalarFieldEnum = (typeof EmailRateLimitScalarFieldEnum)[keyof typeof EmailRateLimitScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -11779,20 +12876,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Int'
-   */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-  /**
-   * Reference to a field of type 'Int[]'
-   */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
-
-
-  /**
    * Reference to a field of type 'String'
    */
   export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
@@ -11803,6 +12886,20 @@ export namespace Prisma {
    * Reference to a field of type 'String[]'
    */
   export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
 
 
@@ -11876,7 +12973,6 @@ export namespace Prisma {
     AND?: ArticleWhereInput | ArticleWhereInput[]
     OR?: ArticleWhereInput[]
     NOT?: ArticleWhereInput | ArticleWhereInput[]
-    id?: IntFilter<"Article"> | number
     title?: StringFilter<"Article"> | string
     imageUrl?: StringFilter<"Article"> | string
     content?: StringFilter<"Article"> | string
@@ -11884,14 +12980,14 @@ export namespace Prisma {
     readTimes?: IntFilter<"Article"> | number
     createdAt?: DateTimeFilter<"Article"> | Date | string
     updatedAt?: DateTimeFilter<"Article"> | Date | string
+    id?: IntFilter<"Article"> | number
     categoryName?: EnumCategoryNameNullableFilter<"Article"> | $Enums.CategoryName | null
     Category?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
-    ReadedTimeCount?: ReadedTimeCountListRelationFilter
     MarkedArticles?: MarkedArticlesListRelationFilter
+    ReadedTimeCount?: ReadedTimeCountListRelationFilter
   }
 
   export type ArticleOrderByWithRelationInput = {
-    id?: SortOrder
     title?: SortOrder
     imageUrl?: SortOrder
     content?: SortOrder
@@ -11899,10 +12995,11 @@ export namespace Prisma {
     readTimes?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    id?: SortOrder
     categoryName?: SortOrderInput | SortOrder
     Category?: CategoryOrderByWithRelationInput
-    ReadedTimeCount?: ReadedTimeCountOrderByRelationAggregateInput
     MarkedArticles?: MarkedArticlesOrderByRelationAggregateInput
+    ReadedTimeCount?: ReadedTimeCountOrderByRelationAggregateInput
   }
 
   export type ArticleWhereUniqueInput = Prisma.AtLeast<{
@@ -11919,12 +13016,11 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Article"> | Date | string
     categoryName?: EnumCategoryNameNullableFilter<"Article"> | $Enums.CategoryName | null
     Category?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
-    ReadedTimeCount?: ReadedTimeCountListRelationFilter
     MarkedArticles?: MarkedArticlesListRelationFilter
+    ReadedTimeCount?: ReadedTimeCountListRelationFilter
   }, "id">
 
   export type ArticleOrderByWithAggregationInput = {
-    id?: SortOrder
     title?: SortOrder
     imageUrl?: SortOrder
     content?: SortOrder
@@ -11932,6 +13028,7 @@ export namespace Prisma {
     readTimes?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    id?: SortOrder
     categoryName?: SortOrderInput | SortOrder
     _count?: ArticleCountOrderByAggregateInput
     _avg?: ArticleAvgOrderByAggregateInput
@@ -11944,7 +13041,6 @@ export namespace Prisma {
     AND?: ArticleScalarWhereWithAggregatesInput | ArticleScalarWhereWithAggregatesInput[]
     OR?: ArticleScalarWhereWithAggregatesInput[]
     NOT?: ArticleScalarWhereWithAggregatesInput | ArticleScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"Article"> | number
     title?: StringWithAggregatesFilter<"Article"> | string
     imageUrl?: StringWithAggregatesFilter<"Article"> | string
     content?: StringWithAggregatesFilter<"Article"> | string
@@ -11952,6 +13048,7 @@ export namespace Prisma {
     readTimes?: IntWithAggregatesFilter<"Article"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Article"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Article"> | Date | string
+    id?: IntWithAggregatesFilter<"Article"> | number
     categoryName?: EnumCategoryNameNullableWithAggregatesFilter<"Article"> | $Enums.CategoryName | null
   }
 
@@ -12001,10 +13098,10 @@ export namespace Prisma {
     image?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-    sessions?: SessionListRelationFilter
-    accounts?: AccountListRelationFilter
-    ReadedTimeCount?: ReadedTimeCountListRelationFilter
     MarkedArticles?: MarkedArticlesListRelationFilter
+    ReadedTimeCount?: ReadedTimeCountListRelationFilter
+    accounts?: AccountListRelationFilter
+    sessions?: SessionListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -12015,10 +13112,10 @@ export namespace Prisma {
     image?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    sessions?: SessionOrderByRelationAggregateInput
-    accounts?: AccountOrderByRelationAggregateInput
-    ReadedTimeCount?: ReadedTimeCountOrderByRelationAggregateInput
     MarkedArticles?: MarkedArticlesOrderByRelationAggregateInput
+    ReadedTimeCount?: ReadedTimeCountOrderByRelationAggregateInput
+    accounts?: AccountOrderByRelationAggregateInput
+    sessions?: SessionOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -12032,10 +13129,10 @@ export namespace Prisma {
     image?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-    sessions?: SessionListRelationFilter
-    accounts?: AccountListRelationFilter
-    ReadedTimeCount?: ReadedTimeCountListRelationFilter
     MarkedArticles?: MarkedArticlesListRelationFilter
+    ReadedTimeCount?: ReadedTimeCountListRelationFilter
+    accounts?: AccountListRelationFilter
+    sessions?: SessionListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -12442,6 +13539,58 @@ export namespace Prisma {
     lastRequest?: BigIntNullableWithAggregatesFilter<"RateLimit"> | bigint | number | null
   }
 
+  export type EmailRateLimitWhereInput = {
+    AND?: EmailRateLimitWhereInput | EmailRateLimitWhereInput[]
+    OR?: EmailRateLimitWhereInput[]
+    NOT?: EmailRateLimitWhereInput | EmailRateLimitWhereInput[]
+    id?: StringFilter<"EmailRateLimit"> | string
+    email?: StringFilter<"EmailRateLimit"> | string
+    lastEmailSentAt?: DateTimeFilter<"EmailRateLimit"> | Date | string
+    createdAt?: DateTimeFilter<"EmailRateLimit"> | Date | string
+    updatedAt?: DateTimeFilter<"EmailRateLimit"> | Date | string
+  }
+
+  export type EmailRateLimitOrderByWithRelationInput = {
+    id?: SortOrder
+    email?: SortOrder
+    lastEmailSentAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EmailRateLimitWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    email?: string
+    AND?: EmailRateLimitWhereInput | EmailRateLimitWhereInput[]
+    OR?: EmailRateLimitWhereInput[]
+    NOT?: EmailRateLimitWhereInput | EmailRateLimitWhereInput[]
+    lastEmailSentAt?: DateTimeFilter<"EmailRateLimit"> | Date | string
+    createdAt?: DateTimeFilter<"EmailRateLimit"> | Date | string
+    updatedAt?: DateTimeFilter<"EmailRateLimit"> | Date | string
+  }, "id" | "email">
+
+  export type EmailRateLimitOrderByWithAggregationInput = {
+    id?: SortOrder
+    email?: SortOrder
+    lastEmailSentAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: EmailRateLimitCountOrderByAggregateInput
+    _max?: EmailRateLimitMaxOrderByAggregateInput
+    _min?: EmailRateLimitMinOrderByAggregateInput
+  }
+
+  export type EmailRateLimitScalarWhereWithAggregatesInput = {
+    AND?: EmailRateLimitScalarWhereWithAggregatesInput | EmailRateLimitScalarWhereWithAggregatesInput[]
+    OR?: EmailRateLimitScalarWhereWithAggregatesInput[]
+    NOT?: EmailRateLimitScalarWhereWithAggregatesInput | EmailRateLimitScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"EmailRateLimit"> | string
+    email?: StringWithAggregatesFilter<"EmailRateLimit"> | string
+    lastEmailSentAt?: DateTimeWithAggregatesFilter<"EmailRateLimit"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"EmailRateLimit"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"EmailRateLimit"> | Date | string
+  }
+
   export type ArticleCreateInput = {
     title: string
     imageUrl: string
@@ -12451,12 +13600,11 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     Category?: CategoryCreateNestedOneWithoutArticlesInput
-    ReadedTimeCount?: ReadedTimeCountCreateNestedManyWithoutArticleInput
     MarkedArticles?: MarkedArticlesCreateNestedManyWithoutArticleInput
+    ReadedTimeCount?: ReadedTimeCountCreateNestedManyWithoutArticleInput
   }
 
   export type ArticleUncheckedCreateInput = {
-    id?: number
     title: string
     imageUrl: string
     content: string
@@ -12464,9 +13612,10 @@ export namespace Prisma {
     readTimes?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    id?: number
     categoryName?: $Enums.CategoryName | null
-    ReadedTimeCount?: ReadedTimeCountUncheckedCreateNestedManyWithoutArticleInput
     MarkedArticles?: MarkedArticlesUncheckedCreateNestedManyWithoutArticleInput
+    ReadedTimeCount?: ReadedTimeCountUncheckedCreateNestedManyWithoutArticleInput
   }
 
   export type ArticleUpdateInput = {
@@ -12478,12 +13627,11 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Category?: CategoryUpdateOneWithoutArticlesNestedInput
-    ReadedTimeCount?: ReadedTimeCountUpdateManyWithoutArticleNestedInput
     MarkedArticles?: MarkedArticlesUpdateManyWithoutArticleNestedInput
+    ReadedTimeCount?: ReadedTimeCountUpdateManyWithoutArticleNestedInput
   }
 
   export type ArticleUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
@@ -12491,13 +13639,13 @@ export namespace Prisma {
     readTimes?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    id?: IntFieldUpdateOperationsInput | number
     categoryName?: NullableEnumCategoryNameFieldUpdateOperationsInput | $Enums.CategoryName | null
-    ReadedTimeCount?: ReadedTimeCountUncheckedUpdateManyWithoutArticleNestedInput
     MarkedArticles?: MarkedArticlesUncheckedUpdateManyWithoutArticleNestedInput
+    ReadedTimeCount?: ReadedTimeCountUncheckedUpdateManyWithoutArticleNestedInput
   }
 
   export type ArticleCreateManyInput = {
-    id?: number
     title: string
     imageUrl: string
     content: string
@@ -12505,6 +13653,7 @@ export namespace Prisma {
     readTimes?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    id?: number
     categoryName?: $Enums.CategoryName | null
   }
 
@@ -12519,7 +13668,6 @@ export namespace Prisma {
   }
 
   export type ArticleUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
@@ -12527,6 +13675,7 @@ export namespace Prisma {
     readTimes?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    id?: IntFieldUpdateOperationsInput | number
     categoryName?: NullableEnumCategoryNameFieldUpdateOperationsInput | $Enums.CategoryName | null
   }
 
@@ -12570,10 +13719,10 @@ export namespace Prisma {
     image?: string | null
     createdAt: Date | string
     updatedAt: Date | string
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    accounts?: AccountCreateNestedManyWithoutUserInput
-    ReadedTimeCount?: ReadedTimeCountCreateNestedManyWithoutUserInput
     MarkedArticles?: MarkedArticlesCreateNestedManyWithoutUserInput
+    ReadedTimeCount?: ReadedTimeCountCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -12584,10 +13733,10 @@ export namespace Prisma {
     image?: string | null
     createdAt: Date | string
     updatedAt: Date | string
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    ReadedTimeCount?: ReadedTimeCountUncheckedCreateNestedManyWithoutUserInput
     MarkedArticles?: MarkedArticlesUncheckedCreateNestedManyWithoutUserInput
+    ReadedTimeCount?: ReadedTimeCountUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -12598,10 +13747,10 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    accounts?: AccountUpdateManyWithoutUserNestedInput
-    ReadedTimeCount?: ReadedTimeCountUpdateManyWithoutUserNestedInput
     MarkedArticles?: MarkedArticlesUpdateManyWithoutUserNestedInput
+    ReadedTimeCount?: ReadedTimeCountUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -12612,10 +13761,10 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    ReadedTimeCount?: ReadedTimeCountUncheckedUpdateManyWithoutUserNestedInput
     MarkedArticles?: MarkedArticlesUncheckedUpdateManyWithoutUserNestedInput
+    ReadedTimeCount?: ReadedTimeCountUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -13029,15 +14178,60 @@ export namespace Prisma {
     lastRequest?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   }
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
+  export type EmailRateLimitCreateInput = {
+    id?: string
+    email: string
+    lastEmailSentAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmailRateLimitUncheckedCreateInput = {
+    id?: string
+    email: string
+    lastEmailSentAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmailRateLimitUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    lastEmailSentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailRateLimitUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    lastEmailSentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailRateLimitCreateManyInput = {
+    id?: string
+    email: string
+    lastEmailSentAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmailRateLimitUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    lastEmailSentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailRateLimitUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    lastEmailSentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -13053,6 +14247,17 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type DateTimeFilter<$PrismaModel = never> = {
@@ -13078,16 +14283,16 @@ export namespace Prisma {
     isNot?: CategoryWhereInput | null
   }
 
-  export type ReadedTimeCountListRelationFilter = {
-    every?: ReadedTimeCountWhereInput
-    some?: ReadedTimeCountWhereInput
-    none?: ReadedTimeCountWhereInput
-  }
-
   export type MarkedArticlesListRelationFilter = {
     every?: MarkedArticlesWhereInput
     some?: MarkedArticlesWhereInput
     none?: MarkedArticlesWhereInput
+  }
+
+  export type ReadedTimeCountListRelationFilter = {
+    every?: ReadedTimeCountWhereInput
+    some?: ReadedTimeCountWhereInput
+    none?: ReadedTimeCountWhereInput
   }
 
   export type SortOrderInput = {
@@ -13095,16 +14300,15 @@ export namespace Prisma {
     nulls?: NullsOrder
   }
 
-  export type ReadedTimeCountOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type MarkedArticlesOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
+  export type ReadedTimeCountOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type ArticleCountOrderByAggregateInput = {
-    id?: SortOrder
     title?: SortOrder
     imageUrl?: SortOrder
     content?: SortOrder
@@ -13112,16 +14316,16 @@ export namespace Prisma {
     readTimes?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    id?: SortOrder
     categoryName?: SortOrder
   }
 
   export type ArticleAvgOrderByAggregateInput = {
-    id?: SortOrder
     readTimes?: SortOrder
+    id?: SortOrder
   }
 
   export type ArticleMaxOrderByAggregateInput = {
-    id?: SortOrder
     title?: SortOrder
     imageUrl?: SortOrder
     content?: SortOrder
@@ -13129,11 +14333,11 @@ export namespace Prisma {
     readTimes?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    id?: SortOrder
     categoryName?: SortOrder
   }
 
   export type ArticleMinOrderByAggregateInput = {
-    id?: SortOrder
     title?: SortOrder
     imageUrl?: SortOrder
     content?: SortOrder
@@ -13141,28 +14345,13 @@ export namespace Prisma {
     readTimes?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    id?: SortOrder
     categoryName?: SortOrder
   }
 
   export type ArticleSumOrderByAggregateInput = {
-    id?: SortOrder
     readTimes?: SortOrder
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
+    id?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -13181,6 +14370,22 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -13266,23 +14471,23 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type SessionListRelationFilter = {
-    every?: SessionWhereInput
-    some?: SessionWhereInput
-    none?: SessionWhereInput
-  }
-
   export type AccountListRelationFilter = {
     every?: AccountWhereInput
     some?: AccountWhereInput
     none?: AccountWhereInput
   }
 
-  export type SessionOrderByRelationAggregateInput = {
-    _count?: SortOrder
+  export type SessionListRelationFilter = {
+    every?: SessionWhereInput
+    some?: SessionWhereInput
+    none?: SessionWhereInput
   }
 
   export type AccountOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SessionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -13641,17 +14846,34 @@ export namespace Prisma {
     _max?: NestedBigIntNullableFilter<$PrismaModel>
   }
 
+  export type EmailRateLimitCountOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    lastEmailSentAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EmailRateLimitMaxOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    lastEmailSentAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EmailRateLimitMinOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    lastEmailSentAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
   export type CategoryCreateNestedOneWithoutArticlesInput = {
     create?: XOR<CategoryCreateWithoutArticlesInput, CategoryUncheckedCreateWithoutArticlesInput>
     connectOrCreate?: CategoryCreateOrConnectWithoutArticlesInput
     connect?: CategoryWhereUniqueInput
-  }
-
-  export type ReadedTimeCountCreateNestedManyWithoutArticleInput = {
-    create?: XOR<ReadedTimeCountCreateWithoutArticleInput, ReadedTimeCountUncheckedCreateWithoutArticleInput> | ReadedTimeCountCreateWithoutArticleInput[] | ReadedTimeCountUncheckedCreateWithoutArticleInput[]
-    connectOrCreate?: ReadedTimeCountCreateOrConnectWithoutArticleInput | ReadedTimeCountCreateOrConnectWithoutArticleInput[]
-    createMany?: ReadedTimeCountCreateManyArticleInputEnvelope
-    connect?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
   }
 
   export type MarkedArticlesCreateNestedManyWithoutArticleInput = {
@@ -13661,7 +14883,7 @@ export namespace Prisma {
     connect?: MarkedArticlesWhereUniqueInput | MarkedArticlesWhereUniqueInput[]
   }
 
-  export type ReadedTimeCountUncheckedCreateNestedManyWithoutArticleInput = {
+  export type ReadedTimeCountCreateNestedManyWithoutArticleInput = {
     create?: XOR<ReadedTimeCountCreateWithoutArticleInput, ReadedTimeCountUncheckedCreateWithoutArticleInput> | ReadedTimeCountCreateWithoutArticleInput[] | ReadedTimeCountUncheckedCreateWithoutArticleInput[]
     connectOrCreate?: ReadedTimeCountCreateOrConnectWithoutArticleInput | ReadedTimeCountCreateOrConnectWithoutArticleInput[]
     createMany?: ReadedTimeCountCreateManyArticleInputEnvelope
@@ -13673,6 +14895,13 @@ export namespace Prisma {
     connectOrCreate?: MarkedArticlesCreateOrConnectWithoutArticleInput | MarkedArticlesCreateOrConnectWithoutArticleInput[]
     createMany?: MarkedArticlesCreateManyArticleInputEnvelope
     connect?: MarkedArticlesWhereUniqueInput | MarkedArticlesWhereUniqueInput[]
+  }
+
+  export type ReadedTimeCountUncheckedCreateNestedManyWithoutArticleInput = {
+    create?: XOR<ReadedTimeCountCreateWithoutArticleInput, ReadedTimeCountUncheckedCreateWithoutArticleInput> | ReadedTimeCountCreateWithoutArticleInput[] | ReadedTimeCountUncheckedCreateWithoutArticleInput[]
+    connectOrCreate?: ReadedTimeCountCreateOrConnectWithoutArticleInput | ReadedTimeCountCreateOrConnectWithoutArticleInput[]
+    createMany?: ReadedTimeCountCreateManyArticleInputEnvelope
+    connect?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -13701,20 +14930,6 @@ export namespace Prisma {
     update?: XOR<XOR<CategoryUpdateToOneWithWhereWithoutArticlesInput, CategoryUpdateWithoutArticlesInput>, CategoryUncheckedUpdateWithoutArticlesInput>
   }
 
-  export type ReadedTimeCountUpdateManyWithoutArticleNestedInput = {
-    create?: XOR<ReadedTimeCountCreateWithoutArticleInput, ReadedTimeCountUncheckedCreateWithoutArticleInput> | ReadedTimeCountCreateWithoutArticleInput[] | ReadedTimeCountUncheckedCreateWithoutArticleInput[]
-    connectOrCreate?: ReadedTimeCountCreateOrConnectWithoutArticleInput | ReadedTimeCountCreateOrConnectWithoutArticleInput[]
-    upsert?: ReadedTimeCountUpsertWithWhereUniqueWithoutArticleInput | ReadedTimeCountUpsertWithWhereUniqueWithoutArticleInput[]
-    createMany?: ReadedTimeCountCreateManyArticleInputEnvelope
-    set?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
-    disconnect?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
-    delete?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
-    connect?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
-    update?: ReadedTimeCountUpdateWithWhereUniqueWithoutArticleInput | ReadedTimeCountUpdateWithWhereUniqueWithoutArticleInput[]
-    updateMany?: ReadedTimeCountUpdateManyWithWhereWithoutArticleInput | ReadedTimeCountUpdateManyWithWhereWithoutArticleInput[]
-    deleteMany?: ReadedTimeCountScalarWhereInput | ReadedTimeCountScalarWhereInput[]
-  }
-
   export type MarkedArticlesUpdateManyWithoutArticleNestedInput = {
     create?: XOR<MarkedArticlesCreateWithoutArticleInput, MarkedArticlesUncheckedCreateWithoutArticleInput> | MarkedArticlesCreateWithoutArticleInput[] | MarkedArticlesUncheckedCreateWithoutArticleInput[]
     connectOrCreate?: MarkedArticlesCreateOrConnectWithoutArticleInput | MarkedArticlesCreateOrConnectWithoutArticleInput[]
@@ -13729,11 +14944,7 @@ export namespace Prisma {
     deleteMany?: MarkedArticlesScalarWhereInput | MarkedArticlesScalarWhereInput[]
   }
 
-  export type NullableEnumCategoryNameFieldUpdateOperationsInput = {
-    set?: $Enums.CategoryName | null
-  }
-
-  export type ReadedTimeCountUncheckedUpdateManyWithoutArticleNestedInput = {
+  export type ReadedTimeCountUpdateManyWithoutArticleNestedInput = {
     create?: XOR<ReadedTimeCountCreateWithoutArticleInput, ReadedTimeCountUncheckedCreateWithoutArticleInput> | ReadedTimeCountCreateWithoutArticleInput[] | ReadedTimeCountUncheckedCreateWithoutArticleInput[]
     connectOrCreate?: ReadedTimeCountCreateOrConnectWithoutArticleInput | ReadedTimeCountCreateOrConnectWithoutArticleInput[]
     upsert?: ReadedTimeCountUpsertWithWhereUniqueWithoutArticleInput | ReadedTimeCountUpsertWithWhereUniqueWithoutArticleInput[]
@@ -13745,6 +14956,10 @@ export namespace Prisma {
     update?: ReadedTimeCountUpdateWithWhereUniqueWithoutArticleInput | ReadedTimeCountUpdateWithWhereUniqueWithoutArticleInput[]
     updateMany?: ReadedTimeCountUpdateManyWithWhereWithoutArticleInput | ReadedTimeCountUpdateManyWithWhereWithoutArticleInput[]
     deleteMany?: ReadedTimeCountScalarWhereInput | ReadedTimeCountScalarWhereInput[]
+  }
+
+  export type NullableEnumCategoryNameFieldUpdateOperationsInput = {
+    set?: $Enums.CategoryName | null
   }
 
   export type MarkedArticlesUncheckedUpdateManyWithoutArticleNestedInput = {
@@ -13759,6 +14974,20 @@ export namespace Prisma {
     update?: MarkedArticlesUpdateWithWhereUniqueWithoutArticleInput | MarkedArticlesUpdateWithWhereUniqueWithoutArticleInput[]
     updateMany?: MarkedArticlesUpdateManyWithWhereWithoutArticleInput | MarkedArticlesUpdateManyWithWhereWithoutArticleInput[]
     deleteMany?: MarkedArticlesScalarWhereInput | MarkedArticlesScalarWhereInput[]
+  }
+
+  export type ReadedTimeCountUncheckedUpdateManyWithoutArticleNestedInput = {
+    create?: XOR<ReadedTimeCountCreateWithoutArticleInput, ReadedTimeCountUncheckedCreateWithoutArticleInput> | ReadedTimeCountCreateWithoutArticleInput[] | ReadedTimeCountUncheckedCreateWithoutArticleInput[]
+    connectOrCreate?: ReadedTimeCountCreateOrConnectWithoutArticleInput | ReadedTimeCountCreateOrConnectWithoutArticleInput[]
+    upsert?: ReadedTimeCountUpsertWithWhereUniqueWithoutArticleInput | ReadedTimeCountUpsertWithWhereUniqueWithoutArticleInput[]
+    createMany?: ReadedTimeCountCreateManyArticleInputEnvelope
+    set?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
+    disconnect?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
+    delete?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
+    connect?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
+    update?: ReadedTimeCountUpdateWithWhereUniqueWithoutArticleInput | ReadedTimeCountUpdateWithWhereUniqueWithoutArticleInput[]
+    updateMany?: ReadedTimeCountUpdateManyWithWhereWithoutArticleInput | ReadedTimeCountUpdateManyWithWhereWithoutArticleInput[]
+    deleteMany?: ReadedTimeCountScalarWhereInput | ReadedTimeCountScalarWhereInput[]
   }
 
   export type ArticleCreateNestedManyWithoutCategoryInput = {
@@ -13807,18 +15036,11 @@ export namespace Prisma {
     deleteMany?: ArticleScalarWhereInput | ArticleScalarWhereInput[]
   }
 
-  export type SessionCreateNestedManyWithoutUserInput = {
-    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
-    createMany?: SessionCreateManyUserInputEnvelope
-    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-  }
-
-  export type AccountCreateNestedManyWithoutUserInput = {
-    create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
-    createMany?: AccountCreateManyUserInputEnvelope
-    connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+  export type MarkedArticlesCreateNestedManyWithoutUserInput = {
+    create?: XOR<MarkedArticlesCreateWithoutUserInput, MarkedArticlesUncheckedCreateWithoutUserInput> | MarkedArticlesCreateWithoutUserInput[] | MarkedArticlesUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MarkedArticlesCreateOrConnectWithoutUserInput | MarkedArticlesCreateOrConnectWithoutUserInput[]
+    createMany?: MarkedArticlesCreateManyUserInputEnvelope
+    connect?: MarkedArticlesWhereUniqueInput | MarkedArticlesWhereUniqueInput[]
   }
 
   export type ReadedTimeCountCreateNestedManyWithoutUserInput = {
@@ -13828,32 +15050,18 @@ export namespace Prisma {
     connect?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
   }
 
-  export type MarkedArticlesCreateNestedManyWithoutUserInput = {
-    create?: XOR<MarkedArticlesCreateWithoutUserInput, MarkedArticlesUncheckedCreateWithoutUserInput> | MarkedArticlesCreateWithoutUserInput[] | MarkedArticlesUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: MarkedArticlesCreateOrConnectWithoutUserInput | MarkedArticlesCreateOrConnectWithoutUserInput[]
-    createMany?: MarkedArticlesCreateManyUserInputEnvelope
-    connect?: MarkedArticlesWhereUniqueInput | MarkedArticlesWhereUniqueInput[]
-  }
-
-  export type SessionUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
-    createMany?: SessionCreateManyUserInputEnvelope
-    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-  }
-
-  export type AccountUncheckedCreateNestedManyWithoutUserInput = {
+  export type AccountCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
     createMany?: AccountCreateManyUserInputEnvelope
     connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
   }
 
-  export type ReadedTimeCountUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<ReadedTimeCountCreateWithoutUserInput, ReadedTimeCountUncheckedCreateWithoutUserInput> | ReadedTimeCountCreateWithoutUserInput[] | ReadedTimeCountUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ReadedTimeCountCreateOrConnectWithoutUserInput | ReadedTimeCountCreateOrConnectWithoutUserInput[]
-    createMany?: ReadedTimeCountCreateManyUserInputEnvelope
-    connect?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
+  export type SessionCreateNestedManyWithoutUserInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
   }
 
   export type MarkedArticlesUncheckedCreateNestedManyWithoutUserInput = {
@@ -13863,54 +15071,33 @@ export namespace Prisma {
     connect?: MarkedArticlesWhereUniqueInput | MarkedArticlesWhereUniqueInput[]
   }
 
+  export type ReadedTimeCountUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ReadedTimeCountCreateWithoutUserInput, ReadedTimeCountUncheckedCreateWithoutUserInput> | ReadedTimeCountCreateWithoutUserInput[] | ReadedTimeCountUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ReadedTimeCountCreateOrConnectWithoutUserInput | ReadedTimeCountCreateOrConnectWithoutUserInput[]
+    createMany?: ReadedTimeCountCreateManyUserInputEnvelope
+    connect?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
+  }
+
+  export type AccountUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
+    createMany?: AccountCreateManyUserInputEnvelope
+    connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+  }
+
+  export type SessionUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+  }
+
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
-  }
-
-  export type SessionUpdateManyWithoutUserNestedInput = {
-    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
-    upsert?: SessionUpsertWithWhereUniqueWithoutUserInput | SessionUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: SessionCreateManyUserInputEnvelope
-    set?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    disconnect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    delete?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
-  }
-
-  export type AccountUpdateManyWithoutUserNestedInput = {
-    create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
-    upsert?: AccountUpsertWithWhereUniqueWithoutUserInput | AccountUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: AccountCreateManyUserInputEnvelope
-    set?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-    disconnect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-    delete?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-    connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-    update?: AccountUpdateWithWhereUniqueWithoutUserInput | AccountUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: AccountUpdateManyWithWhereWithoutUserInput | AccountUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
-  }
-
-  export type ReadedTimeCountUpdateManyWithoutUserNestedInput = {
-    create?: XOR<ReadedTimeCountCreateWithoutUserInput, ReadedTimeCountUncheckedCreateWithoutUserInput> | ReadedTimeCountCreateWithoutUserInput[] | ReadedTimeCountUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ReadedTimeCountCreateOrConnectWithoutUserInput | ReadedTimeCountCreateOrConnectWithoutUserInput[]
-    upsert?: ReadedTimeCountUpsertWithWhereUniqueWithoutUserInput | ReadedTimeCountUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: ReadedTimeCountCreateManyUserInputEnvelope
-    set?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
-    disconnect?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
-    delete?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
-    connect?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
-    update?: ReadedTimeCountUpdateWithWhereUniqueWithoutUserInput | ReadedTimeCountUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: ReadedTimeCountUpdateManyWithWhereWithoutUserInput | ReadedTimeCountUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: ReadedTimeCountScalarWhereInput | ReadedTimeCountScalarWhereInput[]
   }
 
   export type MarkedArticlesUpdateManyWithoutUserNestedInput = {
@@ -13927,7 +15114,35 @@ export namespace Prisma {
     deleteMany?: MarkedArticlesScalarWhereInput | MarkedArticlesScalarWhereInput[]
   }
 
-  export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
+  export type ReadedTimeCountUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ReadedTimeCountCreateWithoutUserInput, ReadedTimeCountUncheckedCreateWithoutUserInput> | ReadedTimeCountCreateWithoutUserInput[] | ReadedTimeCountUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ReadedTimeCountCreateOrConnectWithoutUserInput | ReadedTimeCountCreateOrConnectWithoutUserInput[]
+    upsert?: ReadedTimeCountUpsertWithWhereUniqueWithoutUserInput | ReadedTimeCountUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ReadedTimeCountCreateManyUserInputEnvelope
+    set?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
+    disconnect?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
+    delete?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
+    connect?: ReadedTimeCountWhereUniqueInput | ReadedTimeCountWhereUniqueInput[]
+    update?: ReadedTimeCountUpdateWithWhereUniqueWithoutUserInput | ReadedTimeCountUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ReadedTimeCountUpdateManyWithWhereWithoutUserInput | ReadedTimeCountUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ReadedTimeCountScalarWhereInput | ReadedTimeCountScalarWhereInput[]
+  }
+
+  export type AccountUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
+    upsert?: AccountUpsertWithWhereUniqueWithoutUserInput | AccountUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AccountCreateManyUserInputEnvelope
+    set?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+    disconnect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+    delete?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+    connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+    update?: AccountUpdateWithWhereUniqueWithoutUserInput | AccountUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AccountUpdateManyWithWhereWithoutUserInput | AccountUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
+  }
+
+  export type SessionUpdateManyWithoutUserNestedInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
     upsert?: SessionUpsertWithWhereUniqueWithoutUserInput | SessionUpsertWithWhereUniqueWithoutUserInput[]
@@ -13941,18 +15156,18 @@ export namespace Prisma {
     deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
   }
 
-  export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
-    upsert?: AccountUpsertWithWhereUniqueWithoutUserInput | AccountUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: AccountCreateManyUserInputEnvelope
-    set?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-    disconnect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-    delete?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-    connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-    update?: AccountUpdateWithWhereUniqueWithoutUserInput | AccountUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: AccountUpdateManyWithWhereWithoutUserInput | AccountUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
+  export type MarkedArticlesUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<MarkedArticlesCreateWithoutUserInput, MarkedArticlesUncheckedCreateWithoutUserInput> | MarkedArticlesCreateWithoutUserInput[] | MarkedArticlesUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MarkedArticlesCreateOrConnectWithoutUserInput | MarkedArticlesCreateOrConnectWithoutUserInput[]
+    upsert?: MarkedArticlesUpsertWithWhereUniqueWithoutUserInput | MarkedArticlesUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: MarkedArticlesCreateManyUserInputEnvelope
+    set?: MarkedArticlesWhereUniqueInput | MarkedArticlesWhereUniqueInput[]
+    disconnect?: MarkedArticlesWhereUniqueInput | MarkedArticlesWhereUniqueInput[]
+    delete?: MarkedArticlesWhereUniqueInput | MarkedArticlesWhereUniqueInput[]
+    connect?: MarkedArticlesWhereUniqueInput | MarkedArticlesWhereUniqueInput[]
+    update?: MarkedArticlesUpdateWithWhereUniqueWithoutUserInput | MarkedArticlesUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: MarkedArticlesUpdateManyWithWhereWithoutUserInput | MarkedArticlesUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: MarkedArticlesScalarWhereInput | MarkedArticlesScalarWhereInput[]
   }
 
   export type ReadedTimeCountUncheckedUpdateManyWithoutUserNestedInput = {
@@ -13969,18 +15184,32 @@ export namespace Prisma {
     deleteMany?: ReadedTimeCountScalarWhereInput | ReadedTimeCountScalarWhereInput[]
   }
 
-  export type MarkedArticlesUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<MarkedArticlesCreateWithoutUserInput, MarkedArticlesUncheckedCreateWithoutUserInput> | MarkedArticlesCreateWithoutUserInput[] | MarkedArticlesUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: MarkedArticlesCreateOrConnectWithoutUserInput | MarkedArticlesCreateOrConnectWithoutUserInput[]
-    upsert?: MarkedArticlesUpsertWithWhereUniqueWithoutUserInput | MarkedArticlesUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: MarkedArticlesCreateManyUserInputEnvelope
-    set?: MarkedArticlesWhereUniqueInput | MarkedArticlesWhereUniqueInput[]
-    disconnect?: MarkedArticlesWhereUniqueInput | MarkedArticlesWhereUniqueInput[]
-    delete?: MarkedArticlesWhereUniqueInput | MarkedArticlesWhereUniqueInput[]
-    connect?: MarkedArticlesWhereUniqueInput | MarkedArticlesWhereUniqueInput[]
-    update?: MarkedArticlesUpdateWithWhereUniqueWithoutUserInput | MarkedArticlesUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: MarkedArticlesUpdateManyWithWhereWithoutUserInput | MarkedArticlesUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: MarkedArticlesScalarWhereInput | MarkedArticlesScalarWhereInput[]
+  export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
+    upsert?: AccountUpsertWithWhereUniqueWithoutUserInput | AccountUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AccountCreateManyUserInputEnvelope
+    set?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+    disconnect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+    delete?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+    connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+    update?: AccountUpdateWithWhereUniqueWithoutUserInput | AccountUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AccountUpdateManyWithWhereWithoutUserInput | AccountUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
+  }
+
+  export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    upsert?: SessionUpsertWithWhereUniqueWithoutUserInput | SessionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    set?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    disconnect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    delete?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
   }
 
   export type ArticleCreateNestedOneWithoutMarkedArticlesInput = {
@@ -14087,17 +15316,6 @@ export namespace Prisma {
     divide?: bigint | number
   }
 
-  export type NestedIntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -14110,6 +15328,17 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
@@ -14128,6 +15357,23 @@ export namespace Prisma {
     in?: $Enums.CategoryName[] | ListEnumCategoryNameFieldRefInput<$PrismaModel> | null
     notIn?: $Enums.CategoryName[] | ListEnumCategoryNameFieldRefInput<$PrismaModel> | null
     not?: NestedEnumCategoryNameNullableFilter<$PrismaModel> | $Enums.CategoryName | null
+  }
+
+  export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -14155,23 +15401,6 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
-  export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -14362,6 +15591,25 @@ export namespace Prisma {
     create: XOR<CategoryCreateWithoutArticlesInput, CategoryUncheckedCreateWithoutArticlesInput>
   }
 
+  export type MarkedArticlesCreateWithoutArticleInput = {
+    user: UserCreateNestedOneWithoutMarkedArticlesInput
+  }
+
+  export type MarkedArticlesUncheckedCreateWithoutArticleInput = {
+    id?: number
+    userId: string
+  }
+
+  export type MarkedArticlesCreateOrConnectWithoutArticleInput = {
+    where: MarkedArticlesWhereUniqueInput
+    create: XOR<MarkedArticlesCreateWithoutArticleInput, MarkedArticlesUncheckedCreateWithoutArticleInput>
+  }
+
+  export type MarkedArticlesCreateManyArticleInputEnvelope = {
+    data: MarkedArticlesCreateManyArticleInput | MarkedArticlesCreateManyArticleInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ReadedTimeCountCreateWithoutArticleInput = {
     times: number
     user: UserCreateNestedOneWithoutReadedTimeCountInput
@@ -14383,25 +15631,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type MarkedArticlesCreateWithoutArticleInput = {
-    user: UserCreateNestedOneWithoutMarkedArticlesInput
-  }
-
-  export type MarkedArticlesUncheckedCreateWithoutArticleInput = {
-    id?: number
-    userId: string
-  }
-
-  export type MarkedArticlesCreateOrConnectWithoutArticleInput = {
-    where: MarkedArticlesWhereUniqueInput
-    create: XOR<MarkedArticlesCreateWithoutArticleInput, MarkedArticlesUncheckedCreateWithoutArticleInput>
-  }
-
-  export type MarkedArticlesCreateManyArticleInputEnvelope = {
-    data: MarkedArticlesCreateManyArticleInput | MarkedArticlesCreateManyArticleInput[]
-    skipDuplicates?: boolean
-  }
-
   export type CategoryUpsertWithoutArticlesInput = {
     update: XOR<CategoryUpdateWithoutArticlesInput, CategoryUncheckedUpdateWithoutArticlesInput>
     create: XOR<CategoryCreateWithoutArticlesInput, CategoryUncheckedCreateWithoutArticlesInput>
@@ -14419,6 +15648,31 @@ export namespace Prisma {
 
   export type CategoryUncheckedUpdateWithoutArticlesInput = {
     name?: EnumCategoryNameFieldUpdateOperationsInput | $Enums.CategoryName
+  }
+
+  export type MarkedArticlesUpsertWithWhereUniqueWithoutArticleInput = {
+    where: MarkedArticlesWhereUniqueInput
+    update: XOR<MarkedArticlesUpdateWithoutArticleInput, MarkedArticlesUncheckedUpdateWithoutArticleInput>
+    create: XOR<MarkedArticlesCreateWithoutArticleInput, MarkedArticlesUncheckedCreateWithoutArticleInput>
+  }
+
+  export type MarkedArticlesUpdateWithWhereUniqueWithoutArticleInput = {
+    where: MarkedArticlesWhereUniqueInput
+    data: XOR<MarkedArticlesUpdateWithoutArticleInput, MarkedArticlesUncheckedUpdateWithoutArticleInput>
+  }
+
+  export type MarkedArticlesUpdateManyWithWhereWithoutArticleInput = {
+    where: MarkedArticlesScalarWhereInput
+    data: XOR<MarkedArticlesUpdateManyMutationInput, MarkedArticlesUncheckedUpdateManyWithoutArticleInput>
+  }
+
+  export type MarkedArticlesScalarWhereInput = {
+    AND?: MarkedArticlesScalarWhereInput | MarkedArticlesScalarWhereInput[]
+    OR?: MarkedArticlesScalarWhereInput[]
+    NOT?: MarkedArticlesScalarWhereInput | MarkedArticlesScalarWhereInput[]
+    id?: IntFilter<"MarkedArticles"> | number
+    articleId?: IntFilter<"MarkedArticles"> | number
+    userId?: StringFilter<"MarkedArticles"> | string
   }
 
   export type ReadedTimeCountUpsertWithWhereUniqueWithoutArticleInput = {
@@ -14447,31 +15701,6 @@ export namespace Prisma {
     userId?: StringFilter<"ReadedTimeCount"> | string
   }
 
-  export type MarkedArticlesUpsertWithWhereUniqueWithoutArticleInput = {
-    where: MarkedArticlesWhereUniqueInput
-    update: XOR<MarkedArticlesUpdateWithoutArticleInput, MarkedArticlesUncheckedUpdateWithoutArticleInput>
-    create: XOR<MarkedArticlesCreateWithoutArticleInput, MarkedArticlesUncheckedCreateWithoutArticleInput>
-  }
-
-  export type MarkedArticlesUpdateWithWhereUniqueWithoutArticleInput = {
-    where: MarkedArticlesWhereUniqueInput
-    data: XOR<MarkedArticlesUpdateWithoutArticleInput, MarkedArticlesUncheckedUpdateWithoutArticleInput>
-  }
-
-  export type MarkedArticlesUpdateManyWithWhereWithoutArticleInput = {
-    where: MarkedArticlesScalarWhereInput
-    data: XOR<MarkedArticlesUpdateManyMutationInput, MarkedArticlesUncheckedUpdateManyWithoutArticleInput>
-  }
-
-  export type MarkedArticlesScalarWhereInput = {
-    AND?: MarkedArticlesScalarWhereInput | MarkedArticlesScalarWhereInput[]
-    OR?: MarkedArticlesScalarWhereInput[]
-    NOT?: MarkedArticlesScalarWhereInput | MarkedArticlesScalarWhereInput[]
-    id?: IntFilter<"MarkedArticles"> | number
-    articleId?: IntFilter<"MarkedArticles"> | number
-    userId?: StringFilter<"MarkedArticles"> | string
-  }
-
   export type ArticleCreateWithoutCategoryInput = {
     title: string
     imageUrl: string
@@ -14480,12 +15709,11 @@ export namespace Prisma {
     readTimes?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    ReadedTimeCount?: ReadedTimeCountCreateNestedManyWithoutArticleInput
     MarkedArticles?: MarkedArticlesCreateNestedManyWithoutArticleInput
+    ReadedTimeCount?: ReadedTimeCountCreateNestedManyWithoutArticleInput
   }
 
   export type ArticleUncheckedCreateWithoutCategoryInput = {
-    id?: number
     title: string
     imageUrl: string
     content: string
@@ -14493,8 +15721,9 @@ export namespace Prisma {
     readTimes?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    ReadedTimeCount?: ReadedTimeCountUncheckedCreateNestedManyWithoutArticleInput
+    id?: number
     MarkedArticles?: MarkedArticlesUncheckedCreateNestedManyWithoutArticleInput
+    ReadedTimeCount?: ReadedTimeCountUncheckedCreateNestedManyWithoutArticleInput
   }
 
   export type ArticleCreateOrConnectWithoutCategoryInput = {
@@ -14527,7 +15756,6 @@ export namespace Prisma {
     AND?: ArticleScalarWhereInput | ArticleScalarWhereInput[]
     OR?: ArticleScalarWhereInput[]
     NOT?: ArticleScalarWhereInput | ArticleScalarWhereInput[]
-    id?: IntFilter<"Article"> | number
     title?: StringFilter<"Article"> | string
     imageUrl?: StringFilter<"Article"> | string
     content?: StringFilter<"Article"> | string
@@ -14535,36 +15763,47 @@ export namespace Prisma {
     readTimes?: IntFilter<"Article"> | number
     createdAt?: DateTimeFilter<"Article"> | Date | string
     updatedAt?: DateTimeFilter<"Article"> | Date | string
+    id?: IntFilter<"Article"> | number
     categoryName?: EnumCategoryNameNullableFilter<"Article"> | $Enums.CategoryName | null
   }
 
-  export type SessionCreateWithoutUserInput = {
-    id: string
-    expiresAt: Date | string
-    token: string
-    createdAt: Date | string
-    updatedAt: Date | string
-    ipAddress?: string | null
-    userAgent?: string | null
+  export type MarkedArticlesCreateWithoutUserInput = {
+    article: ArticleCreateNestedOneWithoutMarkedArticlesInput
   }
 
-  export type SessionUncheckedCreateWithoutUserInput = {
-    id: string
-    expiresAt: Date | string
-    token: string
-    createdAt: Date | string
-    updatedAt: Date | string
-    ipAddress?: string | null
-    userAgent?: string | null
+  export type MarkedArticlesUncheckedCreateWithoutUserInput = {
+    id?: number
+    articleId: number
   }
 
-  export type SessionCreateOrConnectWithoutUserInput = {
-    where: SessionWhereUniqueInput
-    create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
+  export type MarkedArticlesCreateOrConnectWithoutUserInput = {
+    where: MarkedArticlesWhereUniqueInput
+    create: XOR<MarkedArticlesCreateWithoutUserInput, MarkedArticlesUncheckedCreateWithoutUserInput>
   }
 
-  export type SessionCreateManyUserInputEnvelope = {
-    data: SessionCreateManyUserInput | SessionCreateManyUserInput[]
+  export type MarkedArticlesCreateManyUserInputEnvelope = {
+    data: MarkedArticlesCreateManyUserInput | MarkedArticlesCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ReadedTimeCountCreateWithoutUserInput = {
+    times: number
+    article: ArticleCreateNestedOneWithoutReadedTimeCountInput
+  }
+
+  export type ReadedTimeCountUncheckedCreateWithoutUserInput = {
+    id?: number
+    times: number
+    articleId: number
+  }
+
+  export type ReadedTimeCountCreateOrConnectWithoutUserInput = {
+    where: ReadedTimeCountWhereUniqueInput
+    create: XOR<ReadedTimeCountCreateWithoutUserInput, ReadedTimeCountUncheckedCreateWithoutUserInput>
+  }
+
+  export type ReadedTimeCountCreateManyUserInputEnvelope = {
+    data: ReadedTimeCountCreateManyUserInput | ReadedTimeCountCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -14608,74 +15847,66 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type ReadedTimeCountCreateWithoutUserInput = {
-    times: number
-    article: ArticleCreateNestedOneWithoutReadedTimeCountInput
+  export type SessionCreateWithoutUserInput = {
+    id: string
+    expiresAt: Date | string
+    token: string
+    createdAt: Date | string
+    updatedAt: Date | string
+    ipAddress?: string | null
+    userAgent?: string | null
   }
 
-  export type ReadedTimeCountUncheckedCreateWithoutUserInput = {
-    id?: number
-    times: number
-    articleId: number
+  export type SessionUncheckedCreateWithoutUserInput = {
+    id: string
+    expiresAt: Date | string
+    token: string
+    createdAt: Date | string
+    updatedAt: Date | string
+    ipAddress?: string | null
+    userAgent?: string | null
   }
 
-  export type ReadedTimeCountCreateOrConnectWithoutUserInput = {
-    where: ReadedTimeCountWhereUniqueInput
-    create: XOR<ReadedTimeCountCreateWithoutUserInput, ReadedTimeCountUncheckedCreateWithoutUserInput>
-  }
-
-  export type ReadedTimeCountCreateManyUserInputEnvelope = {
-    data: ReadedTimeCountCreateManyUserInput | ReadedTimeCountCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type MarkedArticlesCreateWithoutUserInput = {
-    article: ArticleCreateNestedOneWithoutMarkedArticlesInput
-  }
-
-  export type MarkedArticlesUncheckedCreateWithoutUserInput = {
-    id?: number
-    articleId: number
-  }
-
-  export type MarkedArticlesCreateOrConnectWithoutUserInput = {
-    where: MarkedArticlesWhereUniqueInput
-    create: XOR<MarkedArticlesCreateWithoutUserInput, MarkedArticlesUncheckedCreateWithoutUserInput>
-  }
-
-  export type MarkedArticlesCreateManyUserInputEnvelope = {
-    data: MarkedArticlesCreateManyUserInput | MarkedArticlesCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type SessionUpsertWithWhereUniqueWithoutUserInput = {
+  export type SessionCreateOrConnectWithoutUserInput = {
     where: SessionWhereUniqueInput
-    update: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
     create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
   }
 
-  export type SessionUpdateWithWhereUniqueWithoutUserInput = {
-    where: SessionWhereUniqueInput
-    data: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
+  export type SessionCreateManyUserInputEnvelope = {
+    data: SessionCreateManyUserInput | SessionCreateManyUserInput[]
+    skipDuplicates?: boolean
   }
 
-  export type SessionUpdateManyWithWhereWithoutUserInput = {
-    where: SessionScalarWhereInput
-    data: XOR<SessionUpdateManyMutationInput, SessionUncheckedUpdateManyWithoutUserInput>
+  export type MarkedArticlesUpsertWithWhereUniqueWithoutUserInput = {
+    where: MarkedArticlesWhereUniqueInput
+    update: XOR<MarkedArticlesUpdateWithoutUserInput, MarkedArticlesUncheckedUpdateWithoutUserInput>
+    create: XOR<MarkedArticlesCreateWithoutUserInput, MarkedArticlesUncheckedCreateWithoutUserInput>
   }
 
-  export type SessionScalarWhereInput = {
-    AND?: SessionScalarWhereInput | SessionScalarWhereInput[]
-    OR?: SessionScalarWhereInput[]
-    NOT?: SessionScalarWhereInput | SessionScalarWhereInput[]
-    id?: StringFilter<"Session"> | string
-    expiresAt?: DateTimeFilter<"Session"> | Date | string
-    token?: StringFilter<"Session"> | string
-    createdAt?: DateTimeFilter<"Session"> | Date | string
-    updatedAt?: DateTimeFilter<"Session"> | Date | string
-    ipAddress?: StringNullableFilter<"Session"> | string | null
-    userAgent?: StringNullableFilter<"Session"> | string | null
-    userId?: StringFilter<"Session"> | string
+  export type MarkedArticlesUpdateWithWhereUniqueWithoutUserInput = {
+    where: MarkedArticlesWhereUniqueInput
+    data: XOR<MarkedArticlesUpdateWithoutUserInput, MarkedArticlesUncheckedUpdateWithoutUserInput>
+  }
+
+  export type MarkedArticlesUpdateManyWithWhereWithoutUserInput = {
+    where: MarkedArticlesScalarWhereInput
+    data: XOR<MarkedArticlesUpdateManyMutationInput, MarkedArticlesUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ReadedTimeCountUpsertWithWhereUniqueWithoutUserInput = {
+    where: ReadedTimeCountWhereUniqueInput
+    update: XOR<ReadedTimeCountUpdateWithoutUserInput, ReadedTimeCountUncheckedUpdateWithoutUserInput>
+    create: XOR<ReadedTimeCountCreateWithoutUserInput, ReadedTimeCountUncheckedCreateWithoutUserInput>
+  }
+
+  export type ReadedTimeCountUpdateWithWhereUniqueWithoutUserInput = {
+    where: ReadedTimeCountWhereUniqueInput
+    data: XOR<ReadedTimeCountUpdateWithoutUserInput, ReadedTimeCountUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ReadedTimeCountUpdateManyWithWhereWithoutUserInput = {
+    where: ReadedTimeCountScalarWhereInput
+    data: XOR<ReadedTimeCountUpdateManyMutationInput, ReadedTimeCountUncheckedUpdateManyWithoutUserInput>
   }
 
   export type AccountUpsertWithWhereUniqueWithoutUserInput = {
@@ -14713,36 +15944,34 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Account"> | Date | string
   }
 
-  export type ReadedTimeCountUpsertWithWhereUniqueWithoutUserInput = {
-    where: ReadedTimeCountWhereUniqueInput
-    update: XOR<ReadedTimeCountUpdateWithoutUserInput, ReadedTimeCountUncheckedUpdateWithoutUserInput>
-    create: XOR<ReadedTimeCountCreateWithoutUserInput, ReadedTimeCountUncheckedCreateWithoutUserInput>
+  export type SessionUpsertWithWhereUniqueWithoutUserInput = {
+    where: SessionWhereUniqueInput
+    update: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
+    create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
   }
 
-  export type ReadedTimeCountUpdateWithWhereUniqueWithoutUserInput = {
-    where: ReadedTimeCountWhereUniqueInput
-    data: XOR<ReadedTimeCountUpdateWithoutUserInput, ReadedTimeCountUncheckedUpdateWithoutUserInput>
+  export type SessionUpdateWithWhereUniqueWithoutUserInput = {
+    where: SessionWhereUniqueInput
+    data: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
   }
 
-  export type ReadedTimeCountUpdateManyWithWhereWithoutUserInput = {
-    where: ReadedTimeCountScalarWhereInput
-    data: XOR<ReadedTimeCountUpdateManyMutationInput, ReadedTimeCountUncheckedUpdateManyWithoutUserInput>
+  export type SessionUpdateManyWithWhereWithoutUserInput = {
+    where: SessionScalarWhereInput
+    data: XOR<SessionUpdateManyMutationInput, SessionUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type MarkedArticlesUpsertWithWhereUniqueWithoutUserInput = {
-    where: MarkedArticlesWhereUniqueInput
-    update: XOR<MarkedArticlesUpdateWithoutUserInput, MarkedArticlesUncheckedUpdateWithoutUserInput>
-    create: XOR<MarkedArticlesCreateWithoutUserInput, MarkedArticlesUncheckedCreateWithoutUserInput>
-  }
-
-  export type MarkedArticlesUpdateWithWhereUniqueWithoutUserInput = {
-    where: MarkedArticlesWhereUniqueInput
-    data: XOR<MarkedArticlesUpdateWithoutUserInput, MarkedArticlesUncheckedUpdateWithoutUserInput>
-  }
-
-  export type MarkedArticlesUpdateManyWithWhereWithoutUserInput = {
-    where: MarkedArticlesScalarWhereInput
-    data: XOR<MarkedArticlesUpdateManyMutationInput, MarkedArticlesUncheckedUpdateManyWithoutUserInput>
+  export type SessionScalarWhereInput = {
+    AND?: SessionScalarWhereInput | SessionScalarWhereInput[]
+    OR?: SessionScalarWhereInput[]
+    NOT?: SessionScalarWhereInput | SessionScalarWhereInput[]
+    id?: StringFilter<"Session"> | string
+    expiresAt?: DateTimeFilter<"Session"> | Date | string
+    token?: StringFilter<"Session"> | string
+    createdAt?: DateTimeFilter<"Session"> | Date | string
+    updatedAt?: DateTimeFilter<"Session"> | Date | string
+    ipAddress?: StringNullableFilter<"Session"> | string | null
+    userAgent?: StringNullableFilter<"Session"> | string | null
+    userId?: StringFilter<"Session"> | string
   }
 
   export type ArticleCreateWithoutMarkedArticlesInput = {
@@ -14758,7 +15987,6 @@ export namespace Prisma {
   }
 
   export type ArticleUncheckedCreateWithoutMarkedArticlesInput = {
-    id?: number
     title: string
     imageUrl: string
     content: string
@@ -14766,6 +15994,7 @@ export namespace Prisma {
     readTimes?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    id?: number
     categoryName?: $Enums.CategoryName | null
     ReadedTimeCount?: ReadedTimeCountUncheckedCreateNestedManyWithoutArticleInput
   }
@@ -14783,9 +16012,9 @@ export namespace Prisma {
     image?: string | null
     createdAt: Date | string
     updatedAt: Date | string
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    accounts?: AccountCreateNestedManyWithoutUserInput
     ReadedTimeCount?: ReadedTimeCountCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutMarkedArticlesInput = {
@@ -14796,9 +16025,9 @@ export namespace Prisma {
     image?: string | null
     createdAt: Date | string
     updatedAt: Date | string
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     ReadedTimeCount?: ReadedTimeCountUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutMarkedArticlesInput = {
@@ -14830,7 +16059,6 @@ export namespace Prisma {
   }
 
   export type ArticleUncheckedUpdateWithoutMarkedArticlesInput = {
-    id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
@@ -14838,6 +16066,7 @@ export namespace Prisma {
     readTimes?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    id?: IntFieldUpdateOperationsInput | number
     categoryName?: NullableEnumCategoryNameFieldUpdateOperationsInput | $Enums.CategoryName | null
     ReadedTimeCount?: ReadedTimeCountUncheckedUpdateManyWithoutArticleNestedInput
   }
@@ -14861,9 +16090,9 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    accounts?: AccountUpdateManyWithoutUserNestedInput
     ReadedTimeCount?: ReadedTimeCountUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMarkedArticlesInput = {
@@ -14874,9 +16103,9 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     ReadedTimeCount?: ReadedTimeCountUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ArticleCreateWithoutReadedTimeCountInput = {
@@ -14892,7 +16121,6 @@ export namespace Prisma {
   }
 
   export type ArticleUncheckedCreateWithoutReadedTimeCountInput = {
-    id?: number
     title: string
     imageUrl: string
     content: string
@@ -14900,6 +16128,7 @@ export namespace Prisma {
     readTimes?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    id?: number
     categoryName?: $Enums.CategoryName | null
     MarkedArticles?: MarkedArticlesUncheckedCreateNestedManyWithoutArticleInput
   }
@@ -14917,9 +16146,9 @@ export namespace Prisma {
     image?: string | null
     createdAt: Date | string
     updatedAt: Date | string
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    accounts?: AccountCreateNestedManyWithoutUserInput
     MarkedArticles?: MarkedArticlesCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReadedTimeCountInput = {
@@ -14930,9 +16159,9 @@ export namespace Prisma {
     image?: string | null
     createdAt: Date | string
     updatedAt: Date | string
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     MarkedArticles?: MarkedArticlesUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReadedTimeCountInput = {
@@ -14964,7 +16193,6 @@ export namespace Prisma {
   }
 
   export type ArticleUncheckedUpdateWithoutReadedTimeCountInput = {
-    id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
@@ -14972,6 +16200,7 @@ export namespace Prisma {
     readTimes?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    id?: IntFieldUpdateOperationsInput | number
     categoryName?: NullableEnumCategoryNameFieldUpdateOperationsInput | $Enums.CategoryName | null
     MarkedArticles?: MarkedArticlesUncheckedUpdateManyWithoutArticleNestedInput
   }
@@ -14995,9 +16224,9 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    accounts?: AccountUpdateManyWithoutUserNestedInput
     MarkedArticles?: MarkedArticlesUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReadedTimeCountInput = {
@@ -15008,9 +16237,9 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     MarkedArticles?: MarkedArticlesUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSessionsInput = {
@@ -15021,9 +16250,9 @@ export namespace Prisma {
     image?: string | null
     createdAt: Date | string
     updatedAt: Date | string
-    accounts?: AccountCreateNestedManyWithoutUserInput
-    ReadedTimeCount?: ReadedTimeCountCreateNestedManyWithoutUserInput
     MarkedArticles?: MarkedArticlesCreateNestedManyWithoutUserInput
+    ReadedTimeCount?: ReadedTimeCountCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -15034,9 +16263,9 @@ export namespace Prisma {
     image?: string | null
     createdAt: Date | string
     updatedAt: Date | string
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    ReadedTimeCount?: ReadedTimeCountUncheckedCreateNestedManyWithoutUserInput
     MarkedArticles?: MarkedArticlesUncheckedCreateNestedManyWithoutUserInput
+    ReadedTimeCount?: ReadedTimeCountUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -15063,9 +16292,9 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    accounts?: AccountUpdateManyWithoutUserNestedInput
-    ReadedTimeCount?: ReadedTimeCountUpdateManyWithoutUserNestedInput
     MarkedArticles?: MarkedArticlesUpdateManyWithoutUserNestedInput
+    ReadedTimeCount?: ReadedTimeCountUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -15076,9 +16305,9 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    ReadedTimeCount?: ReadedTimeCountUncheckedUpdateManyWithoutUserNestedInput
     MarkedArticles?: MarkedArticlesUncheckedUpdateManyWithoutUserNestedInput
+    ReadedTimeCount?: ReadedTimeCountUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAccountsInput = {
@@ -15089,9 +16318,9 @@ export namespace Prisma {
     image?: string | null
     createdAt: Date | string
     updatedAt: Date | string
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    ReadedTimeCount?: ReadedTimeCountCreateNestedManyWithoutUserInput
     MarkedArticles?: MarkedArticlesCreateNestedManyWithoutUserInput
+    ReadedTimeCount?: ReadedTimeCountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -15102,9 +16331,9 @@ export namespace Prisma {
     image?: string | null
     createdAt: Date | string
     updatedAt: Date | string
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    ReadedTimeCount?: ReadedTimeCountUncheckedCreateNestedManyWithoutUserInput
     MarkedArticles?: MarkedArticlesUncheckedCreateNestedManyWithoutUserInput
+    ReadedTimeCount?: ReadedTimeCountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -15131,9 +16360,9 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    ReadedTimeCount?: ReadedTimeCountUpdateManyWithoutUserNestedInput
     MarkedArticles?: MarkedArticlesUpdateManyWithoutUserNestedInput
+    ReadedTimeCount?: ReadedTimeCountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -15144,9 +16373,14 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    ReadedTimeCount?: ReadedTimeCountUncheckedUpdateManyWithoutUserNestedInput
     MarkedArticles?: MarkedArticlesUncheckedUpdateManyWithoutUserNestedInput
+    ReadedTimeCount?: ReadedTimeCountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type MarkedArticlesCreateManyArticleInput = {
+    id?: number
+    userId: string
   }
 
   export type ReadedTimeCountCreateManyArticleInput = {
@@ -15155,9 +16389,18 @@ export namespace Prisma {
     userId: string
   }
 
-  export type MarkedArticlesCreateManyArticleInput = {
-    id?: number
-    userId: string
+  export type MarkedArticlesUpdateWithoutArticleInput = {
+    user?: UserUpdateOneRequiredWithoutMarkedArticlesNestedInput
+  }
+
+  export type MarkedArticlesUncheckedUpdateWithoutArticleInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type MarkedArticlesUncheckedUpdateManyWithoutArticleInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type ReadedTimeCountUpdateWithoutArticleInput = {
@@ -15177,22 +16420,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type MarkedArticlesUpdateWithoutArticleInput = {
-    user?: UserUpdateOneRequiredWithoutMarkedArticlesNestedInput
-  }
-
-  export type MarkedArticlesUncheckedUpdateWithoutArticleInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    userId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type MarkedArticlesUncheckedUpdateManyWithoutArticleInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    userId?: StringFieldUpdateOperationsInput | string
-  }
-
   export type ArticleCreateManyCategoryInput = {
-    id?: number
     title: string
     imageUrl: string
     content: string
@@ -15200,6 +16428,7 @@ export namespace Prisma {
     readTimes?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    id?: number
   }
 
   export type ArticleUpdateWithoutCategoryInput = {
@@ -15210,12 +16439,11 @@ export namespace Prisma {
     readTimes?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ReadedTimeCount?: ReadedTimeCountUpdateManyWithoutArticleNestedInput
     MarkedArticles?: MarkedArticlesUpdateManyWithoutArticleNestedInput
+    ReadedTimeCount?: ReadedTimeCountUpdateManyWithoutArticleNestedInput
   }
 
   export type ArticleUncheckedUpdateWithoutCategoryInput = {
-    id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
@@ -15223,12 +16451,12 @@ export namespace Prisma {
     readTimes?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ReadedTimeCount?: ReadedTimeCountUncheckedUpdateManyWithoutArticleNestedInput
+    id?: IntFieldUpdateOperationsInput | number
     MarkedArticles?: MarkedArticlesUncheckedUpdateManyWithoutArticleNestedInput
+    ReadedTimeCount?: ReadedTimeCountUncheckedUpdateManyWithoutArticleNestedInput
   }
 
   export type ArticleUncheckedUpdateManyWithoutCategoryInput = {
-    id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
@@ -15236,16 +16464,18 @@ export namespace Prisma {
     readTimes?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    id?: IntFieldUpdateOperationsInput | number
   }
 
-  export type SessionCreateManyUserInput = {
-    id: string
-    expiresAt: Date | string
-    token: string
-    createdAt: Date | string
-    updatedAt: Date | string
-    ipAddress?: string | null
-    userAgent?: string | null
+  export type MarkedArticlesCreateManyUserInput = {
+    id?: number
+    articleId: number
+  }
+
+  export type ReadedTimeCountCreateManyUserInput = {
+    id?: number
+    times: number
+    articleId: number
   }
 
   export type AccountCreateManyUserInput = {
@@ -15263,45 +16493,45 @@ export namespace Prisma {
     updatedAt: Date | string
   }
 
-  export type ReadedTimeCountCreateManyUserInput = {
-    id?: number
-    times: number
-    articleId: number
+  export type SessionCreateManyUserInput = {
+    id: string
+    expiresAt: Date | string
+    token: string
+    createdAt: Date | string
+    updatedAt: Date | string
+    ipAddress?: string | null
+    userAgent?: string | null
   }
 
-  export type MarkedArticlesCreateManyUserInput = {
-    id?: number
-    articleId: number
+  export type MarkedArticlesUpdateWithoutUserInput = {
+    article?: ArticleUpdateOneRequiredWithoutMarkedArticlesNestedInput
   }
 
-  export type SessionUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    token?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+  export type MarkedArticlesUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    articleId?: IntFieldUpdateOperationsInput | number
   }
 
-  export type SessionUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    token?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+  export type MarkedArticlesUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    articleId?: IntFieldUpdateOperationsInput | number
   }
 
-  export type SessionUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    token?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+  export type ReadedTimeCountUpdateWithoutUserInput = {
+    times?: IntFieldUpdateOperationsInput | number
+    article?: ArticleUpdateOneRequiredWithoutReadedTimeCountNestedInput
+  }
+
+  export type ReadedTimeCountUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    times?: IntFieldUpdateOperationsInput | number
+    articleId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ReadedTimeCountUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    times?: IntFieldUpdateOperationsInput | number
+    articleId?: IntFieldUpdateOperationsInput | number
   }
 
   export type AccountUpdateWithoutUserInput = {
@@ -15349,35 +16579,34 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ReadedTimeCountUpdateWithoutUserInput = {
-    times?: IntFieldUpdateOperationsInput | number
-    article?: ArticleUpdateOneRequiredWithoutReadedTimeCountNestedInput
+  export type SessionUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    token?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type ReadedTimeCountUncheckedUpdateWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    times?: IntFieldUpdateOperationsInput | number
-    articleId?: IntFieldUpdateOperationsInput | number
+  export type SessionUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    token?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type ReadedTimeCountUncheckedUpdateManyWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    times?: IntFieldUpdateOperationsInput | number
-    articleId?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type MarkedArticlesUpdateWithoutUserInput = {
-    article?: ArticleUpdateOneRequiredWithoutMarkedArticlesNestedInput
-  }
-
-  export type MarkedArticlesUncheckedUpdateWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    articleId?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type MarkedArticlesUncheckedUpdateManyWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    articleId?: IntFieldUpdateOperationsInput | number
+  export type SessionUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    token?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 
