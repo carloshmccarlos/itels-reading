@@ -25,9 +25,7 @@ export async function signUp({
 			onRequest: (ctx) => {
 				//show loading
 			},
-			onSuccess: (ctx) => {
-				toast.success("Verification email has been sent!");
-			},
+			onSuccess: (ctx) => {},
 			onError: (ctx) => {
 				// display the error message
 				alert(ctx.error.message);

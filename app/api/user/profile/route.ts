@@ -1,5 +1,5 @@
 import { auth } from "@/lib/auth/auth";
-import { prisma } from "@/lib/prisma";
+import { getProfileData, updateUserProfile } from "@/lib/data/user";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
@@ -15,40 +15,13 @@ export async function GET(request: NextRequest) {
 		}
 
 		const userId = session.user.id;
+		const profileData = await getProfileData(userId);
 
-		// Get user profile and total read times in parallel
-		const [user, totalReadTimes] = await Promise.all([
-			prisma.user.findUnique({
-				where: {
-					id: userId,
-				},
-				include: {
-					_count: {
-						select: {
-							MarkedArticles: true,
-							ReadedTimeCount: true,
-						},
-					},
-				},
-			}),
-			prisma.readedTimeCount.aggregate({
-				where: {
-					userId,
-				},
-				_sum: {
-					times: true,
-				},
-			}),
-		]);
-
-		if (!user) {
+		if (!profileData) {
 			return NextResponse.json({ error: "User not found" }, { status: 404 });
 		}
 
-		return NextResponse.json({
-			user,
-			totalReadTimes: totalReadTimes._sum.times || 0,
-		});
+		return NextResponse.json(profileData);
 	} catch (error) {
 		console.error("Error fetching profile data:", error);
 		return NextResponse.json(
@@ -70,47 +43,22 @@ export async function PATCH(request: NextRequest) {
 
 		const userId = session.user.id;
 		const data = await request.json();
-		
+
 		// Validate input data
 		if (!data.name) {
+			return NextResponse.json({ error: "Name is required" }, { status: 400 });
+		}
+
+		const updatedProfileData = await updateUserProfile(userId, data.name);
+
+		if (!updatedProfileData) {
 			return NextResponse.json(
-				{ error: "Name is required" },
-				{ status: 400 }
+				{ error: "Failed to update profile" },
+				{ status: 500 },
 			);
 		}
 
-		// Update user name
-		const updatedUser = await prisma.user.update({
-			where: {
-				id: userId,
-			},
-			data: {
-				name: data.name,
-			},
-			include: {
-				_count: {
-					select: {
-						MarkedArticles: true,
-						ReadedTimeCount: true,
-					},
-				},
-			},
-		});
-
-		// Get total read times
-		const totalReadTimes = await prisma.readedTimeCount.aggregate({
-			where: {
-				userId,
-			},
-			_sum: {
-				times: true,
-			},
-		});
-
-		return NextResponse.json({
-			user: updatedUser,
-			totalReadTimes: totalReadTimes._sum.times || 0,
-		});
+		return NextResponse.json(updatedProfileData);
 	} catch (error) {
 		console.error("Error updating profile data:", error);
 		return NextResponse.json(

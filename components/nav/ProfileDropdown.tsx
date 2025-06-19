@@ -38,7 +38,7 @@ export default function ProfileDropdown() {
 					</Link>
 				</DropdownMenuItem>
 				<DropdownMenuSeparator />
-				<DropdownMenuItem
+				{/*<DropdownMenuItem
 					onClick={() =>
 						authClient.signOut({
 							fetchOptions: {
@@ -52,7 +52,7 @@ export default function ProfileDropdown() {
 				>
 					<Power className={"h-4 w-4 inline"} />
 					Sign out
-				</DropdownMenuItem>
+				</DropdownMenuItem>*/}
 			</DropdownMenuContent>
 		</DropdownMenu>
 	);

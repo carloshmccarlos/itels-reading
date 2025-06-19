@@ -4,7 +4,7 @@ import VerticalCard from "@/components/VerticalCard";
 import BigCard from "@/components/BigCard";
 import Footer from "@/components/Footer";
 import NoImageCard from "@/components/NoImageCard";
-import { getHottestArticles, getLatestArticles } from "@/data/article";
+import { getHottestArticles, getLatestArticles } from "@/lib/data/article";
 
 import type React from "react";
 

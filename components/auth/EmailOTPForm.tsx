@@ -12,12 +12,18 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth/auth-client";
-import { sendEmailOTP, EmailOTPResponse } from "@/lib/auth/sign-in";
+import { EmailOTPResponse, sendEmailOTP } from "@/lib/auth/sign-in";
+import {
+	deleteSendEmailTime,
+	getSendEmailTime,
+	updateSendEmailTime,
+} from "@/lib/data/email-check";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import * as z from "zod";
 
 // Schema for email OTP request form
@@ -89,37 +95,63 @@ export function EmailOTPForm({ callbackUrl = "/" }: EmailOTPFormProps) {
 	const handleEmailRequest = async (values: EmailRequestSchema) => {
 		const email = values.email;
 		setUserEmail(email);
-
-		if (cooldownRemaining > 0) {
-			setError(`Please wait ${cooldownRemaining} seconds before requesting another code.`);
-			return;
-		}
-
 		setLoading(true);
 		setError("");
 
 		try {
+			// Check if there's a cooldown period for this email
+			const cooldownRecord = await getSendEmailTime({ email });
+
+			if (cooldownRecord) {
+				const timeDiff =
+					new Date().getTime() - cooldownRecord.lastEmailSentAt.getTime();
+				const secondsPassed = Math.floor(timeDiff / 1000);
+
+				// If less than 60 seconds have passed since the last email
+				if (secondsPassed < 60) {
+					const remainingTime = 60 - secondsPassed;
+					setCooldownRemaining(remainingTime);
+					setLoading(false);
+					toast.error(
+						`Please wait ${remainingTime} seconds before requesting another code.`,
+					);
+					return;
+				}
+
+				// Reset cooldown if it's expired
+				await deleteSendEmailTime({ email });
+			}
+
+			// Proceed with sending the OTP
 			const response = await sendEmailOTP({
 				email: email,
 			});
 
 			// Check if there's an error
 			if (response.error) {
-				if (response.message?.includes("Rate limit") && response.remainingSeconds) {
+				if (
+					response.message?.includes("Rate limit") &&
+					response.remainingSeconds
+				) {
 					// Set cooldown from server response
 					setCooldownRemaining(response.remainingSeconds);
 					setError(response.message);
 				} else {
 					setError(
 						response.message ||
-						"Failed to send verification code. Please try again."
+							"Failed to send verification code. Please try again.",
 					);
 				}
 			} else {
 				// Successfully sent OTP
 				setStep("verify");
-				// Default cooldown of 60 seconds if server doesn't provide one
+				// Update the email sent time
+				const updateResponse = await updateSendEmailTime({ email });
+				if (!updateResponse) {
+					setError("Failed to update send email time. Please try again.");
+				}
 				setCooldownRemaining(60);
+				toast.success("Verification code sent successfully!");
 			}
 		} catch (err) {
 			console.error("Email OTP request error:", err);
@@ -149,7 +181,7 @@ export function EmailOTPForm({ callbackUrl = "/" }: EmailOTPFormProps) {
 
 			if (verifyError) {
 				setError(
-					verifyError.message || "Invalid verification code. Please try again."
+					verifyError.message || "Invalid verification code. Please try again.",
 				);
 			}
 		} catch (err) {
@@ -163,7 +195,9 @@ export function EmailOTPForm({ callbackUrl = "/" }: EmailOTPFormProps) {
 	// Handle resend OTP
 	const handleResendOTP = async () => {
 		if (cooldownRemaining > 0) {
-			setError(`Please wait ${cooldownRemaining} seconds before requesting another code.`);
+			setError(
+				`Please wait ${cooldownRemaining} seconds before requesting another code.`,
+			);
 			return;
 		}
 
@@ -176,20 +210,22 @@ export function EmailOTPForm({ callbackUrl = "/" }: EmailOTPFormProps) {
 			});
 
 			if (response.error) {
-				if (response.message?.includes("Rate limit") && response.remainingSeconds) {
+				if (
+					response.message?.includes("Rate limit") &&
+					response.remainingSeconds
+				) {
 					// Set cooldown from server response
 					setCooldownRemaining(response.remainingSeconds);
 					setError(response.message);
 				} else {
 					setError(
 						response.message ||
-						"Failed to resend verification code. Please try again."
+							"Failed to resend verification code. Please try again.",
 					);
 				}
 			} else {
 				// Successfully resent OTP
 				setCooldownRemaining(60);
-				setError("Verification code sent successfully!");
 			}
 		} catch (err) {
 			console.error("Resend OTP error:", err);
@@ -203,7 +239,7 @@ export function EmailOTPForm({ callbackUrl = "/" }: EmailOTPFormProps) {
 		<div className="space-y-6">
 			{error && (
 				<Alert variant="destructive">
-					<AlertDescription>{error}</AlertDescription>
+					<AlertDescription className={"font-serif"}>{error}</AlertDescription>
 				</Alert>
 			)}
 
@@ -234,16 +270,25 @@ export function EmailOTPForm({ callbackUrl = "/" }: EmailOTPFormProps) {
 							)}
 						/>
 
-						<Button 
-							type="submit" 
-							className="w-full" 
+						<Button
+							type="submit"
+							className="w-full cursor-pointer"
 							disabled={loading || cooldownRemaining > 0}
 						>
-							{loading 
-								? "Sending code..." 
-								: cooldownRemaining > 0 
-									? `Wait ${cooldownRemaining}s before resending` 
-									: "Send verification code"}
+							{loading ? (
+								"Sending code..."
+							) : cooldownRemaining > 0 ? (
+								// ? `Wait ${cooldownRemaining}s before resending`
+								<div>
+									Wait for{" "}
+									<span className={"inline-block font-[Open-serif]"}>
+										{cooldownRemaining}
+									</span>
+									{""}s before resending
+								</div>
+							) : (
+								"Send verification code"
+							)}
 						</Button>
 					</form>
 				</Form>
@@ -281,7 +326,11 @@ export function EmailOTPForm({ callbackUrl = "/" }: EmailOTPFormProps) {
 							)}
 						/>
 
-						<Button type="submit" className="w-full" disabled={loading}>
+						<Button
+							type="submit"
+							className="w-full cursor-pointer"
+							disabled={loading}
+						>
 							{loading ? "Verifying..." : "Verify and Login"}
 						</Button>
 
@@ -289,17 +338,25 @@ export function EmailOTPForm({ callbackUrl = "/" }: EmailOTPFormProps) {
 							<button
 								type="button"
 								onClick={handleResendOTP}
-								className="hover:underline text-blue-600 disabled:text-gray-400"
+								className="hover:underline cursor-pointer  disabled:text-gray-400"
 								disabled={loading || cooldownRemaining > 0}
 							>
-								{cooldownRemaining > 0 
-									? `Resend code in ${cooldownRemaining}s` 
-									: "Resend code"}
+								{cooldownRemaining > 0 ? (
+									<div>
+										Resend code in{" "}
+										<span className={"font-[Open-serif] inline-block"}>
+											{cooldownRemaining}
+										</span>{" "}
+										s
+									</div>
+								) : (
+									"Resend code"
+								)}
 							</button>
 							<button
 								type="button"
 								onClick={() => setStep("request")}
-								className="hover:underline"
+								className="hover:underline cursor-pointer"
 								disabled={loading}
 							>
 								Change email

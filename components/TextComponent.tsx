@@ -42,7 +42,7 @@ async function TextComponent({
 					</div>
 
 					{readCount && (
-						<span className="text-sm text-gray-500">
+						<span className="text-sm  font-[Open-serif] text-gray-500">
 							Read {readCount} times
 						</span>
 					)}

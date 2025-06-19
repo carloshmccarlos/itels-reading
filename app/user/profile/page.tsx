@@ -1,5 +1,6 @@
 "use client";
 
+import Spinner from "@/components/Spinner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -79,11 +80,7 @@ export default function ProfilePage() {
 
 	// Show loading state
 	if (isLoading) {
-		return (
-			<div className="container mx-auto py-10 px-4 md:px-8 flex justify-center">
-				<p>Loading profile...</p>
-			</div>
-		);
+		return null;
 	}
 
 	// Show error state

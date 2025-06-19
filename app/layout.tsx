@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import Navbar from "@/components/nav/Navbar";
-import { getAllCategories } from "@/data/category";
 import { auth } from "@/lib/auth/auth";
+import { getAllCategories } from "@/lib/data/category";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import type React from "react";

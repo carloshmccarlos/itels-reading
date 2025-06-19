@@ -5,7 +5,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import type { ArticleWithCategory } from "@/data/user";
+import type { ArticleWithCategory } from "@/lib/data/user";
 import {
 	categoryToPath,
 	titleToPath,
@@ -45,7 +45,7 @@ export default function ArticleCard({ article, readCount }: ArticleCardProps) {
 							{categoryName}
 						</span>
 						{readCount && (
-							<span className="text-sm text-gray-500">
+							<span className="text-sm text-gray-500  font-[Open-serif]">
 								Read {readCount} times
 							</span>
 						)}
@@ -58,7 +58,7 @@ export default function ArticleCard({ article, readCount }: ArticleCardProps) {
 					<CardDescription className="line-clamp-2">
 						{article.description}
 					</CardDescription>
-					<div className="mt-4 text-xs text-gray-500">
+					<div className="mt-4 text-xs text-gray-500  font-[Open-serif]">
 						{new Date(article.createdAt).toLocaleDateString("en-US", {
 							year: "numeric",
 							month: "long",

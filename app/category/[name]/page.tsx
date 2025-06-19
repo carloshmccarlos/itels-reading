@@ -7,7 +7,10 @@ import HorizontalCard from "@/components/HorizontalCard";
 import NoImageCard from "@/components/NoImageCard";
 import PaginationComponent from "@/components/PaginationComponent";
 import VerticalCard from "@/components/VerticalCard";
-import { countArticlesByCategory, getArticlesByCategory } from "@/data/article";
+import {
+	countArticlesByCategory,
+	getArticlesByCategory,
+} from "@/lib/data/article";
 
 import { CategoryName } from "@/lib/generated/prisma";
 import { pathToCategory, transformCategoryName } from "@/lib/utils";

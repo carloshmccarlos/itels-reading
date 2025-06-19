@@ -115,7 +115,7 @@ export function AuthForm({ type, onSubmit, error, loading }: AuthFormProps) {
 
 				<Button
 					type="submit"
-					className="w-full h-12 text-lg"
+					className="w-full h-12 text-lg cursor-pointer"
 					disabled={loading}
 				>
 					{loading

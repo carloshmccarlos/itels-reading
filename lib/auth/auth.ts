@@ -1,5 +1,5 @@
+import { sendEmail } from "@/lib/auth/send-email";
 import { prisma } from "@/lib/prisma";
-import { sendEmail } from "@/lib/send-email";
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { emailOTP } from "better-auth/plugins";

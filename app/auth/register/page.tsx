@@ -13,15 +13,18 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { AuthForm, type AuthFormSchema } from "@/components/auth/AuthForm";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 export default function RegisterPage() {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState("");
+	const [success, setSuccess] = useState(false);
 	const router = useRouter();
 
 	const handleSubmit = async (values: AuthFormSchema) => {
 		setLoading(true);
 		setError("");
+		setSuccess(false);
 
 		try {
 			const result = await signUp({
@@ -36,7 +39,8 @@ export default function RegisterPage() {
 						"Registration failed. Please try again later.",
 				);
 			} else {
-				router.push("/auth/login");
+				setSuccess(true);
+				// Wait a moment before redirecting to login page
 			}
 		} catch (error: unknown) {
 			console.error("Registration error:", error);
@@ -62,22 +66,45 @@ export default function RegisterPage() {
 					</CardDescription>
 				</CardHeader>
 				<CardContent>
-					<AuthForm
-						type="register"
-						onSubmit={handleSubmit}
-						error={error}
-						loading={loading}
-					/>
+					{success ? (
+						<div className="text-center">
+							<p className="text-green-600 font-semibold">
+								A verification email has been sent to your email address.
+							</p>
+							<div className="mt-4">
+								<Link
+									href="/auth/login"
+									className="font-medium text-primary hover:text-primary/90"
+								>
+									Back to Login
+								</Link>
+							</div>
+						</div>
+						/*<Alert className="bg-green-50 border-green-500 text-green-700 mb-6">
+							<AlertDescription className="text-lg">
+								Redirecting to login page...
+							</AlertDescription>
+						</Alert>*/
+					) : (
+						<AuthForm
+							type="register"
+							onSubmit={handleSubmit}
+							error={error}
+							loading={loading}
+						/>
+					)}
 
-					<div className="mt-6 text-center text-sm">
-						Already have an account?{" "}
-						<Link
-							href="/auth/login"
-							className="font-medium text-primary hover:text-primary/90"
-						>
-							Sign in
-						</Link>
-					</div>
+					{!success && (
+						<div className="mt-6 text-center text-sm">
+							Already have an account?{" "}
+							<Link
+								href="/auth/login"
+								className="font-medium text-primary hover:text-primary/90"
+							>
+								Sign in
+							</Link>
+						</div>
+					)}
 				</CardContent>
 			</Card>
 		</div>

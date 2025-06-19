@@ -54,6 +54,11 @@ export interface ProfileData {
 	};
 }
 
+export interface ApiProfileResponse {
+	user: UserWithCounts;
+	totalReadTimes: number;
+}
+
 /**
  * Get the current user session
  * @returns User session or redirects to login if not authenticated
@@ -181,33 +186,72 @@ export async function getUserData(): Promise<UserData> {
 }
 
 /**
- * Get user profile data including stats
- * @returns Profile data or redirects to login if not authenticated
+ * Get user profile data for API endpoint
+ * @param userId User ID
+ * @returns Profile data for the API response or null if user not found
  */
-export async function getProfileData(): Promise<ProfileData> {
-	const session = await auth.api.getSession({
-		headers: await headers(),
-	});
+export async function getProfileData(
+	userId: string,
+): Promise<ApiProfileResponse | null> {
+	try {
+		// Get user profile and total read times in parallel
+		const [user, totalReadTimes] = await Promise.all([
+			getUserProfile(userId),
+			getUserTotalReadTimes(userId),
+		]);
 
-	if (!session?.user?.id) {
-		return redirect("/auth/login");
+		if (!user) {
+			return null;
+		}
+
+		return {
+			user,
+			totalReadTimes,
+		};
+	} catch (error) {
+		console.error("Error fetching profile data:", error);
+		return null;
 	}
+}
 
-	const userId = session.user.id;
+/**
+ * Update user profile name
+ * @param userId User ID
+ * @param name New name for the user
+ * @returns Updated profile data for the API response or null if update fails
+ */
+export async function updateUserProfile(
+	userId: string,
+	name: string,
+): Promise<ApiProfileResponse | null> {
+	try {
+		// Update user name
+		const updatedUser = await prisma.user.update({
+			where: {
+				id: userId,
+			},
+			data: {
+				name,
+			},
+			include: {
+				_count: {
+					select: {
+						MarkedArticles: true,
+						ReadedTimeCount: true,
+					},
+				},
+			},
+		});
 
-	// Get user profile and total read times in parallel
-	const [user, totalReadTimes] = await Promise.all([
-		getUserProfile(userId),
-		getUserTotalReadTimes(userId),
-	]);
+		// Get total read times
+		const totalReadTimes = await getUserTotalReadTimes(userId);
 
-	if (!user) {
-		return redirect("/auth/login");
+		return {
+			user: updatedUser as UserWithCounts,
+			totalReadTimes,
+		};
+	} catch (error) {
+		console.error("Error updating profile data:", error);
+		return null;
 	}
-
-	return {
-		user,
-		totalReadTimes,
-		session: { user: session.user },
-	};
 }

@@ -63,10 +63,14 @@ export default function LoginPage() {
 				<CardContent>
 					<Tabs defaultValue="password" className="w-full">
 						<TabsList className="grid w-full grid-cols-2 mb-6">
-							<TabsTrigger value="password">Password</TabsTrigger>
-							<TabsTrigger value="email-otp">Email Code</TabsTrigger>
+							<TabsTrigger className={"cursor-pointer"} value="password">
+								Password
+							</TabsTrigger>
+							<TabsTrigger className={"cursor-pointer"} value="email-otp">
+								Email Code
+							</TabsTrigger>
 						</TabsList>
-						
+
 						<TabsContent value="password">
 							<AuthForm
 								type="login"
@@ -75,7 +79,7 @@ export default function LoginPage() {
 								loading={loading}
 							/>
 						</TabsContent>
-						
+
 						<TabsContent value="email-otp">
 							<EmailOTPForm callbackUrl={callbackUrl} />
 						</TabsContent>

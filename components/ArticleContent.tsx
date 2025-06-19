@@ -2,12 +2,12 @@
 
 import MarkdownRenderer from "@/components/MarkdownRender";
 import { Button } from "@/components/ui/button";
+import { authClient } from "@/lib/auth/auth-client";
 import {
 	getUserArticleStats,
 	incrementReadCount,
 	toggleMarkArticle,
-} from "@/data/article-stats";
-import { authClient } from "@/lib/auth/auth-client";
+} from "@/lib/data/article-stats";
 import { transformCategoryName } from "@/lib/utils";
 import type { ArticleWithCategory } from "@/types/interface";
 import { SmilePlus, Star } from "lucide-react";

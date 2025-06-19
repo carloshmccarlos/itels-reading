@@ -91,7 +91,11 @@ export function ChangePasswordForm({
 					)}
 				/>
 
-				<Button type="submit" className="w-full" disabled={loading}>
+				<Button
+					type="submit"
+					className="w-full cursor-pointer"
+					disabled={loading}
+				>
 					{loading ? "Processing..." : "Reset Password"}
 				</Button>
 			</form>

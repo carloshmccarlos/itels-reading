@@ -25,12 +25,14 @@ interface RequestResetFormProps {
 	onSubmit: (values: RequestResetSchema) => Promise<void>;
 	error?: string;
 	loading?: boolean;
+	cooldownRemaining?: number;
 }
 
 export function RequestResetForm({
 	onSubmit,
 	error,
 	loading,
+	cooldownRemaining = 0,
 }: RequestResetFormProps) {
 	const form = useForm<RequestResetSchema>({
 		resolver: zodResolver(requestResetSchema),
@@ -62,8 +64,16 @@ export function RequestResetForm({
 					)}
 				/>
 
-				<Button type="submit" className="w-full" disabled={loading}>
-					{loading ? "Processing..." : "Send Reset Link"}
+				<Button 
+					type="submit" 
+					className="w-full" 
+					disabled={loading || cooldownRemaining > 0}
+				>
+					{loading
+						? "Processing..."
+						: cooldownRemaining > 0
+						? `Resend in ${cooldownRemaining}s`
+						: "Send Reset Link"}
 				</Button>
 			</form>
 		</Form>

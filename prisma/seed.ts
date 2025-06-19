@@ -1,6 +1,6 @@
 import * as fs from "node:fs";
 
-import { categories } from "@/data/sample-data";
+import { categories } from "@/lib/data/sample-data";
 import type { CategoryName } from "@/lib/generated/prisma";
 import { prisma } from "@/lib/prisma";
 

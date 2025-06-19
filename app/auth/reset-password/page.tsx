@@ -10,9 +10,20 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { authClient } from "@/lib/auth/auth-client";
+import { deleteSendEmailTime, getSendEmailTime, updateSendEmailTime } from "@/lib/data/email-check";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
+
+// Extended error interface for rate limiting
+interface ExtendedError {
+	code?: string;
+	message?: string;
+	status: number;
+	statusText: string;
+	remainingSeconds?: number;
+}
 
 export default function ResetPasswordPage() {
 	const searchParams = useSearchParams();
@@ -20,8 +31,23 @@ export default function ResetPasswordPage() {
 	const [loading, setLoading] = useState(false);
 	const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
 	const [message, setMessage] = useState("");
+	const [cooldownRemaining, setCooldownRemaining] = useState(0);
 
 	const isResetForm = !!token;
+
+	// Countdown timer effect
+	useEffect(() => {
+		if (cooldownRemaining <= 0) return;
+
+		const timer = setInterval(() => {
+			setCooldownRemaining((prev) => {
+				const newValue = prev - 1;
+				return newValue > 0 ? newValue : 0;
+			});
+		}, 1000);
+
+		return () => clearInterval(timer);
+	}, [cooldownRemaining]);
 
 	const handleRequestReset = async (values: { email: string }) => {
 		if (loading) return;
@@ -31,14 +57,41 @@ export default function ResetPasswordPage() {
 		setMessage("");
 
 		try {
+			// Check if there's a cooldown period for this email
+			const cooldownRecord = await getSendEmailTime({ email: values.email });
+
+			if (cooldownRecord) {
+				const timeDiff =
+					new Date().getTime() - cooldownRecord.lastEmailSentAt.getTime();
+				const secondsPassed = Math.floor(timeDiff / 1000);
+
+				// If less than 60 seconds have passed since the last email
+				if (secondsPassed < 60) {
+					const remainingTime = 60 - secondsPassed;
+					setCooldownRemaining(remainingTime);
+					setLoading(false);
+					toast.error(
+						`Please wait ${remainingTime} seconds before requesting another reset link.`
+					);
+					return;
+				}
+
+				// Reset cooldown if it's expired
+				await deleteSendEmailTime({ email: values.email });
+			}
+
 			const { data, error } = await authClient.requestPasswordReset({
 				email: values.email,
 				redirectTo: "/auth/reset-password",
 			});
 
-			console.log(data);
-
 			if (error) {
+				const extendedError = error as ExtendedError;
+				if (extendedError.message?.includes("Rate limit") && extendedError.remainingSeconds) {
+					// Set cooldown from server response if available
+					setCooldownRemaining(extendedError.remainingSeconds);
+				}
+				
 				setStatus("error");
 				setMessage(
 					error.message || "Failed to send reset link. Please try again.",
@@ -47,8 +100,13 @@ export default function ResetPasswordPage() {
 				return;
 			}
 
+			// Update the email sent time
+			await updateSendEmailTime({ email: values.email });
+			setCooldownRemaining(60);
+			
 			setStatus("success");
 			setMessage("Reset password link has been sent to your email!");
+			toast.success("Reset password link sent successfully!");
 		} catch (error) {
 			console.error("Reset password request exception:", error);
 			setStatus("error");
@@ -70,7 +128,7 @@ export default function ResetPasswordPage() {
 		confirmPassword: string;
 	}) => {
 		if (loading) return;
-		
+
 		setLoading(true);
 		setStatus("idle");
 		setMessage("");
@@ -91,7 +149,9 @@ export default function ResetPasswordPage() {
 
 			if (error) {
 				setStatus("error");
-				setMessage(error.message || "Failed to reset password. Please try again.");
+				setMessage(
+					error.message || "Failed to reset password. Please try again.",
+				);
 				console.error("Reset password failed:", error);
 				return;
 			}
@@ -101,13 +161,13 @@ export default function ResetPasswordPage() {
 		} catch (error) {
 			console.error("Reset password exception:", error);
 			setStatus("error");
-			
+
 			// More specific error handling based on error type
-			const errorMessage = 
+			const errorMessage =
 				error instanceof Error
 					? error.message
 					: "Failed to reset password. Please try again later.";
-					
+
 			setMessage(errorMessage);
 		} finally {
 			setLoading(false);
@@ -119,12 +179,14 @@ export default function ResetPasswordPage() {
 			<Card className="w-full max-w-md">
 				<CardHeader>
 					<CardTitle className="text-2xl text-center">
-						{isResetForm ? "Reset Your Password" : "Forgot Password"}
+						{status !== "success" &&
+							(isResetForm ? "Reset Your Password" : "Forgot Password")}
 					</CardTitle>
 					<CardDescription className="text-center">
-						{isResetForm
-							? "Enter your new password below"
-							: "Enter your email to receive a reset link"}
+						{status !== "success" &&
+							(isResetForm
+								? "Enter your new password"
+								: "Enter your email to reset your password")}
 					</CardDescription>
 				</CardHeader>
 				<CardContent>
@@ -151,6 +213,7 @@ export default function ResetPasswordPage() {
 							onSubmit={handleRequestReset}
 							error={status === "error" ? message : undefined}
 							loading={loading}
+							cooldownRemaining={cooldownRemaining}
 						/>
 					)}
 
