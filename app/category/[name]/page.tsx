@@ -12,7 +12,7 @@ import {
 	getArticlesByCategory,
 } from "@/lib/data/article";
 
-import { CategoryName } from "@/lib/generated/prisma";
+import { CategoryName } from "@prisma/client";
 import { pathToCategory, transformCategoryName } from "@/lib/utils";
 import Link from "next/link";
 

@@ -1,4 +1,5 @@
 import { authClient } from "@/lib/auth/auth-client";
+import { toast } from "sonner";
 
 export async function signIn({
 	email,
@@ -28,7 +29,9 @@ export async function signIn({
 			onError: (ctx) => {
 				// Handle the error
 				if (ctx.error.status === 403) {
-					alert("Please verify your email address");
+					toast.error(
+						"Please verify your email address, if expired, pleaser register again",
+					);
 				}
 
 				//you can also show the original error message
@@ -42,14 +45,16 @@ export async function signIn({
 export async function signInWithEmailOTP({
 	email,
 	otp,
-}: { 
-	email: string; 
+}: {
+	email: string;
 	otp: string;
 }) {
 	const { data, error } = await authClient.signIn.emailOtp({
 		email,
 		otp,
 	});
+
+	console.log(1);
 
 	return { data, error };
 }
@@ -78,14 +83,14 @@ export async function sendEmailOTP({
 			return {
 				error: true,
 				message: response.error.message || "Failed to send verification code",
-				data: null
+				data: null,
 			};
 		}
 
 		// If successful, return the data
 		return {
 			error: false,
-			data: response.data
+			data: response.data,
 		};
 	} catch (err: unknown) {
 		// Handle unexpected errors
@@ -93,7 +98,7 @@ export async function sendEmailOTP({
 		return {
 			error: true,
 			message: error.message || "An unexpected error occurred",
-			data: null
+			data: null,
 		};
 	}
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { $Enums } from "@/lib/generated/prisma";
+import { CategoryName } from "@prisma/client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -84,7 +84,7 @@ export function ArticleForm({ initialData, articleId }: ArticleFormProps) {
 	}, [articleId, initialData]);
 
 	// Convert enum values to option list
-	const categoryOptions = Object.entries($Enums.CategoryName).map(
+	const categoryOptions = Object.entries(CategoryName).map(
 		([key, value]) => ({
 			value,
 			label:

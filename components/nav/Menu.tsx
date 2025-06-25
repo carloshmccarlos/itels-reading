@@ -12,30 +12,36 @@ import {
 	SheetTrigger,
 } from "@/components/ui/sheet";
 import { authClient } from "@/lib/auth/auth-client";
-import type { Category } from "@/lib/generated/prisma";
+import type { Category } from "@prisma/client";
+import { usePathname } from "next/navigation";
 
 interface Props {
 	categories: Category[];
+	type: "col" | "admin";
 }
 
-function Menu({ categories }: Props) {
+function Menu({ categories, type }: Props) {
 	// const inputRef = useRef<HTMLInputElement>(null);
 	const session = authClient.useSession();
 
 	return (
 		<Sheet>
 			<SheetTrigger className={"text-start"}>
-				<div className={"hover:cursor-pointer hover:bg-gray-300 pr-1"}>
+				<div
+					className={`hover:cursor-pointer ${type === "admin" && "hover:bg-slate-700"} hover:bg-gray-300 pr-1`}
+				>
 					<MenuIcon />
 				</div>
 			</SheetTrigger>
 			<SheetContent
 				side={"left"}
-				className={"w-3/4 xl:w-1/4  lg:w-1/3 md:w-1/2"}
+				className={`${type === "admin" && "bg-slate-950 border-slate-950"}  w-3/4 xl:w-1/4  lg:w-1/3 md:w-1/2`}
 				onOpenAutoFocus={(e) => e.preventDefault()}
 			>
 				<SheetHeader>
-					<SheetTitle className={"text-2xl font-bold text-center"}>
+					<SheetTitle
+						className={`text-2xl font-bold text-center ${type === "admin" && "text-white"}`}
+					>
 						MENU
 					</SheetTitle>
 				</SheetHeader>
@@ -71,7 +77,7 @@ function Menu({ categories }: Props) {
 
 				<NavLinks
 					categories={categories}
-					type={"col"}
+					type={type}
 					className={"flex flex-col py-2 px-4 "}
 				/>
 			</SheetContent>

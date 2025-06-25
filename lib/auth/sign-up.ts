@@ -1,5 +1,7 @@
 import { authClient } from "@/lib/auth/auth-client";
 
+import { updateUserRoleByEmail } from "@/lib/data/user";
+import type { Role } from "@prisma/client";
 import { toast } from "sonner";
 
 export async function signUp({
@@ -19,16 +21,13 @@ export async function signUp({
 			password,
 			name,
 			image,
-			callbackURL: "/", // A URL to redirect to after the user verifies their email (optional)
+			callbackURL: "/auth/register-result", // A URL to redirect to after the user verifies their email (optional)
 		},
 		{
-			onRequest: (ctx) => {
-				//show loading
-			},
 			onSuccess: (ctx) => {},
 			onError: (ctx) => {
 				// display the error message
-				alert(ctx.error.message);
+				toast.error(ctx.error.message);
 			},
 		},
 	);

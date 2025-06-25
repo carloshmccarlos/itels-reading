@@ -4,7 +4,12 @@ import * as React from "react";
 
 export default function Spinner() {
 	return (
-		<Stack
+		<div className="absolute top-1/2 left-1/2 opacity-80 -translate-x-1/2 -translate-y-1/2">
+			<div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary">
+				{""}
+			</div>
+		</div>
+		/*	<Stack
 			className={
 				"absolute top-1/2 left-1/2 opacity-80 -translate-x-1/2 -translate-y-1/2"
 			}
@@ -15,6 +20,6 @@ export default function Spinner() {
 			<CircularProgress color={"inherit"} size="30px" />
 			<CircularProgress color={"inherit"} size={40} />
 			<CircularProgress color={"inherit"} size="3rem" />
-		</Stack>
+		</Stack>*/
 	);
 }

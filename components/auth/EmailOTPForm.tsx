@@ -91,7 +91,7 @@ export function EmailOTPForm({ callbackUrl = "/" }: EmailOTPFormProps) {
 		return () => clearInterval(timer);
 	}, [cooldownRemaining]);
 
-	// Handle email request submission
+	// Handle sending email
 	const handleEmailRequest = async (values: EmailRequestSchema) => {
 		const email = values.email;
 		setUserEmail(email);
@@ -161,7 +161,7 @@ export function EmailOTPForm({ callbackUrl = "/" }: EmailOTPFormProps) {
 		}
 	};
 
-	// Handle OTP verification submission
+	// Handle OTP verification
 	const handleOTPVerification = async (values: OtpVerificationSchema) => {
 		setLoading(true);
 		setError("");
@@ -180,9 +180,7 @@ export function EmailOTPForm({ callbackUrl = "/" }: EmailOTPFormProps) {
 			);
 
 			if (verifyError) {
-				setError(
-					verifyError.message || "Invalid verification code. Please try again.",
-				);
+				setError("Invalid verification code. Please try again.");
 			}
 		} catch (err) {
 			console.error("OTP verification error:", err);
@@ -314,6 +312,7 @@ export function EmailOTPForm({ callbackUrl = "/" }: EmailOTPFormProps) {
 									<FormLabel>Verification Code</FormLabel>
 									<FormControl>
 										<Input
+											className={"font-[Open-serif]"}
 											placeholder="Enter 6-digit code"
 											type="text"
 											maxLength={6}

@@ -1,7 +1,10 @@
-import type { CategoryName } from "@/lib/generated/prisma";
+import type { CategoryName } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { auth } from "@/lib/auth/auth";
+import { headers } from "next/headers";
+import { Role } from "@prisma/client";
 
 export async function GET(
 	request: NextRequest,
@@ -89,31 +92,52 @@ export async function PUT(
 
 export async function DELETE(
 	request: NextRequest,
-	{ params }: { params: Promise<{ id: string }> },
+	{ params }: { params: { id: string } }
 ) {
 	try {
-		const id = Number.parseInt((await params).id, 10);
-		if (Number.isNaN(id)) {
-			return NextResponse.json({ error: "无效的ID" }, { status: 400 });
+		// Check if user is admin
+		const session = await auth.api.getSession({
+			headers: await headers(),
+		});
+		
+		if (!session?.user?.id) {
+			return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
 		}
-
-		// 检查文章是否存在
-		const existingArticle = await prisma.article.findUnique({
-			where: { id },
+		
+		// Get user with role
+		const user = await prisma.user.findUnique({
+			where: { id: session.user.id },
+			select: { role: true }
 		});
 
-		if (!existingArticle) {
-			return NextResponse.json({ error: "文章不存在" }, { status: 404 });
+		if (!user || user.role !== Role.ADMIN) {
+			return NextResponse.json({ message: "Forbidden: Admin access required" }, { status: 403 });
 		}
 
-		// 删除文章
+		// Delete the article
+		const articleId = parseInt(params.id);
+		
+		if (isNaN(articleId)) {
+			return NextResponse.json({ message: "Invalid article ID" }, { status: 400 });
+		}
+		
+		// Check if article exists
+		const article = await prisma.article.findUnique({
+			where: { id: articleId }
+		});
+		
+		if (!article) {
+			return NextResponse.json({ message: "Article not found" }, { status: 404 });
+		}
+		
+		// Delete the article
 		await prisma.article.delete({
-			where: { id },
+			where: { id: articleId }
 		});
-
-		return NextResponse.json({ message: "文章已成功删除" });
+		
+		return NextResponse.json({ message: "Article deleted successfully" });
 	} catch (error) {
-		console.error("删除文章时出错:", error);
-		return NextResponse.json({ error: "删除文章失败" }, { status: 500 });
+		console.error("Error deleting article:", error);
+		return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
 	}
 }

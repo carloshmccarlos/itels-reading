@@ -1,5 +1,6 @@
 "use client";
 
+import { AuthForm, type AuthFormSchema } from "@/components/auth/AuthForm";
 import {
 	Card,
 	CardContent,
@@ -8,18 +9,15 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { signUp } from "@/lib/auth/sign-up";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { deleteUserByEmail, getUserByEmail } from "@/lib/data/user";
 
-import { AuthForm, type AuthFormSchema } from "@/components/auth/AuthForm";
-import { Alert, AlertDescription } from "@/components/ui/alert";
+import Link from "next/link";
+import { useState } from "react";
 
 export default function RegisterPage() {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState("");
 	const [success, setSuccess] = useState(false);
-	const router = useRouter();
 
 	const handleSubmit = async (values: AuthFormSchema) => {
 		setLoading(true);
@@ -27,6 +25,12 @@ export default function RegisterPage() {
 		setSuccess(false);
 
 		try {
+			const user = await getUserByEmail(values.email);
+
+			if (user && !user?.emailVerified) {
+				await deleteUserByEmail(values.email);
+			}
+
 			const result = await signUp({
 				email: values.email,
 				password: values.password,

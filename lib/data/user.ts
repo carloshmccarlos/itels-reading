@@ -1,8 +1,8 @@
 "use server";
 
 import { auth } from "@/lib/auth/auth";
-import type { Article, Category, User } from "@/lib/generated/prisma";
 import { prisma } from "@/lib/prisma";
+import type { Article, Category, Role, User } from "@prisma/client";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -254,4 +254,45 @@ export async function updateUserProfile(
 		console.error("Error updating profile data:", error);
 		return null;
 	}
+}
+
+export async function deleteUserByEmail(email: string) {
+	return prisma.user.delete({
+		where: {
+			email: email,
+		},
+	});
+}
+
+export async function getUserByEmail(email: string) {
+	return prisma.user.findUnique({
+		where: {
+			email: email,
+		},
+	});
+}
+
+export async function getRoleByUserId(userId: string) {
+	return prisma.user.findUnique({
+		where: {
+			id: userId,
+		},
+		select: {
+			role: true,
+		},
+	});
+}
+
+export async function updateUserRoleByEmail({
+	email,
+	role,
+}: { email: string; role: Role }) {
+	return prisma.user.update({
+		where: {
+			email: email,
+		},
+		data: {
+			role: role,
+		},
+	});
 }

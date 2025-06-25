@@ -8,13 +8,12 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { authClient } from "@/lib/auth/auth-client";
-import { BookMarked, Power, User } from "lucide-react";
+import { BookMarked, User } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
-export default function ProfileDropdown() {
+export default function ProfileDropdown({ role }: { role: "USER" | "ADMIN" }) {
 	const session = authClient.useSession();
-	const router = useRouter();
+	console.log(JSON.stringify(role));
 
 	return (
 		<DropdownMenu>
@@ -38,6 +37,15 @@ export default function ProfileDropdown() {
 					</Link>
 				</DropdownMenuItem>
 				<DropdownMenuSeparator />
+
+				{role === "ADMIN" && (
+					<DropdownMenuItem asChild className={" cursor-pointer text-[16px]"}>
+						<Link href="/admin">
+							<User className="h-4 w-4 inline" />
+							Dashboard
+						</Link>
+					</DropdownMenuItem>
+				)}
 				{/*<DropdownMenuItem
 					onClick={() =>
 						authClient.signOut({

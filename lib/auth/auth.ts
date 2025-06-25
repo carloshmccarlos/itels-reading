@@ -4,9 +4,7 @@ import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { emailOTP } from "better-auth/plugins";
 
-// 创建认证处理程序
 export const auth = betterAuth({
-	// 数据库适配器
 	database: prismaAdapter(prisma, {
 		provider: "postgresql",
 	}),

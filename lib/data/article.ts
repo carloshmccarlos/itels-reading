@@ -1,4 +1,4 @@
-import type { CategoryName } from "@/lib/generated/prisma";
+import type { CategoryName } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 
 export async function getArticleById(id: number) {

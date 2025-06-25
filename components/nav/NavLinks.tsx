@@ -1,14 +1,14 @@
 "use client";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
-import type { Category } from "@/lib/generated/prisma";
 import { categoryToPath, cn, transformCategoryName } from "@/lib/utils";
+import type { Category } from "@prisma/client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 interface Props {
 	className?: string;
-	type: "row" | "col";
+	type: "row" | "col" | "admin";
 	categories: Category[];
 }
 
@@ -25,7 +25,45 @@ function NavLinks({ className, type, categories }: Props) {
 		}
 	}
 
-	console.log(currentCategory);
+	// Admin navigation links
+	if (type === "admin") {
+		return (
+			<ScrollArea className={cn("h-9/10 w-full", className)}>
+				<div className="flex flex-col space-y-1 p-2">
+					<Link
+						href="/admin"
+						className={`block text-xl font-semibold py-2 px-4 mb-1 rounded transition-colors ${
+							pathname === "/admin"
+								? "bg-slate-700 text-white font-medium"
+								: "text-gray-200 hover:bg-slate-700"
+						}`}
+					>
+						Dashboard
+					</Link>
+					<Link
+						href="/admin/edit"
+						className={`block py-2 text-xl font-semibold px-4 mb-1 rounded transition-colors ${
+							pathname.startsWith("/admin/edit")
+								? "bg-slate-700 text-white font-medium"
+								: "text-gray-200 hover:bg-slate-700"
+						}`}
+					>
+						Articles
+					</Link>
+					<Link
+						href="/admin/users"
+						className={`block py-2 text-xl font-semibold px-4 mb-1 rounded transition-colors ${
+							pathname.startsWith("/admin/users")
+								? "bg-slate-700 text-white font-medium"
+								: "text-gray-200 hover:bg-slate-700"
+						}`}
+					>
+						Users
+					</Link>
+				</div>
+			</ScrollArea>
+		);
+	}
 
 	return (
 		<ScrollArea className={cn("h-9/10 w-full", className)}>

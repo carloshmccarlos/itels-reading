@@ -4,7 +4,7 @@ import LoginButton from "@/components/LoginButton";
 import Menu from "@/components/nav/Menu";
 import ProfileDropdown from "@/components/nav/ProfileDropdown";
 import { authClient } from "@/lib/auth/auth-client";
-import type { Category } from "@/lib/generated/prisma";
+import type { Category } from "@prisma/client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -12,12 +12,15 @@ import RegisterButton from "../RegisterButton";
 
 interface Props {
 	categories: Category[];
+	role: "USER" | "ADMIN";
 }
 
-function NavBar({ categories }: Props) {
+function NavBar({ categories, role }: Props) {
 	const [scrolled, setScrolled] = useState(false);
 	const pathname = usePathname();
 	const session = authClient.useSession();
+
+	const type = pathname.startsWith("/admin") ? "admin" : "col";
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -38,14 +41,14 @@ function NavBar({ categories }: Props) {
 	return (
 		<>
 			<nav
-				className={`bg-white py-4 border-b sticky top-0 z-50 transition-all duration-300 ${scrolled ? "py-2" : "py-4"}`}
+				className={`${pathname.startsWith("/admin") ? "bg-slate-950 text-white border-0" : "bg-white text-black border-b"} py-4  sticky top-0 z-50 transition-all duration-300 ${scrolled ? "py-2" : "py-4"}`}
 			>
 				<div className="mx-auto flex items-center px-4 relative">
 					<div className="absolute left-0 sm:left-4">
 						{pathname.startsWith("/auth") ? (
 							""
 						) : (
-							<Menu categories={categories} />
+							<Menu categories={categories} type={type} />
 						)}
 					</div>
 					<div className="w-full flex justify-center">
@@ -63,7 +66,7 @@ function NavBar({ categories }: Props) {
 
 					{session?.data?.user ? (
 						<div className=" lg:flex items-center gap-2 md:gap-4 absolute right-0 sm:right-4">
-							<ProfileDropdown />
+							<ProfileDropdown role={role} />
 						</div>
 					) : (
 						<div className="hidden lg:flex items-center gap-2 md:gap-4 absolute right-0 sm:right-4">

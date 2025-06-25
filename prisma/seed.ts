@@ -1,43 +1,77 @@
 import * as fs from "node:fs";
-
-import { categories } from "@/lib/data/sample-data";
-import type { CategoryName } from "@/lib/generated/prisma";
 import { prisma } from "@/lib/prisma";
+import type { CategoryName } from "@prisma/client";
 
 async function main() {
 	console.log("Start seeding ...");
 
 	// Seed Categories
-	for (const category of categories) {
-		await prisma.category.create({
-			data: {
-				name: category.name as CategoryName,
+	/*	const categoryNames = [
+		"nature_geography",
+		"plant_research",
+		"animal_protection",
+		"space_exploration",
+		"school_education",
+		"technology_invention",
+		"culture_history",
+		"language_evolution",
+		"entertainment_sports",
+		"objects_materials",
+		"fashion_trends",
+		"diet_health",
+		"architecture_places",
+		"transportation_travel",
+		"national_government",
+		"society_economy",
+		"laws_regulations",
+		"battlefield_contention",
+		"social_roles",
+		"behavior_actions",
+		"physical_mental_health",
+		"time_date",
+	];
+
+	for (const name of categoryNames) {
+		await prisma.category.upsert({
+			where: { name: name as CategoryName },
+			update: {},
+			create: {
+				name: name as CategoryName,
 			},
 		});
 	}
-	console.log("Categories seeded.");
+	console.log("Categories seeded.");*/
 
-	/*const articles = JSON.parse(
-		fs.readFileSync("../data/articles.json", "utf-8"),
-	);
+	// Load articles from JSON
+	const articlesData = JSON.parse(fs.readFileSync("articles.json", "utf-8"));
 
-	// Seed Articles
-	for (let i = 0; i < 5; i++) {
-		for (const article of articles) {
-			await prisma.article.create({
-				data: {
-					title: article.title,
-					imageUrl: article.imageUrl,
-					content: article.content,
-					description: article.description,
-					readTimes: article.readTimes,
-					categoryName: article.categoryName,
-				},
-			});
+	// Seed Articles - pick 50 articles from the data
+	const articlesToSeed = articlesData.slice(0, 50);
+
+	console.log(`Seeding ${articlesToSeed.length} articles...`);
+
+	for (const article of articlesToSeed) {
+		// Convert dash-format category names to underscore format
+		let categoryName = article.categoryName;
+
+		// biome-ignore lint/complexity/useOptionalChain: <explanation>
+		if (categoryName && categoryName.includes("-")) {
+			categoryName = categoryName.replace(/-/g, "_");
 		}
-	}
-	console.log("Articles seeded.");*/
 
+		await prisma.article.create({
+			data: {
+				title: article.title,
+				imageUrl: article.imageUrl,
+				content: article.content,
+				description: article.description,
+				readTimes: article.readTimes || 0,
+				categoryName: categoryName as CategoryName,
+			},
+		});
+	}
+
+	console.log("Articles seeded.");
 	console.log("Seeding finished.");
 }
 

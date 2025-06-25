@@ -10,7 +10,11 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { authClient } from "@/lib/auth/auth-client";
-import { deleteSendEmailTime, getSendEmailTime, updateSendEmailTime } from "@/lib/data/email-check";
+import {
+	deleteSendEmailTime,
+	getSendEmailTime,
+	updateSendEmailTime,
+} from "@/lib/data/email-check";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -28,6 +32,7 @@ interface ExtendedError {
 export default function ResetPasswordPage() {
 	const searchParams = useSearchParams();
 	const token = searchParams.get("token");
+	const error = searchParams.get("error");
 	const [loading, setLoading] = useState(false);
 	const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
 	const [message, setMessage] = useState("");
@@ -71,7 +76,7 @@ export default function ResetPasswordPage() {
 					setCooldownRemaining(remainingTime);
 					setLoading(false);
 					toast.error(
-						`Please wait ${remainingTime} seconds before requesting another reset link.`
+						`Please wait ${remainingTime} seconds before requesting another reset link.`,
 					);
 					return;
 				}
@@ -87,11 +92,14 @@ export default function ResetPasswordPage() {
 
 			if (error) {
 				const extendedError = error as ExtendedError;
-				if (extendedError.message?.includes("Rate limit") && extendedError.remainingSeconds) {
+				if (
+					extendedError.message?.includes("Rate limit") &&
+					extendedError.remainingSeconds
+				) {
 					// Set cooldown from server response if available
 					setCooldownRemaining(extendedError.remainingSeconds);
 				}
-				
+
 				setStatus("error");
 				setMessage(
 					error.message || "Failed to send reset link. Please try again.",
@@ -103,7 +111,7 @@ export default function ResetPasswordPage() {
 			// Update the email sent time
 			await updateSendEmailTime({ email: values.email });
 			setCooldownRemaining(60);
-			
+
 			setStatus("success");
 			setMessage("Reset password link has been sent to your email!");
 			toast.success("Reset password link sent successfully!");

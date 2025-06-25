@@ -1,4 +1,4 @@
-import type { Category, CategoryName } from "@/lib/generated/prisma";
+import type { Category, CategoryName } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 
 export async function getAllCategories() {

@@ -1,4 +1,4 @@
-import { CategoryName } from "@/lib/generated/prisma";
+import { CategoryName } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";

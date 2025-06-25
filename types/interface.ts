@@ -1,4 +1,4 @@
-import type { Prisma } from "@/lib/generated/prisma";
+import type { Prisma } from "@prisma/client";
 
 export interface CardProps {
 	article: ArticleWithCategory;
