@@ -7,13 +7,13 @@ import type { NextRequest } from "next/server";
 
 export async function GET(
 	request: NextRequest,
-	{ params }: { params: Promise<{ id: string }> },
+	{ params }: { params: { id: string } },
 ) {
 	try {
-		const id = Number.parseInt((await params).id, 10);
+		const id = Number.parseInt(params.id, 10);
 
 		if (Number.isNaN(id)) {
-			return NextResponse.json({ error: "无效的ID" }, { status: 400 });
+			return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
 		}
 
 		const article = await prisma.article.findUnique({
@@ -24,24 +24,27 @@ export async function GET(
 		});
 
 		if (!article) {
-			return NextResponse.json({ error: "文章不存在" }, { status: 404 });
+			return NextResponse.json({ error: "Article not found" }, { status: 404 });
 		}
 
 		return NextResponse.json(article);
 	} catch (error) {
-		console.error("获取文章时出错:", error);
-		return NextResponse.json({ error: "获取文章失败" }, { status: 500 });
+		console.error("Error getting article:", error);
+		return NextResponse.json(
+			{ error: "Failed to get article" },
+			{ status: 500 },
+		);
 	}
 }
 
 export async function PUT(
 	request: NextRequest,
-	{ params }: { params: Promise<{ id: string }> },
+	{ params }: { params: { id: string } },
 ) {
 	try {
-		const id = Number.parseInt((await params).id, 10);
+		const id = Number.parseInt(params.id, 10);
 		if (Number.isNaN(id)) {
-			return NextResponse.json({ error: "无效的ID" }, { status: 400 });
+			return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
 		}
 
 		const body = await request.json();
@@ -51,7 +54,7 @@ export async function PUT(
 		// 验证必填字段
 		if (!title || !imageUrl || !content || !description) {
 			return NextResponse.json(
-				{ error: "标题、图片URL、内容和描述是必填的" },
+				{ error: "Title, image URL, content and description are required" },
 				{ status: 400 },
 			);
 		}
@@ -62,7 +65,7 @@ export async function PUT(
 		});
 
 		if (!existingArticle) {
-			return NextResponse.json({ error: "文章不存在" }, { status: 404 });
+			return NextResponse.json({ error: "Article not found" }, { status: 404 });
 		}
 
 		// 更新文章
@@ -84,8 +87,11 @@ export async function PUT(
 
 		return NextResponse.json(updatedArticle);
 	} catch (error) {
-		console.error("更新文章时出错:", error);
-		return NextResponse.json({ error: "更新文章失败" }, { status: 500 });
+		console.error("Error updating article:", error);
+		return NextResponse.json(
+			{ error: "Failed to update article" },
+			{ status: 500 },
+		);
 	}
 }
 
