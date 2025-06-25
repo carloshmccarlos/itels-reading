@@ -1,10 +1,9 @@
-import type { CategoryName } from "@prisma/client";
+import { auth } from "@/lib/auth/auth";
 import { prisma } from "@/lib/prisma";
+import { Role } from "@prisma/client";
+import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { auth } from "@/lib/auth/auth";
-import { headers } from "next/headers";
-import { Role } from "@prisma/client";
 
 export async function GET(
 	request: NextRequest,
@@ -92,52 +91,64 @@ export async function PUT(
 
 export async function DELETE(
 	request: NextRequest,
-	{ params }: { params: { id: string } }
+	{ params }: { params: { id: string } },
 ) {
 	try {
 		// Check if user is admin
 		const session = await auth.api.getSession({
 			headers: await headers(),
 		});
-		
+
 		if (!session?.user?.id) {
 			return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
 		}
-		
+
 		// Get user with role
 		const user = await prisma.user.findUnique({
 			where: { id: session.user.id },
-			select: { role: true }
+			select: { role: true },
 		});
 
 		if (!user || user.role !== Role.ADMIN) {
-			return NextResponse.json({ message: "Forbidden: Admin access required" }, { status: 403 });
+			return NextResponse.json(
+				{ message: "Forbidden: Admin access required" },
+				{ status: 403 },
+			);
 		}
 
 		// Delete the article
-		const articleId = parseInt(params.id);
-		
-		if (isNaN(articleId)) {
-			return NextResponse.json({ message: "Invalid article ID" }, { status: 400 });
+		const articleId = Number.parseInt(params.id);
+
+		if (Number.isNaN(articleId)) {
+			return NextResponse.json(
+				{ message: "Invalid article ID" },
+				{ status: 400 },
+			);
 		}
-		
+
 		// Check if article exists
 		const article = await prisma.article.findUnique({
-			where: { id: articleId }
+			where: { id: articleId },
 		});
-		
+
 		if (!article) {
-			return NextResponse.json({ message: "Article not found" }, { status: 404 });
+			return NextResponse.json(
+				{ message: "Article not found" },
+				{ status: 404 },
+			);
 		}
-		
+
 		// Delete the article
 		await prisma.article.delete({
-			where: { id: articleId }
+			where: { id: articleId },
 		});
-		
+
 		return NextResponse.json({ message: "Article deleted successfully" });
 	} catch (error) {
 		console.error("Error deleting article:", error);
-		return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
+		return NextResponse.json(
+			{ message: "Internal Server Error" },
+			{ status: 500 },
+		);
 	}
 }
