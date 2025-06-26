@@ -1,5 +1,5 @@
-import type { CategoryName } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
+import type { CategoryName } from "@prisma/client";
 
 export async function getArticleById(id: number) {
 	return prisma.article.findUnique({
@@ -91,6 +91,94 @@ export async function countArticlesByCategory(categoryName: string) {
 	return prisma.article.count({
 		where: {
 			categoryName: categoryName as CategoryName,
+		},
+	});
+}
+
+export async function getAllArticles() {
+	return prisma.article.findMany({
+		include: {
+			Category: true,
+		},
+		orderBy: {
+			createdAt: "desc",
+		},
+	});
+}
+
+export async function createArticle(articleData: {
+	title: string;
+	imageUrl: string;
+	content: string;
+	description: string;
+	categoryName: string;
+}) {
+	const { title, imageUrl, content, description, categoryName } = articleData;
+	return prisma.article.create({
+		data: {
+			title,
+			imageUrl,
+			content,
+			description,
+			categoryName: categoryName.replaceAll("-", "_") as CategoryName,
+		},
+		include: {
+			Category: true,
+		},
+	});
+}
+
+export async function updateArticle(
+	id: number,
+	articleData: {
+		title: string;
+		imageUrl: string;
+		content: string;
+		description: string;
+		categoryName: string;
+	},
+) {
+	const { title, imageUrl, content, description, categoryName } = articleData;
+
+	const existingArticle = await prisma.article.findUnique({ where: { id } });
+
+	if (!existingArticle) {
+		return null;
+	}
+
+	return prisma.article.update({
+		where: { id },
+		data: {
+			title,
+			imageUrl,
+			content,
+			description,
+			categoryName: categoryName as CategoryName,
+		},
+		include: {
+			Category: true,
+		},
+	});
+}
+
+export async function deleteArticle(id: number) {
+	const existingArticle = await prisma.article.findUnique({ where: { id } });
+
+	if (!existingArticle) {
+		return null;
+	}
+
+	return prisma.article.delete({
+		where: { id },
+	});
+}
+
+export async function deleteArticles(ids: number[]) {
+	return prisma.article.deleteMany({
+		where: {
+			id: {
+				in: ids,
+			},
 		},
 	});
 }

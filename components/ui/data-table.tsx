@@ -3,6 +3,7 @@
 import {
 	type ColumnDef,
 	type ColumnFiltersState,
+	type RowSelectionState,
 	type SortingState,
 	type VisibilityState,
 	flexRender,
@@ -13,6 +14,14 @@ import {
 	useReactTable,
 } from "@tanstack/react-table";
 
+import { Input } from "@/components/ui/input";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
 import {
 	Table,
 	TableBody,
@@ -22,33 +31,37 @@ import {
 	TableRow,
 } from "@/components/ui/table";
 import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from "@/components/ui/select";
-import {
 	ChevronLeftIcon,
 	ChevronRightIcon,
 	DoubleArrowLeftIcon,
 	DoubleArrowRightIcon,
 } from "@radix-ui/react-icons";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Button } from "./button";
 
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[];
 	data: TData[];
+	rowSelection?: RowSelectionState;
+	onRowSelectionChange?: (
+		updater:
+			| RowSelectionState
+			| ((old: RowSelectionState) => RowSelectionState),
+	) => void;
+	toolbar?: React.ReactNode;
 }
 
 export function DataTable<TData, TValue>({
 	columns,
 	data,
+	rowSelection,
+	onRowSelectionChange,
+	toolbar,
 }: DataTableProps<TData, TValue>) {
 	const [sorting, setSorting] = useState<SortingState>([]);
 	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 	const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+	const searchRef = useRef<HTMLInputElement>(null);
 
 	const table = useReactTable({
 		data,
@@ -60,16 +73,36 @@ export function DataTable<TData, TValue>({
 		onColumnFiltersChange: setColumnFilters,
 		getFilteredRowModel: getFilteredRowModel(),
 		onColumnVisibilityChange: setColumnVisibility,
+		onRowSelectionChange: onRowSelectionChange,
 		state: {
 			sorting,
 			columnFilters,
 			columnVisibility,
+			rowSelection,
 		},
 	});
 
 	return (
-		<div className="space-y-4">
-			<div className="rounded-md border">
+		<div className="space-y-4 max-w-[2000px] mx-auto px-2 sm:px-4 lg:px-8 xl:px-16 2xl:px-32 py-2 sm:py-2 lg:py-4">
+			<div className={"flex items-center justify-between "}>
+				<div className="flex items-center relative w-1/3 ">
+					<Input ref={searchRef} placeholder="Search title..." />
+					<Button
+						className={"rounded-l-none absolute top-0 right-0"}
+						type={"button"}
+						onClick={() => {
+							table
+								.getColumn("title")
+								?.setFilterValue(searchRef.current?.value);
+						}}
+					>
+						Search
+					</Button>
+				</div>
+
+				<div className={"w-1/bg-black"}>{toolbar}</div>
+			</div>
+			<div className="rounded-md border px-8">
 				<Table>
 					<TableHeader>
 						{table.getHeaderGroups().map((headerGroup) => (
@@ -134,7 +167,9 @@ export function DataTable<TData, TValue>({
 							}}
 						>
 							<SelectTrigger className="h-8 w-[70px]">
-								<SelectValue placeholder={table.getState().pagination.pageSize} />
+								<SelectValue
+									placeholder={table.getState().pagination.pageSize}
+								/>
 							</SelectTrigger>
 							<SelectContent side="top">
 								{[10, 20, 30, 40, 50].map((pageSize) => (

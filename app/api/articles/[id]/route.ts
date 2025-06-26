@@ -1,28 +1,26 @@
-import { auth } from "@/lib/auth/auth";
-import { prisma } from "@/lib/prisma";
-import { Role } from "@prisma/client";
+import adminCheck from "@/lib/auth/adminCheck";
+import {
+	deleteArticle,
+	getArticleById,
+	updateArticle,
+} from "@/lib/data/article";
 import { revalidatePath } from "next/cache";
-import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export async function GET(
-	request: NextRequest,
-	{ params }: { params: { id: string } },
-) {
+interface Props {
+	params: Promise<{ id: string }>;
+}
+
+export async function GET(request: NextRequest, { params }: Props) {
 	try {
-		const id = Number.parseInt(params.id, 10);
+		const id = Number.parseInt((await params).id, 10);
 
 		if (Number.isNaN(id)) {
 			return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
 		}
 
-		const article = await prisma.article.findUnique({
-			where: { id },
-			include: {
-				Category: true,
-			},
-		});
+		const article = await getArticleById(id);
 
 		if (!article) {
 			return NextResponse.json({ error: "Article not found" }, { status: 404 });
@@ -38,12 +36,9 @@ export async function GET(
 	}
 }
 
-export async function PUT(
-	request: NextRequest,
-	{ params }: { params: { id: string } },
-) {
+export async function PUT(request: NextRequest, { params }: Props) {
 	try {
-		const id = Number.parseInt(params.id, 10);
+		const id = Number.parseInt((await params).id, 10);
 		if (Number.isNaN(id)) {
 			return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
 		}
@@ -59,32 +54,17 @@ export async function PUT(
 				{ status: 400 },
 			);
 		}
-
-		// 检查文章是否存在
-		const existingArticle = await prisma.article.findUnique({
-			where: { id },
+		const updatedArticle = await updateArticle(id, {
+			title,
+			imageUrl,
+			content,
+			description,
+			categoryName,
 		});
 
-		if (!existingArticle) {
+		if (!updatedArticle) {
 			return NextResponse.json({ error: "Article not found" }, { status: 404 });
 		}
-
-		// 更新文章
-		console.log(categoryName);
-
-		const updatedArticle = await prisma.article.update({
-			where: { id },
-			data: {
-				title,
-				imageUrl,
-				content,
-				description,
-				categoryName: categoryName,
-			},
-			include: {
-				Category: true,
-			},
-		});
 
 		return NextResponse.json(updatedArticle);
 	} catch (error) {
@@ -96,35 +76,13 @@ export async function PUT(
 	}
 }
 
-export async function DELETE(
-	request: NextRequest,
-	{ params }: { params: { id: string } },
-) {
+export async function DELETE(request: NextRequest, { params }: Props) {
 	try {
 		// Check if user is admin
-		const session = await auth.api.getSession({
-			headers: await headers(),
-		});
-
-		if (!session?.user?.id) {
-			return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
-		}
-
-		// Get user with role
-		const user = await prisma.user.findUnique({
-			where: { id: session.user.id },
-			select: { role: true },
-		});
-
-		if (!user || user.role !== Role.ADMIN) {
-			return NextResponse.json(
-				{ message: "Forbidden: Admin access required" },
-				{ status: 403 },
-			);
-		}
+		await adminCheck();
 
 		// Delete the article
-		const articleId = Number.parseInt(params.id);
+		const articleId = Number.parseInt((await params).id, 10);
 
 		if (Number.isNaN(articleId)) {
 			return NextResponse.json(
@@ -133,22 +91,14 @@ export async function DELETE(
 			);
 		}
 
-		// Check if article exists
-		const article = await prisma.article.findUnique({
-			where: { id: articleId },
-		});
+		const deletedArticle = await deleteArticle(articleId);
 
-		if (!article) {
+		if (!deletedArticle) {
 			return NextResponse.json(
 				{ message: "Article not found" },
 				{ status: 404 },
 			);
 		}
-
-		// Delete the article
-		await prisma.article.delete({
-			where: { id: articleId },
-		});
 		revalidatePath("/admin/edit");
 
 		return NextResponse.json({ message: "Article deleted successfully" });

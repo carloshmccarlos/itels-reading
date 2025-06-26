@@ -1,8 +1,9 @@
 import { sendEmail } from "@/lib/auth/send-email";
+import { getRoleByUserId } from "@/lib/data/user";
 import { prisma } from "@/lib/prisma";
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
-import { emailOTP } from "better-auth/plugins";
+import { customSession, emailOTP } from "better-auth/plugins";
 
 export const auth = betterAuth({
 	database: prismaAdapter(prisma, {
@@ -89,6 +90,19 @@ export const auth = betterAuth({
 			otpLength: 6,
 			expiresIn: 300, // 5 minutes
 			allowedAttempts: 3,
+		}),
+		customSession(async ({ user, session }) => {
+			if (!user || !session) {
+				return { user, session };
+			}
+			const role = await getRoleByUserId(session.userId);
+			return {
+				user: {
+					...user,
+					role: role,
+				},
+				session,
+			};
 		}),
 	],
 });

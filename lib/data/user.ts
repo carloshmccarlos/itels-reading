@@ -186,6 +186,23 @@ export async function getUserData(): Promise<UserData> {
 }
 
 /**
+ * Get user collections (marked articles and read history)
+ * @param userId User ID
+ * @returns Object with marked articles and read history
+ */
+export async function getUserCollections(userId: string) {
+	const [markedArticles, readHistory] = await Promise.all([
+		getUserMarkedArticles(userId),
+		getUserReadHistory(userId),
+	]);
+
+	return {
+		markedArticles,
+		readHistory,
+	};
+}
+
+/**
  * Get user profile data for API endpoint
  * @param userId User ID
  * @returns Profile data for the API response or null if user not found

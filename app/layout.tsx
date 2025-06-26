@@ -1,12 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { QueryProvider } from "@/components/QueryProvider";
 import Navbar from "@/components/nav/Navbar";
 import { auth } from "@/lib/auth/auth";
-import { authClient } from "@/lib/auth/auth-client";
 import { getAllCategories } from "@/lib/data/category";
 import { getRoleByUserId } from "@/lib/data/user";
 import { headers } from "next/headers";
-import { redirect } from "next/navigation";
 import type React from "react";
 import { Toaster } from "sonner";
 
@@ -49,9 +48,11 @@ export default async function RootLayout({
 	return (
 		<html lang="en">
 			<body className="overflow-y-scroll  flex flex-col font-serif justify-center items-stretch antialiased">
-				<Navbar categories={categories} role={role} />
-				{children}
-				<Toaster position="top-center" />
+				<QueryProvider>
+					<Navbar categories={categories} role={role} />
+					{children}
+					<Toaster position="top-center" />
+				</QueryProvider>
 			</body>
 		</html>
 	);

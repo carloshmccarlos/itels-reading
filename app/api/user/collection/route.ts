@@ -1,5 +1,5 @@
 import { auth } from "@/lib/auth/auth";
-import { getUserData } from "@/lib/data/user";
+import { getUserCollections } from "@/lib/data/user";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
@@ -9,14 +9,14 @@ export async function GET(request: NextRequest) {
 		const session = await auth.api.getSession({
 			headers: await headers(),
 		});
-
-		if (!session?.user?.id) {
+		const user = session?.user;
+		if (!user?.id) {
 			return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 		}
 
-		const data = await getUserData();
+		const collections = await getUserCollections(user.id);
 
-		return NextResponse.json(data);
+		return NextResponse.json({ ...collections, user });
 	} catch (error) {
 		console.error("Error fetching user collection data:", error);
 		return NextResponse.json(
