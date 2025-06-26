@@ -1,6 +1,7 @@
 import { auth } from "@/lib/auth/auth";
 import { prisma } from "@/lib/prisma";
 import { Role } from "@prisma/client";
+import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
@@ -148,6 +149,7 @@ export async function DELETE(
 		await prisma.article.delete({
 			where: { id: articleId },
 		});
+		revalidatePath("/admin/edit");
 
 		return NextResponse.json({ message: "Article deleted successfully" });
 	} catch (error) {
