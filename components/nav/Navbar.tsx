@@ -63,13 +63,14 @@ function NavBar({ categories, role }: Props) {
 							I READ
 						</Link>
 					</div>
-					{session?.data?.user && (
+
+					{session?.data?.user.id && (
 						<div className=" lg:flex items-center gap-2 md:gap-4 absolute right-0 sm:right-4">
 							<ProfileDropdown role={role} />
 						</div>
 					)}
 
-					{!session && (
+					{!session?.data?.user.id && (
 						<div className="hidden lg:flex items-center gap-2 md:gap-4 absolute right-0 sm:right-4">
 							<RegisterButton />
 							<LoginButton />
