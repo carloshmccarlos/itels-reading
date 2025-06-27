@@ -10,9 +10,9 @@ import {
 } from "@/lib/data/article-stats";
 import { transformCategoryName } from "@/lib/utils";
 import type { ArticleWithCategory } from "@/types/interface";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { SmilePlus, Star } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 interface Props {
@@ -21,75 +21,62 @@ interface Props {
 
 function ArticleContent({ article }: Props) {
 	const session = authClient.useSession();
+	const queryClient = useQueryClient();
 	const showCategoryName = transformCategoryName(article.Category?.name || "");
-	const [isMarked, setIsMarked] = useState(false);
-	const [readTimes, setReadTimes] = useState(0);
-
-	const [isLoading, setIsLoading] = useState(false);
 
 	const isLoggedIn = !!session.data?.user;
 
-	// Load user stats for this article
-	useEffect(() => {
-		async function loadStats() {
-			try {
-				const stats = await getUserArticleStats(article.id);
-				setIsMarked(stats.marked);
-				setReadTimes(stats.readTimes);
-			} catch (error) {
-				console.error("Failed to load article stats:", error);
-			}
-		}
+	const { data: stats, isLoading: isLoadingStats } = useQuery({
+		queryKey: ["articleStats", article.id],
+		queryFn: () => getUserArticleStats(article.id),
+		enabled: isLoggedIn,
+	});
 
-		loadStats().then();
-	}, [article.id]);
+	const { mutate: toggleMark, isPending: isTogglingMark } = useMutation({
+		mutationFn: () => toggleMarkArticle(article.id),
+		onSuccess: (data) => {
+			queryClient.invalidateQueries({
+				queryKey: ["articleStats", article.id],
+			});
+			toast.success(data.marked ? "Article marked" : "Article unmarked");
+		},
+		onError: () => {
+			toast.error("Failed to update mark status");
+		},
+	});
 
-	// Handle marking/unmarking the article
-	const handleToggleMark = async () => {
+	const { mutate: incrementRead, isPending: isIncrementingRead } = useMutation({
+		mutationFn: () => incrementReadCount(article.id),
+		onSuccess: (data) => {
+			queryClient.invalidateQueries({
+				queryKey: ["articleStats", article.id],
+			});
+			toast.success(`You've read this article ${data.times} times`);
+		},
+		onError: () => {
+			toast.error("Failed to update read count");
+		},
+	});
+
+	const handleToggleMark = () => {
 		if (!isLoggedIn) {
 			toast.error("You must be logged in to mark articles");
 			return;
 		}
-
-		try {
-			setIsLoading(true);
-			const result = await toggleMarkArticle(article.id);
-
-			if (result) {
-				setIsMarked(result.marked);
-			}
-			toast.success(result.marked ? "Article marked" : "Article unmarked");
-		} catch (error) {
-			console.error("Failed to toggle mark:", error);
-			toast.error("Failed to update mark status");
-		} finally {
-			setIsLoading(false);
-		}
+		toggleMark();
 	};
 
-	// Handle incrementing read count
-	const handleIncrementReadCount = async () => {
+	const handleIncrementReadCount = () => {
 		if (!isLoggedIn) {
 			toast.error("You must be logged in to track read times");
 			return;
 		}
-
-		try {
-			setIsLoading(true);
-			const result = await incrementReadCount(article.id);
-
-			if (result) {
-				setReadTimes(result.times);
-			}
-
-			toast.success(`You've read this article ${result.times} times`);
-		} catch (error) {
-			console.error("Failed to increment read count:", error);
-			toast.error("Failed to update read count");
-		} finally {
-			setIsLoading(false);
-		}
+		incrementRead();
 	};
+
+	const isMarked = stats?.marked || false;
+	const readTimes = stats?.readTimes || 0;
+	const isLoading = isTogglingMark || isIncrementingRead;
 
 	return (
 		<article className="py-8 px-4 md:px-8 lg:px-16 max-w-7xl mx-auto relative">
@@ -141,7 +128,7 @@ function ArticleContent({ article }: Props) {
 					variant="outline"
 					className="cursor-pointer flex items-center gap-2"
 					onClick={handleToggleMark}
-					disabled={isLoading}
+					disabled={isLoading || isLoadingStats}
 				>
 					<Star className={`w-4 h-4 ${isMarked ? "fill-yellow-400" : ""}`} />
 					{isMarked ? "Marked" : "Mark"}
@@ -151,7 +138,7 @@ function ArticleContent({ article }: Props) {
 					variant="outline"
 					className="cursor-pointer flex items-center gap-2"
 					onClick={handleIncrementReadCount}
-					disabled={isLoading}
+					disabled={isLoading || isLoadingStats}
 				>
 					<SmilePlus className="w-4 h-4" />
 					Finished {readTimes} times
