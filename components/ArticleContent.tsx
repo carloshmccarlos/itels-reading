@@ -54,7 +54,10 @@ function ArticleContent({ article }: Props) {
 		try {
 			setIsLoading(true);
 			const result = await toggleMarkArticle(article.id);
-			setIsMarked(result.marked);
+
+			if (result) {
+				setIsMarked(result.marked);
+			}
 			toast.success(result.marked ? "Article marked" : "Article unmarked");
 		} catch (error) {
 			console.error("Failed to toggle mark:", error);
@@ -74,7 +77,11 @@ function ArticleContent({ article }: Props) {
 		try {
 			setIsLoading(true);
 			const result = await incrementReadCount(article.id);
-			setReadTimes(result.times);
+
+			if (result) {
+				setReadTimes(result.times);
+			}
+
 			toast.success(`You've read this article ${result.times} times`);
 		} catch (error) {
 			console.error("Failed to increment read count:", error);

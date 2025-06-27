@@ -165,6 +165,76 @@ export async function getUserTotalReadTimes(userId: string): Promise<number> {
 }
 
 /**
+ * Get paginated marked articles for the current user
+ * @param userId User ID
+ * @param page Page number
+ * @param limit Number of items per page
+ * @returns Paginated marked articles and total count
+ */
+export async function getPaginatedUserMarkedArticles(
+	userId: string,
+	page: number,
+	limit: number,
+) {
+	const skip = (page - 1) * limit;
+	const [articles, total] = await Promise.all([
+		prisma.markedArticles.findMany({
+			where: { userId },
+			include: {
+				article: {
+					include: {
+						Category: true,
+					},
+				},
+			},
+			orderBy: {
+				article: {
+					createdAt: "desc",
+				},
+			},
+			skip,
+			take: limit,
+		}),
+		prisma.markedArticles.count({ where: { userId } }),
+	]);
+	return { articles, total };
+}
+
+/**
+ * Get paginated reading history for the current user
+ * @param userId User ID
+ * @param page Page number
+ * @param limit Number of items per page
+ * @returns Paginated reading history and total count
+ */
+export async function getPaginatedUserReadHistory(
+	userId: string,
+	page: number,
+	limit: number,
+) {
+	const skip = (page - 1) * limit;
+	const [history, total] = await Promise.all([
+		prisma.readedTimeCount.findMany({
+			where: { userId },
+			include: {
+				article: {
+					include: {
+						Category: true,
+					},
+				},
+			},
+			orderBy: {
+				times: "desc",
+			},
+			skip,
+			take: limit,
+		}),
+		prisma.readedTimeCount.count({ where: { userId } }),
+	]);
+	return { history, total };
+}
+
+/**
  * Get all user data including marked articles and reading history
  * @returns User data or redirects to login if not authenticated
  */

@@ -13,8 +13,8 @@ export async function GET() {
 		const articleList = articles.map((article) => ({
 			...article,
 			title:
-				article.title.length > 30
-					? `${article.title.slice(0, 30)}...`
+				article.title.length > 80
+					? `${article.title.slice(0, 80)}...`
 					: article.title,
 		}));
 

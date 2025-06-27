@@ -5,6 +5,7 @@ import {
 	type ColumnFiltersState,
 	type RowSelectionState,
 	type SortingState,
+	type Table as TanstackTable,
 	type VisibilityState,
 	flexRender,
 	getCoreRowModel,
@@ -36,7 +37,7 @@ import {
 	DoubleArrowLeftIcon,
 	DoubleArrowRightIcon,
 } from "@radix-ui/react-icons";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { Button } from "./button";
 
 interface DataTableProps<TData, TValue> {
@@ -48,7 +49,7 @@ interface DataTableProps<TData, TValue> {
 			| RowSelectionState
 			| ((old: RowSelectionState) => RowSelectionState),
 	) => void;
-	toolbar?: React.ReactNode;
+	toolbar?: (table: TanstackTable<TData>) => React.ReactNode;
 }
 
 export function DataTable<TData, TValue>({
@@ -61,7 +62,6 @@ export function DataTable<TData, TValue>({
 	const [sorting, setSorting] = useState<SortingState>([]);
 	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 	const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
-	const searchRef = useRef<HTMLInputElement>(null);
 
 	const table = useReactTable({
 		data,
@@ -84,24 +84,7 @@ export function DataTable<TData, TValue>({
 
 	return (
 		<div className="space-y-4 max-w-[2000px] mx-auto px-2 sm:px-4 lg:px-8 xl:px-16 2xl:px-32 py-2 sm:py-2 lg:py-4">
-			<div className={"flex items-center justify-between "}>
-				<div className="flex items-center relative w-1/3 ">
-					<Input ref={searchRef} placeholder="Search title..." />
-					<Button
-						className={"rounded-l-none absolute top-0 right-0"}
-						type={"button"}
-						onClick={() => {
-							table
-								.getColumn("title")
-								?.setFilterValue(searchRef.current?.value);
-						}}
-					>
-						Search
-					</Button>
-				</div>
-
-				<div className={"w-1/bg-black"}>{toolbar}</div>
-			</div>
+			<div className={"flex items-center"}>{toolbar?.(table)}</div>
 			<div className="rounded-md border px-8">
 				<Table>
 					<TableHeader>
@@ -109,7 +92,15 @@ export function DataTable<TData, TValue>({
 							<TableRow key={headerGroup.id}>
 								{headerGroup.headers.map((header) => {
 									return (
-										<TableHead key={header.id}>
+										<TableHead
+											key={header.id}
+											style={{
+												width:
+													header.column.getSize() !== 150
+														? header.column.getSize()
+														: undefined,
+											}}
+										>
 											{header.isPlaceholder
 												? null
 												: flexRender(
@@ -130,7 +121,15 @@ export function DataTable<TData, TValue>({
 									data-state={row.getIsSelected() && "selected"}
 								>
 									{row.getVisibleCells().map((cell) => (
-										<TableCell key={cell.id}>
+										<TableCell
+											key={cell.id}
+											style={{
+												width:
+													cell.column.getSize() !== 150
+														? cell.column.getSize()
+														: undefined,
+											}}
+										>
 											{flexRender(
 												cell.column.columnDef.cell,
 												cell.getContext(),

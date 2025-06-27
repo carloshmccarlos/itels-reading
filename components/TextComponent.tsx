@@ -1,3 +1,5 @@
+"use client";
+
 import { cn, transformCategoryName } from "@/lib/utils";
 import type { ArticleWithCategory } from "@/types/interface";
 
@@ -8,12 +10,7 @@ interface Props {
 	readCount?: number | null;
 }
 
-async function TextComponent({
-	className,
-	article,
-	titleSize,
-	readCount,
-}: Props) {
+function TextComponent({ className, article, titleSize, readCount }: Props) {
 	const showCategoryName = transformCategoryName(article.Category?.name || "");
 
 	return (
@@ -40,12 +37,6 @@ async function TextComponent({
 							{article.title}
 						</span>
 					</div>
-
-					{readCount && (
-						<span className="text-sm  font-[Open-serif] text-gray-500">
-							Read {readCount} times
-						</span>
-					)}
 				</h2>
 
 				{titleSize && (
@@ -53,9 +44,17 @@ async function TextComponent({
 						{article.description}
 					</p>
 				)}
-				<time className="text-sm text-gray-500 mt-auto font-[Open-serif]">
-					{new Date(article.createdAt).toLocaleDateString()}
-				</time>
+				<div className={"flex items-center justify-between"}>
+					<time className="text-sm text-gray-500 mt-auto font-[Open-serif]">
+						{new Date(article.createdAt).toLocaleDateString()}
+					</time>
+
+					{readCount && (
+						<span className="text-sm  font-[Open-serif] text-gray-500">
+							Read {readCount} times
+						</span>
+					)}
+				</div>
 			</div>
 		</>
 	);

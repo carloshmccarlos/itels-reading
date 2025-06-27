@@ -9,6 +9,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import RegisterButton from "../RegisterButton";
+import Spinner from "../Spinner";
 
 interface Props {
 	categories: Category[];
@@ -18,7 +19,7 @@ interface Props {
 function NavBar({ categories, role }: Props) {
 	const [scrolled, setScrolled] = useState(false);
 	const pathname = usePathname();
-	const session = authClient.useSession();
+	const { data, isPending } = authClient.useSession();
 
 	const type = pathname.startsWith("/admin") ? "admin" : "col";
 
@@ -64,13 +65,15 @@ function NavBar({ categories, role }: Props) {
 						</Link>
 					</div>
 
-					{session?.data?.user.id && (
+					{isPending ? (
+						<div className="lg:flex items-center absolute right-0 sm:right-4">
+							<Spinner />
+						</div>
+					) : data?.user?.id ? (
 						<div className=" lg:flex items-center gap-2 md:gap-4 absolute right-0 sm:right-4">
 							<ProfileDropdown role={role} />
 						</div>
-					)}
-
-					{!session?.data?.user.id && (
+					) : (
 						<div className="hidden lg:flex items-center gap-2 md:gap-4 absolute right-0 sm:right-4">
 							<RegisterButton />
 							<LoginButton />

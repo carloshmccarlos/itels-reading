@@ -1,5 +1,5 @@
 import { auth } from "@/lib/auth/auth";
-import { getUserCollections } from "@/lib/data/user";
+import { getPaginatedUserMarkedArticles } from "@/lib/data/user";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
@@ -14,14 +14,22 @@ export async function GET(request: NextRequest) {
 			return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 		}
 
-		const collections = await getUserCollections(user.id);
+		const { searchParams } = new URL(request.url);
+		const page = Number(searchParams.get("page")) || 1;
+		const limit = Number(searchParams.get("limit")) || 8;
 
-		return NextResponse.json({ ...collections, user });
+		const { articles, total } = await getPaginatedUserMarkedArticles(
+			user.id,
+			page,
+			limit,
+		);
+
+		return NextResponse.json({ articles, total, page, limit });
 	} catch (error) {
-		console.error("Error fetching user collection data:", error);
+		console.error("Error fetching marked articles:", error);
 		return NextResponse.json(
-			{ error: "Failed to fetch user collection data" },
+			{ error: "Failed to fetch marked articles" },
 			{ status: 500 },
 		);
 	}
-}
+} 

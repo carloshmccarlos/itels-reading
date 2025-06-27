@@ -153,6 +153,7 @@ export function ArticleTable() {
 			),
 			enableSorting: false,
 			enableHiding: false,
+			size: 50,
 		},
 		{
 			accessorKey: "id",
@@ -169,6 +170,7 @@ export function ArticleTable() {
 					</Button>
 				);
 			},
+			size: 80,
 		},
 		{
 			accessorKey: "title",
@@ -183,6 +185,7 @@ export function ArticleTable() {
 					</Button>
 				);
 			},
+			size: 600,
 		},
 		{
 			accessorKey: "Category.name",
@@ -202,6 +205,7 @@ export function ArticleTable() {
 					{transformCategoryName(row.original.categoryName || "") || "None"}
 				</div>
 			),
+			size: 150,
 		},
 		{
 			accessorKey: "readTimes",
@@ -219,6 +223,7 @@ export function ArticleTable() {
 			cell: ({ row }) => (
 				<div className="font-mono text-left">{row.original.readTimes}</div>
 			),
+			size: 120,
 		},
 		{
 			accessorKey: "createdAt",
@@ -238,6 +243,7 @@ export function ArticleTable() {
 					{new Date(row.original.createdAt).toLocaleDateString()}
 				</div>
 			),
+			size: 120,
 		},
 		{
 			id: "actions",
@@ -253,15 +259,15 @@ export function ArticleTable() {
 						<Button
 							size="icon"
 							variant="outline"
-							className="text-red-600 hover:bg-red-100 hover:text-red-700"
+							className="text-destructive hover:text-destructive"
 							onClick={() => handleDeleteArticle(article.id)}
-							disabled={deleteMutation.isPending}
 						>
 							<Trash2 className="h-4 w-4" />
 						</Button>
 					</div>
 				);
 			},
+			size: 100,
 		},
 	];
 
@@ -313,19 +319,20 @@ export function ArticleTable() {
 		<div>
 			<DataTable
 				columns={columns}
-				data={showedArticles ?? []}
+				data={showedArticles || []}
 				rowSelection={rowSelection}
 				onRowSelectionChange={setRowSelection}
-				toolbar={
+				toolbar={(table) => (
 					<ToolBar
+						table={table}
 						value={filteredCategory}
 						onChange={setFilteredCategory}
 						categories={categories}
 						handleDeleteSelected={handleDeleteSelected}
 						isDeleting={deleteArticlesMutation.isPending}
-						selectedRowCount={selectedRowCount}
+						selectedRowCount={Object.keys(rowSelection).length}
 					/>
-				}
+				)}
 			/>
 		</div>
 	);

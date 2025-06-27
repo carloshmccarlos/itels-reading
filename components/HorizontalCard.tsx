@@ -4,7 +4,7 @@ import type { CardProps } from "@/types/interface";
 import Image from "next/image";
 import Link from "next/link";
 
-function HorizontalCard({ article, className }: CardProps) {
+function HorizontalCard({ readCount, article, className }: CardProps) {
 	if (!article) {
 		return null;
 	}
@@ -30,7 +30,11 @@ function HorizontalCard({ article, className }: CardProps) {
 				/>
 			</div>
 
-			<TextComponent article={article} className={"w-3/4 lg:w-2/3"} />
+			<TextComponent
+				readCount={readCount}
+				article={article}
+				className={"w-3/4 lg:w-2/3"}
+			/>
 		</Link>
 	);
 }

@@ -1,6 +1,5 @@
 "use client";
 
-import { AuthForm, type AuthFormSchema } from "@/components/auth/AuthForm";
 import {
 	Card,
 	CardContent,
@@ -9,15 +8,18 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { signUp } from "@/lib/auth/sign-up";
-import { deleteUserByEmail, getUserByEmail } from "@/lib/data/user";
-
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+
+import { AuthForm, type AuthFormSchema } from "@/components/auth/AuthForm";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 export default function RegisterPage() {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState("");
 	const [success, setSuccess] = useState(false);
+	const router = useRouter();
 
 	const handleSubmit = async (values: AuthFormSchema) => {
 		setLoading(true);
@@ -25,12 +27,6 @@ export default function RegisterPage() {
 		setSuccess(false);
 
 		try {
-			const user = await getUserByEmail(values.email);
-
-			if (user && !user?.emailVerified) {
-				await deleteUserByEmail(values.email);
-			}
-
 			const result = await signUp({
 				email: values.email,
 				password: values.password,
@@ -45,6 +41,7 @@ export default function RegisterPage() {
 			} else {
 				setSuccess(true);
 				// Wait a moment before redirecting to login page
+			
 			}
 		} catch (error: unknown) {
 			console.error("Registration error:", error);
@@ -71,24 +68,12 @@ export default function RegisterPage() {
 				</CardHeader>
 				<CardContent>
 					{success ? (
-						<div className="text-center">
-							<p className="text-green-600 font-semibold">
-								A verification email has been sent to your email address.
-							</p>
-							<div className="mt-4">
-								<Link
-									href="/auth/login"
-									className="font-medium text-primary hover:text-primary/90"
-								>
-									Back to Login
-								</Link>
-							</div>
-						</div>
-						/*<Alert className="bg-green-50 border-green-500 text-green-700 mb-6">
+						<Alert className="bg-green-50 border-green-500 text-green-700 mb-6">
 							<AlertDescription className="text-lg">
+								Registration successful! A verification email has been sent to your email address.
 								Redirecting to login page...
 							</AlertDescription>
-						</Alert>*/
+						</Alert>
 					) : (
 						<AuthForm
 							type="register"
